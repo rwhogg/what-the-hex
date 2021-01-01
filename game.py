@@ -16,17 +16,24 @@ import math, random, sys
 
 import pygame
 
-pygame.init()
+pretty_game_name = "Hexasexy"
 size = width, height = 1024, 768
 hexagon_side_length = 50
 hexagon_rows = 5
 hexagon_columns = 8
 debug = False
+
+pygame.init()
 screen = pygame.display.set_mode(size)
+pygame.display.set_caption(pretty_game_name)
 clock = pygame.time.Clock()
+
+font_name = "kenney-pixel-square.ttf"
+font = pygame.font.Font(font_name, 16)
 
 # FIXME: I'll probably want some nicer colors later. For now, primaries are fine
 black = 0, 0, 0
+white = 255, 255, 255
 blue = 0, 0, 255
 green = 0, 255, 0
 yellow = 255, 255, 0
@@ -85,6 +92,7 @@ def random_hexagon_array(start):
 hexagon_array = random_hexagon_array([width / 6, height / 6])
 
 def game_loop():
+    time_left = 300
     while 1:
         clock.tick(1)
         for event in pygame.event.get():
@@ -93,10 +101,15 @@ def game_loop():
         if debug:
             print("Tick")
 
+        screen.fill(white)
         for row in hexagon_array:
             for hexagon in row:
                 draw_hexagon(hexagon)
-        
+
+        time_text_surface = font.render(f"Time {time_left}", True, black)
+        screen.blit(time_text_surface, time_text_surface.get_rect())
+        time_left -= 1
+
         pygame.display.flip()
 
 game_loop()

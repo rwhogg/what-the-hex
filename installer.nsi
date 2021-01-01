@@ -7,4 +7,5 @@ InstallDir "$PROGRAMFILES64\Hexasexy"
 Section "Hexasexy"
     SetOutPath $INSTDIR
     File "dist\Hexasexy.exe"
+    File "kenney-pixel-square.ttf"
 SectionEnd
