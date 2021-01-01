@@ -8,4 +8,5 @@ Section "Hexasexy"
     SetOutPath $INSTDIR
     File "dist\Hexasexy.exe"
     File "kenney-pixel-square.ttf"
+    File "drumming-sticks.ogg"
 SectionEnd

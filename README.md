@@ -29,3 +29,7 @@ Maybe I'll make it configurable once the basics are working.
 
 Copyright (C) 2020, Bob "Wombat" Hogg
 See LICENSE.txt for copying details.
+
+## Acknowledgements
+
+In addition to the above development requirements, special thanks to kenney.nl for providing a number of the assets.

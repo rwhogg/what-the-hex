@@ -31,6 +31,9 @@ clock = pygame.time.Clock()
 font_name = "kenney-pixel-square.ttf"
 font = pygame.font.Font(font_name, 16)
 
+music_name = "drumming-sticks.ogg"
+pygame.mixer.music.load(music_name)
+
 # FIXME: I'll probably want some nicer colors later. For now, primaries are fine
 black = 0, 0, 0
 white = 255, 255, 255
@@ -93,6 +96,7 @@ hexagon_array = random_hexagon_array([width / 6, height / 6])
 
 def game_loop():
     time_left = 300
+    pygame.mixer.music.play(-1)
     while 1:
         clock.tick(1)
         for event in pygame.event.get():
