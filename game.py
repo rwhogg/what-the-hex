@@ -94,26 +94,47 @@ def random_hexagon_array(start):
 
 hexagon_array = random_hexagon_array([width / 6, height / 6])
 
-def game_loop():
-    time_left = 300
-    pygame.mixer.music.play(-1)
-    while 1:
-        clock.tick(1)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+def game_over():
+    pygame.mixer.music.stop()
+    game_over_sound = pygame.mixer.Sound("game_over-sound.wav")
+    game_over_voice = pygame.mixer.Sound("game_over-voice.ogg")
+    game_over_sound.play()
+    pygame.time.wait(int(game_over_sound.get_length() * 1000))
+    game_over_voice.play()
+    pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
+    sys.exit()
 
-        if debug:
-            print("Tick")
+def game_loop(time_left):
+    clock.tick()
 
-        screen.fill(white)
-        for row in hexagon_array:
-            for hexagon in row:
-                draw_hexagon(hexagon)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
 
-        time_text_surface = font.render(f"Time {time_left}", True, black)
-        screen.blit(time_text_surface, time_text_surface.get_rect())
-        time_left -= 1
+    if debug:
+        print("Tick")
 
-        pygame.display.flip()
+    screen.fill(white)
+    for row in hexagon_array:
+        for hexagon in row:
+            draw_hexagon(hexagon)
 
-game_loop()
+    time_text_surface = font.render(f"Time {int(time_left / 1000)}", True, black)
+    screen.blit(time_text_surface, time_text_surface.get_rect())
+
+    if time_left <= 0:
+        return True
+
+    pygame.display.flip()
+
+    return time_left - clock.get_time()
+        
+time_left = 300.0 * 1000.0
+game_loop(time_left) # first iteration so the screen comes up before the music starts
+pygame.mixer.music.play(-1)
+while True:
+    time_left = game_loop(time_left)
+    if time_left == True:
+        break
+
+if time_left == True:
+    game_over()

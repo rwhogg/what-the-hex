@@ -9,4 +9,6 @@ Section "Hexasexy"
     File "dist\Hexasexy.exe"
     File "kenney-pixel-square.ttf"
     File "drumming-sticks.ogg"
+    File "game_over-sound.wav"
+    File "game_over-voice.ogg"
 SectionEnd
