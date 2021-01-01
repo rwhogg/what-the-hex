@@ -36,6 +36,9 @@ font = pygame.font.Font(font_name, 16)
 music_name = "drumming-sticks.ogg"
 pygame.mixer.music.load(music_name)
 
+rotate_sound_name = "rotate.ogg"
+rotate_sound = pygame.mixer.Sound(rotate_sound_name)
+
 # FIXME: I'll probably want some nicer colors later. For now, primaries are fine
 black = 0, 0, 0
 white = 255, 255, 255
@@ -148,6 +151,7 @@ def game_loop(time_left):
         if event.type == pygame.MOUSEBUTTONDOWN:
             dir = "left" if event.button == 1 else "right"
             rotate_hexagon(dir, event.pos)
+            rotate_sound.play()
         elif event.type == pygame.QUIT:
             sys.exit()
 

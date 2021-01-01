@@ -11,4 +11,5 @@ Section "Hexasexy"
     File "drumming-sticks.ogg"
     File "game_over-sound.wav"
     File "game_over-voice.ogg"
+    File "rotate.ogg"
 SectionEnd
