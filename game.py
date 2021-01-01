@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import math, random, sys
+import math
+import random
+import sys
 
 import pygame
 
@@ -46,6 +48,7 @@ orange = 255, 0xa5, 0
 
 edge_colors = [orange, purple, blue]
 
+
 class HexagonStruct:
     def __init__(self, center, base_color, edge_colors) -> None:
         if len(edge_colors) != 6:
@@ -72,27 +75,34 @@ class HexagonStruct:
         points = self.get_points()
         return [[points[a], points[(a + 1) % 6]] for a in range(6)]
 
+
 def draw_hexagon(hexagon):
     points = hexagon.get_points()
     edges = hexagon.get_edges()
     colors = hexagon.edge_colors
-    pygame.draw.polygon(screen, hexagon.base_color, points) 
+    pygame.draw.polygon(screen, hexagon.base_color, points)
     for e in range(6):
         pygame.draw.line(screen, colors[e], edges[e][0], edges[e][1], 5)
+
 
 def random_hexagon(center, base_color):
     colors = random.choices(edge_colors, k=6)
     return HexagonStruct(center, base_color, colors)
 
+
 def random_hexagon_array(start):
     hexagons = [[] for i in range(hexagon_rows)]
     for i in range(hexagon_rows):
         for j in range(hexagon_columns):
-            center = [start[0] + j * hexagon_side_length * math.cos(30) * 13, start[1] + i * hexagon_side_length * math.cos(30) * 12 + 20]
+            center_x = start[0] + j * hexagon_side_length * math.cos(30) * 13
+            center_y = start[1] + i * hexagon_side_length * math.cos(30) * 12 + 20
+            center = [center_x, center_y]
             hexagons[i].append(random_hexagon(center, green))
     return hexagons
 
+
 hexagon_array = random_hexagon_array([width / 6, height / 6])
+
 
 def game_over():
     pygame.mixer.music.stop()
@@ -104,11 +114,13 @@ def game_over():
     pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
     sys.exit()
 
+
 def game_loop(time_left):
     clock.tick()
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT:
+            sys.exit()
 
     if debug:
         print("Tick")
@@ -127,14 +139,15 @@ def game_loop(time_left):
     pygame.display.flip()
 
     return time_left - clock.get_time()
-        
+
+
 time_left = 300.0 * 1000.0
 game_loop(time_left) # first iteration so the screen comes up before the music starts
 pygame.mixer.music.play(-1)
 while True:
     time_left = game_loop(time_left)
-    if time_left == True:
+    if time_left is True:
         break
 
-if time_left == True:
+if time_left is True:
     game_over()
