@@ -68,12 +68,28 @@ class HexagonStruct:
         p5 = (center_x - 0.5 * hexagon_side_length, center_y - 0.866025 * hexagon_side_length)
         return [p0, p1, p2, p3, p4, p5]
 
+    def get_big_radius(self):
+        return hexagon_side_length * 2
+
     def get_small_radius(self):
         return hexagon_side_length * math.cos(30)
 
     def get_edges(self):
         points = self.get_points()
         return [[points[a], points[(a + 1) % 6]] for a in range(6)]
+
+    def point_is_inside(self, point):
+        # this isn't strictly correct, but it's accurate enough for my purposes
+        # (the 30 is just a little extra tolerance)
+        return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= self.get_small_radius() + 30
+
+    def rotate(self, dir):
+        if dir == "right":
+            last_color = self.edge_colors.pop(5)
+            self.edge_colors.insert(0, last_color)
+        elif dir == "left":
+            first_color = self.edge_colors.pop(0)
+            self.edge_colors.append(first_color)
 
 
 def draw_hexagon(hexagon):
@@ -104,6 +120,16 @@ def random_hexagon_array(start):
 hexagon_array = random_hexagon_array([width / 6, height / 6])
 
 
+# FIXME: ideally, this would be determined via screen position calculation rather than iteration, but we'll see if this is fast enough...
+def rotate_hexagon(dir, position):
+    for row in hexagon_array:
+        for hexagon in row:
+            if hexagon.point_is_inside(position):
+                print(f"position: {position}")
+                print(f"hexagon: {hexagon.center}")
+                hexagon.rotate(dir)
+                return
+
 def game_over():
     pygame.mixer.music.stop()
     game_over_sound = pygame.mixer.Sound("game_over-sound.wav")
@@ -119,7 +145,10 @@ def game_loop(time_left):
     clock.tick()
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            dir = "left" if event.button == 1 else "right"
+            rotate_hexagon(dir, event.pos)
+        elif event.type == pygame.QUIT:
             sys.exit()
 
     if debug:
