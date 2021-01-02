@@ -95,11 +95,13 @@ rotate_sound = pygame.mixer.Sound(rotate_sound_name)
 match_sound = pygame.mixer.Sound(match_sound_name)
 
 mouse_left_image, rotate_counterclockwise_image, mouse_right_image, rotate_clockwise_image = None, None, None, None
+bg_image = None
 if pygame.image.get_extended():
     mouse_left_image = pygame.image.load("mouseLeft.png")
     rotate_counterclockwise_image = pygame.image.load("rotate_counterclockwise.png")
     mouse_right_image = pygame.image.load("mouseRight.png")
     rotate_clockwise_image = pygame.image.load("rotate_clockwise.png")
+    bg_image = pygame.image.load("bg.png")
 
 class HexagonStruct:
     def __init__(self, center, base_color, edge_colors) -> None:
@@ -335,7 +337,12 @@ def game_loop(time_left, score, num_to_refresh):
         print("Tick")
 
     # UI drawing
-    screen.fill(dark_gray)
+
+    if bg_image is None:
+        screen.fill(dark_gray)
+    else:
+        screen.blit(bg_image, pygame.Rect(0, 0, width, height))
+
     pygame.draw.rect(screen, (10, 10, 10), pygame.Rect(150, 150, 700, 370))
     for row in hexagon_array:
         for hexagon in row:
@@ -347,7 +354,7 @@ def game_loop(time_left, score, num_to_refresh):
     screen.blit(time_text_surface, time_text_rect)
 
     if mouse_left_image is not None:
-        pygame.draw.rect(screen, white, pygame.Rect(0, 600, width, 300))
+        pygame.draw.rect(screen, (0x93, 0x70, 0xdb), pygame.Rect(0, 600, width, 300))
         screen.blit(mouse_left_image, pygame.Rect(200, 650, 100, 100))
         screen.blit(rotate_counterclockwise_image, pygame.Rect(250, 650, 100, 100))
         screen.blit(rotate_clockwise_image, pygame.Rect(width - 350, 650, 100, 100))

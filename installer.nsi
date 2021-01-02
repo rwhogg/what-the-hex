@@ -17,6 +17,7 @@ Section "What The Hex"
     SetOutPath $INSTDIR
     File "dist\What The Hex.exe"
     File "kenney-pixel-square.ttf"
+    File "bg.png"
     File "bg_music.ogg"
     File "game_over-sound.wav"
     File "game_over-voice.ogg"
@@ -41,6 +42,7 @@ Section "Uninstall"
     Delete $INSTDIR\uninstaller.exe
     Delete "$INSTDIR\What The Hex.exe"
     Delete $INSTDIR\kenney-pixel-square.ttf
+    Delete $INSTDIR\bg.png
     Delete $INSTDIR\bg_music.ogg
     Delete $INSTDIR\game_over-sound.wav
     Delete $INSTDIR\game_over-voice.ogg
