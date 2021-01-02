@@ -14,4 +14,6 @@ Section "Hexasexy"
     File "match.wav"
     File "rotate.ogg"
     File /r "licenses"
+    File "LICENSE.txt"
+    File "README.md"
 SectionEnd
