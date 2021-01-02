@@ -69,7 +69,7 @@ Licenses of (possible) runtime dependencies are included in the licenses/ direct
 
 ## Acknowledgements
 
-In addition to the above development requirements, special thanks to www.kenney.nl and to the Superpowers app team for providing a number of the assets.
-
 ![Python Powered](https://www.python.org/static/community_logos/python-powered-w-140x56.png)
 ![Powered by pygame](pygame_powered.gif)
+
+In addition to the above development requirements, special thanks to www.kenney.nl and to the Superpowers app team for providing a number of the assets.
