@@ -21,8 +21,9 @@ Maybe I'll make it configurable once the basics are working.
 * If a diamond with 4 hexagons bordering it has all 4 edges the same color, you get a match
     * It's possible more than one match is made at once - if so, you get geometrically increasing points per match made (100, 200, 400, 800, etc.)
     * After the hexagons are destroyed, they are randomly regenerated
-* Every 10 seconds, 2 random hexagons are regenerated
-    * Hexagons are internally gray by default, turn yellow when they are selected for replacement, and turn red after 5 seconds as a warning
+* Every 10 seconds, random hexagons are regenerated
+    * Hexagons are internally black by default but turn blue when they are selected for replacement
+* The number of hexagons refreshed per cycle increases by 1 every 20 seconds
 
 ## Requirements
 

@@ -353,6 +353,7 @@ time_left = 100.0 * 1000.0
 num_to_refresh = 0
 score = 0
 game_loop(time_left, score, num_to_refresh) # first iteration so the screen comes up before the music starts
+num_to_refresh = 1
 pygame.mixer.music.play(-1)
 pygame.time.set_timer(refresh_background_hexagons_event, 10 * 1000)
 pygame.time.set_timer(increase_refresh_rate_event, 20 * 1000)
