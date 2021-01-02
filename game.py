@@ -36,6 +36,7 @@ hexagon_side_length = 50
 hexagon_rows = 5
 hexagon_columns = 8
 extra_seconds = 5
+edge_thickness = 6
 refresh_sound_name = "refresh.ogg"
 rotate_sound_name = "rotate.ogg"
 font_name = "kenney-pixel-square.ttf"
@@ -150,8 +151,8 @@ class HexagonStruct:
 
     def point_is_inside(self, point):
         # this isn't strictly correct, but it's accurate enough for my purposes
-        # (the 30 is just a little extra tolerance)
-        return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= self.get_small_radius() + 30
+        # (the 35 is just a little extra tolerance)
+        return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= self.get_small_radius() + 35
 
     def rotate(self, dir):
         if dir == "right":
@@ -168,7 +169,7 @@ def draw_hexagon(hexagon):
     colors = hexagon.edge_colors
     pygame.draw.polygon(screen, hexagon.base_color, points)
     for e in range(6):
-        pygame.draw.line(screen, colors[e], edges[e][0], edges[e][1], 5)
+        pygame.draw.line(screen, colors[e], edges[e][0], edges[e][1], edge_thickness)
 
 
 def random_hexagon(center, base_color):
@@ -180,14 +181,14 @@ def random_hexagon_array(start):
     hexagons = [[] for i in range(hexagon_rows)]
     for i in range(hexagon_rows):
         for j in range(hexagon_columns):
-            center_x = start[0] + j * hexagon_side_length * math.cos(30) * 13
-            center_y = start[1] + i * hexagon_side_length * math.cos(30) * 12 + 20
+            center_x = start[0] + j * hexagon_side_length * math.cos(30) * 14
+            center_y = start[1] + i * hexagon_side_length * math.cos(30) * 12.5
             center = [center_x, center_y]
             hexagons[i].append(random_hexagon(center, green))
     return hexagons
 
 
-hexagon_array = random_hexagon_array([width / 6, height / 6])
+hexagon_array = random_hexagon_array([width / 8, height / 6])
 
 
 def refresh_matched_hexagons():
@@ -368,7 +369,8 @@ def game_loop(time_left, score, num_to_refresh, high_score):
     else:
         screen.blit(bg_image, pygame.Rect(0, 0, width, height))
 
-    pygame.draw.rect(screen, (10, 10, 10), pygame.Rect(150, 150, 700, 370))
+    diamond_color = pygame.Color(0x30, 0x30, 0x30)
+    pygame.draw.rect(screen, diamond_color, pygame.Rect(150, height / 6, 750, 385))
     for row in hexagon_array:
         for hexagon in row:
             draw_hexagon(hexagon)
