@@ -64,9 +64,10 @@ sky_blue = pygame.Color(0, 0xbf, 255)
 dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
 
 # reserved for the colors of the various hexagon states
-green = black # yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
+green = black # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
 red = pygame.Color(0xdc, 0x14, 0x3c)
-crimson = pygame.Color(0x40, 0xe0, 0xd0)
+crimson = pygame.Color(0x40, 0xe0, 0xd0) # FIXME not actually crimson
+refresh_color = faint_blue
 pink = pygame.Color(0xad, 255, 0x2f)
 
 # edge colors
@@ -192,18 +193,16 @@ hexagon_array = random_hexagon_array([width / 8, height / 6])
 
 
 def refresh_matched_hexagons():
-    for row in range(len(hexagon_array)):
-        for column in range(len(hexagon_array[row])):
-            if hexagon_array[row][column].was_matched:
-                hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
-
+    refresh_hexagons(lambda hexagon: hexagon.was_matched)
 
 def refresh_background_hexagons():
+    refresh_hexagons(lambda hexagon: hexagon.to_refresh)
+
+def refresh_hexagons(predicate):
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
-            if hexagon_array[row][column].to_refresh:
+            if predicate(hexagon_array[row][column]):
                 hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
-
 
 def pick_background_hexagons_to_refresh(num_to_refresh):
     num_refreshed = 0
@@ -215,7 +214,7 @@ def pick_background_hexagons_to_refresh(num_to_refresh):
         row = random.randrange(0, num_rows - 1)
         if not hexagon_array[row][column].was_matched:
             hexagon_array[row][column].to_refresh = True
-            hexagon_array[row][column].base_color = crimson
+            hexagon_array[row][column].base_color = refresh_color
             num_refreshed += 1
         # iteration count, make sure we never get stuck here
         i += 1
@@ -319,7 +318,6 @@ def game_over(high_score):
     pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
     print(high_score)
     with open(hiscore_file_path, "w") as high_score_file:
-        print("writing")
         high_score_file.write(str(int(high_score)))
     sys.exit()
 
