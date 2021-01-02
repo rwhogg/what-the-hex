@@ -39,7 +39,7 @@ extra_seconds = 5
 edge_thickness = 6
 refresh_sound_name = "refresh.ogg"
 rotate_sound_name = "rotate.ogg"
-font_name = "kenney-pixel-square.ttf"
+font_name = "font.ttf"
 music_name = "bg_music.ogg"
 match_sound_name = "match.wav"
 home_dir = str(Path.home())
@@ -64,9 +64,9 @@ sky_blue = pygame.Color(0, 0xbf, 255)
 dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
 
 # reserved for the colors of the various hexagon states
-green = black # yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
+green = black # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
 red = pygame.Color(0xdc, 0x14, 0x3c)
-crimson = pygame.Color(0x40, 0xe0, 0xd0)
+crimson = pygame.Color(0x40, 0xe0, 0xd0) # FIXME NOT ACTUALLY CRIMSON
 pink = pygame.Color(0xad, 255, 0x2f)
 
 # edge colors
@@ -87,6 +87,7 @@ dark_gray_no_green = pygame.Color(0x2f, 0, 0x4f)
 very_red = pygame.Color(255, 0, 0) # clashes with the orange
 
 edge_colors = [true_green, purple, true_pink, yellow]
+refresh_color = offwhite
 
 # Setup
 
@@ -191,6 +192,8 @@ def random_hexagon_array(start):
 hexagon_array = random_hexagon_array([width / 8, height / 6])
 
 
+# FIXME: refresh_matched_hexagons and refresh_background_hexagons are literally the same
+# except for the predicate that is applied. I should consolidate those
 def refresh_matched_hexagons():
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
@@ -215,7 +218,7 @@ def pick_background_hexagons_to_refresh(num_to_refresh):
         row = random.randrange(0, num_rows - 1)
         if not hexagon_array[row][column].was_matched:
             hexagon_array[row][column].to_refresh = True
-            hexagon_array[row][column].base_color = crimson
+            hexagon_array[row][column].base_color = refresh_color
             num_refreshed += 1
         # iteration count, make sure we never get stuck here
         i += 1

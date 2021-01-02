@@ -16,7 +16,7 @@ UninstPage instfiles
 Section "What The Hex"
     SetOutPath $INSTDIR
     File "dist\What The Hex.exe"
-    File "kenney-pixel-square.ttf"
+    File "font.ttf"
     File "bg.png"
     File "bg_music.ogg"
     File "game_over-sound.wav"
@@ -41,7 +41,7 @@ SectionEnd
 Section "Uninstall"
     Delete $INSTDIR\uninstaller.exe
     Delete "$INSTDIR\What The Hex.exe"
-    Delete $INSTDIR\kenney-pixel-square.ttf
+    Delete $INSTDIR\font.ttf
     Delete $INSTDIR\bg.png
     Delete $INSTDIR\bg_music.ogg
     Delete $INSTDIR\game_over-sound.wav
