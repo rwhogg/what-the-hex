@@ -43,4 +43,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: "dist/What The Hex.zip"
         asset_name: "What The Hex.zip"
-        asset_content_type: "application/octet-stream"
+        asset_content_type: "application/zip"
