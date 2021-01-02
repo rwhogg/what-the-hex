@@ -4,6 +4,11 @@ OutFile "dist\Hexasexy-installer.exe"
 
 InstallDir "$PROGRAMFILES64\Hexasexy"
 
+InstallButtonText "Install!"
+
+Page directory
+Page instfiles
+
 Section "Hexasexy"
     SetOutPath $INSTDIR
     File "dist\Hexasexy.exe"
