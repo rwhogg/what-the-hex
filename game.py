@@ -58,6 +58,7 @@ dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
 # reserved for the colors of the various hexagon states
 green = (0, 0, 0)#dark_gray#pygame.Color(0xfa, 0xf0, 0xe6)#offwhite # pygame.Color(0x77, 0x88, 0x99)##pygame.Color(0, 255, 0xf7)#(0, 0x64, 0)#(0, 0x80, 0x80)#(0xd3, 0xd3, 0xd3)#(0x90, 0xee, 0x90)
 red = pygame.Color(0xdc, 0x14, 0x3c)
+crimson = pygame.Color(0x40, 0xe0, 0xd0)
 pink = pygame.Color(0xad, 255, 0x2f)
 
 # edge colors
@@ -101,6 +102,7 @@ class HexagonStruct:
         self.base_color = base_color
         self.edge_colors = edge_colors
         self.was_matched = False
+        self.to_refresh = False
 
     def get_points(self):
         center_x = self.center[0]
@@ -171,11 +173,15 @@ def refresh_matched_hexagons():
             if hexagon_array[row][column].was_matched:
                 hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
 
-# FIXME: this currently does this without warning. What I should do:
-# One timer to randomly pick a number of hexagons, which should increase over time, which should be refreshed, and set them to flash red
-# Another to prune the background refreshed hexagons (this one)
-def refresh_background_hexagons(num_to_refresh):
-    print(f"Num to refresh {num_to_refresh}")
+
+def refresh_background_hexagons():
+    for row in range(len(hexagon_array)):
+        for column in range(len(hexagon_array[row])):
+            if hexagon_array[row][column].to_refresh:
+                hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
+
+
+def pick_background_hexagons_to_refresh(num_to_refresh):
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
@@ -184,10 +190,10 @@ def refresh_background_hexagons(num_to_refresh):
         column = random.randrange(0, num_columns - 1)
         row = random.randrange(0, num_rows - 1)
         if not hexagon_array[row][column].was_matched:
-            hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green) # FIXME color is wrong
+            hexagon_array[row][column].to_refresh = True
+            hexagon_array[row][column].base_color = crimson
             num_refreshed += 1
             print(f"REFRESH {row}, {column}")
-
         # iteration count, make sure we never get stuck here
         i += 1
         if i == 20:
@@ -296,8 +302,10 @@ def game_loop(time_left, score, num_to_refresh):
             refresh_matched_hexagons()
         elif event.type == refresh_background_hexagons_event:
             if num_to_refresh > 0:
-                refresh_background_hexagons(num_to_refresh)
+                refresh_background_hexagons()
                 refresh_sound.play()
+                pick_background_hexagons_to_refresh(num_to_refresh)
+                # FIXME sound?
         elif event.type == increase_refresh_rate_event:
             num_to_refresh += 1
             # FIXME add sound here
