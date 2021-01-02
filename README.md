@@ -45,6 +45,8 @@ See LICENSE.txt for copying details.
 
 Licenses of (possible) runtime dependencies are included in the licenses/ directory.
 
+![Wombat OSG](wombat-osg.png)
+
 ## Acknowledgements
 
 In addition to the above development requirements, special thanks to www.kenney.nl and to the Superpowers app team for providing a number of the assets.
