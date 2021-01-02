@@ -38,7 +38,7 @@ clock = pygame.time.Clock()
 font_name = "kenney-pixel-square.ttf"
 font = pygame.font.Font(font_name, 16)
 
-music_name = "drumming-sticks.ogg"
+music_name = "bg_music.ogg"
 pygame.mixer.music.load(music_name)
 
 rotate_sound_name = "rotate.ogg"
@@ -59,7 +59,7 @@ dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
 # reserved for the colors of the various hexagon states
 green = (0, 0, 0)#dark_gray#pygame.Color(0xfa, 0xf0, 0xe6)#offwhite # pygame.Color(0x77, 0x88, 0x99)##pygame.Color(0, 255, 0xf7)#(0, 0x64, 0)#(0, 0x80, 0x80)#(0xd3, 0xd3, 0xd3)#(0x90, 0xee, 0x90)
 red = pygame.Color(0xdc, 0x14, 0x3c)
-pink = pygame.Color(0x7c, 0xfc, 0) # actually just a brighter green now...
+pink = pygame.Color(0xad, 255, 0x2f)
 
 # edge colors
 # FIXME: 3 colors are too few. Too easy to make matches unintentionally

@@ -16,7 +16,7 @@ Section "Hexasexy"
     SetOutPath $INSTDIR
     File "dist\Hexasexy.exe"
     File "kenney-pixel-square.ttf"
-    File "drumming-sticks.ogg"
+    File "bg_music.ogg"
     File "game_over-sound.wav"
     File "game_over-voice.ogg"
     File "match.wav"
@@ -33,7 +33,7 @@ Section "Uninstall"
     Delete $INSTDIR\uninstaller.exe
     Delete $INSTDIR\Hexasexy.exe
     Delete $INSTDIR\kenney-pixel-square.ttf
-    Delete $INSTDIR\drumming-sticks.ogg
+    Delete $INSTDIR\bg_music.ogg
     Delete $INSTDIR\game_over-sound.wav
     Delete $INSTDIR\game_over-voice.ogg
     Delete $INSTDIR\match.wav
