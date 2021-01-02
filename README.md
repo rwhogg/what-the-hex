@@ -36,7 +36,7 @@ Get Python via whatever method you prefer.
 Pygame can be acquired with the following:
 
 ```bash
-% pip3 install pygame
+% pip3 install -r requirements.txt
 ```
 
 To run the game on its own, just run:
