@@ -50,20 +50,34 @@ match_sound = pygame.mixer.Sound(match_sound_name)
 black = pygame.Color(0, 0, 0)
 white = pygame.Color(255, 255, 255)
 
+# using for other stuff
+offwhite = pygame.Color(255, 0xfa, 0xf0)
+faint_blue = pygame.Color(0x87, 0xce, 0xfa)
+sky_blue = pygame.Color(0, 0xbf, 255)
+dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
+
 # reserved for the colors of the various hexagon states
-green = pygame.Color(0x7c, 0xfc, 0)
-yellow = pygame.Color(255, 255, 0)
-red = pygame.Color(255, 0, 0)
-pink = pygame.Color(0xff, 0x14, 0x93)
+green = (0, 0, 0)#dark_gray#pygame.Color(0xfa, 0xf0, 0xe6)#offwhite # pygame.Color(0x77, 0x88, 0x99)##pygame.Color(0, 255, 0xf7)#(0, 0x64, 0)#(0, 0x80, 0x80)#(0xd3, 0xd3, 0xd3)#(0x90, 0xee, 0x90)
+red = pygame.Color(0xdc, 0x14, 0x3c)
+pink = pygame.Color(0x7c, 0xfc, 0) # actually just a brighter green now...
 
 # edge colors
 # FIXME: 3 colors are too few. Too easy to make matches unintentionally
 # 6 sounds like too many, so probably 4 or 5???
-blue = pygame.Color(0x1e, 0x90, 255)
-purple = pygame.Color(0x4b, 0, 0x82)
+# trying to get 5 mutually non-clashing colors, plus avoiding the hexagon state ones, is too hard...
+# stick with 4, just make the game refresh more frequently
+blue = pygame.Color(0, 0, 0x90)# too hard to distinguish from the purple
+purple = pygame.Color(0x4b, 0, 82)
 orange = pygame.Color(255, 0x63, 0x47)
-olive = pygame.Color(0x6b, 0x8e, 0x23)
-edge_colors = [orange, purple, blue, olive]
+maroon = pygame.Color(0x80, 0, 0) # too subtle
+yellow = pygame.Color(255, 0xd7, 0) # hurts my eyes...
+true_pink = pygame.Color(255, 0x14, 0x93)
+teal = pygame.Color(0, 0x80, 0x80) # too hard to see against the green
+
+dark_gray_no_green = pygame.Color(0x2f, 0, 0x4f)
+very_red = pygame.Color(255, 0, 0) # clashes with the orange
+
+edge_colors = [orange, purple, true_pink, yellow]
 
 
 class HexagonStruct:
@@ -244,7 +258,6 @@ def game_loop(time_left, score):
         if event.type == pygame.MOUSEBUTTONDOWN:
             dir = "left" if event.button == 1 else "right"
             hexagon_rotated, row, column = rotate_hexagon(dir, event.pos)
-            rotate_sound.play()
         elif event.type == refresh_matched_hexagons_event:
             refresh_matched_hexagons()
         elif event.type == pygame.QUIT:
@@ -252,6 +265,7 @@ def game_loop(time_left, score):
 
     extra_time = 0
     if hexagon_rotated is not None:
+        rotate_sound.play()
         hexagons_in_match, diamonds_matched = check_all_adjacent_diamonds(hexagon_rotated, row, column)
         if diamonds_matched > 0:
             score += math.pow(diamonds_matched, 2) * 100
@@ -265,12 +279,14 @@ def game_loop(time_left, score):
     if debug:
         print("Tick")
 
-    screen.fill(white)
+    screen.fill(dark_gray)
+    #pygame.draw.rect(screen, sky_blue, pygame.Rect(100, 80, 850, 500))
+    pygame.draw.rect(screen, (10, 10, 10), pygame.Rect(150, 150, 700, 370))
     for row in hexagon_array:
         for hexagon in row:
             draw_hexagon(hexagon)
 
-    time_text_surface = font.render(f"Time {int(time_left / 1000)}        Score {int(score)}", True, black)
+    time_text_surface = font.render(f"Time {int(time_left / 1000)}        Score {int(score)}", True, red)
     screen.blit(time_text_surface, time_text_surface.get_rect())
 
     if time_left <= 0:
@@ -282,7 +298,7 @@ def game_loop(time_left, score):
     return (time_left - clock.get_time() + extra_time, score)
 
 
-time_left = 300.0 * 1000.0
+time_left = 100.0 * 1000.0
 score = 0
 game_loop(time_left, score) # first iteration so the screen comes up before the music starts
 pygame.mixer.music.play(-1)
