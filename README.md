@@ -1,6 +1,6 @@
 # Hexasexy
 
-Hexagonal puzzle game (VERY VERY WIP)
+Hexagonal puzzle game
 
 ## Rules
 
@@ -22,7 +22,7 @@ Maybe I'll make it configurable once the basics are working.
 * Python 3.9
 * Ruby/Rake
 * Pyinstaller
-* Pygame
+* Pygame (and dependencies thereof, eg. SDL)
 * NSIS
 
 ![Powered by pygame](pygame_powered.gif)
@@ -30,6 +30,7 @@ Maybe I'll make it configurable once the basics are working.
 ## Copyright
 
 Copyright (C) 2020, Bob "Wombat" Hogg
+
 See LICENSE.txt for copying details.
 
 Licenses of (possible) runtime dependencies are included in the licenses/ directory.
