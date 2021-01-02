@@ -30,7 +30,6 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.6
-    - run: gem install rake
     - run: rake
     - name: Create Release
       id: create_release
