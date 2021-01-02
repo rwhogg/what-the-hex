@@ -1,0 +1,33 @@
+[tool.briefcase]
+project_name = "What The Hex?"
+bundle = "site.rwhogg.whatthehex"
+version = "1.0.0"
+url = "https://github.com/rwhogg/what-the-hex"
+license = "LGPL-2.1+"
+author = 'Bob "Wombat" Hogg'
+author_email = "wombat@rwhogg.site"
+
+[tool.briefcase.app.game]
+formal_name = "What The Hex"
+description = "Hexagonal puzzle game"
+icon = "icon.png"
+sources = ["game"]
+requires = ["pygame"]
+
+
+[tool.briefcase.app.game.macOS]
+requires = []
+
+[tool.briefcase.app.game.linux]
+requires = []
+system_requires = []
+
+[tool.briefcase.app.game.windows]
+requires = []
+
+# Mobile deployments
+#[tool.briefcase.app.game.iOS]
+#requires = []
+
+#[tool.briefcase.app.game.android]
+#requires = []
