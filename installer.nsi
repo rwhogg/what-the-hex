@@ -1,6 +1,7 @@
 !define VERSION "1.0.0"
 Name "What The Hex"
 OutFile "dist\What The Hex Installer.exe"
+Icon "icon.ico"
 
 InstallDir "$PROGRAMFILES64\What The Hex"
 

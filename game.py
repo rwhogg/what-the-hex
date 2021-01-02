@@ -21,30 +21,20 @@ import pygame
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
-pretty_game_name = "What the Hex"
+pretty_game_name = "What the Hex?"
 size = width, height = 1024, 768
 hexagon_side_length = 50
 hexagon_rows = 5
 hexagon_columns = 8
+extra_seconds = 5
+rotate_sound_name = "rotate.ogg"
+font_name = "kenney-pixel-square.ttf"
+music_name = "bg_music.ogg"
+match_sound_name = "match.wav"
 debug = False
 
+# Events
 refresh_matched_hexagons_event = pygame.USEREVENT + 1
-
-pygame.init()
-screen = pygame.display.set_mode(size)
-pygame.display.set_caption(pretty_game_name)
-clock = pygame.time.Clock()
-
-font_name = "kenney-pixel-square.ttf"
-font = pygame.font.Font(font_name, 16)
-
-music_name = "bg_music.ogg"
-pygame.mixer.music.load(music_name)
-
-rotate_sound_name = "rotate.ogg"
-rotate_sound = pygame.mixer.Sound(rotate_sound_name)
-match_sound_name = "match.wav"
-match_sound = pygame.mixer.Sound(match_sound_name)
 
 # Colors
 # FIXME: create separate loadable color schemes
@@ -81,6 +71,16 @@ very_red = pygame.Color(255, 0, 0) # clashes with the orange
 
 edge_colors = [orange, purple, true_pink, yellow]
 
+# Setup
+
+pygame.init()
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption(pretty_game_name)
+clock = pygame.time.Clock()
+font = pygame.font.Font(font_name, 24)
+pygame.mixer.music.load(music_name)
+rotate_sound = pygame.mixer.Sound(rotate_sound_name)
+match_sound = pygame.mixer.Sound(match_sound_name)
 
 class HexagonStruct:
     def __init__(self, center, base_color, edge_colors) -> None:
@@ -272,7 +272,7 @@ def game_loop(time_left, score):
         if diamonds_matched > 0:
             score += math.pow(diamonds_matched, 2) * 100
             match_sound.play()
-            extra_time += 5 * diamonds_matched * 1000
+            extra_time += extra_seconds * diamonds_matched * 1000
             for hexagon in hexagons_in_match:
                 hexagon.base_color = pink
                 hexagon.was_matched = True
@@ -289,7 +289,9 @@ def game_loop(time_left, score):
             draw_hexagon(hexagon)
 
     time_text_surface = font.render(f"Time {int(time_left / 1000)}        Score {int(score)}", True, red)
-    screen.blit(time_text_surface, time_text_surface.get_rect())
+    time_text_rect = time_text_surface.get_rect()
+    time_text_rect.center = (200, 45)
+    screen.blit(time_text_surface, time_text_rect)
 
     if time_left <= 0:
         # FIXME this is a bad way of doing this

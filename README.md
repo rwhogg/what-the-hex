@@ -2,7 +2,7 @@
 
 ![What The Hex?](logo.png)
 
-Hexagonal puzzle game.
+## Notes
 
 This is _not_ fully finished but I'm not intending to do active
 work on this long-term.
@@ -60,9 +60,9 @@ Copyright (C) 2021, Bob "Wombat" Hogg
 
 See LICENSE.txt for copying details.
 
-Licenses of (possible) runtime dependencies are included in the licenses/ directory.
-
 ![Wombat OSG](wombat-osg.png)
+
+Licenses of (possible) runtime dependencies are included in the licenses/ directory.
 
 ## Acknowledgements
 
