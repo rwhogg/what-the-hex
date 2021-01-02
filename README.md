@@ -17,7 +17,7 @@ Maybe I'll make it configurable once the basics are working.
 * Each hexagon has one of 3 colors on each edge
 * You can rotate any given hexagon 60 degrees counterclockwise with a left click, 60 degrees clockwise with a right click
 * You start with 3 minutes on the clock
-* If a diamond with 4 hexagons bordering it has all 4 edges the same color, you get a match
+* If a rhombus with 4 hexagons bordering it has all 4 edges the same color, you get a match
     * It's possible more than one match is made at once - if so, you get geometrically increasing points per match made (100, 200, 400, 800, etc.)
     * After the hexagons are destroyed, they are randomly regenerated
 * Every 10 seconds, random hexagons are regenerated
@@ -28,7 +28,7 @@ Maybe I'll make it configurable once the basics are working.
 
 You'll need at least the following:
 
-* Python 3.9 (may work with earlier 3.x versions. Python 2.x probably _won't_ work)
+* Python 3.8 or 3.9 (may work with earlier 3.x versions. Python 2.x probably _won't_ work)
 * Pygame (and dependencies thereof, eg. SDL)
 
 Get Python via whatever method you prefer.
