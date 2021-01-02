@@ -47,3 +47,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: "dist/What The Hex Installer.app"
         asset_name: "What The Hex Installer.app"
+        asset_type: "application/octet-stream"
