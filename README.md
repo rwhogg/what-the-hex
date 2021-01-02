@@ -49,12 +49,15 @@ If you want to build an installable standalone executable, you'll also need:
 
 * Pyinstaller
 * Ruby/Rake
-* NSIS
+* NSIS (if you're on Windows)
+* 7Zip (if you're on macOS)
 
 Then:
 
 ```
-% rake
+% rake # for Windows
+% rake -f Rakefile.macos.rb # for macOS
+# Didn't bother to make Linux builds for this one... Nothing against it, but I wrote this on Windows so that's where I play it
 ```
 
 ## Created By
