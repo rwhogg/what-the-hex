@@ -13,10 +13,13 @@
 # limitations under the License.
 
 import math
+import os
 import random
 import sys
 
 import pygame
+
+os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 pretty_game_name = "Hexasexy"
 size = width, height = 1024, 768
