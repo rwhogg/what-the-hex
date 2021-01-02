@@ -28,6 +28,8 @@ hexagon_rows = 5
 hexagon_columns = 8
 debug = False
 
+refresh_matched_hexagons_event = pygame.USEREVENT + 1
+
 pygame.init()
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption(pretty_game_name)
@@ -44,18 +46,24 @@ rotate_sound = pygame.mixer.Sound(rotate_sound_name)
 match_sound_name = "match.wav"
 match_sound = pygame.mixer.Sound(match_sound_name)
 
-# FIXME: I'll probably want some nicer colors later. For now, primaries are fine
+# Colors
 black = pygame.Color(0, 0, 0)
 white = pygame.Color(255, 255, 255)
-blue = pygame.Color(0, 0, 255)
-green = pygame.Color(0, 255, 0)
+
+# reserved for the colors of the various hexagon states
+green = pygame.Color(0x7c, 0xfc, 0)
 yellow = pygame.Color(255, 255, 0)
 red = pygame.Color(255, 0, 0)
-purple = pygame.Color(255, 0, 255)
-orange = pygame.Color(255, 0xa5, 0)
 pink = pygame.Color(0xff, 0x14, 0x93)
 
-edge_colors = [orange, purple, blue]
+# edge colors
+# FIXME: 3 colors are too few. Too easy to make matches unintentionally
+# 6 sounds like too many, so probably 4 or 5???
+blue = pygame.Color(0x1e, 0x90, 255)
+purple = pygame.Color(0x4b, 0, 0x82)
+orange = pygame.Color(255, 0x63, 0x47)
+olive = pygame.Color(0x6b, 0x8e, 0x23)
+edge_colors = [orange, purple, blue, olive]
 
 
 class HexagonStruct:
@@ -65,6 +73,7 @@ class HexagonStruct:
         self.center = center
         self.base_color = base_color
         self.edge_colors = edge_colors
+        self.was_matched = False
 
     def get_points(self):
         center_x = self.center[0]
@@ -129,7 +138,15 @@ def random_hexagon_array(start):
 hexagon_array = random_hexagon_array([width / 6, height / 6])
 
 
-# FIXME: ideally, this would be determined via screen position calculation rather than iteration, but we'll see if this is fast enough...
+def refresh_matched_hexagons():
+    for row in range(len(hexagon_array)):
+        for column in range(len(hexagon_array[row])):
+            if hexagon_array[row][column].was_matched:
+                hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
+
+
+# FIXME: ideally, this would be determined via screen position calculation rather than iteration
+# But so far it seems acceptably fast
 def rotate_hexagon(dir, position):
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
@@ -139,10 +156,8 @@ def rotate_hexagon(dir, position):
                 return hexagon, row, column
     return None, None, None
 
+
 def check_all_adjacent_diamonds(hexagon, row, column):
-    print("Checking diamonds")
-    print(hexagon.edge_colors)
-    print(hexagon.get_edges())
     hexagons_involved = set()
     count_diamonds = 0
 
@@ -153,16 +168,13 @@ def check_all_adjacent_diamonds(hexagon, row, column):
 
     # top-left
     if row != 0 and column != 0:
-        print("tl check")
         hex_nw = hexagon_array[row - 1][column - 1]
         hex_n = hexagon_array[row - 1][column]
         hex_w = hexagon_array[row][column - 1]
         nw_eq = hexagon.edge_colors[tle] == hex_nw.edge_colors[bre]
         n_eq = hexagon.edge_colors[tle] == hex_n.edge_colors[ble]
         w_eq = hexagon.edge_colors[tle] == hex_w.edge_colors[tre]
-        #print(hexagon.edge_colors[5], hex_nw.edge_colors[2], hex_n.edge_colors[4], hex_w.edge_colors[1])
         if nw_eq and n_eq and w_eq:
-            print("tl match")
             count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_nw)
@@ -170,16 +182,13 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_w)
     # top-right
     if row != 0 and column != len(hexagon_array[0]) - 1:
-        print("tr check")
         hex_ne = hexagon_array[row - 1][column + 1]
         hex_n = hexagon_array[row - 1][column]
         hex_e = hexagon_array[row][column + 1]
         ne_eq = hexagon.edge_colors[tre] == hex_ne.edge_colors[ble]
         n_eq = hexagon.edge_colors[tre] == hex_n.edge_colors[bre]
         e_eq = hexagon.edge_colors[tre] == hex_e.edge_colors[tle]
-        #print(hexagon.edge_colors[tre], hex_ne.edge_colors[4], hex_n.edge_colors[2], hex_e.edge_colors[5])
         if  ne_eq and n_eq and e_eq:
-            print("tr match")
             count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_ne)
@@ -187,16 +196,13 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_e)
     # bottom-right
     if row != len(hexagon_array) - 1 and column != len(hexagon_array[0]) - 1:
-        print("br check")
         hex_se = hexagon_array[row + 1][column + 1]
         hex_s = hexagon_array[row + 1][column]
         hex_e = hexagon_array[row][column + 1]
         se_eq = hexagon.edge_colors[bre] == hex_se.edge_colors[tle]
         s_eq = hexagon.edge_colors[bre] == hex_s.edge_colors[tre]
         e_eq = hexagon.edge_colors[bre] == hex_e.edge_colors[ble]
-        #print(hexagon.edge_colors[bre], hex_se.edge_colors[5], hex_s.edge_colors[1], hex_e.edge_colors[4])
         if se_eq and s_eq and e_eq:
-            print("br match")
             count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_se)
@@ -204,16 +210,13 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_e)
     # bottom-left
     if row != len(hexagon_array) - 1 and column != 0:
-        print("bl check")
         hex_sw = hexagon_array[row + 1][column - 1]
         hex_s = hexagon_array[row + 1][column]
         hex_w = hexagon_array[row][column - 1]
         sw_eq = hexagon.edge_colors[ble] == hex_sw.edge_colors[tre]
         s_eq = hexagon.edge_colors[ble] == hex_s.edge_colors[tle]
         w_eq = hexagon.edge_colors[ble] == hex_w.edge_colors[bre]
-        #print(hexagon.edge_colors[4], hex_sw.edge_colors[1], hex_s.edge_colors[5], hex_w.edge_colors[2])
         if sw_eq and s_eq and w_eq:
-            print("bl match")
             count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_sw)
@@ -242,6 +245,8 @@ def game_loop(time_left, score):
             dir = "left" if event.button == 1 else "right"
             hexagon_rotated, row, column = rotate_hexagon(dir, event.pos)
             rotate_sound.play()
+        elif event.type == refresh_matched_hexagons_event:
+            refresh_matched_hexagons()
         elif event.type == pygame.QUIT:
             sys.exit()
 
@@ -254,6 +259,8 @@ def game_loop(time_left, score):
             extra_time += 5 * diamonds_matched * 1000
             for hexagon in hexagons_in_match:
                 hexagon.base_color = pink
+                hexagon.was_matched = True
+            pygame.time.set_timer(refresh_matched_hexagons_event, 1000, True)
 
     if debug:
         print("Tick")
