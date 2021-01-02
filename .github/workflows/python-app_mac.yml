@@ -18,12 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install flake8 pyinstaller
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --exit-zero --statistics
+        pip install pyinstaller
     - uses: ruby/setup-ruby@v1
       with:
          ruby-version: 2.6
@@ -47,4 +42,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: "dist/What The Hex Installer.app"
         asset_name: "What The Hex Installer.app"
-        asset_type: "application/octet-stream"
+        asset_content_type: "application/octet-stream"
