@@ -1,6 +1,6 @@
 task default: %W[bundle]
 
-task bundle: %W["dist/What The Hex.exe" "dist/What The Hex Installer.exe"]
+task bundle: ["dist/What The Hex.exe", "dist/What The Hex Installer.exe"]
 
 %W[game.py].each do |pyfile|
     sh "pyinstaller --noconsole --onefile #{pyfile} -n \"What The Hex.exe\""
