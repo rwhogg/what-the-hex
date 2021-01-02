@@ -1,4 +1,5 @@
 # Copyright 2021 Bob "Wombat" Hogg
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -15,6 +16,7 @@
 
 import math
 import os
+import os.path
 import random
 import sys
 
@@ -37,6 +39,7 @@ rotate_sound_name = "rotate.ogg"
 font_name = "kenney-pixel-square.ttf"
 music_name = "bg_music.ogg"
 match_sound_name = "match.wav"
+hiscore_file_path = os.path.join(os.environ["HOME"], ".what-the-hex.hiscore")
 debug = False
 
 # Events
@@ -81,6 +84,12 @@ very_red = pygame.Color(255, 0, 0) # clashes with the orange
 edge_colors = [orange, purple, true_pink, yellow]
 
 # Setup
+
+high_score = 0
+if os.path.isfile(hiscore_file_path) and os.access(hiscore_file_path, os.R_OK):
+    with open(hiscore_file_path, "r") as high_score_file:
+        high_score = int(high_score_file.read())
+previous_high_score = high_score
 
 if icon is not None:
     pygame.display.set_icon(icon)
@@ -287,7 +296,7 @@ def check_all_adjacent_diamonds(hexagon, row, column):
     return (hexagons_involved, count_diamonds)
 
 
-def game_over():
+def game_over(high_score):
     pygame.mixer.music.stop()
     game_over_sound = pygame.mixer.Sound("game_over-sound.wav")
     game_over_voice = pygame.mixer.Sound("game_over-voice.ogg")
@@ -295,10 +304,14 @@ def game_over():
     pygame.time.wait(int(game_over_sound.get_length() * 1000))
     game_over_voice.play()
     pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
+    print(high_score)
+    with open(hiscore_file_path, "w") as high_score_file:
+        print("writing")
+        high_score_file.write(str(int(high_score)))
     sys.exit()
 
 
-def game_loop(time_left, score, num_to_refresh):
+def game_loop(time_left, score, num_to_refresh, high_score):
     clock.tick()
 
     hexagon_rotated, row, column = None, None, None
@@ -313,10 +326,8 @@ def game_loop(time_left, score, num_to_refresh):
                 refresh_background_hexagons()
                 refresh_sound.play()
                 pick_background_hexagons_to_refresh(num_to_refresh)
-                # FIXME sound?
         elif event.type == increase_refresh_rate_event:
             num_to_refresh += 1
-            # FIXME add sound here
         elif event.type == pygame.QUIT:
             sys.exit()
 
@@ -326,6 +337,8 @@ def game_loop(time_left, score, num_to_refresh):
         hexagons_in_match, diamonds_matched = check_all_adjacent_diamonds(hexagon_rotated, row, column)
         if diamonds_matched > 0:
             score += math.pow(diamonds_matched, 2) * 100
+            if score >= high_score:
+                high_score = int(score)
             match_sound.play()
             extra_time += extra_seconds * diamonds_matched * 1000
             for hexagon in hexagons_in_match:
@@ -348,9 +361,10 @@ def game_loop(time_left, score, num_to_refresh):
         for hexagon in row:
             draw_hexagon(hexagon)
 
-    time_text_surface = font.render(f"Time {int(time_left / 1000)}        Score {int(score)}", True, red)
+    time_and_score = f"Time {int(time_left / 1000)}        Score {int(score)}        HiScore {int(high_score)}"
+    time_text_surface = font.render(time_and_score, True, red)
     time_text_rect = time_text_surface.get_rect()
-    time_text_rect.center = (200, 45)
+    time_text_rect.center = (300, 45)
     screen.blit(time_text_surface, time_text_rect)
 
     if mouse_left_image is not None:
@@ -363,25 +377,27 @@ def game_loop(time_left, score, num_to_refresh):
 
     if time_left <= 0:
         # FIXME this is a bad way of doing this
-        return True, True, True
+        return True, True, True, high_score
 
     pygame.display.flip()
 
-    return (time_left - clock.get_time() + extra_time, score, num_to_refresh)
+    return (time_left - clock.get_time() + extra_time, score, num_to_refresh, high_score)
 
 
 time_left = 100.0 * 1000.0
 num_to_refresh = 0
 score = 0
-game_loop(time_left, score, num_to_refresh) # first iteration so the screen comes up before the music starts
+game_loop(time_left, score, num_to_refresh, high_score) # first iteration so the screen comes up before the music starts
 num_to_refresh = 1
 pygame.mixer.music.play(-1)
 pygame.time.set_timer(refresh_background_hexagons_event, 10 * 1000)
 pygame.time.set_timer(increase_refresh_rate_event, 20 * 1000)
 while True:
-    time_left, score, num_to_refresh = game_loop(time_left, score, num_to_refresh)
+    time_left, score, num_to_refresh, high_score = game_loop(time_left, score, num_to_refresh, high_score)
     if time_left is True:
         break
 
 if time_left is True:
-    game_over()
+    print(high_score)
+    print(previous_high_score)
+    game_over(max(high_score, previous_high_score))
