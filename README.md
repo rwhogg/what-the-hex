@@ -6,8 +6,7 @@
 
 ## Notes
 
-This is _not_ fully finished but I'm not intending to do active
-work on this long-term.
+This is _not_ fully finished but I'm not intending to do active work on this long-term.
 
 ## Rules
 

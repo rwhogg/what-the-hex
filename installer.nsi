@@ -22,6 +22,10 @@ Section "What The Hex"
     File "game_over-voice.ogg"
     File "icon.ico"
     File "icon.png"
+    File "mouseLeft.png"
+    File "mouseRight.png"
+    File "rotate_clockwise.png"
+    File "rotate_counterclockwise.png"
     File "match.wav"
     File "refresh.ogg"
     File "rotate.ogg"
@@ -42,6 +46,10 @@ Section "Uninstall"
     Delete $INSTDIR\game_over-voice.ogg
     Delete $INSTDIR\icon.ico
     Delete $INSTDIR\icon.png
+    Delete $INSTDIR\mouseLeft.png
+    Delete $INSTDIR\mouseRight.png
+    Delete $INSTDIR\rotate_clockwise.png
+    Delete $INSTDIR\rotate_counterclockwise.png
     Delete $INSTDIR\match.wav
     Delete $INSTDIR\refresh.ogg
     Delete $INSTDIR\rotate.ogg

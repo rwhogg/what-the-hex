@@ -82,9 +82,9 @@ edge_colors = [orange, purple, true_pink, yellow]
 
 # Setup
 
-pygame.init()
 if icon is not None:
     pygame.display.set_icon(icon)
+pygame.init()
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption(pretty_game_name)
 clock = pygame.time.Clock()
@@ -94,6 +94,12 @@ refresh_sound = pygame.mixer.Sound(refresh_sound_name)
 rotate_sound = pygame.mixer.Sound(rotate_sound_name)
 match_sound = pygame.mixer.Sound(match_sound_name)
 
+mouse_left_image, rotate_counterclockwise_image, mouse_right_image, rotate_clockwise_image = None, None, None, None
+if pygame.image.get_extended():
+    mouse_left_image = pygame.image.load("mouseLeft.png")
+    rotate_counterclockwise_image = pygame.image.load("rotate_counterclockwise.png")
+    mouse_right_image = pygame.image.load("mouseRight.png")
+    rotate_clockwise_image = pygame.image.load("rotate_clockwise.png")
 
 class HexagonStruct:
     def __init__(self, center, base_color, edge_colors) -> None:
@@ -339,6 +345,14 @@ def game_loop(time_left, score, num_to_refresh):
     time_text_rect = time_text_surface.get_rect()
     time_text_rect.center = (200, 45)
     screen.blit(time_text_surface, time_text_rect)
+
+    if mouse_left_image is not None:
+        pygame.draw.rect(screen, white, pygame.Rect(0, 600, width, 300))
+        screen.blit(mouse_left_image, pygame.Rect(200, 650, 100, 100))
+        screen.blit(rotate_counterclockwise_image, pygame.Rect(250, 650, 100, 100))
+        screen.blit(rotate_clockwise_image, pygame.Rect(width - 350, 650, 100, 100))
+        screen.blit(mouse_right_image, pygame.Rect(width - 300, 650, 100, 100))
+        
 
     if time_left <= 0:
         # FIXME this is a bad way of doing this
