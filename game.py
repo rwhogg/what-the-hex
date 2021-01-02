@@ -20,6 +20,8 @@ import os.path
 import random
 import sys
 
+from pathlib import Path
+
 import pygame
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -39,7 +41,8 @@ rotate_sound_name = "rotate.ogg"
 font_name = "kenney-pixel-square.ttf"
 music_name = "bg_music.ogg"
 match_sound_name = "match.wav"
-hiscore_file_path = os.path.join(os.environ["HOME"], ".what-the-hex.hiscore")
+home_dir = str(Path.home())
+hiscore_file_path = os.path.join(home_dir, ".what-the-hex.hiscore")
 debug = False
 
 # Events
