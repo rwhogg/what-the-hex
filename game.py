@@ -82,6 +82,7 @@ pygame.mixer.music.load(music_name)
 rotate_sound = pygame.mixer.Sound(rotate_sound_name)
 match_sound = pygame.mixer.Sound(match_sound_name)
 
+
 class HexagonStruct:
     def __init__(self, center, base_color, edge_colors) -> None:
         if len(edge_colors) != 6:
@@ -281,6 +282,7 @@ def game_loop(time_left, score):
     if debug:
         print("Tick")
 
+    # UI drawing
     screen.fill(dark_gray)
     #pygame.draw.rect(screen, sky_blue, pygame.Rect(100, 80, 850, 500))
     pygame.draw.rect(screen, (10, 10, 10), pygame.Rect(150, 150, 700, 370))
