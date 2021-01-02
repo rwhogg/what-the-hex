@@ -23,6 +23,7 @@ Section "What The Hex"
     File "icon.ico"
     File "icon.png"
     File "match.wav"
+    File "refresh.ogg"
     File "rotate.ogg"
     File "pygame_powered.gif"
     File /r "licenses"
@@ -42,6 +43,7 @@ Section "Uninstall"
     Delete $INSTDIR\icon.ico
     Delete $INSTDIR\icon.png
     Delete $INSTDIR\match.wav
+    Delete $INSTDIR\refresh.ogg
     Delete $INSTDIR\rotate.ogg
     Delete $INSTDIR\pygame_powered.gif
     RMDir /r $INSTDIR\licenses

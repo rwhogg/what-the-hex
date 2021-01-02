@@ -2,6 +2,8 @@
 
 ![What The Hex?](logo.png)
 
+![Python application](https://github.com/rwhogg/what-the-hex/workflows/Python%20application/badge.svg)
+
 ## Notes
 
 This is _not_ fully finished but I'm not intending to do active

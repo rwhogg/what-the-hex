@@ -31,6 +31,7 @@ hexagon_side_length = 50
 hexagon_rows = 5
 hexagon_columns = 8
 extra_seconds = 5
+refresh_sound_name = "refresh.ogg"
 rotate_sound_name = "rotate.ogg"
 font_name = "kenney-pixel-square.ttf"
 music_name = "bg_music.ogg"
@@ -39,6 +40,8 @@ debug = False
 
 # Events
 refresh_matched_hexagons_event = pygame.USEREVENT + 1
+refresh_background_hexagons_event = refresh_matched_hexagons_event + 1
+increase_refresh_rate_event = refresh_background_hexagons_event + 1
 
 # Colors
 # FIXME: create separate loadable color schemes
@@ -85,6 +88,7 @@ pygame.display.set_caption(pretty_game_name)
 clock = pygame.time.Clock()
 font = pygame.font.Font(font_name, 24)
 pygame.mixer.music.load(music_name)
+refresh_sound = pygame.mixer.Sound(refresh_sound_name)
 rotate_sound = pygame.mixer.Sound(rotate_sound_name)
 match_sound = pygame.mixer.Sound(match_sound_name)
 
@@ -167,6 +171,27 @@ def refresh_matched_hexagons():
             if hexagon_array[row][column].was_matched:
                 hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
 
+# FIXME: this currently does this without warning. What I should do:
+# One timer to randomly pick a number of hexagons, which should increase over time, which should be refreshed, and set them to flash red
+# Another to prune the background refreshed hexagons (this one)
+def refresh_background_hexagons(num_to_refresh):
+    print(f"Num to refresh {num_to_refresh}")
+    num_refreshed = 0
+    num_columns = len(hexagon_array[0])
+    num_rows = len(hexagon_array)
+    i = 0
+    while num_refreshed < num_to_refresh:
+        column = random.randrange(0, num_columns - 1)
+        row = random.randrange(0, num_rows - 1)
+        if not hexagon_array[row][column].was_matched:
+            hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green) # FIXME color is wrong
+            num_refreshed += 1
+            print(f"REFRESH {row}, {column}")
+
+        # iteration count, make sure we never get stuck here
+        i += 1
+        if i == 20:
+            break
 
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
 # But so far it seems acceptably fast
@@ -259,7 +284,7 @@ def game_over():
     sys.exit()
 
 
-def game_loop(time_left, score):
+def game_loop(time_left, score, num_to_refresh):
     clock.tick()
 
     hexagon_rotated, row, column = None, None, None
@@ -269,6 +294,13 @@ def game_loop(time_left, score):
             hexagon_rotated, row, column = rotate_hexagon(dir, event.pos)
         elif event.type == refresh_matched_hexagons_event:
             refresh_matched_hexagons()
+        elif event.type == refresh_background_hexagons_event:
+            if num_to_refresh > 0:
+                refresh_background_hexagons(num_to_refresh)
+                refresh_sound.play()
+        elif event.type == increase_refresh_rate_event:
+            num_to_refresh += 1
+            # FIXME add sound here
         elif event.type == pygame.QUIT:
             sys.exit()
 
@@ -290,7 +322,6 @@ def game_loop(time_left, score):
 
     # UI drawing
     screen.fill(dark_gray)
-    #pygame.draw.rect(screen, sky_blue, pygame.Rect(100, 80, 850, 500))
     pygame.draw.rect(screen, (10, 10, 10), pygame.Rect(150, 150, 700, 370))
     for row in hexagon_array:
         for hexagon in row:
@@ -303,21 +334,22 @@ def game_loop(time_left, score):
 
     if time_left <= 0:
         # FIXME this is a bad way of doing this
-        return True, True
+        return True, True, True
 
     pygame.display.flip()
 
-    return (time_left - clock.get_time() + extra_time, score)
+    return (time_left - clock.get_time() + extra_time, score, num_to_refresh)
 
 
 time_left = 100.0 * 1000.0
+num_to_refresh = 0
 score = 0
-game_loop(time_left, score) # first iteration so the screen comes up before the music starts
+game_loop(time_left, score, num_to_refresh) # first iteration so the screen comes up before the music starts
 pygame.mixer.music.play(-1)
-# TODO!!
-#pygame.time.set_timer(refresh_background_hexagons_event
+pygame.time.set_timer(refresh_background_hexagons_event, 10 * 1000)
+pygame.time.set_timer(increase_refresh_rate_event, 20 * 1000)
 while True:
-    time_left, score = game_loop(time_left, score)
+    time_left, score, num_to_refresh = game_loop(time_left, score, num_to_refresh)
     if time_left is True:
         break
 
