@@ -1,4 +1,4 @@
-# Hexasexy
+# What The Hex
 
 Hexagonal puzzle game
 
@@ -15,21 +15,31 @@ Maybe I'll make it configurable once the basics are working.
     * It's possible more than one match is made at once - if so, you get geometrically increasing points per match made (100, 200, 400, 800, etc.)
     * After the hexagons are destroyed, they are randomly regenerated
 * Every 10 seconds, 2 random hexagons are regenerated
-    * Hexagons are internally green by default, turn yellow when they are selected for replacement, and turn red after 5 seconds as a warning
+    * Hexagons are internally gray by default, turn yellow when they are selected for replacement, and turn red after 5 seconds as a warning
 
 ## Development Requirements
 
-* Python 3.9
-* Ruby/Rake
-* Pyinstaller
-* Pygame (and dependencies thereof, eg. SDL)
-* NSIS
+You'll definitely need the following:
 
-![Powered by pygame](pygame_powered.gif)
+* Python 3.9 (may work with earlier 3.x versions)
+* Pygame (and dependencies thereof, eg. SDL)
+
+Get Python via whatever method you prefer.
+Pygame can be acquired with the following:
+
+```bash
+% pip install pygame
+```
+
+If you want to build an installable standalone executable, you'll also need:
+
+* Pyinstaller
+* Ruby/Rake
+* NSIS
 
 ## Copyright
 
-Copyright (C) 2020, Bob "Wombat" Hogg
+Copyright (C) 2021, Bob "Wombat" Hogg
 
 See LICENSE.txt for copying details.
 
@@ -37,4 +47,7 @@ Licenses of (possible) runtime dependencies are included in the licenses/ direct
 
 ## Acknowledgements
 
-In addition to the above development requirements, special thanks to kenney.nl and the Superpowers app team for providing a number of the assets.
+In addition to the above development requirements, special thanks to www.kenney.nl and to the Superpowers app team for providing a number of the assets.
+
+![Python Powered](https://www.python.org/static/community_logos/python-powered-w-140x56.png)
+![Powered by pygame](pygame_powered.gif)

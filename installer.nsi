@@ -1,8 +1,8 @@
 !define VERSION "1.0.0"
-Name "Hexasexy"
-OutFile "dist\Hexasexy-installer.exe"
+Name "What The Hex"
+OutFile "dist\What The Hex Installer.exe"
 
-InstallDir "$PROGRAMFILES64\Hexasexy"
+InstallDir "$PROGRAMFILES64\What The Hex"
 
 InstallButtonText "Install!"
 
@@ -12,9 +12,9 @@ Page instfiles
 UninstPage uninstConfirm
 UninstPage instfiles
 
-Section "Hexasexy"
+Section "What The Hex"
     SetOutPath $INSTDIR
-    File "dist\Hexasexy.exe"
+    File "dist\What The Hex.exe"
     File "kenney-pixel-square.ttf"
     File "bg_music.ogg"
     File "game_over-sound.wav"
@@ -31,7 +31,7 @@ SectionEnd
 
 Section "Uninstall"
     Delete $INSTDIR\uninstaller.exe
-    Delete $INSTDIR\Hexasexy.exe
+    Delete "$INSTDIR\What The Hex.exe"
     Delete $INSTDIR\kenney-pixel-square.ttf
     Delete $INSTDIR\bg_music.ogg
     Delete $INSTDIR\game_over-sound.wav

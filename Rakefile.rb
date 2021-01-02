@@ -1,9 +1,9 @@
 task default: %W[bundle]
 
-task bundle: %W[dist/Hexasexy.exe dist/Hexasexy-installer.exe]
+task bundle: %W["dist/What The Hex.exe" "dist/What The Hex Installer.exe"]
 
 %W[game.py].each do |pyfile|
-    sh "pyinstaller --noconsole --onefile #{pyfile} -n Hexasexy.exe"
+    sh "pyinstaller --noconsole --onefile #{pyfile} -n \"What The Hex.exe\""
 end
 
 %W[installer.nsi].each do |installerscript|

@@ -21,7 +21,7 @@ import pygame
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
-pretty_game_name = "Hexasexy"
+pretty_game_name = "What the Hex"
 size = width, height = 1024, 768
 hexagon_side_length = 50
 hexagon_rows = 5
@@ -47,6 +47,8 @@ match_sound_name = "match.wav"
 match_sound = pygame.mixer.Sound(match_sound_name)
 
 # Colors
+# FIXME: create separate loadable color schemes
+# with symbolic color names rather than explicit ones
 black = pygame.Color(0, 0, 0)
 white = pygame.Color(255, 255, 255)
 
@@ -302,6 +304,8 @@ time_left = 100.0 * 1000.0
 score = 0
 game_loop(time_left, score) # first iteration so the screen comes up before the music starts
 pygame.mixer.music.play(-1)
+# TODO!!
+#pygame.time.set_timer(refresh_background_hexagons_event
 while True:
     time_left, score = game_loop(time_left, score)
     if time_left is True:
