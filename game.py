@@ -245,11 +245,13 @@ def game_loop(time_left, score):
         elif event.type == pygame.QUIT:
             sys.exit()
 
+    extra_time = 0
     if hexagon_rotated is not None:
         hexagons_in_match, diamonds_matched = check_all_adjacent_diamonds(hexagon_rotated, row, column)
         if diamonds_matched > 0:
             score += math.pow(diamonds_matched, 2) * 100
             match_sound.play()
+            extra_time += 5 * diamonds_matched * 1000
             for hexagon in hexagons_in_match:
                 hexagon.base_color = pink
 
@@ -270,7 +272,7 @@ def game_loop(time_left, score):
 
     pygame.display.flip()
 
-    return (time_left - clock.get_time(), score)
+    return (time_left - clock.get_time() + extra_time, score)
 
 
 time_left = 300.0 * 1000.0
