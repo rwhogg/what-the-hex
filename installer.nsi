@@ -20,6 +20,8 @@ Section "What The Hex"
     File "bg_music.ogg"
     File "game_over-sound.wav"
     File "game_over-voice.ogg"
+    File "icon.ico"
+    File "icon.png"
     File "match.wav"
     File "rotate.ogg"
     File "pygame_powered.gif"
@@ -37,6 +39,8 @@ Section "Uninstall"
     Delete $INSTDIR\bg_music.ogg
     Delete $INSTDIR\game_over-sound.wav
     Delete $INSTDIR\game_over-voice.ogg
+    Delete $INSTDIR\icon.ico
+    Delete $INSTDIR\icon.png
     Delete $INSTDIR\match.wav
     Delete $INSTDIR\rotate.ogg
     Delete $INSTDIR\pygame_powered.gif

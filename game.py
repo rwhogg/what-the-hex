@@ -22,6 +22,10 @@ import pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 pretty_game_name = "What the Hex?"
+icon = None
+if pygame.image.get_extended():
+    icon_name = "icon.png"
+    icon = pygame.image.load(icon_name)
 size = width, height = 1024, 768
 hexagon_side_length = 50
 hexagon_rows = 5
@@ -74,6 +78,8 @@ edge_colors = [orange, purple, true_pink, yellow]
 # Setup
 
 pygame.init()
+if icon is not None:
+    pygame.display.set_icon(icon)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption(pretty_game_name)
 clock = pygame.time.Clock()
