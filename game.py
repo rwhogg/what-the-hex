@@ -382,6 +382,8 @@ def game_loop(time_left, score, num_to_refresh, high_score):
         screen.blit(rotate_counterclockwise_image, pygame.Rect(250, 650, 100, 100))
         screen.blit(rotate_clockwise_image, pygame.Rect(width - 350, 650, 100, 100))
         screen.blit(mouse_right_image, pygame.Rect(width - 300, 650, 100, 100))
+        screen.blit(icon, pygame.Rect(25, 650, 100, 100))
+        screen.blit(icon, pygame.Rect(width - 125, 650, 100, 100))
 
     if time_left <= 0:
         # FIXME this is a bad way of doing this
