@@ -13,4 +13,5 @@ Section "Hexasexy"
     File "game_over-voice.ogg"
     File "match.wav"
     File "rotate.ogg"
+    File /r "licenses"
 SectionEnd

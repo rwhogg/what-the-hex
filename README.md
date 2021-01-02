@@ -11,8 +11,8 @@ Maybe I'll make it configurable once the basics are working.
 * Each hexagon has one of 3 colors on each edge
 * You can rotate any given hexagon 60 degrees counterclockwise with a left click, 60 degrees clockwise with a right click
 * You start with 3 minutes on the clock
-* If any single hexagon is surrounded by six other hexagons with all the same color facing inwards, all seven hexagons are destroyed and you get 100 points and another minute on the clock
-    * It's possible more than one match is made at once - if so, you get geometrically increasing points per central hexagon involved (100, 200, 400, 800, etc.)
+* If a diamond with 4 hexagons bordering has all 4 edges the same color, you get a match
+    * It's possible more than one match is made at once - if so, you get geometrically increasing points per match made (100, 200, 400, 800, etc.)
     * After the hexagons are destroyed, they are randomly regenerated
 * Every 10 seconds, 2 random hexagons are regenerated
     * Hexagons are internally green by default, turn yellow when they are selected for replacement, and turn red after 5 seconds as a warning
@@ -25,11 +25,15 @@ Maybe I'll make it configurable once the basics are working.
 * Pygame
 * NSIS
 
+![Powered by pygame](pygame_powered.gif)
+
 ## Copyright
 
 Copyright (C) 2020, Bob "Wombat" Hogg
 See LICENSE.txt for copying details.
 
+Licenses of (possible) runtime dependencies are included in the licenses/ directory.
+
 ## Acknowledgements
 
-In addition to the above development requirements, special thanks to kenney.nl for providing a number of the assets.
+In addition to the above development requirements, special thanks to kenney.nl and the Superpowers app team for providing a number of the assets.
