@@ -24,10 +24,7 @@ Maybe I'll make it configurable once the basics are working.
 
 ## Requirements
 
-If you just want to use the provided executables, just download them
-and run from the [Releases page](https://github.com/rwhogg/what-the-hex/releases).
-
-Otherwise, you'll need at least the following:
+You'll need at least the following:
 
 * Python 3.9 (may work with earlier 3.x versions. Python 2.x probably _won't_ work)
 * Pygame (and dependencies thereof, eg. SDL)
