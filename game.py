@@ -113,6 +113,7 @@ if pygame.image.get_extended():
     rotate_clockwise_image = pygame.image.load("rotate_clockwise.png")
     bg_image = pygame.image.load("bg.png")
 
+
 class HexagonStruct:
     def __init__(self, center, base_color, edge_colors) -> None:
         if len(edge_colors) != 6:
@@ -217,6 +218,7 @@ def pick_background_hexagons_to_refresh(num_to_refresh):
         if i == 20:
             break
 
+
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
 # But so far it seems acceptably fast
 def rotate_hexagon(dir, position):
@@ -262,7 +264,7 @@ def check_all_adjacent_diamonds(hexagon, row, column):
         ne_eq = hexagon.edge_colors[tre] == hex_ne.edge_colors[ble]
         n_eq = hexagon.edge_colors[tre] == hex_n.edge_colors[bre]
         e_eq = hexagon.edge_colors[tre] == hex_e.edge_colors[tle]
-        if  ne_eq and n_eq and e_eq:
+        if ne_eq and n_eq and e_eq:
             count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_ne)
@@ -380,7 +382,6 @@ def game_loop(time_left, score, num_to_refresh, high_score):
         screen.blit(rotate_counterclockwise_image, pygame.Rect(250, 650, 100, 100))
         screen.blit(rotate_clockwise_image, pygame.Rect(width - 350, 650, 100, 100))
         screen.blit(mouse_right_image, pygame.Rect(width - 300, 650, 100, 100))
-        
 
     if time_left <= 0:
         # FIXME this is a bad way of doing this
