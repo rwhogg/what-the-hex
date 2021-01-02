@@ -60,7 +60,7 @@ sky_blue = pygame.Color(0, 0xbf, 255)
 dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
 
 # reserved for the colors of the various hexagon states
-green = (0, 0, 0)#dark_gray#pygame.Color(0xfa, 0xf0, 0xe6)#offwhite # pygame.Color(0x77, 0x88, 0x99)##pygame.Color(0, 255, 0xf7)#(0, 0x64, 0)#(0, 0x80, 0x80)#(0xd3, 0xd3, 0xd3)#(0x90, 0xee, 0x90)
+green = black # yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
 red = pygame.Color(0xdc, 0x14, 0x3c)
 crimson = pygame.Color(0x40, 0xe0, 0xd0)
 pink = pygame.Color(0xad, 255, 0x2f)
@@ -77,11 +77,12 @@ maroon = pygame.Color(0x80, 0, 0) # too subtle
 yellow = pygame.Color(255, 0xd7, 0) # hurts my eyes...
 true_pink = pygame.Color(255, 0x14, 0x93)
 teal = pygame.Color(0, 0x80, 0x80) # too hard to see against the green
+true_green = pygame.Color(0x7c, 0xfc, 0)
 
 dark_gray_no_green = pygame.Color(0x2f, 0, 0x4f)
 very_red = pygame.Color(255, 0, 0) # clashes with the orange
 
-edge_colors = [orange, purple, true_pink, yellow]
+edge_colors = [true_green, purple, true_pink, yellow]
 
 # Setup
 
@@ -231,6 +232,7 @@ def rotate_hexagon(dir, position):
 def check_all_adjacent_diamonds(hexagon, row, column):
     hexagons_involved = set()
     count_diamonds = 0
+    color_to_flash = None
 
     tre = 0
     bre = 1
@@ -251,6 +253,7 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_nw)
             hexagons_involved.add(hex_n)
             hexagons_involved.add(hex_w)
+            color_to_flash = hexagon.edge_colors[tle]
     # top-right
     if row != 0 and column != len(hexagon_array[0]) - 1:
         hex_ne = hexagon_array[row - 1][column + 1]
@@ -265,6 +268,7 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_ne)
             hexagons_involved.add(hex_n)
             hexagons_involved.add(hex_e)
+            color_to_flash = hexagon.edge_colors[tre]
     # bottom-right
     if row != len(hexagon_array) - 1 and column != len(hexagon_array[0]) - 1:
         hex_se = hexagon_array[row + 1][column + 1]
@@ -279,6 +283,7 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_se)
             hexagons_involved.add(hex_s)
             hexagons_involved.add(hex_e)
+            color_to_flash = hexagon.edge_colors[bre]
     # bottom-left
     if row != len(hexagon_array) - 1 and column != 0:
         hex_sw = hexagon_array[row + 1][column - 1]
@@ -293,7 +298,9 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_sw)
             hexagons_involved.add(hex_s)
             hexagons_involved.add(hex_w)
-    return (hexagons_involved, count_diamonds)
+            color_to_flash = hexagon.edge_colors[ble]
+
+    return (hexagons_involved, count_diamonds, color_to_flash)
 
 
 def game_over(high_score):
@@ -334,7 +341,7 @@ def game_loop(time_left, score, num_to_refresh, high_score):
     extra_time = 0
     if hexagon_rotated is not None:
         rotate_sound.play()
-        hexagons_in_match, diamonds_matched = check_all_adjacent_diamonds(hexagon_rotated, row, column)
+        hexagons_in_match, diamonds_matched, color_to_flash = check_all_adjacent_diamonds(hexagon_rotated, row, column)
         if diamonds_matched > 0:
             score += math.pow(diamonds_matched, 2) * 100
             if score >= high_score:
@@ -342,7 +349,7 @@ def game_loop(time_left, score, num_to_refresh, high_score):
             match_sound.play()
             extra_time += extra_seconds * diamonds_matched * 1000
             for hexagon in hexagons_in_match:
-                hexagon.base_color = pink
+                hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
             pygame.time.set_timer(refresh_matched_hexagons_event, 1000, True)
 
