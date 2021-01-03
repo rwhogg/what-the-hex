@@ -14,8 +14,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import os.path
-import pathlib
+import pygame
 
-PRETTY_GAME_NAME = "What The Hex?"
-HISCORE_FILE_PATH = os.path.join(str(pathlib.Path.home()), ".what-the-hex.hiscore")
+REFRESH_MATCHED_HEXAGONS_EVENT = pygame.USEREVENT + 1
+REFRESH_BACKGROUND_HEXAGONS_EVENT = REFRESH_MATCHED_HEXAGONS_EVENT + 1
+INCREASE_REFRESH_RATE_EVENT = REFRESH_BACKGROUND_HEXAGONS_EVENT + 1

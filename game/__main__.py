@@ -20,11 +20,10 @@ import os.path
 import random
 import sys
 
-from pathlib import Path
-
 import pygame
 
 import constants
+import events
 import game_resources
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -40,14 +39,6 @@ hexagon_columns = 8
 extra_seconds = 5
 edge_thickness = 6
 
-home_dir = str(Path.home())
-hiscore_file_path = os.path.join(home_dir, ".what-the-hex.hiscore")
-debug = False
-
-# Events
-refresh_matched_hexagons_event = pygame.USEREVENT + 1
-refresh_background_hexagons_event = refresh_matched_hexagons_event + 1
-increase_refresh_rate_event = refresh_background_hexagons_event + 1
 
 # Colors
 # FIXME: create separate loadable color schemes
@@ -90,8 +81,8 @@ edge_colors = [true_green, purple, true_pink, yellow]
 # Setup
 
 high_score = 0
-if os.path.isfile(hiscore_file_path) and os.access(hiscore_file_path, os.R_OK):
-    with open(hiscore_file_path, "r") as high_score_file:
+if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(constants.HISCORE_FILE_PATH, os.R_OK):
+    with open(constants.HISCORE_FILE_PATH, "r") as high_score_file:
         high_score = int(high_score_file.read())
 previous_high_score = high_score
 
@@ -327,9 +318,8 @@ def game_over(high_score):
     pygame.time.wait(int(game_over_sound.get_length() * 1000))
     game_over_voice.play()
     pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
-    print(high_score)
-    with open(hiscore_file_path, "w") as high_score_file:
-        high_score_file.write(str(int(high_score)))
+    with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
+        hiscore_file.write(str(int(high_score)))
     sys.exit()
 
 
@@ -339,16 +329,16 @@ def game_loop(time_left, score, num_to_refresh, high_score):
     hexagon_rotated, row, column = None, None, None
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
-            dir = "left" if event.button == 1 else "right"
-            hexagon_rotated, row, column = rotate_hexagon(dir, event.pos)
-        elif event.type == refresh_matched_hexagons_event:
+            direction = "left" if event.button == 1 else "right"
+            hexagon_rotated, row, column = rotate_hexagon(direction, event.pos)
+        elif event.type == events.REFRESH_MATCHED_HEXAGONS_EVENT:
             refresh_matched_hexagons()
-        elif event.type == refresh_background_hexagons_event:
+        elif event.type == events.REFRESH_BACKGROUND_HEXAGONS_EVENT:
             if num_to_refresh > 0:
                 refresh_background_hexagons()
                 refresh_sound.play()
                 pick_background_hexagons_to_refresh(num_to_refresh)
-        elif event.type == increase_refresh_rate_event:
+        elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             num_to_refresh += 1
         elif event.type == pygame.QUIT:
             sys.exit()
@@ -367,10 +357,7 @@ def game_loop(time_left, score, num_to_refresh, high_score):
             for hexagon in hexagons_in_match:
                 hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
-            pygame.time.set_timer(refresh_matched_hexagons_event, 1000, True)
-
-    if debug:
-        print("Tick")
+            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000, True)
 
     # UI drawing
 
@@ -421,8 +408,8 @@ game_loop(time_left, score, num_to_refresh, high_score
           )  # first iteration so the screen comes up before the music starts
 num_to_refresh = 1
 pygame.mixer.music.play(-1)
-pygame.time.set_timer(refresh_background_hexagons_event, 10 * 1000)
-pygame.time.set_timer(increase_refresh_rate_event, 20 * 1000)
+pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, 10 * 1000)
+pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT, 20 * 1000)
 while True:
     time_left, score, num_to_refresh, high_score = game_loop(
         time_left, score, num_to_refresh, high_score)
@@ -430,6 +417,4 @@ while True:
         break
 
 if time_left is True:
-    print(high_score)
-    print(previous_high_score)
     game_over(max(high_score, previous_high_score))
