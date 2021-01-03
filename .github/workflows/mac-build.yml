@@ -18,7 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install briefcase
-    - run: briefcase package macos app
+    - run: briefcase package macos app --no-sign
     - run: 7z a what_the_hex.zip "macOS/What The Hex/What The Hex.app"
     - name: Create Release
       id: create_release
