@@ -22,6 +22,7 @@ import sys
 
 import pygame
 
+import colors
 import constants
 import events
 import game_resources
@@ -43,7 +44,7 @@ edge_thickness = 6
 # Colors
 # FIXME: create separate loadable color schemes
 # with symbolic color names rather than explicit ones
-black = pygame.Color(0, 0, 0)
+
 white = pygame.Color(255, 255, 255)
 
 # using for other stuff
@@ -53,30 +54,17 @@ sky_blue = pygame.Color(0, 0xbf, 255)
 dark_gray = pygame.Color(0x2f, 0x4f, 0x4f)  # also too green...
 
 # reserved for the colors of the various hexagon states
-green = black  # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
+green = colors.BLACK  # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
 red = pygame.Color(0xdc, 0x14, 0x3c)
 crimson = pygame.Color(0x40, 0xe0, 0xd0)  # FIXME not actually crimson
 refresh_color = faint_blue
 pink = pygame.Color(0xad, 255, 0x2f)
 
 # edge colors
-# FIXME: 3 colors are too few. Too easy to make matches unintentionally
-# 6 sounds like too many, so probably 4 or 5???
-# trying to get 5 mutually non-clashing colors, plus avoiding the hexagon state ones, is too hard...
-# stick with 4, just make the game refresh more frequently
 blue = pygame.Color(0, 0, 0x90)  # too hard to distinguish from the purple
-purple = pygame.Color(0x4b, 0, 82)
 orange = pygame.Color(255, 0x63, 0x47)
-maroon = pygame.Color(0x80, 0, 0)  # too subtle
-yellow = pygame.Color(255, 0xd7, 0)  # hurts my eyes...
-true_pink = pygame.Color(255, 0x14, 0x93)
-teal = pygame.Color(0, 0x80, 0x80)  # too hard to see against the green
-true_green = pygame.Color(0x7c, 0xfc, 0)
 
-dark_gray_no_green = pygame.Color(0x2f, 0, 0x4f)
-very_red = pygame.Color(255, 0, 0)  # clashes with the orange
-
-edge_colors = [true_green, purple, true_pink, yellow]
+edge_colors = [colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW]
 
 # Setup
 
