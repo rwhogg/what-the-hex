@@ -4,9 +4,11 @@
 
 ![Python application](https://github.com/rwhogg/what-the-hex/workflows/Python%20application/badge.svg)
 
+![Screenshot](screenshot.png)
+
 ## Downloads
 
-* [Windows]()
+* [Windows](https://github.com/rwhogg/what-the-hex/releases/download/mac_71d001558d722cbbc8690e7ae83027d2ee805de7/What.The.Hex.msi)
 * [macOS](https://github.com/rwhogg/what-the-hex/releases/download/mac_e56ffc2ce75d39f907a79bb3b3734e823bdd7fd5/What.The.Hex.zip)
 * Linux: not currently provided. Yes, I know I'm a Linux user and so this is hypocritical. Bug me about it enough and I'll fix it.
 
