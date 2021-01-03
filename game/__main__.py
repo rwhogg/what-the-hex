@@ -26,8 +26,11 @@ import pygame
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
+
 def get_res(file_name):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)), "resources", file_name)
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                        "resources", file_name)
+
 
 pretty_game_name = "What the Hex?"
 icon = None
@@ -64,12 +67,12 @@ white = pygame.Color(255, 255, 255)
 offwhite = pygame.Color(255, 0xfa, 0xf0)
 faint_blue = pygame.Color(0x87, 0xce, 0xfa)
 sky_blue = pygame.Color(0, 0xbf, 255)
-dark_gray = pygame.Color(0x2f, 0x4f, 0x4f) # also too green...
+dark_gray = pygame.Color(0x2f, 0x4f, 0x4f)  # also too green...
 
 # reserved for the colors of the various hexagon states
-green = black # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
+green = black  # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
 red = pygame.Color(0xdc, 0x14, 0x3c)
-crimson = pygame.Color(0x40, 0xe0, 0xd0) # FIXME not actually crimson
+crimson = pygame.Color(0x40, 0xe0, 0xd0)  # FIXME not actually crimson
 refresh_color = faint_blue
 pink = pygame.Color(0xad, 255, 0x2f)
 
@@ -78,17 +81,17 @@ pink = pygame.Color(0xad, 255, 0x2f)
 # 6 sounds like too many, so probably 4 or 5???
 # trying to get 5 mutually non-clashing colors, plus avoiding the hexagon state ones, is too hard...
 # stick with 4, just make the game refresh more frequently
-blue = pygame.Color(0, 0, 0x90)# too hard to distinguish from the purple
+blue = pygame.Color(0, 0, 0x90)  # too hard to distinguish from the purple
 purple = pygame.Color(0x4b, 0, 82)
 orange = pygame.Color(255, 0x63, 0x47)
-maroon = pygame.Color(0x80, 0, 0) # too subtle
-yellow = pygame.Color(255, 0xd7, 0) # hurts my eyes...
+maroon = pygame.Color(0x80, 0, 0)  # too subtle
+yellow = pygame.Color(255, 0xd7, 0)  # hurts my eyes...
 true_pink = pygame.Color(255, 0x14, 0x93)
-teal = pygame.Color(0, 0x80, 0x80) # too hard to see against the green
+teal = pygame.Color(0, 0x80, 0x80)  # too hard to see against the green
 true_green = pygame.Color(0x7c, 0xfc, 0)
 
 dark_gray_no_green = pygame.Color(0x2f, 0, 0x4f)
-very_red = pygame.Color(255, 0, 0) # clashes with the orange
+very_red = pygame.Color(255, 0, 0)  # clashes with the orange
 
 edge_colors = [true_green, purple, true_pink, yellow]
 
@@ -116,7 +119,8 @@ mouse_left_image, rotate_counterclockwise_image, mouse_right_image, rotate_clock
 bg_image = None
 if pygame.image.get_extended():
     mouse_left_image = pygame.image.load(get_res("mouseLeft.png"))
-    rotate_counterclockwise_image = pygame.image.load(get_res("rotate_counterclockwise.png"))
+    rotate_counterclockwise_image = pygame.image.load(
+        get_res("rotate_counterclockwise.png"))
     mouse_right_image = pygame.image.load(get_res("mouseRight.png"))
     rotate_clockwise_image = pygame.image.load(get_res("rotate_clockwise.png"))
     bg_image = pygame.image.load(get_res("bg.png"))
@@ -135,12 +139,16 @@ class HexagonStruct:
     def get_points(self):
         center_x = self.center[0]
         center_y = self.center[1]
-        p0 = (0.5 * hexagon_side_length + center_x, center_y - 0.866025 * hexagon_side_length)
+        p0 = (0.5 * hexagon_side_length + center_x,
+              center_y - 0.866025 * hexagon_side_length)
         p1 = (hexagon_side_length + center_x, center_y)
-        p2 = (0.5 * hexagon_side_length + center_x, 0.866025 * hexagon_side_length + center_y)
-        p3 = (center_x - 0.5 * hexagon_side_length, 0.866025 * hexagon_side_length + center_y)
+        p2 = (0.5 * hexagon_side_length + center_x,
+              0.866025 * hexagon_side_length + center_y)
+        p3 = (center_x - 0.5 * hexagon_side_length,
+              0.866025 * hexagon_side_length + center_y)
         p4 = (center_x - hexagon_side_length, center_y)
-        p5 = (center_x - 0.5 * hexagon_side_length, center_y - 0.866025 * hexagon_side_length)
+        p5 = (center_x - 0.5 * hexagon_side_length,
+              center_y - 0.866025 * hexagon_side_length)
         return [p0, p1, p2, p3, p4, p5]
 
     def get_big_radius(self):
@@ -156,7 +164,8 @@ class HexagonStruct:
     def point_is_inside(self, point):
         # this isn't strictly correct, but it's accurate enough for my purposes
         # (the 35 is just a little extra tolerance)
-        return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= self.get_small_radius() + 35
+        return math.hypot(point[0] - self.center[0], point[1] -
+                          self.center[1]) <= self.get_small_radius() + 35
 
     def rotate(self, dir):
         if dir == "right":
@@ -173,7 +182,8 @@ def draw_hexagon(hexagon):
     colors = hexagon.edge_colors
     pygame.draw.polygon(screen, hexagon.base_color, points)
     for e in range(6):
-        pygame.draw.line(screen, colors[e], edges[e][0], edges[e][1], edge_thickness)
+        pygame.draw.line(screen, colors[e], edges[e][0], edges[e][1],
+                         edge_thickness)
 
 
 def random_hexagon(center, base_color):
@@ -198,14 +208,18 @@ hexagon_array = random_hexagon_array([width / 8, height / 6])
 def refresh_matched_hexagons():
     refresh_hexagons(lambda hexagon: hexagon.was_matched)
 
+
 def refresh_background_hexagons():
     refresh_hexagons(lambda hexagon: hexagon.to_refresh)
+
 
 def refresh_hexagons(predicate):
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             if predicate(hexagon_array[row][column]):
-                hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, green)
+                hexagon_array[row][column] = random_hexagon(
+                    hexagon_array[row][column].center, green)
+
 
 def pick_background_hexagons_to_refresh(num_to_refresh):
     num_refreshed = 0
@@ -348,7 +362,8 @@ def game_loop(time_left, score, num_to_refresh, high_score):
     extra_time = 0
     if hexagon_rotated is not None:
         rotate_sound.play()
-        hexagons_in_match, diamonds_matched, color_to_flash = check_all_adjacent_diamonds(hexagon_rotated, row, column)
+        hexagons_in_match, diamonds_matched, color_to_flash = check_all_adjacent_diamonds(
+            hexagon_rotated, row, column)
         if diamonds_matched > 0:
             score += math.pow(diamonds_matched, 2) * 100
             if score >= high_score:
@@ -371,7 +386,8 @@ def game_loop(time_left, score, num_to_refresh, high_score):
         screen.blit(bg_image, pygame.Rect(0, 0, width, height))
 
     diamond_color = pygame.Color(0x30, 0x30, 0x30)
-    pygame.draw.rect(screen, diamond_color, pygame.Rect(150, height / 6, 750, 385))
+    pygame.draw.rect(screen, diamond_color,
+                     pygame.Rect(150, height / 6, 750, 385))
     for row in hexagon_array:
         for hexagon in row:
             draw_hexagon(hexagon)
@@ -383,10 +399,13 @@ def game_loop(time_left, score, num_to_refresh, high_score):
     screen.blit(time_text_surface, time_text_rect)
 
     if mouse_left_image is not None:
-        pygame.draw.rect(screen, (0x93, 0x70, 0xdb), pygame.Rect(0, 600, width, 300))
+        pygame.draw.rect(screen, (0x93, 0x70, 0xdb),
+                         pygame.Rect(0, 600, width, 300))
         screen.blit(mouse_left_image, pygame.Rect(200, 650, 100, 100))
-        screen.blit(rotate_counterclockwise_image, pygame.Rect(250, 650, 100, 100))
-        screen.blit(rotate_clockwise_image, pygame.Rect(width - 350, 650, 100, 100))
+        screen.blit(rotate_counterclockwise_image,
+                    pygame.Rect(250, 650, 100, 100))
+        screen.blit(rotate_clockwise_image,
+                    pygame.Rect(width - 350, 650, 100, 100))
         screen.blit(mouse_right_image, pygame.Rect(width - 300, 650, 100, 100))
         screen.blit(icon, pygame.Rect(25, 650, 100, 100))
         screen.blit(icon, pygame.Rect(width - 125, 650, 100, 100))
@@ -397,19 +416,22 @@ def game_loop(time_left, score, num_to_refresh, high_score):
 
     pygame.display.flip()
 
-    return (time_left - clock.get_time() + extra_time, score, num_to_refresh, high_score)
+    return (time_left - clock.get_time() + extra_time, score, num_to_refresh,
+            high_score)
 
 
 time_left = 100.0 * 1000.0
 num_to_refresh = 0
 score = 0
-game_loop(time_left, score, num_to_refresh, high_score) # first iteration so the screen comes up before the music starts
+game_loop(time_left, score, num_to_refresh, high_score
+          )  # first iteration so the screen comes up before the music starts
 num_to_refresh = 1
 pygame.mixer.music.play(-1)
 pygame.time.set_timer(refresh_background_hexagons_event, 10 * 1000)
 pygame.time.set_timer(increase_refresh_rate_event, 20 * 1000)
 while True:
-    time_left, score, num_to_refresh, high_score = game_loop(time_left, score, num_to_refresh, high_score)
+    time_left, score, num_to_refresh, high_score = game_loop(
+        time_left, score, num_to_refresh, high_score)
     if time_left is True:
         break
 
