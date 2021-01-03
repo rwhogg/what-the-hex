@@ -27,9 +27,10 @@ import constants
 import events
 import game_resources
 import hexagon_struct
+import hexagon_utils
+import utils
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
-
 
 icon = None
 if pygame.image.get_extended():
@@ -47,13 +48,11 @@ edge_thickness = 6
 
 # using for other stuff
 offwhite = pygame.Color(255, 0xfa, 0xf0)
-sky_blue = pygame.Color(0, 0xbf, 255)
-dark_gray = pygame.Color(0x2f, 0x4f, 0x4f)  # also too green...
 
 # reserved for the colors of the various hexagon states
 green = colors.BLACK  # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
-red = pygame.Color(0xdc, 0x14, 0x3c)
 refresh_color = colors.FAINT_BLUE
+diamond_color = pygame.Color(0x30, 0x30, 0x30)
 
 # edge colors
 EDGE_COLOR_OPTIONS = [colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW]
@@ -62,13 +61,8 @@ EDGE_COLOR_OPTIONS = [colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW]
 
 high_score = 0
 
-def get_old_hiscore():
-    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(constants.HISCORE_FILE_PATH, os.R_OK):
-        with open(constants.HISCORE_FILE_PATH, "r") as high_score_file:
-            return int(high_score_file.read())
-    return 0
 
-previous_high_score = get_old_hiscore()
+previous_high_score = utils.get_old_hiscore()
 
 if icon is not None:
     pygame.display.set_icon(icon)
@@ -137,12 +131,12 @@ def refresh_hexagons(predicate):
                     hexagon_array[row][column].center, green)
 
 
-def pick_background_hexagons_to_refresh(num_to_refresh):
+def pick_background_hexagons_to_refresh(num_hexagons_to_refresh):
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
     i = 0
-    while num_refreshed < num_to_refresh:
+    while num_refreshed < num_hexagons_to_refresh:
         column = random.randrange(0, num_columns - 1)
         row = random.randrange(0, num_rows - 1)
         if not hexagon_array[row][column].was_matched:
@@ -153,18 +147,6 @@ def pick_background_hexagons_to_refresh(num_to_refresh):
         i += 1
         if i == 20:
             break
-
-
-# FIXME: ideally, this would be determined via screen position calculation rather than iteration
-# But so far it seems acceptably fast
-def rotate_hexagon(direction, position):
-    for row in range(len(hexagon_array)):
-        for column in range(len(hexagon_array[row])):
-            hexagon = hexagon_array[row][column]
-            if hexagon.point_is_inside(position):
-                hexagon.rotate(direction)
-                return hexagon, row, column
-    return None, None, None
 
 
 def check_all_adjacent_diamonds(hexagon, row, column):
@@ -261,7 +243,7 @@ def game_loop(time_remaining, score, hexagons_to_refresh, high_score):
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             direction = "left" if event.button == 1 else "right"
-            hexagon_rotated, row, column = rotate_hexagon(direction, event.pos)
+            hexagon_rotated, row, column = hexagon_utils.rotate_hexagon(hexagon_array, direction, event.pos)
         elif event.type == events.REFRESH_MATCHED_HEXAGONS_EVENT:
             refresh_matched_hexagons()
         elif event.type == events.REFRESH_BACKGROUND_HEXAGONS_EVENT:
@@ -293,11 +275,10 @@ def game_loop(time_remaining, score, hexagons_to_refresh, high_score):
     # UI drawing
 
     if bg_image is None:
-        screen.fill(dark_gray)
+        screen.fill(colors.DARK_GRAY)
     else:
         screen.blit(bg_image, pygame.Rect(0, 0, width, height))
 
-    diamond_color = pygame.Color(0x30, 0x30, 0x30)
     pygame.draw.rect(screen, diamond_color,
                      pygame.Rect(150, height / 6, 750, 385))
     for row in hexagon_array:
@@ -305,7 +286,7 @@ def game_loop(time_remaining, score, hexagons_to_refresh, high_score):
             draw_hexagon(hexagon)
 
     time_and_score = f"Time {int(time_remaining / 1000)}        Score {int(score)}        HiScore {int(high_score)}"
-    time_text_surface = font.render(time_and_score, True, red)
+    time_text_surface = font.render(time_and_score, True, colors.RED)
     time_text_rect = time_text_surface.get_rect()
     time_text_rect.center = (300, 45)
     screen.blit(time_text_surface, time_text_rect)

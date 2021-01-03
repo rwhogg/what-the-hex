@@ -14,15 +14,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import pygame
+import os
 
-BLACK = pygame.Color(0, 0, 0)
-DARK_GRAY = pygame.Color(0x2f, 0x4f, 0x4f)
-FAINT_BLUE = pygame.Color(0x87, 0xce, 0xfa)
-GRAY = pygame.Color(0x93, 0x70, 0xdb)
-GREEN = pygame.Color(0x7c, 0xfc, 0)
-PURPLE = pygame.Color(0x4b, 0, 82)
-PINK = pygame.Color(255, 0x14, 0x93)
-RED = pygame.Color(0xdc, 0x14, 0x3c)
-WHITE = pygame.Color(255, 255, 255)
-YELLOW = pygame.Color(255, 0xd7, 0)
+import constants
+
+
+def get_old_hiscore():
+    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(constants.HISCORE_FILE_PATH, os.R_OK):
+        with open(constants.HISCORE_FILE_PATH, "r") as high_score_file:
+            return int(high_score_file.read())
+    return 0

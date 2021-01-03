@@ -14,15 +14,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import pygame
-
-BLACK = pygame.Color(0, 0, 0)
-DARK_GRAY = pygame.Color(0x2f, 0x4f, 0x4f)
-FAINT_BLUE = pygame.Color(0x87, 0xce, 0xfa)
-GRAY = pygame.Color(0x93, 0x70, 0xdb)
-GREEN = pygame.Color(0x7c, 0xfc, 0)
-PURPLE = pygame.Color(0x4b, 0, 82)
-PINK = pygame.Color(255, 0x14, 0x93)
-RED = pygame.Color(0xdc, 0x14, 0x3c)
-WHITE = pygame.Color(255, 255, 255)
-YELLOW = pygame.Color(255, 0xd7, 0)
+# FIXME: ideally, this would be determined via screen position calculation rather than iteration
+# But so far it seems acceptably fast
+def rotate_hexagon(hexagon_array, direction, position):
+    for row in range(len(hexagon_array)):
+        for column in range(len(hexagon_array[row])):
+            hexagon = hexagon_array[row][column]
+            if hexagon.point_is_inside(position):
+                hexagon.rotate(direction)
+                return hexagon, row, column
+    return None, None, None
