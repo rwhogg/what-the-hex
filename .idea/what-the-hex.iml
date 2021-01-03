@@ -4,6 +4,12 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/37venv" />
       <excludeFolder url="file://$MODULE_DIR$/lgpl-src" />
+      <excludeFolder url="file://$MODULE_DIR$/game.dist-info" />
+      <excludeFolder url="file://$MODULE_DIR$/.mypy_cache" />
+      <excludeFolder url="file://$MODULE_DIR$/.pytype" />
+      <excludeFolder url="file://$MODULE_DIR$/.vscode" />
+      <excludeFolder url="file://$MODULE_DIR$/include" />
+      <excludeFolder url="file://$MODULE_DIR$/windows" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (what-the-hex)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
