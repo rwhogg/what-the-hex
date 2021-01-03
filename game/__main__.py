@@ -16,14 +16,12 @@
 
 import math
 import sys
-import typing
 
 import pygame
 
 import constants
 import events
 import game_resources
-import hexagon_struct
 import hexagon_utils
 import utils
 
