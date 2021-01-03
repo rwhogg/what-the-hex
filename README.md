@@ -12,10 +12,6 @@
 * [macOS](https://github.com/rwhogg/what-the-hex/releases/download/v0.1.0/What.The.Hex_macos.zip)
 * Linux: not currently provided. Yes, I know I'm a Linux user and so this is hypocritical. Bug me about it enough and I'll fix it.
 
-## Notes
-
-This is _not_ fully finished but I'm not intending to do active work on this long-term.
-
 ## Rules
 
 * You begin with an 8 x 5 grid of hexagons
