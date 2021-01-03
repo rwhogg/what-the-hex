@@ -10,13 +10,10 @@ This is _not_ fully finished but I'm not intending to do active work on this lon
 
 ## Rules
 
-I'm still tweaking the specific numbers. Once we get to playing the game, what's fun/frustrating etc. will probably require adjusting this.
-Maybe I'll make it configurable once the basics are working.
-
 * You begin with an 8 x 5 grid of hexagons
-* Each hexagon has one of 3 colors on each edge
+* Each hexagon has one of 4 colors on each edge
 * You can rotate any given hexagon 60 degrees counterclockwise with a left click, 60 degrees clockwise with a right click
-* You start with 3 minutes on the clock
+* You start with 100 seconds on the clock
 * If a rhombus with 4 hexagons bordering it has all 4 edges the same color, you get a match
     * It's possible more than one match is made at once - if so, you get geometrically increasing points per match made (100, 200, 400, 800, etc.)
     * After the hexagons are destroyed, they are randomly regenerated
