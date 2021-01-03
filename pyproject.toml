@@ -4,7 +4,7 @@ bundle = "site.rwhogg.whatthehex"
 version = "1.0.0"
 url = "https://github.com/rwhogg/what-the-hex"
 license = "LGPL-2.1+"
-author = 'Bob "Wombat" Hogg'
+author = 'Bob Wombat Hogg'
 author_email = "wombat@rwhogg.site"
 
 [tool.briefcase.app.game]
