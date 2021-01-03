@@ -33,7 +33,8 @@ def draw_bg(screen, bg_image):
             pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 
 
-def draw_bottom(screen, icon, mouse_right_image, mouse_left_image, rotate_clockwise_image, rotate_counterclockwise_image):
+def draw_bottom(screen, icon, mouse_right_image, mouse_left_image,
+                rotate_clockwise_image, rotate_counterclockwise_image):
     if mouse_left_image is not None:
         pygame.draw.rect(screen, colors.GRAY,
                          pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))

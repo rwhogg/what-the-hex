@@ -109,8 +109,10 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh) -> tuple:
     for row in hexagon_array:
         for hexagon in row:
             hexagon_utils.draw_hexagon(screen, hexagon)
-    utils.draw_stats(screen, font, current_score, previous_hiscore, time_remaining)
-    utils.draw_bottom(screen, icon, mouse_right_image, mouse_left_image, rotate_clockwise_image, rotate_counterclockwise_image)
+    utils.draw_stats(screen, font, current_score, previous_hiscore,
+                     time_remaining)
+    utils.draw_bottom(screen, icon, mouse_right_image, mouse_left_image,
+                      rotate_clockwise_image, rotate_counterclockwise_image)
 
     if time_remaining <= 0:
         # FIXME this is a bad way of doing this
@@ -126,8 +128,9 @@ def run_loop():
     time_left = constants.INITIAL_TIME_MILLIS
     num_to_refresh = 0
     score = 0
-    game_loop(time_left, score, num_to_refresh
-              )  # first iteration so the screen comes up before the music starts
+    game_loop(
+        time_left, score, num_to_refresh
+    )  # first iteration so the screen comes up before the music starts
     num_to_refresh = 1
     pygame.mixer.music.play(constants.LOOP_FOREVER)
     pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT,
