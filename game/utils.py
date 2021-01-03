@@ -19,8 +19,51 @@ import sys
 
 import pygame
 
+import colors
 import constants
 import game_resources
+
+
+def draw_bg(screen, bg_image):
+    if bg_image is None:
+        screen.fill(colors.BACKGROUND_BACKUP_COLOR)
+    else:
+        screen.blit(
+            bg_image,
+            pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
+
+
+def draw_bottom(screen, icon, mouse_right_image, mouse_left_image, rotate_clockwise_image, rotate_counterclockwise_image):
+    if mouse_left_image is not None:
+        pygame.draw.rect(screen, colors.GRAY,
+                         pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))
+        screen.blit(mouse_left_image, pygame.Rect(200, 650, 100, 100))
+        screen.blit(rotate_counterclockwise_image,
+                    pygame.Rect(250, 650, 100, 100))
+        screen.blit(rotate_clockwise_image,
+                    pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
+        screen.blit(mouse_right_image,
+                    pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
+        screen.blit(icon, pygame.Rect(25, 650, 100, 100))
+        screen.blit(icon,
+                    pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
+
+
+def draw_rhombuses(screen):
+    pygame.draw.rect(screen, colors.RHOMBUS_COLOR,
+                     pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
+
+
+def draw_stats(screen, font, current_score, previous_hiscore, time_remaining):
+    current_high_score = int(max(current_score, previous_hiscore))
+    time_remaining_text = str(int(time_remaining / 1000))
+    score_text = str(int(current_score))
+    hiscore_text = str(int(current_high_score))
+    time_and_score = f"Time {time_remaining_text}        Score {score_text}        HiScore {hiscore_text}"
+    time_text_surface = font.render(time_and_score, True, colors.RED)
+    time_text_rect = time_text_surface.get_rect()
+    time_text_rect.center = (300, 45)
+    screen.blit(time_text_surface, time_text_rect)
 
 
 def game_over(high_score_value):
@@ -36,6 +79,7 @@ def game_over(high_score_value):
     sys.exit()
 
 
+# FIXME: there is some bug with the high score handling
 def get_old_hiscore():
     if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(
             constants.HISCORE_FILE_PATH, os.R_OK):

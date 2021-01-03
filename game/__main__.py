@@ -19,7 +19,6 @@ import sys
 
 import pygame
 
-import colors
 import constants
 import events
 import game_resources
@@ -105,40 +104,13 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
                                   True)
 
     # UI drawing
-
-    if bg_image is None:
-        screen.fill(colors.DARK_GRAY)
-    else:
-        screen.blit(
-            bg_image,
-            pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
-
-    pygame.draw.rect(screen, colors.RHOMBUS_COLOR,
-                     pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
+    utils.draw_bg(screen, bg_image)
+    utils.draw_rhombuses(screen)
     for row in hexagon_array:
         for hexagon in row:
             hexagon_utils.draw_hexagon(screen, hexagon)
-
-    current_high_score = int(max(current_score, previous_hiscore))
-    time_and_score = f"Time {int(time_remaining / 1000)}        Score {int(current_score)}        HiScore {current_high_score}"
-    time_text_surface = font.render(time_and_score, True, colors.RED)
-    time_text_rect = time_text_surface.get_rect()
-    time_text_rect.center = (300, 45)
-    screen.blit(time_text_surface, time_text_rect)
-
-    if mouse_left_image is not None:
-        pygame.draw.rect(screen, colors.GRAY,
-                         pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))
-        screen.blit(mouse_left_image, pygame.Rect(200, 650, 100, 100))
-        screen.blit(rotate_counterclockwise_image,
-                    pygame.Rect(250, 650, 100, 100))
-        screen.blit(rotate_clockwise_image,
-                    pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
-        screen.blit(mouse_right_image,
-                    pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
-        screen.blit(icon, pygame.Rect(25, 650, 100, 100))
-        screen.blit(icon,
-                    pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
+    utils.draw_stats(screen, font, current_score, previous_hiscore, time_remaining)
+    utils.draw_bottom(screen, icon, mouse_right_image, mouse_left_image, rotate_clockwise_image, rotate_counterclockwise_image)
 
     if time_remaining <= 0:
         # FIXME this is a bad way of doing this

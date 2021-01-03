@@ -32,6 +32,7 @@ YELLOW = pygame.Color(255, 0xd7, 0)
 # with symbolic color names rather than explicit ones
 
 # FIXME: not sure if this should go here, or if this should just be for generic colors
+BACKGROUND_BACKUP_COLOR = DARK_GRAY
 EDGE_COLOR_OPTIONS = [GREEN, PURPLE, PINK, YELLOW]
 REFRESH_COLOR = FAINT_BLUE
 RHOMBUS_COLOR = FAINT_GRAY
