@@ -120,8 +120,8 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh) -> tuple:
 
     pygame.display.flip()
 
-    return time_remaining - clock.get_time(
-    ) + extra_time, current_score, hexagons_to_refresh
+    new_time_remaining = time_remaining - clock.get_time() + extra_time
+    return new_time_remaining, current_score, hexagons_to_refresh
 
 
 def run_loop():
