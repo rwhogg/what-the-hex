@@ -1,4 +1,4 @@
-name: Python application (macOS)
+name: Native Installer (macOS)
 
 on:
   workflow_dispatch

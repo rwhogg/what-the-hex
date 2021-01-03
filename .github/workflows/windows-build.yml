@@ -1,4 +1,4 @@
-name: Python application (Windows)
+name: Native installer (Windows)
 
 on:
   workflow_dispatch
