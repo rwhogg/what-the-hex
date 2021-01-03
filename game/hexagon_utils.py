@@ -103,11 +103,12 @@ def draw_hexagon(screen, hexagon):
     edges = hexagon.get_edges()
     pygame.draw.polygon(screen, hexagon.base_color, points)
     for e in range(6):
-        pygame.draw.line(screen, hexagon.edge_colors[e], edges[e][0], edges[e][1],
-                         constants.EDGE_THICKNESS)
+        pygame.draw.line(screen, hexagon.edge_colors[e], edges[e][0],
+                         edges[e][1], constants.EDGE_THICKNESS)
 
 
-def pick_background_hexagons_to_refresh(hexagon_array, num_hexagons_to_refresh):
+def pick_background_hexagons_to_refresh(hexagon_array,
+                                        num_hexagons_to_refresh):
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
@@ -134,8 +135,10 @@ def random_hexagon_array(start):
     hexagons = [[] for _ in range(constants.HEXAGON_ROWS)]
     for i in range(constants.HEXAGON_ROWS):
         for j in range(constants.HEXAGON_COLUMNS):
-            center_x = start[0] + j * constants.HEXAGON_SIDE_LENGTH * math.cos(30) * 14
-            center_y = start[1] + i * constants.HEXAGON_SIDE_LENGTH * math.cos(30) * 12.5
+            center_x = start[0] + j * constants.HEXAGON_SIDE_LENGTH * math.cos(
+                30) * 14
+            center_y = start[1] + i * constants.HEXAGON_SIDE_LENGTH * math.cos(
+                30) * 12.5
             center = [center_x, center_y]
             hexagons[i].append(random_hexagon(center, colors.BLACK))
     return hexagons

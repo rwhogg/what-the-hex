@@ -26,6 +26,7 @@ import game_resources
 import hexagon_utils
 import utils
 
+
 # Setup
 def setup():
     icon = None
@@ -46,19 +47,24 @@ def setup():
     mouse_left_image, rotate_counterclockwise_image, mouse_right_image, rotate_clockwise_image = None, None, None, None
     bg_image = None
     if pygame.image.get_extended():
-        mouse_left_image = pygame.image.load(game_resources.MOUSE_LEFT_IMAGE_NAME)
+        mouse_left_image = pygame.image.load(
+            game_resources.MOUSE_LEFT_IMAGE_NAME)
         rotate_counterclockwise_image = pygame.image.load(
             game_resources.ROTATE_COUNTERCLOCKWISE_IMAGE_NAME)
-        mouse_right_image = pygame.image.load(game_resources.MOUSE_RIGHT_IMAGE_NAME)
-        rotate_clockwise_image = pygame.image.load(game_resources.ROTATE_CLOCKWISE_IMAGE_NAME)
+        mouse_right_image = pygame.image.load(
+            game_resources.MOUSE_RIGHT_IMAGE_NAME)
+        rotate_clockwise_image = pygame.image.load(
+            game_resources.ROTATE_CLOCKWISE_IMAGE_NAME)
         bg_image = pygame.image.load(game_resources.BACKGROUND_IMAGE_NAME)
 
     return screen, clock, font, bg_image, refresh_sound, rotate_sound, match_sound, mouse_left_image, mouse_right_image, rotate_clockwise_image, rotate_counterclockwise_image, icon
 
 
-screen, clock, font, bg_image, refresh_sound, rotate_sound, match_sound, mouse_left_image, mouse_right_image, rotate_clockwise_image, rotate_counterclockwise_image, icon = setup()
+screen, clock, font, bg_image, refresh_sound, rotate_sound, match_sound, mouse_left_image, mouse_right_image, rotate_clockwise_image, rotate_counterclockwise_image, icon = setup(
+)
 previous_high_score = utils.get_old_hiscore()
-hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
+hexagon_array = hexagon_utils.random_hexagon_array(
+    [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
 
 
 def game_loop(time_remaining, current_score, hexagons_to_refresh):
@@ -68,14 +74,16 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             direction = "left" if event.button == 1 else "right"
-            hexagon_rotated, row, column = hexagon_utils.rotate_hexagon(hexagon_array, direction, event.pos)
+            hexagon_rotated, row, column = hexagon_utils.rotate_hexagon(
+                hexagon_array, direction, event.pos)
         elif event.type == events.REFRESH_MATCHED_HEXAGONS_EVENT:
             hexagon_utils.refresh_matched_hexagons(hexagon_array)
         elif event.type == events.REFRESH_BACKGROUND_HEXAGONS_EVENT:
             if hexagons_to_refresh > 0:
                 hexagon_utils.refresh_background_hexagons(hexagon_array)
                 refresh_sound.play()
-                hexagon_utils.pick_background_hexagons_to_refresh(hexagon_array, hexagons_to_refresh)
+                hexagon_utils.pick_background_hexagons_to_refresh(
+                    hexagon_array, hexagons_to_refresh)
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             hexagons_to_refresh += 1
         elif event.type == pygame.QUIT:
@@ -93,14 +101,17 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
             for hexagon in hexagons_in_match:
                 hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
-            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000, True)
+            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000,
+                                  True)
 
     # UI drawing
 
     if bg_image is None:
         screen.fill(colors.DARK_GRAY)
     else:
-        screen.blit(bg_image, pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
+        screen.blit(
+            bg_image,
+            pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 
     pygame.draw.rect(screen, colors.RHOMBUS_COLOR,
                      pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
@@ -123,9 +134,11 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
                     pygame.Rect(250, 650, 100, 100))
         screen.blit(rotate_clockwise_image,
                     pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
-        screen.blit(mouse_right_image, pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
+        screen.blit(mouse_right_image,
+                    pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
         screen.blit(icon, pygame.Rect(25, 650, 100, 100))
-        screen.blit(icon, pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
+        screen.blit(icon,
+                    pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
 
     if time_remaining <= 0:
         # FIXME this is a bad way of doing this
@@ -133,7 +146,8 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
 
     pygame.display.flip()
 
-    return time_remaining - clock.get_time() + extra_time, current_score, hexagons_to_refresh
+    return time_remaining - clock.get_time(
+    ) + extra_time, current_score, hexagons_to_refresh
 
 
 time_left = constants.INITIAL_TIME_MILLIS
@@ -143,9 +157,12 @@ game_loop(time_left, score, num_to_refresh
           )  # first iteration so the screen comes up before the music starts
 num_to_refresh = 1
 pygame.mixer.music.play(constants.LOOP_FOREVER)
-pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
-pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT, constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
+pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT,
+                      constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
+pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT,
+                      constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
 while True:
-    time_left, score, num_to_refresh = game_loop(time_left, score, num_to_refresh)
+    time_left, score, num_to_refresh = game_loop(time_left, score,
+                                                 num_to_refresh)
     if time_left is True:
         utils.game_over(max(score, previous_high_score))

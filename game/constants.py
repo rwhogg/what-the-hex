@@ -25,7 +25,8 @@ FONT_SIZE = 24
 HEXAGON_ROWS = 5
 HEXAGON_COLUMNS = 8
 HEXAGON_SIDE_LENGTH = 50
-HISCORE_FILE_PATH = os.path.join(str(pathlib.Path.home()), ".what-the-hex.hiscore")
+HISCORE_FILE_PATH = os.path.join(str(pathlib.Path.home()),
+                                 ".what-the-hex.hiscore")
 INCREASE_REFRESH_RATE_TIME_MILLIS = 20 * 1000
 INITIAL_TIME_MILLIS = 100.0 * 1000.0
 LOOP_FOREVER = -1

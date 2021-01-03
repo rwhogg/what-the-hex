@@ -37,7 +37,8 @@ def game_over(high_score_value):
 
 
 def get_old_hiscore():
-    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(constants.HISCORE_FILE_PATH, os.R_OK):
+    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(
+            constants.HISCORE_FILE_PATH, os.R_OK):
         with open(constants.HISCORE_FILE_PATH, "r") as high_score_file:
             return int(high_score_file.read())
     return 0
