@@ -27,7 +27,7 @@ import pygame
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 def get_res(file_name):
-    return os.path.join("resources", file_name)
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), "resources", file_name)
 
 pretty_game_name = "What the Hex?"
 icon = None

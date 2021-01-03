@@ -28,7 +28,7 @@ Maybe I'll make it configurable once the basics are working.
 
 You'll need at least the following:
 
-* Python 3.8 or 3.9 (may work with 3.5, 3.6, or 3.7, but untested. 2.x definitely _won't_ work)
+* Python 3.7 or later (may work with 3.5 or 3.6, but untested. 2.x definitely _won't_ work)
 * Pygame (and dependencies thereof, eg. SDL)
 * Briefcase (`pip install briefcase`)
 
