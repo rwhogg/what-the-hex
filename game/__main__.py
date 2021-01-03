@@ -24,30 +24,22 @@ from pathlib import Path
 
 import pygame
 
+import constants
+import game_resources
+
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 
-def get_res(file_name):
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                        "resources", file_name)
-
-
-pretty_game_name = "What the Hex?"
 icon = None
 if pygame.image.get_extended():
-    icon_name = get_res("icon.png")
-    icon = pygame.image.load(icon_name)
+    icon = pygame.image.load(game_resources.ICON_NAME)
 size = width, height = 1024, 768
 hexagon_side_length = 50
 hexagon_rows = 5
 hexagon_columns = 8
 extra_seconds = 5
 edge_thickness = 6
-refresh_sound_name = get_res("refresh.ogg")
-rotate_sound_name = get_res("rotate.ogg")
-font_name = get_res("kenney-pixel-square.ttf")
-music_name = get_res("bg_music.ogg")
-match_sound_name = get_res("match.wav")
+
 home_dir = str(Path.home())
 hiscore_file_path = os.path.join(home_dir, ".what-the-hex.hiscore")
 debug = False
@@ -107,23 +99,23 @@ if icon is not None:
     pygame.display.set_icon(icon)
 pygame.init()
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption(pretty_game_name)
+pygame.display.set_caption(constants.PRETTY_GAME_NAME)
 clock = pygame.time.Clock()
-font = pygame.font.Font(font_name, 24)
-pygame.mixer.music.load(music_name)
-refresh_sound = pygame.mixer.Sound(refresh_sound_name)
-rotate_sound = pygame.mixer.Sound(rotate_sound_name)
-match_sound = pygame.mixer.Sound(match_sound_name)
+font = pygame.font.Font(game_resources.FONT_NAME, 24)
+pygame.mixer.music.load(game_resources.MUSIC_NAME)
+refresh_sound = pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME)
+rotate_sound = pygame.mixer.Sound(game_resources.ROTATE_SOUND_NAME)
+match_sound = pygame.mixer.Sound(game_resources.MATCH_SOUND_NAME)
 
 mouse_left_image, rotate_counterclockwise_image, mouse_right_image, rotate_clockwise_image = None, None, None, None
 bg_image = None
 if pygame.image.get_extended():
-    mouse_left_image = pygame.image.load(get_res("mouseLeft.png"))
+    mouse_left_image = pygame.image.load(game_resources.MOUSE_LEFT_IMAGE_NAME)
     rotate_counterclockwise_image = pygame.image.load(
-        get_res("rotate_counterclockwise.png"))
-    mouse_right_image = pygame.image.load(get_res("mouseRight.png"))
-    rotate_clockwise_image = pygame.image.load(get_res("rotate_clockwise.png"))
-    bg_image = pygame.image.load(get_res("bg.png"))
+        game_resources.ROTATE_COUNTERCLOCKWISE_IMAGE_NAME)
+    mouse_right_image = pygame.image.load(game_resources.MOUSE_RIGHT_IMAGE_NAME)
+    rotate_clockwise_image = pygame.image.load(game_resources.ROTATE_CLOCKWISE_IMAGE_NAME)
+    bg_image = pygame.image.load(game_resources.BACKGROUND_IMAGE_NAME)
 
 
 class HexagonStruct:
@@ -151,10 +143,12 @@ class HexagonStruct:
               center_y - 0.866025 * hexagon_side_length)
         return [p0, p1, p2, p3, p4, p5]
 
-    def get_big_radius(self):
+    @staticmethod
+    def get_big_radius():
         return hexagon_side_length * 2
 
-    def get_small_radius(self):
+    @staticmethod
+    def get_small_radius():
         return hexagon_side_length * math.cos(30)
 
     def get_edges(self):
@@ -192,7 +186,7 @@ def random_hexagon(center, base_color):
 
 
 def random_hexagon_array(start):
-    hexagons = [[] for i in range(hexagon_rows)]
+    hexagons = [[] for _ in range(hexagon_rows)]
     for i in range(hexagon_rows):
         for j in range(hexagon_columns):
             center_x = start[0] + j * hexagon_side_length * math.cos(30) * 14
@@ -327,8 +321,8 @@ def check_all_adjacent_diamonds(hexagon, row, column):
 
 def game_over(high_score):
     pygame.mixer.music.stop()
-    game_over_sound = pygame.mixer.Sound(get_res("game_over-sound.wav"))
-    game_over_voice = pygame.mixer.Sound(get_res("game_over-voice.ogg"))
+    game_over_sound = pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME)
+    game_over_voice = pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME)
     game_over_sound.play()
     pygame.time.wait(int(game_over_sound.get_length() * 1000))
     game_over_voice.play()
