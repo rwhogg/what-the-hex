@@ -27,7 +27,7 @@ import utils
 
 
 # Setup
-def setup():
+def setup() -> tuple:
     icon = None
     if pygame.image.get_extended():
         icon = pygame.image.load(game_resources.ICON_NAME)
@@ -66,7 +66,7 @@ hexagon_array = hexagon_utils.random_hexagon_array(
     [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
 
 
-def game_loop(time_remaining, current_score, hexagons_to_refresh):
+def game_loop(time_remaining, current_score, hexagons_to_refresh) -> tuple:
     clock.tick()
 
     hexagon_rotated, row, column = None, None, None
