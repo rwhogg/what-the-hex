@@ -40,31 +40,22 @@ hexagon_columns = 8
 extra_seconds = 5
 edge_thickness = 6
 
-
 # Colors
 # FIXME: create separate loadable color schemes
 # with symbolic color names rather than explicit ones
 
-white = pygame.Color(255, 255, 255)
-
 # using for other stuff
 offwhite = pygame.Color(255, 0xfa, 0xf0)
-faint_blue = pygame.Color(0x87, 0xce, 0xfa)
 sky_blue = pygame.Color(0, 0xbf, 255)
 dark_gray = pygame.Color(0x2f, 0x4f, 0x4f)  # also too green...
 
 # reserved for the colors of the various hexagon states
 green = colors.BLACK  # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
 red = pygame.Color(0xdc, 0x14, 0x3c)
-crimson = pygame.Color(0x40, 0xe0, 0xd0)  # FIXME not actually crimson
-refresh_color = faint_blue
-pink = pygame.Color(0xad, 255, 0x2f)
+refresh_color = colors.FAINT_BLUE
 
 # edge colors
-blue = pygame.Color(0, 0, 0x90)  # too hard to distinguish from the purple
-orange = pygame.Color(255, 0x63, 0x47)
-
-edge_colors = [colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW]
+EDGE_COLOR_OPTIONS = [colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW]
 
 # Setup
 
@@ -140,11 +131,11 @@ class HexagonStruct:
         return math.hypot(point[0] - self.center[0], point[1] -
                           self.center[1]) <= self.get_small_radius() + 35
 
-    def rotate(self, dir):
-        if dir == "right":
+    def rotate(self, direction):
+        if direction == "right":
             last_color = self.edge_colors.pop(5)
             self.edge_colors.insert(0, last_color)
-        elif dir == "left":
+        elif direction == "left":
             first_color = self.edge_colors.pop(0)
             self.edge_colors.append(first_color)
 
@@ -160,8 +151,8 @@ def draw_hexagon(hexagon):
 
 
 def random_hexagon(center, base_color):
-    colors = random.choices(edge_colors, k=6)
-    return HexagonStruct(center, base_color, colors)
+    random_colors = random.choices(EDGE_COLOR_OPTIONS, k=6)
+    return HexagonStruct(center, base_color, random_colors)
 
 
 def random_hexagon_array(start):
@@ -214,12 +205,12 @@ def pick_background_hexagons_to_refresh(num_to_refresh):
 
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
 # But so far it seems acceptably fast
-def rotate_hexagon(dir, position):
+def rotate_hexagon(direction, position):
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             hexagon = hexagon_array[row][column]
             if hexagon.point_is_inside(position):
-                hexagon.rotate(dir)
+                hexagon.rotate(direction)
                 return hexagon, row, column
     return None, None, None
 
@@ -295,7 +286,7 @@ def check_all_adjacent_diamonds(hexagon, row, column):
             hexagons_involved.add(hex_w)
             color_to_flash = hexagon.edge_colors[ble]
 
-    return (hexagons_involved, count_diamonds, color_to_flash)
+    return hexagons_involved, count_diamonds, color_to_flash
 
 
 def game_over(high_score):
