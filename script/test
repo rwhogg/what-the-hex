@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Just here to make flint happy
+
+bash ./test.sh
+

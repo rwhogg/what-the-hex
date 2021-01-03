@@ -17,11 +17,14 @@
 import math
 import typing
 
+import pygame
+
 import constants
 
 
 class HexagonStruct:
-    def __init__(self, center, base_color, edge_colors) -> None:
+    def __init__(self, center, base_color,
+                 edge_colors: typing.Sequence[pygame.Color]) -> None:
         if len(edge_colors) != 6:
             raise Exception
         self.center = center

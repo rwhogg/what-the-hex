@@ -53,13 +53,14 @@ If you want to build an installable standalone executable, run:
 % briefcase run
 ```
 
-For development, you'll also need flake8, mypy, pylint, and yapf
+For development, you'll also need flake8, mypy, nose, pylint, and yapf
 
 ```bash
 % pip install flake8 mypy pylint yapf
-% scripts/format.sh
-% scripts/typecheck.sh
-% scripts/lint.sh
+% script/format.sh
+% script/typecheck.sh
+% script/lint.sh
+% script/test.sh
 ```
 
 
