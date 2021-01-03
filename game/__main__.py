@@ -62,7 +62,7 @@ def setup():
 
 screen, clock, font, bg_image, refresh_sound, rotate_sound, match_sound, mouse_left_image, mouse_right_image, rotate_clockwise_image, rotate_counterclockwise_image, icon = setup(
 )
-previous_high_score = utils.get_old_hiscore()
+previous_hiscore = utils.get_old_hiscore()
 hexagon_array = hexagon_utils.random_hexagon_array(
     [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
 
@@ -119,7 +119,7 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
         for hexagon in row:
             hexagon_utils.draw_hexagon(screen, hexagon)
 
-    current_high_score = int(max(score, previous_high_score))
+    current_high_score = int(max(current_score, previous_hiscore))
     time_and_score = f"Time {int(time_remaining / 1000)}        Score {int(current_score)}        HiScore {current_high_score}"
     time_text_surface = font.render(time_and_score, True, colors.RED)
     time_text_rect = time_text_surface.get_rect()
@@ -150,19 +150,23 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh):
     ) + extra_time, current_score, hexagons_to_refresh
 
 
-time_left = constants.INITIAL_TIME_MILLIS
-num_to_refresh = 0
-score = 0
-game_loop(time_left, score, num_to_refresh
-          )  # first iteration so the screen comes up before the music starts
-num_to_refresh = 1
-pygame.mixer.music.play(constants.LOOP_FOREVER)
-pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT,
-                      constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
-pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT,
-                      constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
-while True:
-    time_left, score, num_to_refresh = game_loop(time_left, score,
-                                                 num_to_refresh)
-    if time_left is True:
-        utils.game_over(max(score, previous_high_score))
+def run_loop():
+    time_left = constants.INITIAL_TIME_MILLIS
+    num_to_refresh = 0
+    score = 0
+    game_loop(time_left, score, num_to_refresh
+              )  # first iteration so the screen comes up before the music starts
+    num_to_refresh = 1
+    pygame.mixer.music.play(constants.LOOP_FOREVER)
+    pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT,
+                          constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
+    pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT,
+                          constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
+    while True:
+        time_left, score, num_to_refresh = game_loop(time_left, score,
+                                                     num_to_refresh)
+        if time_left is True:
+            utils.game_over(max(score, previous_hiscore))
+
+
+run_loop()
