@@ -107,6 +107,24 @@ def draw_hexagon(screen, hexagon):
                          constants.EDGE_THICKNESS)
 
 
+def pick_background_hexagons_to_refresh(hexagon_array, num_hexagons_to_refresh):
+    num_refreshed = 0
+    num_columns = len(hexagon_array[0])
+    num_rows = len(hexagon_array)
+    i = 0
+    while num_refreshed < num_hexagons_to_refresh:
+        column = random.randrange(0, num_columns - 1)
+        row = random.randrange(0, num_rows - 1)
+        if not hexagon_array[row][column].was_matched:
+            hexagon_array[row][column].to_refresh = True
+            hexagon_array[row][column].base_color = colors.REFRESH_COLOR
+            num_refreshed += 1
+        # iteration count, make sure we never get stuck here
+        i += 1
+        if i == 20:
+            break
+
+
 def random_hexagon(center, base_color):
     random_colors = random.choices(colors.EDGE_COLOR_OPTIONS, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)

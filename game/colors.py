@@ -19,6 +19,7 @@ import pygame
 BLACK = pygame.Color(0, 0, 0)
 DARK_GRAY = pygame.Color(0x2f, 0x4f, 0x4f)
 FAINT_BLUE = pygame.Color(0x87, 0xce, 0xfa)
+FAINT_GRAY = pygame.Color(0x30, 0x30, 0x30)
 GRAY = pygame.Color(0x93, 0x70, 0xdb)
 GREEN = pygame.Color(0x7c, 0xfc, 0)
 PURPLE = pygame.Color(0x4b, 0, 82)
@@ -27,5 +28,10 @@ RED = pygame.Color(0xdc, 0x14, 0x3c)
 WHITE = pygame.Color(255, 255, 255)
 YELLOW = pygame.Color(255, 0xd7, 0)
 
+# FIXME: create separate loadable color schemes
+# with symbolic color names rather than explicit ones
+
 # FIXME: not sure if this should go here, or if this should just be for generic colors
 EDGE_COLOR_OPTIONS = [GREEN, PURPLE, PINK, YELLOW]
+REFRESH_COLOR = FAINT_BLUE
+RHOMBUS_COLOR = FAINT_GRAY

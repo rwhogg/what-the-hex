@@ -15,7 +15,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import math
-import random
 import sys
 
 import pygame
@@ -34,21 +33,7 @@ size = width, height = 1024, 768
 
 extra_seconds = 5
 
-
-# Colors
-# FIXME: create separate loadable color schemes
-# with symbolic color names rather than explicit ones
-
-# reserved for the colors of the various hexagon states
-green = colors.BLACK  # FIXME yes, I know, green isn't black. Lay off me, I was experimenting with the colors _a lot_
-refresh_color = colors.FAINT_BLUE
-diamond_color = pygame.Color(0x30, 0x30, 0x30)
-
-
 # Setup
-
-high_score = 0
-
 
 previous_high_score = utils.get_old_hiscore()
 
@@ -78,23 +63,6 @@ if pygame.image.get_extended():
 hexagon_array = hexagon_utils.random_hexagon_array([width / 8, height / 6])
 
 
-def pick_background_hexagons_to_refresh(num_hexagons_to_refresh):
-    num_refreshed = 0
-    num_columns = len(hexagon_array[0])
-    num_rows = len(hexagon_array)
-    i = 0
-    while num_refreshed < num_hexagons_to_refresh:
-        column = random.randrange(0, num_columns - 1)
-        row = random.randrange(0, num_rows - 1)
-        if not hexagon_array[row][column].was_matched:
-            hexagon_array[row][column].to_refresh = True
-            hexagon_array[row][column].base_color = refresh_color
-            num_refreshed += 1
-        # iteration count, make sure we never get stuck here
-        i += 1
-        if i == 20:
-            break
-
 
 def game_loop(time_remaining, score, hexagons_to_refresh, high_score):
     clock.tick()
@@ -110,7 +78,7 @@ def game_loop(time_remaining, score, hexagons_to_refresh, high_score):
             if hexagons_to_refresh > 0:
                 hexagon_utils.refresh_background_hexagons(hexagon_array)
                 refresh_sound.play()
-                pick_background_hexagons_to_refresh(hexagons_to_refresh)
+                hexagon_utils.pick_background_hexagons_to_refresh(hexagon_array, hexagons_to_refresh)
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             hexagons_to_refresh += 1
         elif event.type == pygame.QUIT:
@@ -139,7 +107,7 @@ def game_loop(time_remaining, score, hexagons_to_refresh, high_score):
     else:
         screen.blit(bg_image, pygame.Rect(0, 0, width, height))
 
-    pygame.draw.rect(screen, diamond_color,
+    pygame.draw.rect(screen, colors.RHOMBUS_COLOR,
                      pygame.Rect(150, height / 6, 750, 385))
     for row in hexagon_array:
         for hexagon in row:
