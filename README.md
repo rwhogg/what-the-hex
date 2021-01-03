@@ -30,30 +30,26 @@ You'll need at least the following:
 
 * Python 3.8 or 3.9 (may work with 3.5, 3.6, or 3.7, but untested. 2.x definitely _won't_ work)
 * Pygame (and dependencies thereof, eg. SDL)
+* Briefcase (`pip install briefcase`)
 
 Get Python via whatever method you prefer.
-Pygame can be acquired with the following:
+Pygame and Briefcase can be acquired with the following:
 
 ```bash
-% pip3 install -r requirements.txt
+% pip3 install pygame briefcase
 ```
 
 To run the game on its own, just run:
 
 ```bash
-% python3 game.py
+% briefcase dev
 ```
 
-If you want to build an installable standalone executable, you'll also need:
-
-* Briefcase (`pip install briefcase`)
-
-Then:
+If you want to build an installable standalone executable, run:
 
 ```
-% rake # for Windows
-% rake -f Rakefile.macos.rb # for macOS
-# Didn't bother to make Linux builds for this one... Nothing against it, but I wrote this on Windows so that's where I play it
+% briefcase package
+% briefcase run
 ```
 
 ## Created By
