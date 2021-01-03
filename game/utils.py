@@ -15,8 +15,25 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import os
+import sys
+
+import pygame
 
 import constants
+import game_resources
+
+
+def game_over(high_score_value):
+    pygame.mixer.music.stop()
+    game_over_sound = pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME)
+    game_over_voice = pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME)
+    game_over_sound.play()
+    pygame.time.wait(int(game_over_sound.get_length() * 1000))
+    game_over_voice.play()
+    pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
+    with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
+        hiscore_file.write(str(int(high_score_value)))
+    sys.exit()
 
 
 def get_old_hiscore():

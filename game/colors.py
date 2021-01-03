@@ -26,3 +26,6 @@ PINK = pygame.Color(255, 0x14, 0x93)
 RED = pygame.Color(0xdc, 0x14, 0x3c)
 WHITE = pygame.Color(255, 255, 255)
 YELLOW = pygame.Color(255, 0xd7, 0)
+
+# FIXME: not sure if this should go here, or if this should just be for generic colors
+EDGE_COLOR_OPTIONS = [GREEN, PURPLE, PINK, YELLOW]
