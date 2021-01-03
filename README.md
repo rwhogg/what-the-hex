@@ -30,8 +30,8 @@
 You'll need at least the following:
 
 * Python 3.7 or later (may work with 3.5 or 3.6, but untested. 2.x definitely _won't_ work)
-* Pygame (and dependencies thereof, eg. SDL)
-* Briefcase (`pip install briefcase`)
+* Pygame (and dependencies thereof, e.g. SDL)
+* Briefcase
 
 Get Python via whatever method you prefer.
 Pygame and Briefcase can be acquired with the following:
