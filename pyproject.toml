@@ -1,7 +1,7 @@
 [tool.briefcase]
 project_name = "What The Hex?"
 bundle = "site.rwhogg.whatthehex"
-version = "1.0.0"
+version = "0.2.0"
 url = "https://github.com/rwhogg/what-the-hex"
 license = "LGPL-2.1+"
 author = 'Bob Wombat Hogg'
@@ -13,7 +13,6 @@ description = "Hexagonal puzzle game"
 icon = "game/resources/icon"
 sources = ["game"]
 requires = ["pygame"]
-
 
 [tool.briefcase.app.game.macOS]
 requires = []

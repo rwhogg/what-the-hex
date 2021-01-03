@@ -16,6 +16,7 @@
 
 import math
 import random
+import typing
 
 import pygame
 
@@ -24,7 +25,9 @@ import constants
 import hexagon_struct
 
 
-def check_all_adjacent_diamonds(hexagon_array, hexagon, row, column):
+def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray,
+                                hexagon: hexagon_struct.HexagonStruct,
+                                row: int, column: int) -> tuple:
     hexagons_involved = set()
     count_diamonds = 0
     color_to_flash = None
@@ -107,8 +110,8 @@ def draw_hexagon(screen, hexagon):
                          edges[e][1], constants.EDGE_THICKNESS)
 
 
-def pick_background_hexagons_to_refresh(hexagon_array,
-                                        num_hexagons_to_refresh):
+def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArray,
+                                        num_hexagons_to_refresh: int):
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
@@ -126,13 +129,13 @@ def pick_background_hexagons_to_refresh(hexagon_array,
             break
 
 
-def random_hexagon(center, base_color):
+def random_hexagon(center: typing.List[float], base_color: pygame.Color):
     random_colors = random.choices(colors.EDGE_COLOR_OPTIONS, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
 
-def random_hexagon_array(start):
-    hexagons = [[] for _ in range(constants.HEXAGON_ROWS)]
+def random_hexagon_array(start: typing.Sequence[float]):
+    hexagons: typing.Sequence = [[] for _ in range(constants.HEXAGON_ROWS)]
     for i in range(constants.HEXAGON_ROWS):
         for j in range(constants.HEXAGON_COLUMNS):
             center_x = start[0] + j * constants.HEXAGON_SIDE_LENGTH * math.cos(
@@ -144,15 +147,17 @@ def random_hexagon_array(start):
     return hexagons
 
 
-def refresh_matched_hexagons(hexagon_array):
+def refresh_matched_hexagons(hexagon_array: hexagon_struct.HexagonArray):
     refresh_hexagons(hexagon_array, lambda hexagon: hexagon.was_matched)
 
 
-def refresh_background_hexagons(hexagon_array):
+def refresh_background_hexagons(hexagon_array: hexagon_struct.HexagonArray):
     refresh_hexagons(hexagon_array, lambda hexagon: hexagon.to_refresh)
 
 
-def refresh_hexagons(hexagon_array, predicate):
+def refresh_hexagons(hexagon_array: hexagon_struct.HexagonArray,
+                     predicate: typing.Callable[[hexagon_struct.HexagonStruct],
+                                                bool]):
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             if predicate(hexagon_array[row][column]):
@@ -162,7 +167,7 @@ def refresh_hexagons(hexagon_array, predicate):
 
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
 # But so far it seems acceptably fast
-def rotate_hexagon(hexagon_array, direction, position):
+def rotate_hexagon(hexagon_array: hexagon_struct.HexagonArray, direction: str, position) -> tuple:
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             hexagon = hexagon_array[row][column]

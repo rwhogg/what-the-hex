@@ -16,12 +16,14 @@
 
 import math
 import sys
+import typing
 
 import pygame
 
 import constants
 import events
 import game_resources
+import hexagon_struct
 import hexagon_utils
 import utils
 
@@ -66,14 +68,17 @@ hexagon_array = hexagon_utils.random_hexagon_array(
     [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
 
 
-def game_loop(time_remaining, current_score, hexagons_to_refresh) -> tuple:
+def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int) -> tuple:
+    row_num: int
+    column_num: int
+
     clock.tick()
 
-    hexagon_rotated, row, column = None, None, None
+    hexagon_rotated = None
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             direction = "left" if event.button == 1 else "right"
-            hexagon_rotated, row, column = hexagon_utils.rotate_hexagon(
+            hexagon_rotated, row_num, column_num = hexagon_utils.rotate_hexagon(
                 hexagon_array, direction, event.pos)
         elif event.type == events.REFRESH_MATCHED_HEXAGONS_EVENT:
             hexagon_utils.refresh_matched_hexagons(hexagon_array)
@@ -92,9 +97,9 @@ def game_loop(time_remaining, current_score, hexagons_to_refresh) -> tuple:
     if hexagon_rotated is not None:
         rotate_sound.play()
         hexagons_in_match, diamonds_matched, color_to_flash = hexagon_utils.check_all_adjacent_diamonds(
-            hexagon_array, hexagon_rotated, row, column)
+            hexagon_array, hexagon_rotated, row_num, column_num)
         if diamonds_matched > 0:
-            current_score += math.pow(diamonds_matched, 2) * 100
+            current_score += int(math.pow(diamonds_matched, 2)) * 100
             match_sound.play()
             extra_time += constants.EXTRA_SECONDS * diamonds_matched * 1000
             for hexagon in hexagons_in_match:

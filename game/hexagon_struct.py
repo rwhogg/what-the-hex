@@ -15,6 +15,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import math
+import typing
 
 import constants
 
@@ -29,7 +30,7 @@ class HexagonStruct:
         self.was_matched = False
         self.to_refresh = False
 
-    def get_points(self):
+    def get_points(self) -> typing.List[typing.Tuple[float, float]]:
         center_x = self.center[0]
         center_y = self.center[1]
         p0 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x,
@@ -45,27 +46,30 @@ class HexagonStruct:
         return [p0, p1, p2, p3, p4, p5]
 
     @staticmethod
-    def get_big_radius():
+    def get_big_radius() -> int:
         return constants.HEXAGON_SIDE_LENGTH * 2
 
     @staticmethod
-    def get_small_radius():
+    def get_small_radius() -> float:
         return constants.HEXAGON_SIDE_LENGTH * math.cos(30)
 
-    def get_edges(self):
+    def get_edges(self) -> list:
         points = self.get_points()
         return [[points[a], points[(a + 1) % 6]] for a in range(6)]
 
-    def point_is_inside(self, point):
+    def point_is_inside(self, point) -> bool:
         # this isn't strictly correct, but it's accurate enough for my purposes
         # (the 35 is just a little extra tolerance)
         return math.hypot(point[0] - self.center[0], point[1] -
                           self.center[1]) <= self.get_small_radius() + 35
 
-    def rotate(self, direction):
+    def rotate(self, direction) -> None:
         if direction == "right":
             last_color = self.edge_colors.pop(5)
             self.edge_colors.insert(0, last_color)
         elif direction == "left":
             first_color = self.edge_colors.pop(0)
             self.edge_colors.append(first_color)
+
+
+HexagonArray = typing.List[typing.List[HexagonStruct]]

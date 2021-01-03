@@ -17,28 +17,29 @@
 import os.path
 
 
-def get_res(file_name):
+def get_res(file_name) -> str:
     return os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         "resources", file_name)
 
 
 # Images
-BACKGROUND_IMAGE_NAME = get_res("bg.png")
-ICON_NAME = get_res("icon.png")
-MOUSE_LEFT_IMAGE_NAME = get_res("mouseLeft.png")
-MOUSE_RIGHT_IMAGE_NAME = get_res("mouseRight.png")
-ROTATE_CLOCKWISE_IMAGE_NAME = get_res("rotate_clockwise.png")
-ROTATE_COUNTERCLOCKWISE_IMAGE_NAME = get_res("rotate_counterclockwise.png")
+BACKGROUND_IMAGE_NAME: str = get_res("bg.png")
+ICON_NAME: str = get_res("icon.png")
+MOUSE_LEFT_IMAGE_NAME: str = get_res("mouseLeft.png")
+MOUSE_RIGHT_IMAGE_NAME: str = get_res("mouseRight.png")
+ROTATE_CLOCKWISE_IMAGE_NAME: str = get_res("rotate_clockwise.png")
+ROTATE_COUNTERCLOCKWISE_IMAGE_NAME: str = get_res(
+    "rotate_counterclockwise.png")
 
 # Sounds
-GAME_OVER_SOUND_NAME = get_res("game_over-sound.wav")
-GAME_OVER_VOICE_NAME = get_res("game_over-voice.ogg")
-REFRESH_SOUND_NAME = get_res("refresh.ogg")
-ROTATE_SOUND_NAME = get_res("rotate.ogg")
-MATCH_SOUND_NAME = get_res("match.wav")
+GAME_OVER_SOUND_NAME: str = get_res("game_over-sound.wav")
+GAME_OVER_VOICE_NAME: str = get_res("game_over-voice.ogg")
+REFRESH_SOUND_NAME: str = get_res("refresh.ogg")
+ROTATE_SOUND_NAME: str = get_res("rotate.ogg")
+MATCH_SOUND_NAME: str = get_res("match.wav")
 
 # Fonts
-FONT_NAME = get_res("kenney-pixel-square.ttf")
+FONT_NAME: str = get_res("kenney-pixel-square.ttf")
 
 # Music
-MUSIC_NAME = get_res("bg_music.ogg")
+MUSIC_NAME: str = get_res("bg_music.ogg")
