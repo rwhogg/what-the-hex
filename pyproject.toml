@@ -10,7 +10,7 @@ author_email = "wombat@rwhogg.site"
 [tool.briefcase.app.game]
 formal_name = "What The Hex"
 description = "Hexagonal puzzle game"
-icon = "icon.png"
+icon = "game/resources/icon"
 sources = ["game"]
 requires = ["pygame"]
 
