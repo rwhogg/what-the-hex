@@ -2,5 +2,4 @@
 
 # Just here to make flint happy
 
-bash ./test.sh
-
+bash ./script/test.sh
