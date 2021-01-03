@@ -18,6 +18,7 @@ import pygame
 
 BLACK = pygame.Color(0, 0, 0)
 FAINT_BLUE = pygame.Color(0x87, 0xce, 0xfa)
+GRAY = pygame.Color(0x93, 0x70, 0xdb)
 GREEN = pygame.Color(0x7c, 0xfc, 0)
 PURPLE = pygame.Color(0x4b, 0, 82)
 PINK = pygame.Color(255, 0x14, 0x93)

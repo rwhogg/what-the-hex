@@ -18,4 +18,8 @@ import os.path
 import pathlib
 
 PRETTY_GAME_NAME = "What The Hex?"
+FONT_SIZE = 24
+HEXAGON_SIDE_LENGTH = 50
 HISCORE_FILE_PATH = os.path.join(str(pathlib.Path.home()), ".what-the-hex.hiscore")
+INITIAL_TIME_MILLIS = 100.0 * 1000.0
+LOOP_FOREVER = -1
