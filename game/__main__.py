@@ -26,10 +26,13 @@ import pygame
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
+def get_res(file_name):
+    return os.path.join("resources", file_name)
+
 pretty_game_name = "What the Hex?"
 icon = None
 if pygame.image.get_extended():
-    icon_name = "icon.png"
+    icon_name = get_res("icon.png")
     icon = pygame.image.load(icon_name)
 size = width, height = 1024, 768
 hexagon_side_length = 50
@@ -37,11 +40,11 @@ hexagon_rows = 5
 hexagon_columns = 8
 extra_seconds = 5
 edge_thickness = 6
-refresh_sound_name = "refresh.ogg"
-rotate_sound_name = "rotate.ogg"
-font_name = "kenney-pixel-square.ttf"
-music_name = "bg_music.ogg"
-match_sound_name = "match.wav"
+refresh_sound_name = get_res("refresh.ogg")
+rotate_sound_name = get_res("rotate.ogg")
+font_name = get_res("kenney-pixel-square.ttf")
+music_name = get_res("bg_music.ogg")
+match_sound_name = get_res("match.wav")
 home_dir = str(Path.home())
 hiscore_file_path = os.path.join(home_dir, ".what-the-hex.hiscore")
 debug = False
@@ -112,11 +115,11 @@ match_sound = pygame.mixer.Sound(match_sound_name)
 mouse_left_image, rotate_counterclockwise_image, mouse_right_image, rotate_clockwise_image = None, None, None, None
 bg_image = None
 if pygame.image.get_extended():
-    mouse_left_image = pygame.image.load("mouseLeft.png")
-    rotate_counterclockwise_image = pygame.image.load("rotate_counterclockwise.png")
-    mouse_right_image = pygame.image.load("mouseRight.png")
-    rotate_clockwise_image = pygame.image.load("rotate_clockwise.png")
-    bg_image = pygame.image.load("bg.png")
+    mouse_left_image = pygame.image.load(get_res("mouseLeft.png"))
+    rotate_counterclockwise_image = pygame.image.load(get_res("rotate_counterclockwise.png"))
+    mouse_right_image = pygame.image.load(get_res("mouseRight.png"))
+    rotate_clockwise_image = pygame.image.load(get_res("rotate_clockwise.png"))
+    bg_image = pygame.image.load(get_res("bg.png"))
 
 
 class HexagonStruct:
@@ -310,8 +313,8 @@ def check_all_adjacent_diamonds(hexagon, row, column):
 
 def game_over(high_score):
     pygame.mixer.music.stop()
-    game_over_sound = pygame.mixer.Sound("game_over-sound.wav")
-    game_over_voice = pygame.mixer.Sound("game_over-voice.ogg")
+    game_over_sound = pygame.mixer.Sound(get_res("game_over-sound.wav"))
+    game_over_voice = pygame.mixer.Sound(get_res("game_over-voice.ogg"))
     game_over_sound.play()
     pygame.time.wait(int(game_over_sound.get_length() * 1000))
     game_over_voice.play()

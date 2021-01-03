@@ -46,10 +46,7 @@ To run the game on its own, just run:
 
 If you want to build an installable standalone executable, you'll also need:
 
-* Pyinstaller
-* Ruby/Rake
-* NSIS (if you're on Windows)
-* 7Zip (if you're on macOS)
+* Briefcase (`pip install briefcase`)
 
 Then:
 
@@ -81,7 +78,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-Licenses of (possible) runtime dependencies are included in the licenses/ directory.
+Licenses of (possible) runtime dependencies are included in the game/resources/licenses/ directory.
 
 ## Acknowledgements
 
