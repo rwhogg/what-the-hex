@@ -110,8 +110,9 @@ def draw_hexagon(screen, hexagon):
                          edges[e][1], constants.EDGE_THICKNESS)
 
 
-def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArray,
-                                        num_hexagons_to_refresh: int):
+def pick_background_hexagons_to_refresh(
+        hexagon_array: hexagon_struct.HexagonArray,
+        num_hexagons_to_refresh: int):
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
@@ -167,7 +168,8 @@ def refresh_hexagons(hexagon_array: hexagon_struct.HexagonArray,
 
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
 # But so far it seems acceptably fast
-def rotate_hexagon(hexagon_array: hexagon_struct.HexagonArray, direction: str, position) -> tuple:
+def rotate_hexagon(hexagon_array: hexagon_struct.HexagonArray, direction: str,
+                   position) -> tuple:
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             hexagon = hexagon_array[row][column]

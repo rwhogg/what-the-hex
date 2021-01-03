@@ -48,10 +48,20 @@ To run the game on its own, just run:
 
 If you want to build an installable standalone executable, run:
 
-```
+```bash
 % briefcase package
 % briefcase run
 ```
+
+For development, you'll also need flake8, mypy, pylint, and yapf
+
+```bash
+% pip install flake8 mypy pylint yapf
+% scripts/format.sh
+% scripts/typecheck.sh
+% scripts/lint.sh
+```
+
 
 ## Created By
 

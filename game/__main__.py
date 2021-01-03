@@ -68,7 +68,8 @@ hexagon_array = hexagon_utils.random_hexagon_array(
     [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
 
 
-def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int) -> tuple:
+def game_loop(time_remaining: int, current_score: int,
+              hexagons_to_refresh: int) -> tuple:
     row_num: int
     column_num: int
 
