@@ -4,6 +4,12 @@
 
 ![Python application](https://github.com/rwhogg/what-the-hex/workflows/Python%20application/badge.svg)
 
+## Downloads
+
+* [Windows]()
+* [macOS](https://github.com/rwhogg/what-the-hex/releases/download/mac_e56ffc2ce75d39f907a79bb3b3734e823bdd7fd5/What.The.Hex.zip)
+* Linux: not currently provided. Yes, I know I'm a Linux user and so this is hypocritical. Bug me about it enough and I'll fix it.
+
 ## Notes
 
 This is _not_ fully finished but I'm not intending to do active work on this long-term.
