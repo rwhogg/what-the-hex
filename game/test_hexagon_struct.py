@@ -20,18 +20,37 @@ import pygame
 
 import hexagon_struct
 
+color1, color2, color3, color4, color5, color6 = pygame.Color(1, 1, 1), pygame.Color(2, 2, 2), pygame.Color(3, 3, 3), pygame.Color(4, 4, 4), pygame.Color(5, 5, 5), pygame.Color(6, 6, 6)
+hexagon = hexagon_struct.HexagonStruct([300, 300],
+                                       pygame.Color(255, 255, 255), [
+                                            color1,
+                                            color2,
+                                            color3,
+                                            color4,
+                                            color5,
+                                            color6
+                                       ])
+
 
 def test_get_big_radius():
-    hexagon = hexagon_struct.HexagonStruct([300, 300],
-                                           pygame.Color(255, 255, 255), [
-                                               pygame.Color(0x10, 0x10, 0x10),
-                                               pygame.Color(0x10, 0x10, 0x10),
-                                               pygame.Color(0x10, 0x10, 0x10),
-                                               pygame.Color(0x10, 0x10, 0x10),
-                                               pygame.Color(0x10, 0x10, 0x10),
-                                               pygame.Color(0x10, 0x10, 0x10)
-                                           ])
     assert hexagon.get_big_radius() == 100
+
+
+def test_rotate():
+    hexagon.rotate("left")
+    assert hexagon.edge_colors[0] == color2
+    assert hexagon.edge_colors[1] == color3
+    assert hexagon.edge_colors[2] == color4
+    assert hexagon.edge_colors[3] == color5
+    assert hexagon.edge_colors[4] == color6
+    assert hexagon.edge_colors[5] == color1
+    hexagon.rotate("right")
+    assert hexagon.edge_colors[0] == color1
+    assert hexagon.edge_colors[1] == color2
+    assert hexagon.edge_colors[2] == color3
+    assert hexagon.edge_colors[3] == color4
+    assert hexagon.edge_colors[4] == color5
+    assert hexagon.edge_colors[5] == color6
 
 
 if __name__ == "main":
