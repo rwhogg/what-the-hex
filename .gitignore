@@ -141,3 +141,4 @@ game.dist-info
 .vscode
 include
 windows
+android
