@@ -1,41 +1,56 @@
-name: Native installer (Windows)
-
-on:
-  workflow_dispatch
-
-jobs:
-  build:
-
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install briefcase
-    - run: briefcase package windows msi 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: mac_${{ github.sha }}
-        release_name: Release ${{ github.sha }} (Windows)
-        draft: false
-        prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: "windows/What The Hex-1.0.0.msi"
-        asset_name: "What The Hex.msi"
-        asset_content_type: "application/x-ole-storage"
+{
+    "name": "Native installer (Windows)",
+    "on": "workflow_dispatch",
+    "jobs": {
+        "build": {
+            "runs-on": "windows-latest",
+            "steps": [
+                {
+                    "uses": "actions/checkout@v2"
+                },
+                {
+                    "name": "Set up Python 3.7",
+                    "uses": "actions/setup-python@v2",
+                    "with": {
+                        "python-version": 3.7
+                    }
+                },
+                {
+                    "name": "Install dependencies",
+                    "run": "python -m pip install --upgrade pip\npip install briefcase\n"
+                },
+                {
+                    "run": "briefcase package windows msi"
+                },
+                {
+                    "name": "Create Release",
+                    "id": "create_release",
+                    "uses": "actions/create-release@v1",
+                    "env": {
+                        "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"
+                    },
+                    "with": {
+                        "tag_name": "mac_${{ github.sha }}",
+                        "release_name": "Release ${{ github.sha }} (Windows)",
+                        "draft": false,
+                        "prerelease": false
+                    }
+                },
+                {
+                    "name": "Upload Release Asset",
+                    "id": "upload-release-asset",
+                    "uses": "actions/upload-release-asset@v1",
+                    "env": {
+                        "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"
+                    },
+                    "with": {
+                        "upload_url": "${{ steps.create_release.outputs.upload_url }}",
+                        "asset_path": "windows/What The Hex-1.0.0.msi",
+                        "asset_name": "What The Hex.msi",
+                        "asset_content_type": "application/x-ole-storage"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,27 +1,43 @@
-name: Python application
-
-on:
-  push:
-    branches: [ trunk ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-20.04
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        bash ./script/bootstrap.sh
-    - name: Lint
-      run: bash ./script/lint.sh
-    - name: Typecheck
-      run: bash ./script/typecheck.sh
-    - name: Test
-      run: bash ./script/test.sh
+{
+    "name": "Python application",
+    "on": {
+        "push": {
+            "branches": [
+                "trunk"
+            ]
+        }
+    },
+    "jobs": {
+        "build": {
+            "runs-on": "ubuntu-20.04",
+            "steps": [
+                {
+                    "uses": "actions/checkout@v2"
+                },
+                {
+                    "name": "Set up Python 3.9",
+                    "uses": "actions/setup-python@v2",
+                    "with": {
+                        "python-version": 3.9
+                    }
+                },
+                {
+                    "name": "Install dependencies",
+                    "run": "python -m pip install --upgrade pip\nbash ./script/bootstrap.sh\n"
+                },
+                {
+                    "name": "Lint",
+                    "run": "bash ./script/lint.sh"
+                },
+                {
+                    "name": "Typecheck",
+                    "run": "bash ./script/typecheck.sh"
+                },
+                {
+                    "name": "Test",
+                    "run": "bash ./script/test.sh"
+                }
+            ]
+        }
+    }
+}
