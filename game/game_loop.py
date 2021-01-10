@@ -16,7 +16,6 @@
 
 import math
 import sys
-import typing
 
 import pygame
 

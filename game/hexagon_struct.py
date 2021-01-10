@@ -64,7 +64,7 @@ class HexagonStruct:
         # this isn't strictly correct, but it's accurate enough for my purposes
         # (the 35 is just a little extra tolerance)
         return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= \
-               self.get_small_radius() + 35
+            self.get_small_radius() + 35
 
     def rotate(self, direction) -> None:
         if direction == "right":
