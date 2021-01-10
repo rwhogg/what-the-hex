@@ -31,7 +31,7 @@ def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
     for row in hexagon_array:
         for hexagon in row:
             hexagon_utils.draw_hexagon(screen, hexagon)
-    utils.draw_stats(screen, font, stats["current_score"], stats["previous_hiscore"], stats["time_remaining"])
+    utils.draw_stats(screen, font, stats)
     utils.draw_bottom(screen, ui_images["icon"],
                       ui_images["mouse_right_image"],
                       ui_images["mouse_left_image"],

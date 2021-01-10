@@ -55,10 +55,10 @@ def draw_rhombuses(screen):
                      pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
 
 
-def draw_stats(screen, font, current_score, previous_hiscore, time_remaining):
-    current_high_score = int(max(current_score, previous_hiscore))
-    time_remaining_text = str(int(time_remaining / 1000))
-    score_text = str(int(current_score))
+def draw_stats(screen, font, stats):
+    current_high_score = int(max(stats["current_score"], stats["previous_hiscore"]))
+    time_remaining_text = str(int(stats["time_remaining"] / 1000))
+    score_text = str(int(stats["current_score"]))
     hiscore_text = str(int(current_high_score))
     time_and_score = f"Time {time_remaining_text}        Score {score_text}        HiScore {hiscore_text}"
     time_text_surface = font.render(time_and_score, True, colors.RED)
