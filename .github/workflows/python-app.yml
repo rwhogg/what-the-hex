@@ -20,8 +20,8 @@ jobs:
         python -m pip install --upgrade pip
         bash ./script/bootstrap.sh
     - name: Lint
-      run: bash ./scripts/lint.sh
+      run: bash ./script/lint.sh
     - name: Typecheck
-      run: bash ./scripts/typecheck.sh
+      run: bash ./script/typecheck.sh
     - name: Test
-      run: bash ./scripts/test.sh
+      run: bash ./script/test.sh
