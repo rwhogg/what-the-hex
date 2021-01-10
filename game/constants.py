@@ -30,7 +30,7 @@ HEXAGON_SIDE_LENGTH: int = 50
 HISCORE_FILE_PATH: str = os.path.join(str(pathlib.Path.home()),
                                       ".what-the-hex.hiscore")
 INCREASE_REFRESH_RATE_TIME_MILLIS: int = 20 * 1000
-INITIAL_TIME_MILLIS: float = 100.0 * 1000.0
+INITIAL_TIME_MILLIS: int = 100 * 1000
 LOOP_FOREVER: int = -1
 REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS: int = 10 * 1000
 SCREEN_WIDTH: int = 1024

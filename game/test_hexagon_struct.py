@@ -20,16 +20,11 @@ import pygame
 
 import hexagon_struct
 
-color1, color2, color3, color4, color5, color6 = pygame.Color(1, 1, 1), pygame.Color(2, 2, 2), pygame.Color(3, 3, 3), pygame.Color(4, 4, 4), pygame.Color(5, 5, 5), pygame.Color(6, 6, 6)
-hexagon = hexagon_struct.HexagonStruct([300, 300],
-                                       pygame.Color(255, 255, 255), [
-                                            color1,
-                                            color2,
-                                            color3,
-                                            color4,
-                                            color5,
-                                            color6
-                                       ])
+color1, color2, color3, color4, color5, color6 = pygame.Color(
+    1, 1, 1), pygame.Color(2, 2, 2), pygame.Color(3, 3, 3), pygame.Color(
+        4, 4, 4), pygame.Color(5, 5, 5), pygame.Color(6, 6, 6)
+hexagon = hexagon_struct.HexagonStruct([300, 300], pygame.Color(
+    255, 255, 255), [color1, color2, color3, color4, color5, color6])
 
 
 def test_get_big_radius():
