@@ -135,16 +135,18 @@ def random_hexagon(center: typing.List[float], base_color: pygame.Color):
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
 
-def random_hexagon_array(start: typing.Sequence[float]):
-    hexagons: typing.Sequence = [[] for _ in range(constants.HEXAGON_ROWS)]
-    for i in range(constants.HEXAGON_ROWS):
-        for j in range(constants.HEXAGON_COLUMNS):
+def random_hexagon_array(start: typing.Sequence[float], num_rows: int,
+                         num_columns: int) -> hexagon_struct.HexagonArray:
+    hexagons: hexagon_struct.HexagonArray = [[] for _ in range(num_rows)]
+    for i in range(num_rows):
+        for j in range(num_columns):
             center_x = start[0] + j * constants.HEXAGON_SIDE_LENGTH * math.cos(
                 30) * 14
             center_y = start[1] + i * constants.HEXAGON_SIDE_LENGTH * math.cos(
                 30) * 12.5
             center = [center_x, center_y]
-            hexagons[i].append(random_hexagon(center, colors.BLACK))
+            hexagons[i].append(
+                random_hexagon(center, colors.INITIAL_HEXAGON_COLOR))
     return hexagons
 
 

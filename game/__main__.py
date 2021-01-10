@@ -27,7 +27,8 @@ import utils
 def run_loop():
     screen, clock, font, previous_hiscore, ui_images, sounds = setup.setup()
     hexagon_array = hexagon_utils.random_hexagon_array(
-        [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
+        [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
+        constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS)
     time_left = constants.INITIAL_TIME_MILLIS
     num_to_match = constants.NUM_TO_MATCH
     num_to_refresh = 0

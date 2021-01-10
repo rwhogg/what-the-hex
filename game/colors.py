@@ -36,5 +36,6 @@ YELLOW: pygame.Color = pygame.Color(255, 0xd7, 0)
 # FIXME: not sure if this should go here, or if this should just be for generic colors
 BACKGROUND_BACKUP_COLOR: pygame.Color = DARK_GRAY
 EDGE_COLOR_OPTIONS: collections.abc.Sequence = [GREEN, PURPLE, PINK, YELLOW]
+INITIAL_HEXAGON_COLOR: pygame.Color = BLACK
 REFRESH_COLOR: pygame.Color = FAINT_BLUE
 RHOMBUS_COLOR: pygame.Color = FAINT_GRAY
