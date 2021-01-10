@@ -29,7 +29,7 @@
 
 You'll need at least the following:
 
-* Python 3.7 or later (may work with 3.5 or 3.6, but untested. 2.x definitely _won't_ work)
+* Python 3.7 or later
 * Pygame (and dependencies thereof, e.g. SDL)
 * Briefcase
 
@@ -37,7 +37,7 @@ Get Python via whatever method you prefer.
 Pygame and Briefcase can be acquired with the following:
 
 ```bash
-% pip3 install pygame briefcase
+% ./script/bootstrap
 ```
 
 To run the game on its own, just run:
@@ -62,7 +62,6 @@ For development, you'll also need flake8, mypy, nose, pylint, and yapf
 % script/lint.sh
 % script/test.sh
 ```
-
 
 ## Created By
 
