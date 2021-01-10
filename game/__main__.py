@@ -23,8 +23,8 @@ import hexagon_utils
 import setup
 import utils
 
-screen, clock, font, bg_image, refresh_sound, rotate_sound, match_sound, mouse_left_image, mouse_right_image,\
-    rotate_clockwise_image, rotate_counterclockwise_image, icon, previous_hiscore = setup.setup()
+screen, clock, font, refresh_sound, rotate_sound, match_sound, previous_hiscore, ui_images = setup.setup(
+)
 hexagon_array = hexagon_utils.random_hexagon_array(
     [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
 
@@ -34,10 +34,8 @@ def run_loop():
     num_to_refresh = 0
     score = 0
     game_loop.game_loop(
-        time_left, score, num_to_refresh, clock, hexagon_array, screen,
-        bg_image, font, refresh_sound, previous_hiscore, icon,
-        mouse_right_image, mouse_left_image, rotate_clockwise_image,
-        rotate_counterclockwise_image, rotate_sound, match_sound
+        time_left, score, num_to_refresh, clock, hexagon_array, screen, font,
+        refresh_sound, previous_hiscore, rotate_sound, match_sound, ui_images
     )  # first iteration so the screen comes up before the music starts
     num_to_refresh = 1
     pygame.mixer.music.play(constants.LOOP_FOREVER)
@@ -48,9 +46,8 @@ def run_loop():
     while True:
         time_left, score, num_to_refresh = game_loop.game_loop(
             time_left, score, num_to_refresh, clock, hexagon_array, screen,
-            bg_image, font, refresh_sound, previous_hiscore, icon,
-            mouse_right_image, mouse_left_image, rotate_clockwise_image,
-            rotate_counterclockwise_image, rotate_sound, match_sound)
+            font, refresh_sound, previous_hiscore, rotate_sound, match_sound,
+            ui_images)
         if time_left is True:
             utils.game_over(max(score, previous_hiscore))
 
