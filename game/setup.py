@@ -53,10 +53,11 @@ def setup() -> tuple:
     clock = pygame.time.Clock()
     font = pygame.font.Font(game_resources.FONT_NAME, constants.FONT_SIZE)
     pygame.mixer.music.load(game_resources.MUSIC_NAME)
-    refresh_sound = pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME)
-    rotate_sound = pygame.mixer.Sound(game_resources.ROTATE_SOUND_NAME)
-    match_sound = pygame.mixer.Sound(game_resources.MATCH_SOUND_NAME)
-
+    sounds = {
+        "refresh_sound": pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME),
+        "rotate_sound": pygame.mixer.Sound(game_resources.ROTATE_SOUND_NAME),
+        "match_sound": pygame.mixer.Sound(game_resources.MATCH_SOUND_NAME)
+    }
     previous_hiscore = utils.get_old_hiscore()
 
-    return screen, clock, font, refresh_sound, rotate_sound, match_sound, previous_hiscore, ui_images
+    return screen, clock, font, previous_hiscore, ui_images, sounds

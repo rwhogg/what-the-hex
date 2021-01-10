@@ -37,8 +37,8 @@ def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
 
 def game_loop(time_remaining: int, current_score: int,
               hexagons_to_refresh: int, clock: pygame.time.Clock,
-              hexagon_array, screen, font, previous_hiscore,
-              ui_images, sounds) -> tuple:
+              hexagon_array, screen, font, previous_hiscore, ui_images: dict,
+              sounds: dict, num_to_match: int) -> tuple:
     clock.tick()
 
     hexagon_rotated = None
@@ -70,24 +70,27 @@ def game_loop(time_remaining: int, current_score: int,
             current_score += int(math.pow(diamonds_matched, 2)) * 100
             sounds["match_sound"].play()
             extra_time += constants.EXTRA_SECONDS * diamonds_matched * 1000
+            num_to_match = max(num_to_match - diamonds_matched, 0)
             for hexagon in hexagons_in_match:
                 hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
-            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000, True)
+            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000,
+                                  True)
 
     # UI drawing
     stats = {
         "current_score": current_score,
         "previous_hiscore": previous_hiscore,
-        "time_remaining": time_remaining
+        "time_remaining": time_remaining,
+        "matches_left": num_to_match
     }
     draw_ui(screen, ui_images, hexagon_array, font, stats)
 
     if time_remaining <= 0:
         # FIXME this is a bad way of doing this
-        return True, True, True
+        return True, True, True, True
 
     pygame.display.flip()
 
     new_time_remaining = time_remaining - clock.get_time() + extra_time
-    return new_time_remaining, current_score, hexagons_to_refresh
+    return new_time_remaining, current_score, hexagons_to_refresh, num_to_match

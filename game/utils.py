@@ -53,10 +53,11 @@ def draw_rhombuses(screen):
 def draw_stats(screen, font, stats):
     current_high_score = int(
         max(stats["current_score"], stats["previous_hiscore"]))
-    time_remaining_text = str(int(stats["time_remaining"] / 1000))
-    score_text = str(int(stats["current_score"]))
-    hiscore_text = str(int(current_high_score))
-    time_and_score = f"Time {time_remaining_text}        Score {score_text}        HiScore {hiscore_text}"
+    time_remaining_text = "Time " + str(int(stats["time_remaining"] / 1000))
+    score_text = "Score " + str(int(stats["current_score"]))
+    hiscore_text = "HiScore " + str(int(current_high_score))
+    matches_left_text = "Matches " + str(int(stats["matches_left"]))
+    time_and_score = f"{time_remaining_text}        {score_text}        {hiscore_text}        {matches_left_text}"
     time_text_surface = font.render(time_and_score, True, colors.RED)
     time_text_rect = time_text_surface.get_rect()
     time_text_rect.center = (300, 45)
