@@ -37,8 +37,8 @@ def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
 
 def game_loop(time_remaining: int, current_score: int,
               hexagons_to_refresh: int, clock: pygame.time.Clock,
-              hexagon_array, screen, font, refresh_sound, previous_hiscore,
-              rotate_sound, match_sound, ui_images) -> tuple:
+              hexagon_array, screen, font, previous_hiscore,
+              ui_images, sounds) -> tuple:
     clock.tick()
 
     hexagon_rotated = None
@@ -53,7 +53,7 @@ def game_loop(time_remaining: int, current_score: int,
         elif event.type == events.REFRESH_BACKGROUND_HEXAGONS_EVENT:
             if hexagons_to_refresh > 0:
                 hexagon_utils.refresh_background_hexagons(hexagon_array)
-                refresh_sound.play()
+                sounds["refresh_sound"].play()
                 hexagon_utils.pick_background_hexagons_to_refresh(
                     hexagon_array, hexagons_to_refresh)
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
@@ -63,18 +63,17 @@ def game_loop(time_remaining: int, current_score: int,
 
     extra_time = 0
     if hexagon_rotated is not None:
-        rotate_sound.play()
+        sounds["rotate_sound"].play()
         hexagons_in_match, diamonds_matched, color_to_flash = hexagon_utils.check_all_adjacent_diamonds(
             hexagon_array, hexagon_rotated, row_num, column_num)
         if diamonds_matched > 0:
             current_score += int(math.pow(diamonds_matched, 2)) * 100
-            match_sound.play()
+            sounds["match_sound"].play()
             extra_time += constants.EXTRA_SECONDS * diamonds_matched * 1000
             for hexagon in hexagons_in_match:
                 hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
-            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000,
-                                  True)
+            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000, True)
 
     # UI drawing
     stats = {

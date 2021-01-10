@@ -33,9 +33,15 @@ def run_loop():
     time_left = constants.INITIAL_TIME_MILLIS
     num_to_refresh = 0
     score = 0
+    sounds = {
+        "rotate_sound": rotate_sound,
+        "match_sound": match_sound,
+        "refresh_sound": refresh_sound
+    }
+
     game_loop.game_loop(
         time_left, score, num_to_refresh, clock, hexagon_array, screen, font,
-        refresh_sound, previous_hiscore, rotate_sound, match_sound, ui_images
+        previous_hiscore, ui_images, sounds
     )  # first iteration so the screen comes up before the music starts
     num_to_refresh = 1
     pygame.mixer.music.play(constants.LOOP_FOREVER)
@@ -46,8 +52,7 @@ def run_loop():
     while True:
         time_left, score, num_to_refresh = game_loop.game_loop(
             time_left, score, num_to_refresh, clock, hexagon_array, screen,
-            font, refresh_sound, previous_hiscore, rotate_sound, match_sound,
-            ui_images)
+            font, previous_hiscore, ui_images, sounds)
         if time_left is True:
             utils.game_over(max(score, previous_hiscore))
 
