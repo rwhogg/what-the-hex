@@ -26,17 +26,13 @@ import utils
 
 
 def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
-    utils.draw_bg(screen, ui_images["bg_image"])
+    utils.draw_bg(screen, ui_images)
     utils.draw_rhombuses(screen)
     for row in hexagon_array:
         for hexagon in row:
             hexagon_utils.draw_hexagon(screen, hexagon)
     utils.draw_stats(screen, font, stats)
-    utils.draw_bottom(screen, ui_images["icon"],
-                      ui_images["mouse_right_image"],
-                      ui_images["mouse_left_image"],
-                      ui_images["rotate_clockwise_image"],
-                      ui_images["rotate_counterclockwise_image"])
+    utils.draw_bottom(screen, ui_images)
 
 
 def game_loop(time_remaining: int, current_score: int,

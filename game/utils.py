@@ -24,30 +24,25 @@ import constants
 import game_resources
 
 
-def draw_bg(screen, bg_image):
-    if bg_image is None:
-        screen.fill(colors.BACKGROUND_BACKUP_COLOR)
-    else:
-        screen.blit(
-            bg_image,
-            pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
+def draw_bg(screen, images):
+    screen.blit(
+        images["bg_image"],
+        pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 
 
-def draw_bottom(screen, icon, mouse_right_image, mouse_left_image,
-                rotate_clockwise_image, rotate_counterclockwise_image):
-    if mouse_left_image is not None:
-        pygame.draw.rect(screen, colors.GRAY,
-                         pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))
-        screen.blit(mouse_left_image, pygame.Rect(200, 650, 100, 100))
-        screen.blit(rotate_counterclockwise_image,
-                    pygame.Rect(250, 650, 100, 100))
-        screen.blit(rotate_clockwise_image,
-                    pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
-        screen.blit(mouse_right_image,
-                    pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
-        screen.blit(icon, pygame.Rect(25, 650, 100, 100))
-        screen.blit(icon,
-                    pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
+def draw_bottom(screen, images):
+    pygame.draw.rect(screen, colors.GRAY,
+                     pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))
+    screen.blit(images["mouse_left_image"], pygame.Rect(200, 650, 100, 100))
+    screen.blit(images["rotate_counterclockwise_image"],
+                pygame.Rect(250, 650, 100, 100))
+    screen.blit(images["rotate_clockwise_image"],
+                pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
+    screen.blit(images["mouse_right_image"],
+                pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
+    screen.blit(images["icon"], pygame.Rect(25, 650, 100, 100))
+    screen.blit(images["icon"],
+                pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
 
 
 def draw_rhombuses(screen):
@@ -56,7 +51,8 @@ def draw_rhombuses(screen):
 
 
 def draw_stats(screen, font, stats):
-    current_high_score = int(max(stats["current_score"], stats["previous_hiscore"]))
+    current_high_score = int(
+        max(stats["current_score"], stats["previous_hiscore"]))
     time_remaining_text = str(int(stats["time_remaining"] / 1000))
     score_text = str(int(stats["current_score"]))
     hiscore_text = str(int(current_high_score))
