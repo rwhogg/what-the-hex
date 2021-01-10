@@ -12,7 +12,7 @@ formal_name = "What The Hex"
 description = "Hexagonal puzzle game"
 icon = "game/resources/icon"
 sources = ["game"]
-requires = ["pygame==2.0.1"]
+requires = ["guizero==1.1.1", "pygame==2.0.1"]
 
 [tool.briefcase.app.game.macOS]
 requires = []

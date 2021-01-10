@@ -15,7 +15,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import os
-import sys
 
 import pygame
 
@@ -24,34 +23,25 @@ import constants
 
 
 def draw_bg(screen, images):
-    screen.blit(
-        images["bg_image"],
-        pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
+    screen.blit(images["bg_image"], pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 
 
 def draw_bottom(screen, images):
-    pygame.draw.rect(screen, colors.GRAY,
-                     pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))
+    pygame.draw.rect(screen, colors.GRAY, pygame.Rect(0, 600, constants.SCREEN_WIDTH, 300))
     screen.blit(images["mouse_left_image"], pygame.Rect(200, 650, 100, 100))
-    screen.blit(images["rotate_counterclockwise_image"],
-                pygame.Rect(250, 650, 100, 100))
-    screen.blit(images["rotate_clockwise_image"],
-                pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
-    screen.blit(images["mouse_right_image"],
-                pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
+    screen.blit(images["rotate_counterclockwise_image"], pygame.Rect(250, 650, 100, 100))
+    screen.blit(images["rotate_clockwise_image"], pygame.Rect(constants.SCREEN_WIDTH - 350, 650, 100, 100))
+    screen.blit(images["mouse_right_image"], pygame.Rect(constants.SCREEN_WIDTH - 300, 650, 100, 100))
     screen.blit(images["icon"], pygame.Rect(25, 650, 100, 100))
-    screen.blit(images["icon"],
-                pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
+    screen.blit(images["icon"], pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
 
 
 def draw_rhombuses(screen):
-    pygame.draw.rect(screen, colors.RHOMBUS_COLOR,
-                     pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
+    pygame.draw.rect(screen, colors.RHOMBUS_COLOR, pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
 
 
 def draw_stats(screen, font, stats):
-    current_high_score = int(
-        max(stats["current_score"], stats["previous_hiscore"]))
+    current_high_score = int(max(stats["current_score"], stats["previous_hiscore"]))
     time_remaining_text = "Time " + str(int(stats["time_remaining"] / 1000))
     score_text = "Score " + str(int(stats["current_score"]))
     hiscore_text = "HiScore " + str(int(current_high_score))
@@ -68,26 +58,37 @@ def write_hiscore(hiscore):
         hiscore_file.write(str(int(hiscore)))
 
 
-def game_over(high_score_value, sounds):
+def clean_out_sound():
     pygame.mixer.music.stop()
     pygame.time.wait(1000)
+
+
+def return_to_launcher(launcher, hiscore):
+    write_hiscore(hiscore)
+    pygame.quit()
+    launcher.show()
+
+
+def game_over(launcher, hiscore, sounds):
+    clean_out_sound()
     sounds["game_over_sound"].play()
     pygame.time.wait(int(sounds["game_over_sound"].get_length() * 1000))
     sounds["game_over_voice"].play()
     pygame.time.wait(int(sounds["game_over_voice"].get_length() * 1000 + 1500))
-    write_hiscore(high_score_value)
-    sys.exit()
+    return_to_launcher(launcher, hiscore)
 
 
-def won(hiscore, sounds):
-    print("FIXME this is wrong!")
-    game_over(hiscore, sounds)
+def won(launcher, hiscore, sounds):
+    clean_out_sound()
+    sounds["win_sound"].play()
+    pygame.time.wait(int(sounds["win_sound"].get_length() * 1000))
+    sounds["win_voice"].play()
+    pygame.time.wait(int(sounds["win_voice"].get_length() * 1000 + 1500))
+    return_to_launcher(launcher, hiscore)
 
 
-# FIXME: there is some bug with the high score handling
 def get_old_hiscore():
-    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(
-            constants.HISCORE_FILE_PATH, os.R_OK):
+    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(constants.HISCORE_FILE_PATH, os.R_OK):
         with open(constants.HISCORE_FILE_PATH, "r") as high_score_file:
             return int(high_score_file.read())
     return 0

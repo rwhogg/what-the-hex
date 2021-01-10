@@ -36,10 +36,8 @@ def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
     utils.draw_bottom(screen, ui_images)
 
 
-def game_loop(time_remaining: int, current_score: int,
-              hexagons_to_refresh: int, clock: pygame.time.Clock,
-              hexagon_array, screen, font, previous_hiscore, ui_images: dict,
-              sounds: dict, num_to_match: int) -> tuple:
+def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int, clock: pygame.time.Clock,
+              hexagon_array, screen, font, previous_hiscore, ui_images: dict, sounds: dict, num_to_match: int) -> tuple:
     clock.tick()
 
     if time_remaining <= 0:
@@ -52,16 +50,14 @@ def game_loop(time_remaining: int, current_score: int,
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             direction = "left" if event.button == 1 else "right"
-            hexagon_rotated, row_num, column_num = hexagon_utils.rotate_hexagon(
-                hexagon_array, direction, event.pos)
+            hexagon_rotated, row_num, column_num = hexagon_utils.rotate_hexagon(hexagon_array, direction, event.pos)
         elif event.type == events.REFRESH_MATCHED_HEXAGONS_EVENT:
             hexagon_utils.refresh_matched_hexagons(hexagon_array)
         elif event.type == events.REFRESH_BACKGROUND_HEXAGONS_EVENT:
             if hexagons_to_refresh > 0:
                 hexagon_utils.refresh_background_hexagons(hexagon_array)
                 sounds["refresh_sound"].play()
-                hexagon_utils.pick_background_hexagons_to_refresh(
-                    hexagon_array, hexagons_to_refresh)
+                hexagon_utils.pick_background_hexagons_to_refresh(hexagon_array, hexagons_to_refresh)
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             hexagons_to_refresh += 1
         elif event.type == pygame.QUIT:
@@ -80,8 +76,7 @@ def game_loop(time_remaining: int, current_score: int,
             for hexagon in hexagons_in_match:
                 hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
-            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000,
-                                  True)
+            pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000, True)
 
     # UI drawing
     stats = {

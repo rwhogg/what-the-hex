@@ -26,12 +26,11 @@ EXTRA_SECONDS: int = 5
 FONT_SIZE: int = 24
 HEXAGON_ROWS: int = 5
 HEXAGON_COLUMNS: int = 8
-NUM_TO_MATCH: int = 20
+NUM_TO_MATCH: int = 3
 HEXAGON_SIDE_LENGTH: int = 50
-HISCORE_FILE_PATH: str = os.path.join(str(pathlib.Path.home()),
-                                      ".what-the-hex.hiscore")
+HISCORE_FILE_PATH: str = os.path.join(str(pathlib.Path.home()), ".what-the-hex.hiscore")
 INCREASE_REFRESH_RATE_TIME_MILLIS: int = 20 * 1000
-INITIAL_TIME_MILLIS: int = 101 * 1000
+INITIAL_TIME_MILLIS: int = 100 * 1000 + (1 * 1000)
 LOOP_FOREVER: int = -1
 REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS: int = 10 * 1000
 SCREEN_WIDTH: int = 1024

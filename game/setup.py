@@ -33,18 +33,12 @@ def check_prerequisites():
 def setup() -> tuple:
     check_prerequisites()
     ui_images = {
-        "icon":
-        pygame.image.load(game_resources.ICON_NAME),
-        "mouse_left_image":
-        pygame.image.load(game_resources.MOUSE_LEFT_IMAGE_NAME),
-        "rotate_counterclockwise_image":
-        pygame.image.load(game_resources.ROTATE_COUNTERCLOCKWISE_IMAGE_NAME),
-        "mouse_right_image":
-        pygame.image.load(game_resources.MOUSE_RIGHT_IMAGE_NAME),
-        "rotate_clockwise_image":
-        pygame.image.load(game_resources.ROTATE_CLOCKWISE_IMAGE_NAME),
-        "bg_image":
-        pygame.image.load(game_resources.BACKGROUND_IMAGE_NAME)
+        "icon": pygame.image.load(game_resources.ICON_NAME),
+        "mouse_left_image": pygame.image.load(game_resources.MOUSE_LEFT_IMAGE_NAME),
+        "rotate_counterclockwise_image": pygame.image.load(game_resources.ROTATE_COUNTERCLOCKWISE_IMAGE_NAME),
+        "mouse_right_image": pygame.image.load(game_resources.MOUSE_RIGHT_IMAGE_NAME),
+        "rotate_clockwise_image": pygame.image.load(game_resources.ROTATE_CLOCKWISE_IMAGE_NAME),
+        "bg_image": pygame.image.load(game_resources.BACKGROUND_IMAGE_NAME)
     }
     pygame.display.set_icon(ui_images["icon"])
     pygame.init()
@@ -57,10 +51,10 @@ def setup() -> tuple:
         "refresh_sound": pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME),
         "rotate_sound": pygame.mixer.Sound(game_resources.ROTATE_SOUND_NAME),
         "match_sound": pygame.mixer.Sound(game_resources.MATCH_SOUND_NAME),
-        "game_over_sound":
-        pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME),
-        "game_over_voice":
-        pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME)
+        "game_over_sound": pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME),
+        "game_over_voice": pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME),
+        "win_sound": pygame.mixer.Sound(game_resources.WIN_SOUND_NAME),
+        "win_voice": pygame.mixer.Sound(game_resources.WIN_VOICE_NAME)
     }
     previous_hiscore = utils.get_old_hiscore()
 

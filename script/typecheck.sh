@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mypy game
+mypy --ignore-missing-imports game

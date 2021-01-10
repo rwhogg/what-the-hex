@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-yapf -i game/*.py
+yapf --style='{based_on_style: google, indent_width: 4, column_limit: 120}' -i game/*.py

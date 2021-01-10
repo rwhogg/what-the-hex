@@ -16,10 +16,12 @@
 
 
 class GameOver(Exception):
+
     def __init__(self, score):
         self.score = score
 
 
 class Won(Exception):
+
     def __init__(self, score):
         self.score = score
