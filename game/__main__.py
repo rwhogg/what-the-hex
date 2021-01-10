@@ -23,13 +23,11 @@ import hexagon_utils
 import setup
 import utils
 
-screen, clock, font, refresh_sound, rotate_sound, match_sound, previous_hiscore, ui_images = setup.setup(
-)
-hexagon_array = hexagon_utils.random_hexagon_array(
-    [constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
-
 
 def run_loop():
+    screen, clock, font, refresh_sound, rotate_sound, match_sound, previous_hiscore, ui_images = setup.setup(
+    )
+    hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6])
     time_left = constants.INITIAL_TIME_MILLIS
     num_to_refresh = 0
     score = 0
