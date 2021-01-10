@@ -57,8 +57,10 @@ def setup() -> tuple:
         "refresh_sound": pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME),
         "rotate_sound": pygame.mixer.Sound(game_resources.ROTATE_SOUND_NAME),
         "match_sound": pygame.mixer.Sound(game_resources.MATCH_SOUND_NAME),
-        "game_over_sound": pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME),
-        "game_over_voice": pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME)
+        "game_over_sound":
+        pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME),
+        "game_over_voice":
+        pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME)
     }
     previous_hiscore = utils.get_old_hiscore()
 

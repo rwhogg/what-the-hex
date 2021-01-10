@@ -55,5 +55,6 @@ def run_loop():
         except exceptions.Won as e:
             utils.won(max(e.score, previous_hiscore), sounds)
 
+
 if __name__ == "__main__":
     run_loop()
