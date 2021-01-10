@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        ./script/bootstrap.sh
+        bash ./script/bootstrap.sh
     - name: Lint
       run: bash ./scripts/lint.sh
     - name: Typecheck
