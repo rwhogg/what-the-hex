@@ -165,7 +165,7 @@ def refresh_hexagons(hexagon_array: hexagon_struct.HexagonArray,
         for column in range(len(hexagon_array[row])):
             if predicate(hexagon_array[row][column]):
                 hexagon_array[row][column] = random_hexagon(
-                    hexagon_array[row][column].center, colors.BLACK)
+                    hexagon_array[row][column].center, colors.INITIAL_HEXAGON_COLOR)
 
 
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
