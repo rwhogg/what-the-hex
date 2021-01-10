@@ -21,7 +21,6 @@ import pygame
 
 import colors
 import constants
-import game_resources
 
 
 def draw_bg(screen, images):
