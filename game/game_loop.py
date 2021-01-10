@@ -26,13 +26,26 @@ import hexagon_utils
 import utils
 
 
+def draw_ui(screen, ui_images: dict, hexagon_array, font, current_score,
+            previous_hiscore, time_remaining):
+    utils.draw_bg(screen, ui_images["bg_image"])
+    utils.draw_rhombuses(screen)
+    for row in hexagon_array:
+        for hexagon in row:
+            hexagon_utils.draw_hexagon(screen, hexagon)
+    utils.draw_stats(screen, font, current_score, previous_hiscore,
+                     time_remaining)
+    utils.draw_bottom(screen, ui_images["icon"],
+                      ui_images["mouse_right_image"],
+                      ui_images["mouse_left_image"],
+                      ui_images["rotate_clockwise_image"],
+                      ui_images["rotate_counterclockwise_image"])
+
+
 def game_loop(time_remaining: int, current_score: int,
               hexagons_to_refresh: int, clock: pygame.time.Clock,
               hexagon_array, screen, font, refresh_sound, previous_hiscore,
               rotate_sound, match_sound, ui_images) -> tuple:
-    row_num: typing.Optional[int] = None
-    column_num: typing.Optional[int] = None
-
     clock.tick()
 
     hexagon_rotated = None
@@ -70,18 +83,8 @@ def game_loop(time_remaining: int, current_score: int,
                                   True)
 
     # UI drawing
-    utils.draw_bg(screen, ui_images["bg_image"])
-    utils.draw_rhombuses(screen)
-    for row in hexagon_array:
-        for hexagon in row:
-            hexagon_utils.draw_hexagon(screen, hexagon)
-    utils.draw_stats(screen, font, current_score, previous_hiscore,
-                     time_remaining)
-    utils.draw_bottom(screen, ui_images["icon"],
-                      ui_images["mouse_right_image"],
-                      ui_images["mouse_left_image"],
-                      ui_images["rotate_clockwise_image"],
-                      ui_images["rotate_counterclockwise_image"])
+    draw_ui(screen, ui_images, hexagon_array, font, current_score,
+            previous_hiscore, time_remaining)
 
     if time_remaining <= 0:
         # FIXME this is a bad way of doing this
