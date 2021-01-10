@@ -60,7 +60,7 @@ def draw_stats(screen, font, stats):
     time_and_score = f"{time_remaining_text}        {score_text}        {hiscore_text}        {matches_left_text}"
     time_text_surface = font.render(time_and_score, True, colors.RED)
     time_text_rect = time_text_surface.get_rect()
-    time_text_rect.center = (300, 45)
+    time_text_rect.center = (5 * constants.SCREEN_WIDTH / 11, 45)
     screen.blit(time_text_surface, time_text_rect)
 
 
