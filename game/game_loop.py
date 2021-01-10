@@ -14,11 +14,22 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import math
+import sys
+
 import pygame
+
+import constants
+import events
+import hexagon_utils
+import utils
 
 
 def game_loop(time_remaining: int, current_score: int,
-              hexagons_to_refresh: int, clock: pygame.time.Clock) -> tuple:
+              hexagons_to_refresh: int, clock: pygame.time.Clock,
+              hexagon_array, screen, bg_image, font, refresh_sound,
+              previous_hiscore, icon, mouse_right_image, mouse_left_image,
+              rotate_clockwise_image, rotate_counterclockwise_image, rotate_sound, match_sound) -> tuple:
     row_num: int
     column_num: int
 

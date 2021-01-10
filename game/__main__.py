@@ -14,9 +14,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import math
-import sys
-
 import pygame
 
 import constants
@@ -37,7 +34,10 @@ def run_loop():
     num_to_refresh = 0
     score = 0
     game_loop.game_loop(
-        time_left, score, num_to_refresh, clock
+        time_left, score, num_to_refresh, clock, hexagon_array, screen,
+        bg_image, font, refresh_sound, previous_hiscore, icon,
+        mouse_right_image, mouse_left_image, rotate_clockwise_image,
+        rotate_counterclockwise_image, rotate_sound, match_sound
     )  # first iteration so the screen comes up before the music starts
     num_to_refresh = 1
     pygame.mixer.music.play(constants.LOOP_FOREVER)
@@ -47,7 +47,10 @@ def run_loop():
                           constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
     while True:
         time_left, score, num_to_refresh = game_loop.game_loop(
-            time_left, score, num_to_refresh, clock)
+            time_left, score, num_to_refresh, clock, hexagon_array, screen,
+            bg_image, font, refresh_sound, previous_hiscore, icon,
+            mouse_right_image, mouse_left_image, rotate_clockwise_image,
+            rotate_counterclockwise_image, rotate_sound, match_sound)
         if time_left is True:
             utils.game_over(max(score, previous_hiscore))
 
