@@ -42,6 +42,7 @@ def game_loop(time_remaining: int, current_score: int,
     clock.tick()
 
     hexagon_rotated = None
+    row_num = column_num = 0
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             direction = "left" if event.button == 1 else "right"
