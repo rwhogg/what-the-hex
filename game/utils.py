@@ -64,18 +64,24 @@ def draw_stats(screen, font, stats):
     screen.blit(time_text_surface, time_text_rect)
 
 
-def game_over(high_score_value):
-    pygame.mixer.music.stop()
-    game_over_sound = pygame.mixer.Sound(game_resources.GAME_OVER_SOUND_NAME)
-    game_over_voice = pygame.mixer.Sound(game_resources.GAME_OVER_VOICE_NAME)
-    game_over_sound.play()
-    pygame.time.wait(int(game_over_sound.get_length() * 1000))
-    game_over_voice.play()
-    pygame.time.wait(int(game_over_voice.get_length() * 1000 + 1500))
+def write_hiscore(hiscore):
     with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
-        hiscore_file.write(str(int(high_score_value)))
+        hiscore_file.write(str(int(hiscore)))
+
+def game_over(high_score_value, sounds):
+    pygame.mixer.music.stop()
+    pygame.time.wait(1000)
+    sounds["game_over_sound"].play()
+    pygame.time.wait(int(sounds["game_over_sound"].get_length() * 1000))
+    sounds["game_over_voice"].play()
+    pygame.time.wait(int(sounds["game_over_voice"].get_length() * 1000 + 1500))
+    write_hiscore(high_score_value)
     sys.exit()
 
+
+def won(hiscore, sounds):
+    print("FIXME this is wrong!")
+    game_over(hiscore, sounds)
 
 # FIXME: there is some bug with the high score handling
 def get_old_hiscore():

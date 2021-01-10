@@ -18,6 +18,7 @@ import pygame
 
 import constants
 import events
+import exceptions
 import game_loop
 import hexagon_utils
 import setup
@@ -45,12 +46,14 @@ def run_loop():
     pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT,
                           constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
     while True:
-        time_left, score, num_to_refresh, num_to_match = game_loop.game_loop(
-            time_left, score, num_to_refresh, clock, hexagon_array, screen,
-            font, previous_hiscore, ui_images, sounds, num_to_match)
-        if time_left is True:
-            utils.game_over(max(score, previous_hiscore))
-
+        try:
+            time_left, score, num_to_refresh, num_to_match = game_loop.game_loop(
+                time_left, score, num_to_refresh, clock, hexagon_array, screen,
+                font, previous_hiscore, ui_images, sounds, num_to_match)
+        except exceptions.GameOver as e:
+            utils.game_over(max(e.score, previous_hiscore), sounds)
+        except exceptions.Won as e:
+            utils.won(max(e.score, previous_hiscore), sounds)
 
 if __name__ == "__main__":
     run_loop()

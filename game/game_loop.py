@@ -21,6 +21,7 @@ import pygame
 
 import constants
 import events
+import exceptions
 import hexagon_utils
 import utils
 
@@ -40,6 +41,11 @@ def game_loop(time_remaining: int, current_score: int,
               hexagon_array, screen, font, previous_hiscore, ui_images: dict,
               sounds: dict, num_to_match: int) -> tuple:
     clock.tick()
+
+    if time_remaining <= 0:
+        raise exceptions.GameOver(current_score)
+    elif num_to_match <= 0:
+        raise exceptions.Won(current_score)
 
     hexagon_rotated = None
     row_num = column_num = 0
@@ -85,10 +91,6 @@ def game_loop(time_remaining: int, current_score: int,
         "matches_left": num_to_match
     }
     draw_ui(screen, ui_images, hexagon_array, font, stats)
-
-    if time_remaining <= 0:
-        # FIXME this is a bad way of doing this
-        return True, True, True, True
 
     pygame.display.flip()
 
