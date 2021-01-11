@@ -30,7 +30,7 @@
 
 You'll need at least the following:
 
-* Python 3.7 or later
+* Python 3.7 (3.8 or 3.9 should work, but only 3.7 is supported at this time)
 * Pygame (and dependencies thereof, e.g. SDL)
 * Briefcase
 

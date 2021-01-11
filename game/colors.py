@@ -17,6 +17,7 @@
 import collections.abc
 
 import pygame
+import travertino.colors
 
 BLACK: pygame.Color = pygame.Color(0, 0, 0)
 DARK_GRAY: pygame.Color = pygame.Color(0x2f, 0x4f, 0x4f)
@@ -43,3 +44,7 @@ RHOMBUS_COLOR: pygame.Color = FAINT_GRAY
 
 def to_tuple(color: pygame.Color):
     return color.r, color.g, color.b
+
+
+def to_travertino(color: pygame.Color):
+    return travertino.colors.rgb(color.r, color.g, color.b)

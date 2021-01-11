@@ -63,10 +63,12 @@ def clean_out_sound():
     pygame.time.wait(1000)
 
 
-def return_to_launcher(launcher, hiscore):
-    write_hiscore(hiscore)
+def return_to_launcher(launcher, hiscore=None):
+    if hiscore is not None:
+        write_hiscore(hiscore)
+
     pygame.quit()
-    launcher.show()
+    #launcher.show()
 
 
 def game_over(launcher, hiscore, sounds):

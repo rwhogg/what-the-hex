@@ -14,8 +14,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import guizero
 import pygame
+import toga
+
 
 import colors
 import constants
@@ -38,7 +39,7 @@ def run_loop(launcher):
 
     game_loop.game_loop(time_left, score, num_to_refresh, clock, hexagon_array, screen, font, previous_hiscore,
                         ui_images, sounds,
-                        num_to_match)  # first iteration so the screen comes up before the music starts
+                        num_to_match, launcher)  # first iteration so the screen comes up before the music starts
     num_to_refresh = 1
     pygame.mixer.music.play(constants.LOOP_FOREVER)
     pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
@@ -48,29 +49,37 @@ def run_loop(launcher):
             time_left, score, num_to_refresh, num_to_match = game_loop.game_loop(time_left, score, num_to_refresh,
                                                                                  clock, hexagon_array, screen, font,
                                                                                  previous_hiscore, ui_images, sounds,
-                                                                                 num_to_match)
+                                                                                 num_to_match, launcher)
         except exceptions.GameOver as e:
             utils.game_over(launcher, max(e.score, previous_hiscore), sounds)
             return
         except exceptions.Won as e:
             utils.won(launcher, max(e.score, previous_hiscore), sounds)
             return
+        except exceptions.Quit:
+            utils.return_to_launcher(launcher)
+            return
 
 
 def start_game(launcher):
-    launcher.hide()
+    #launcher.hide()
     run_loop(launcher)
 
 
-def init_launcher():
-    launcher = guizero.App(title=constants.PRETTY_GAME_NAME, bg=colors.to_tuple(colors.BLACK))
-    guizero.Text(launcher, constants.PRETTY_GAME_NAME, size=20, color=colors.to_tuple(colors.RED))
-    button = guizero.PushButton(launcher, text="Start!", command=lambda: start_game(launcher))
-    button.text_color = colors.to_tuple(colors.RED)
+def init_ui(launcher):
+    box = toga.Box()
+    label = toga.Label(constants.PRETTY_GAME_NAME, style=toga.style.pack.Pack(font_size=20, color=colors.to_travertino(colors.RED)))
+    box.add(label)
+    button = toga.Button("Start!", on_press=lambda _: start_game(launcher))
+    button.text_color = colors.to_travertino(colors.RED)
+    box.add(button)
+    return box
 
-    launcher.display()
-    return launcher
+
+def init_launcher():
+    return toga.App(constants.PRETTY_GAME_NAME, constants.PACKAGE, startup=init_ui)
 
 
 if __name__ == "__main__":
-    init_launcher()
+    app = init_launcher()
+    app.main_loop()

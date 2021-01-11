@@ -20,6 +20,7 @@ import pathlib
 import typing
 
 PRETTY_GAME_NAME: str = "What The Hex?"
+PACKAGE: str = "site.rwhogg.whatthehex"
 
 EDGE_THICKNESS: int = 6
 EXTRA_SECONDS: int = 5

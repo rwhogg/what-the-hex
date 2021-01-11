@@ -25,3 +25,6 @@ class Won(Exception):
 
     def __init__(self, score):
         self.score = score
+
+class Quit(Exception):
+    pass

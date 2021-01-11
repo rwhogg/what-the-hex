@@ -37,7 +37,7 @@ def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
 
 
 def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int, clock: pygame.time.Clock,
-              hexagon_array, screen, font, previous_hiscore, ui_images: dict, sounds: dict, num_to_match: int) -> tuple:
+              hexagon_array, screen, font, previous_hiscore, ui_images: dict, sounds: dict, num_to_match: int, launcher) -> tuple:
     clock.tick()
 
     if time_remaining <= 0:
@@ -61,7 +61,8 @@ def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int,
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             hexagons_to_refresh += 1
         elif event.type == pygame.QUIT:
-            sys.exit()
+            utils.return_to_launcher(launcher)
+            raise exceptions.Quit
 
     extra_time = 0
     if hexagon_rotated is not None:
