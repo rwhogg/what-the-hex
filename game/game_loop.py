@@ -37,7 +37,8 @@ def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):
 
 
 def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int, clock: pygame.time.Clock,
-              hexagon_array, screen, font, previous_hiscore, ui_images: dict, sounds: dict, num_to_match: int, launcher) -> tuple:
+              hexagon_array, screen, font, previous_hiscore, ui_images: dict, sounds: dict, num_to_match: int,
+              launcher) -> tuple:
     clock.tick()
 
     if time_remaining <= 0:

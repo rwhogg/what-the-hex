@@ -17,7 +17,6 @@
 import pygame
 import toga
 
-
 import colors
 import constants
 import events
@@ -38,8 +37,8 @@ def run_loop(launcher):
     score = 0
 
     game_loop.game_loop(time_left, score, num_to_refresh, clock, hexagon_array, screen, font, previous_hiscore,
-                        ui_images, sounds,
-                        num_to_match, launcher)  # first iteration so the screen comes up before the music starts
+                        ui_images, sounds, num_to_match,
+                        launcher)  # first iteration so the screen comes up before the music starts
     num_to_refresh = 1
     pygame.mixer.music.play(constants.LOOP_FOREVER)
     pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
@@ -68,7 +67,8 @@ def start_game(launcher):
 
 def init_ui(launcher):
     box = toga.Box()
-    label = toga.Label(constants.PRETTY_GAME_NAME, style=toga.style.pack.Pack(font_size=20, color=colors.to_travertino(colors.RED)))
+    label = toga.Label(constants.PRETTY_GAME_NAME,
+                       style=toga.style.pack.Pack(font_size=20, color=colors.to_travertino(colors.RED)))
     box.add(label)
     button = toga.Button("Start!", on_press=lambda _: start_game(launcher))
     button.text_color = colors.to_travertino(colors.RED)
