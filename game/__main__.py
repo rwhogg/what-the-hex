@@ -63,7 +63,6 @@ def run_loop(launcher):
 
 
 def start_game(launcher):
-    #launcher.hide()
     run_loop(launcher)
 
 
