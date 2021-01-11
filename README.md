@@ -24,6 +24,7 @@
 * Every 10 seconds, random hexagons are regenerated
     * Hexagons are internally black by default but turn blue when they are selected for replacement
 * The number of hexagons refreshed per cycle increases by 1 every 20 seconds
+* You win if you make 20 matches
 
 ## Requirements
 
@@ -92,4 +93,5 @@ Licenses of (possible) runtime dependencies are included in the game/resources/l
 ![Python Powered](https://www.python.org/static/community_logos/python-powered-w-140x56.png)
 ![Powered by pygame](pygame_powered.gif)
 
-In addition to the above development requirements, special thanks to www.kenney.nl and to the [Superpowers app](http://superpowers-html5.com/) team for providing a number of the assets.
+In addition to the above development requirements, special thanks to www.kenney.nl and to the
+[Superpowers app](http://superpowers-html5.com/) team for providing a number of the assets.
