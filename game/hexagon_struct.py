@@ -19,7 +19,11 @@ import typing
 
 import pygame
 
-import constants
+# Hack to get imports to work under both nosetests and briefcase
+try:
+    from . import constants
+except ImportError:
+    import constants
 
 
 class HexagonStruct:

@@ -18,7 +18,7 @@ import pygame
 import toga
 
 # Note, I think Toga is actually running as the main package in Briefcase,
-# so this import style is necessary (but only in this file, strangely)
+# so this import style is necessary.
 from . import colors
 from . import constants
 from . import events
