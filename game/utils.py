@@ -18,8 +18,8 @@ import os
 
 import pygame
 
-import colors
-import constants
+from . import colors
+from . import constants
 
 
 def draw_bg(screen, images):
@@ -68,7 +68,6 @@ def return_to_launcher(launcher, hiscore=None):
         write_hiscore(hiscore)
 
     pygame.quit()
-    #launcher.show()
 
 
 def game_over(launcher, hiscore, sounds):

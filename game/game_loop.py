@@ -15,15 +15,14 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import math
-import sys
 
 import pygame
 
-import constants
-import events
-import exceptions
-import hexagon_utils
-import utils
+from . import constants
+from . import events
+from . import exceptions
+from . import hexagon_utils
+from . import utils
 
 
 def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):

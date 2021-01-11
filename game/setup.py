@@ -18,9 +18,9 @@ import sys
 
 import pygame
 
-import constants
-import game_resources
-import utils
+from . import constants
+from . import game_resources
+from . import utils
 
 
 def check_prerequisites():

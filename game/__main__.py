@@ -17,14 +17,16 @@
 import pygame
 import toga
 
-import colors
-import constants
-import events
-import exceptions
-import game_loop
-import hexagon_utils
-import setup
-import utils
+# Note, I think Toga is actually running as the main package in Briefcase,
+# so this import style is necessary (but only in this file, strangely)
+from . import colors
+from . import constants
+from . import events
+from . import exceptions
+from . import game_loop
+from . import hexagon_utils
+from . import setup
+from . import utils
 
 
 def run_loop(launcher):
