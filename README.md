@@ -67,6 +67,8 @@ For development, you'll also need flake8, mypy, nose, pylint, and yapf
 ## Created By
 
 ![Wombat OSG](wombat-osg.png)
+A Division Of
+![Boarish Entertainment](boarish-entertainment.png)
 
 ## Copyright
 
