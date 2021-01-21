@@ -15,6 +15,10 @@
                     "uses": "actions/checkout@v2"
                 },
                 {
+                    "name": "Install system deps",
+                    "run": "sudo apt install libgirepository1.0-dev"
+                },
+                {
                     "name": "Set up Python 3.7",
                     "uses": "actions/setup-python@v2",
                     "with": {
