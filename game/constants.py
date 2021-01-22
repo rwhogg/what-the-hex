@@ -19,8 +19,10 @@ import pathlib
 
 import typing
 
+
 def get_homedir():
     return str(pathlib.Path.home())
+
 
 PRETTY_GAME_NAME: str = "What The Hex?"
 PACKAGE: str = "site.rwhogg.whatthehex"
