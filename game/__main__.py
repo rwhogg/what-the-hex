@@ -14,19 +14,37 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import logging
+import os
+import pathlib
+
 import pygame
 import toga
 
 # Note, I think Toga is actually running as the main package in Briefcase,
 # so this import style is necessary.
-from . import colors
-from . import constants
-from . import events
-from . import exceptions
-from . import game_loop
-from . import hexagon_utils
-from . import setup
-from . import utils
+try:
+    from . import colors
+    from . import constants
+    from . import events
+    from . import exceptions
+    from . import game_loop
+    from . import hexagon_utils
+    from . import setup
+    from . import utils
+except ImportError:
+    import colors
+    import constants
+    import events
+    import exceptions
+    import game_loop
+    import hexagon_utils
+    import setup
+    import utils
+
+
+def get_homedir():
+    return str(pathlib.Path.home())
 
 
 def run_loop(launcher):
@@ -82,5 +100,7 @@ def init_launcher():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(filename=os.path.join(get_homedir(), ".what-the-hex.log"), level=logging.INFO)
+    logging.info("Initializing")
     app = init_launcher()
     app.main_loop()

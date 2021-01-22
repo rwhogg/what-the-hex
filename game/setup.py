@@ -18,9 +18,14 @@ import sys
 
 import pygame
 
-from . import constants
-from . import game_resources
-from . import utils
+try:
+    from . import constants
+    from . import game_resources
+    from . import utils
+except ImportError:
+    import constants
+    import game_resources
+    import utils
 
 
 def check_prerequisites():

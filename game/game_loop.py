@@ -18,11 +18,18 @@ import math
 
 import pygame
 
-from . import constants
-from . import events
-from . import exceptions
-from . import hexagon_utils
-from . import utils
+try:
+    from . import constants
+    from . import events
+    from . import exceptions
+    from . import hexagon_utils
+    from . import utils
+except ImportError:
+    import constants
+    import events
+    import exceptions
+    import hexagon_utils
+    import utils
 
 
 def draw_ui(screen, ui_images: dict, hexagon_array, font, stats):

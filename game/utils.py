@@ -18,8 +18,12 @@ import os
 
 import pygame
 
-from . import colors
-from . import constants
+try:
+    from . import colors
+    from . import constants
+except ImportError:
+    import colors
+    import constants
 
 
 def draw_bg(screen, images):

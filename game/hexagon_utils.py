@@ -20,9 +20,14 @@ import typing
 
 import pygame
 
-from . import colors
-from . import constants
-from . import hexagon_struct
+try:
+    from . import colors
+    from . import constants
+    from . import hexagon_struct
+except ImportError:
+    import colors
+    import constants
+    import hexagon_struct
 
 
 def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexagon: hexagon_struct.HexagonStruct,
