@@ -132,7 +132,7 @@ def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArr
 
 
 def random_hexagon(center: typing.List[float], base_color: pygame.Color):
-    random_colors: typing.List[pygame.Color]  = random.choices(colors.EDGE_COLOR_OPTIONS, k=6)
+    random_colors: typing.List[pygame.Color] = random.choices(colors.EDGE_COLOR_OPTIONS, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
 
