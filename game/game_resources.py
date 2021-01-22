@@ -14,10 +14,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import logging
 import os.path
+import pathlib
+
+
+def get_homedir():
+    return str(pathlib.Path.home())
 
 
 def get_res(file_name) -> str:
+    logging.info("Getting Resource: " + file_name)
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "resources", file_name)
 
 

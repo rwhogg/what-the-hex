@@ -21,6 +21,8 @@ import pathlib
 import pygame
 import toga
 
+logging.basicConfig(filename=os.path.join(str(pathlib.Path.home()), ".what-the-hex.log"), level=logging.INFO)
+
 # Note, I think Toga is actually running as the main package in Briefcase,
 # so this import style is necessary.
 try:
@@ -41,10 +43,6 @@ except ImportError:
     import hexagon_utils
     import setup
     import utils
-
-
-def get_homedir():
-    return str(pathlib.Path.home())
 
 
 def run_loop(launcher):
@@ -100,7 +98,6 @@ def init_launcher():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(filename=os.path.join(get_homedir(), ".what-the-hex.log"), level=logging.INFO)
     logging.info("Initializing")
     app = init_launcher()
     app.main_loop()
