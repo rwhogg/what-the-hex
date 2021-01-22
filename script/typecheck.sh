@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-pyright
+cd game && pyright
+cd -
