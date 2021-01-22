@@ -23,7 +23,6 @@ import toga
 
 logging.basicConfig(filename=os.path.join(str(pathlib.Path.home()), ".what-the-hex.log"), level=logging.INFO)
 
-
 # Note, I think Toga is actually running as the main package in Briefcase,
 # so this import style is necessary.
 try:
