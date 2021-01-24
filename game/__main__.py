@@ -84,12 +84,22 @@ def start_game(launcher):
 
 def init_ui(launcher):
     box = toga.Box()
+    top_box = toga.Box()
     label = toga.Label(constants.PRETTY_GAME_NAME,
-                       style=toga.style.pack.Pack(font_size=20, color=colors.to_travertino(colors.RED)))
-    box.add(label)
-    button = toga.Button("Start!", on_press=lambda _: start_game(launcher))
+                       style=toga.style.pack.Pack(font_size=20,
+                                                  color=colors.to_travertino(colors.RED),
+                                                  text_align=toga.style.pack.CENTER,
+                                                  padding=(10, 300)))
+    top_box.add(label)
+    box.add(top_box)
+    button_box = toga.Box()
+    button = toga.Button("Start!",
+                         on_press=lambda _: start_game(launcher),
+                         style=toga.style.pack.Pack(padding=(10, 350)))
     button.text_color = colors.to_travertino(colors.RED)
-    box.add(button)
+    button_box.add(button)
+    box.add(button_box)
+    box.style.update(direction=toga.style.pack.COLUMN)
     return box
 
 
