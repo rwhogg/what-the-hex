@@ -170,7 +170,7 @@ def rotate_hexagon(hexagon_array: hexagon_struct.HexagonArray, direction: str, p
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             hexagon = hexagon_array[row][column]
-            if hexagon.point_is_inside(position):
+            if hexagon.point_is_inside(position) and not hexagon.was_matched:
                 hexagon.rotate(direction)
                 return hexagon, row, column
     return None, None, None
