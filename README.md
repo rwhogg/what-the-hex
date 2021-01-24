@@ -33,6 +33,7 @@ You'll need at least the following:
 * Python 3.7 (3.8 or 3.9 should work, but only 3.7 is supported at this time)
 * Pygame (and dependencies thereof, e.g. SDL)
 * Briefcase
+* Toga (for now - probably depends on how quickly https://github.com/beeware/briefcase/issues/383 is fixed, because I'd prefer guizero)
 
 Get Python via whatever method you prefer.
 Pygame and Briefcase can be acquired with the following:
