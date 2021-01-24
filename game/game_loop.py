@@ -23,12 +23,14 @@ try:
     from . import events
     from . import exceptions
     from . import hexagon_utils
+    from . import setup
     from . import utils
 except ImportError:
     import constants
     import events
     import exceptions
     import hexagon_utils
+    import setup
     import utils
 
 
@@ -99,3 +101,34 @@ def game_loop(time_remaining: int, current_score: int, hexagons_to_refresh: int,
 
     new_time_remaining = time_remaining - clock.get_time() + extra_time
     return new_time_remaining, current_score, hexagons_to_refresh, num_to_match
+
+
+def run_loop(launcher, level_data):
+    screen, clock, font, previous_hiscore, ui_images, sounds = setup.setup(level_data)
+    hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
+                                                       constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS)
+    time_left = constants.INITIAL_TIME_MILLIS
+    num_to_match = constants.NUM_TO_MATCH
+    num_to_refresh = 0
+    score = 0
+
+    game_loop(time_left, score, num_to_refresh, clock, hexagon_array, screen, font, previous_hiscore, ui_images, sounds,
+              num_to_match, launcher)  # first iteration so the screen comes up before the music starts
+    num_to_refresh = 1
+    pygame.mixer.music.play(constants.LOOP_FOREVER)
+    pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
+    pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT, constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
+    while True:
+        try:
+            time_left, score, num_to_refresh, num_to_match = game_loop(time_left, score, num_to_refresh, clock,
+                                                                       hexagon_array, screen, font, previous_hiscore,
+                                                                       ui_images, sounds, num_to_match, launcher)
+        except exceptions.GameOver as e:
+            utils.game_over(launcher, max(e.score, previous_hiscore), sounds)
+            return
+        except exceptions.Won as e:
+            utils.won(launcher, max(e.score, previous_hiscore), sounds)
+            return
+        except exceptions.Quit:
+            utils.return_to_launcher(launcher)
+            return
