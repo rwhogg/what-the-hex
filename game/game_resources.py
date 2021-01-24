@@ -28,8 +28,11 @@ def get_res(file_name) -> str:
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "resources", file_name)
 
 
+def get_background(file_name) -> str:
+    return get_res(os.path.join("backgrounds", file_name))
+
+
 # Images
-BACKGROUND_IMAGE_NAME: str = get_res("bg.png")
 ICON_NAME: str = get_res("icon.png")
 MOUSE_LEFT_IMAGE_NAME: str = get_res("mouseLeft.png")
 MOUSE_RIGHT_IMAGE_NAME: str = get_res("mouseRight.png")
