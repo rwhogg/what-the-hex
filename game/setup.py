@@ -35,7 +35,7 @@ def check_prerequisites():
         raise Exception("Please use Python 3.7 or later.")
 
 
-def setup() -> tuple:
+def setup(level_data) -> tuple:
     check_prerequisites()
     ui_images = {
         "icon": pygame.image.load(game_resources.ICON_NAME),
@@ -43,7 +43,7 @@ def setup() -> tuple:
         "rotate_counterclockwise_image": pygame.image.load(game_resources.ROTATE_COUNTERCLOCKWISE_IMAGE_NAME),
         "mouse_right_image": pygame.image.load(game_resources.MOUSE_RIGHT_IMAGE_NAME),
         "rotate_clockwise_image": pygame.image.load(game_resources.ROTATE_CLOCKWISE_IMAGE_NAME),
-        "bg_image": pygame.image.load(game_resources.BACKGROUND_IMAGE_NAME)
+        "bg_image": pygame.image.load(level_data.background)
     }
     pygame.display.set_icon(ui_images["icon"])
     pygame.init()

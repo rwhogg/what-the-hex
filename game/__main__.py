@@ -14,6 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import importlib
 import logging
 import os
 import pathlib
@@ -45,8 +46,8 @@ except ImportError:
     import utils
 
 
-def run_loop(launcher):
-    screen, clock, font, previous_hiscore, ui_images, sounds = setup.setup()
+def run_loop(launcher, level_data):
+    screen, clock, font, previous_hiscore, ui_images, sounds = setup.setup(level_data)
     hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
                                                        constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS)
     time_left = constants.INITIAL_TIME_MILLIS
@@ -79,7 +80,8 @@ def run_loop(launcher):
 
 
 def start_game(launcher):
-    run_loop(launcher)
+    level_one = importlib.import_module("levels.one")
+    run_loop(launcher, level_one)
 
 
 def init_ui(launcher):
