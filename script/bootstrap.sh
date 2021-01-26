@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 pip install briefcase
-pip install flake8 nose pylint yapf
+pip install flake8 nose pylint scancode-toolkit[full] yapf
+
+# FIXME: see https://github.com/nexB/scancode-toolkit/issues/2368
+pip install commoncode==20.10.20
+
 if [ -x "$(which npm)" ]; then
     npm i -g pyright
 fi
