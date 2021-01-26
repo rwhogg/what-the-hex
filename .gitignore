@@ -142,3 +142,4 @@ game.dist-info
 include
 windows
 android
+scancode_*
