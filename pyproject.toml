@@ -13,3 +13,18 @@ description = "Hexagonal puzzle game"
 icon = "game/resources/icon"
 sources = ["game"]
 requires = ["toga==0.3.0.dev16", "pygame==2.0.1"]
+
+[tool.briefcase.app.game.windows]
+requires = [
+    "toga-winforms>=0.3.0.dev16"
+]
+
+[tool.briefcase.app.game.macOS]
+requires = [
+    "toga-cocoa>=0.3.0.dev16"
+]
+
+[tool.briefcase.app.game.android]
+requires = [
+    "toga-android>=0.3.0.dev16"
+]
