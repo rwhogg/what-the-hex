@@ -51,7 +51,7 @@ def setup(level_data) -> tuple:
     pygame.display.set_caption(constants.PRETTY_GAME_NAME)
     clock = pygame.time.Clock()
     font = pygame.font.Font(game_resources.FONT_NAME, constants.FONT_SIZE)
-    pygame.mixer.music.load(game_resources.MUSIC_NAME)
+    pygame.mixer.music.load(level_data.music)
     sounds = {
         "refresh_sound": pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME),
         "rotate_sound": pygame.mixer.Sound(game_resources.ROTATE_SOUND_NAME),
@@ -61,6 +61,13 @@ def setup(level_data) -> tuple:
         "win_sound": pygame.mixer.Sound(game_resources.WIN_SOUND_NAME),
         "win_voice": pygame.mixer.Sound(game_resources.WIN_VOICE_NAME)
     }
+    colors = {
+        "bg_backup_color": level_data.bg_backup_color,
+        "edge_color_options": level_data.edge_color_options,
+        "initial_hexagon_color": level_data.initial_hexagon_color,
+        "refresh_color": level_data.refresh_color,
+        "rhombus_color": level_data.rhombus_color
+    }
     previous_hiscore = utils.get_old_hiscore()
 
-    return screen, clock, font, previous_hiscore, ui_images, sounds
+    return screen, clock, font, previous_hiscore, ui_images, sounds, colors

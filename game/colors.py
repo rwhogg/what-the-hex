@@ -14,8 +14,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import collections.abc
-
 import pygame
 import travertino.colors
 
@@ -30,16 +28,6 @@ PINK: pygame.Color = pygame.Color(255, 0x14, 0x93)
 RED: pygame.Color = pygame.Color(0xdc, 0x14, 0x3c)
 WHITE: pygame.Color = pygame.Color(255, 255, 255)
 YELLOW: pygame.Color = pygame.Color(255, 0xd7, 0)
-
-# FIXME: create separate loadable color schemes
-# with symbolic color names rather than explicit ones
-
-# FIXME: not sure if this should go here, or if this should just be for generic colors
-BACKGROUND_BACKUP_COLOR: pygame.Color = DARK_GRAY
-EDGE_COLOR_OPTIONS: collections.abc.Sequence = [GREEN, PURPLE, PINK, YELLOW]
-INITIAL_HEXAGON_COLOR: pygame.Color = BLACK
-REFRESH_COLOR: pygame.Color = FAINT_BLUE
-RHOMBUS_COLOR: pygame.Color = FAINT_GRAY
 
 
 def to_tuple(color: pygame.Color):

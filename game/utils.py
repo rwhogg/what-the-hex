@@ -40,8 +40,8 @@ def draw_bottom(screen, images):
     screen.blit(images["icon"], pygame.Rect(constants.SCREEN_WIDTH - 125, 650, 100, 100))
 
 
-def draw_rhombuses(screen):
-    pygame.draw.rect(screen, colors.RHOMBUS_COLOR, pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
+def draw_rhombuses(screen, rhombus_color):
+    pygame.draw.rect(screen, rhombus_color, pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
 
 
 def draw_stats(screen, font, stats):

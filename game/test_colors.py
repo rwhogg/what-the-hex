@@ -22,12 +22,7 @@ import colors
 
 
 def test_colors():
-    assert colors.EDGE_COLOR_OPTIONS == [
-        pygame.Color(0x7c, 0xfc, 0),
-        pygame.Color(0x4b, 0, 0x82),
-        pygame.Color(255, 0x14, 0x93),
-        pygame.Color(255, 0xd7, 0)
-    ]
+    assert colors.GREEN == pygame.Color(0x7c, 0xfc, 0)
 
 
 if __name__ == '__main__':
