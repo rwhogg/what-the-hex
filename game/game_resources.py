@@ -32,6 +32,10 @@ def get_background(file_name) -> str:
     return get_res(os.path.join("backgrounds", file_name))
 
 
+def get_music(file_name) -> str:
+    return get_res(os.path.join("music", file_name))
+
+
 # Images
 ICON_NAME: str = get_res("icon.png")
 MOUSE_LEFT_IMAGE_NAME: str = get_res("mouseLeft.png")
@@ -52,4 +56,4 @@ WIN_VOICE_NAME: str = get_res("win-voice.ogg")
 FONT_NAME: str = get_res("kenney-pixel-square.ttf")
 
 # Music
-MUSIC_NAME: str = get_res("bg_music.ogg")
+MUSIC_NAME: str = get_res("retro.ogg")

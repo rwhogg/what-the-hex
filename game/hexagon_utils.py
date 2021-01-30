@@ -21,11 +21,9 @@ import typing
 import pygame
 
 try:
-    from . import colors
     from . import constants
     from . import hexagon_struct
 except ImportError:
-    import colors
     import constants
     import hexagon_struct
 
@@ -113,7 +111,8 @@ def draw_hexagon(screen, hexagon):
         pygame.draw.line(screen, hexagon.edge_colors[e], edges[e][0], edges[e][1], constants.EDGE_THICKNESS)
 
 
-def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArray, num_hexagons_to_refresh: int):
+def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArray, num_hexagons_to_refresh: int,
+                                        refresh_color: pygame.Color):
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
@@ -123,7 +122,7 @@ def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArr
         row = random.randrange(0, num_rows - 1)
         if not hexagon_array[row][column].was_matched:
             hexagon_array[row][column].to_refresh = True
-            hexagon_array[row][column].base_color = colors.REFRESH_COLOR
+            hexagon_array[row][column].base_color = refresh_color
             num_refreshed += 1
         # iteration count, make sure we never get stuck here
         i += 1
@@ -131,37 +130,41 @@ def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArr
             break
 
 
-def random_hexagon(center: typing.List[float], base_color: pygame.Color):
-    random_colors: typing.List[pygame.Color] = random.choices(colors.EDGE_COLOR_OPTIONS, k=6)
+def random_hexagon(center: typing.List[float], base_color: pygame.Color, color_options):
+    random_colors: typing.List[pygame.Color] = random.choices(color_options, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
 
-def random_hexagon_array(start: typing.Sequence[float], num_rows: int, num_columns: int) -> hexagon_struct.HexagonArray:
+def random_hexagon_array(start: typing.Sequence[float], num_rows: int, num_columns: int,
+                         initial_hexagon_color: pygame.Color, color_options) -> hexagon_struct.HexagonArray:
     hexagons: hexagon_struct.HexagonArray = [[] for _ in range(num_rows)]
     for i in range(num_rows):
         for j in range(num_columns):
             center_x = start[0] + j * constants.HEXAGON_SIDE_LENGTH * math.cos(30) * 14
             center_y = start[1] + i * constants.HEXAGON_SIDE_LENGTH * math.cos(30) * 12.5
             center = [center_x, center_y]
-            hexagons[i].append(random_hexagon(center, colors.INITIAL_HEXAGON_COLOR))
+            hexagons[i].append(random_hexagon(center, initial_hexagon_color, color_options))
     return hexagons
 
 
-def refresh_matched_hexagons(hexagon_array: hexagon_struct.HexagonArray):
-    refresh_hexagons(hexagon_array, lambda hexagon: hexagon.was_matched)
+def refresh_matched_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: pygame.Color,
+                             color_options):
+    refresh_hexagons(hexagon_array, lambda hexagon: hexagon.was_matched, initial_hexagon_color, color_options)
 
 
-def refresh_background_hexagons(hexagon_array: hexagon_struct.HexagonArray):
-    refresh_hexagons(hexagon_array, lambda hexagon: hexagon.to_refresh)
+def refresh_background_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: pygame.Color,
+                                color_options):
+    refresh_hexagons(hexagon_array, lambda hexagon: hexagon.to_refresh, initial_hexagon_color, color_options)
 
 
 def refresh_hexagons(hexagon_array: hexagon_struct.HexagonArray,
-                     predicate: typing.Callable[[hexagon_struct.HexagonStruct], bool]):
+                     predicate: typing.Callable[[hexagon_struct.HexagonStruct],
+                                                bool], initial_hexagon_color: pygame.Color, color_options):
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             if predicate(hexagon_array[row][column]):
-                hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center,
-                                                            colors.INITIAL_HEXAGON_COLOR)
+                hexagon_array[row][column] = random_hexagon(hexagon_array[row][column].center, initial_hexagon_color,
+                                                            color_options)
 
 
 # FIXME: ideally, this would be determined via screen position calculation rather than iteration
