@@ -54,5 +54,8 @@ def init_launcher() -> toga.App:
 
 
 def start_game(launcher):
-    level_one = importlib.import_module("levels.one")
+    try:
+        level_one = importlib.import_module("levels.one")
+    except ModuleNotFoundError:
+        level_one = importlib.import_module("game.levels.one")
     game_loop.run_loop(launcher, level_one)
