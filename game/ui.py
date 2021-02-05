@@ -27,6 +27,8 @@ except ImportError:
     import constants
     import game_loop
 
+levels = ["one"]
+
 
 def init_ui(launcher):
     box = toga.Box()
@@ -38,9 +40,20 @@ def init_ui(launcher):
                                                   padding=(10, 300)))
     top_box.add(label)
     box.add(top_box)
+    level_select_box = toga.Box()
+    level_label = toga.Label("Level", style=toga.style.pack.Pack(font_size=14,
+                                                                 color=colors.to_travertino(colors.BLACK),
+                                                                 text_align=toga.style.pack.CENTER,
+                                                                 padding=(10, 300)))
+    level_input = toga.NumberInput(min_value=1, max_value=len(levels))
+    level_input.value = 1
+    level_select_box.add(level_label)
+    level_select_box.add(level_input)
+    launcher.level_select = level_input
+    box.add(level_select_box)
     button_box = toga.Box()
     button = toga.Button("Start!",
-                         on_press=lambda _: start_game(launcher),
+                         on_press=(lambda _: start_game(launcher)),
                          style=toga.style.pack.Pack(padding=(10, 350)))
     button.text_color = colors.to_travertino(colors.RED)
     button_box.add(button)
@@ -54,8 +67,9 @@ def init_launcher() -> toga.App:
 
 
 def start_game(launcher):
+    level_name = levels[int(launcher.level_select.value - 1)]
     try:
-        level_one = importlib.import_module("levels.one")
+        level_one = importlib.import_module("levels." + level_name)
     except ModuleNotFoundError:
-        level_one = importlib.import_module("game.levels.one")
+        level_one = importlib.import_module("game.levels." + level_name)
     game_loop.run_loop(launcher, level_one)
