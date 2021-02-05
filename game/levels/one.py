@@ -32,9 +32,7 @@ music: str = game_resources.get_music("retro.ogg")
 
 # Colors
 bg_backup_color: pygame.Color = colors.DARK_GRAY
-edge_color_options: collections.abc.Sequence = [
-    colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW
-]
+edge_color_options: collections.abc.Sequence = [colors.GREEN, colors.PURPLE, colors.PINK, colors.YELLOW]
 initial_hexagon_color: pygame.Color = colors.BLACK
 refresh_color: pygame.Color = colors.FAINT_BLUE
 rhombus_color: pygame.Color = colors.FAINT_GRAY
