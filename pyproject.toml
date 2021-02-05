@@ -18,6 +18,7 @@ requires = ["toga==0.3.0.dev16", "pygame==2.0.1"]
 requires = [
     "toga-winforms>=0.3.0.dev16"
 ]
+system_installer = true
 
 [tool.briefcase.app.game.macOS]
 requires = [
