@@ -15,6 +15,9 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import importlib
+import os
+import os.path
+import platform
 
 import toga
 
@@ -52,18 +55,41 @@ def init_ui(launcher):
     launcher.level_select = level_input
     box.add(level_select_box)
     button_box = toga.Box()
-    button = toga.Button("Start!",
-                         on_press=(lambda _: start_game(launcher)),
-                         style=toga.style.pack.Pack(padding=(10, 350)))
-    button.text_color = colors.to_travertino(colors.RED)
-    button_box.add(button)
+    start_button = toga.Button("Start!",
+                               on_press=(lambda _: start_game(launcher)),
+                               style=toga.style.pack.Pack(padding=(10, 350)))
+    start_button.text_color = colors.to_travertino(colors.RED)
+    button_box.add(start_button)
     box.add(button_box)
+
+    license_button_box = toga.Box()
+    licenses_button = toga.Button("View Licenses",
+                                  on_press=(lambda _: view_licenses(launcher)),
+                                  style=toga.style.pack.Pack(padding=(10, 350)))
+    license_button_box.add(licenses_button)
+    box.add(license_button_box)
+
     box.style.update(direction=toga.style.pack.COLUMN)
     return box
 
 
 def init_launcher() -> toga.App:
     return toga.App(constants.PRETTY_GAME_NAME, constants.PACKAGE, startup=init_ui)
+
+
+def view_licenses(launcher):
+    try:
+        current_dir = os.path.join(os.path.dirname(__file__), "resources", "licenses")
+        file = launcher.main_window.open_file_dialog("License to view", initial_directory=current_dir)
+    except ValueError:
+        return
+    # os.startfile is only on Windows at the moment
+    if platform.system() == "Windows":
+        os.startfile(file)
+    elif platform.system() == "Linux":
+        os.system("xdg-open " + file)
+    else:
+        os.system("open " + file)
 
 
 def start_game(launcher):
