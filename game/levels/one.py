@@ -28,7 +28,7 @@ except ImportError:
     import game_resources
 
 background: str = game_resources.get_background("starry.png")
-music: str = game_resources.get_music("retro.ogg")
+music: str = game_resources.get_music("time_driving.ogg")
 
 # Colors
 bg_backup_color: pygame.Color = colors.DARK_GRAY

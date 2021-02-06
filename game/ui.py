@@ -27,7 +27,7 @@ except ImportError:
     import constants
     import game_loop
 
-levels = ["one"]
+levels = ["one", "two"]
 
 
 def init_ui(launcher):
