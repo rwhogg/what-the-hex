@@ -20,7 +20,7 @@
                     "uses": "actions/checkout@v2"
                 },
                 {
-                    "name": "Install system deps",
+                    "name": "Install system dependencies",
                     "run": "sudo apt install libgirepository1.0-dev"
                 },
                 {
