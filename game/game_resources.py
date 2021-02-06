@@ -56,4 +56,4 @@ WIN_VOICE_NAME: str = get_res("win-voice.ogg")
 FONT_NAME: str = get_res("kenney-pixel-square.ttf")
 
 # Music
-MUSIC_NAME: str = get_res("retro.ogg")
+MUSIC_NAME: str = get_res("time_driving.ogg")
