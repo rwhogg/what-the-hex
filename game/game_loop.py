@@ -111,8 +111,8 @@ def run_loop(launcher, level_data):
     hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
                                                        constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS,
                                                        colors["initial_hexagon_color"], colors["edge_color_options"])
-    time_left = constants.INITIAL_TIME_MILLIS
-    num_to_match = constants.NUM_TO_MATCH
+    time_left = level_data.starting_time
+    num_to_match = level_data.num_to_match
     num_to_refresh = 0
     score = 0
 

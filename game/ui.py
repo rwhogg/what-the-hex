@@ -47,10 +47,11 @@ def init_ui(launcher):
     top_box.add(label)
     box.add(top_box)
     level_select_box = toga.Box()
-    level_label = toga.Label("Level", style=toga.style.pack.Pack(font_size=14,
-                                                                 color=colors.to_travertino(colors.BLACK),
-                                                                 text_align=toga.style.pack.CENTER,
-                                                                 padding=(10, 300)))
+    level_label = toga.Label("Level",
+                             style=toga.style.pack.Pack(font_size=14,
+                                                        color=colors.to_travertino(colors.BLACK),
+                                                        text_align=toga.style.pack.CENTER,
+                                                        padding=(10, 300)))
     level_input = toga.NumberInput(min_value=1, max_value=len(levels))
     level_input.value = 1
     level_select_box.add(level_label)

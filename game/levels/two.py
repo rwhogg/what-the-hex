@@ -23,12 +23,14 @@ import pygame
 try:
     from game import colors
     from game import game_resources
+    from game import utils
 except ImportError:
     import colors
     import game_resources
+    import utils
 
-# FIXME: the font colors are overwhelmed by the background... but I think this might be usable, maybe with some
-# image tweaking
+# FIXME: the font colors are overwhelmed by the background...
+#  but I think this might be usable, maybe with some image tweaking
 background: str = game_resources.get_background("doradus.jpg")
 music: str = game_resources.get_music("drumming_sticks.ogg")
 
@@ -38,3 +40,9 @@ edge_color_options: collections.abc.Sequence = [colors.GREEN, colors.PURPLE, col
 initial_hexagon_color: pygame.Color = colors.BLACK
 refresh_color: pygame.Color = colors.FAINT_BLUE
 rhombus_color: pygame.Color = colors.FAINT_GRAY
+
+# system
+# FIXME: Change some of these for level 2
+# So far, they're just straight imports from the old constants
+num_to_match: int = 20
+starting_time: int = utils.seconds_to_millis_plus_spare(100)

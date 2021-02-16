@@ -41,6 +41,7 @@ def draw_bottom(screen, images):
 
 
 def draw_rhombuses(screen, rhombus_color):
+    # FIXME: get rid of these hardcoded numbers
     pygame.draw.rect(screen, rhombus_color, pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
 
 
@@ -57,7 +58,11 @@ def draw_stats(screen, font, stats):
     screen.blit(time_text_surface, time_text_rect)
 
 
-def write_hiscore(hiscore):
+def seconds_to_millis_plus_spare(seconds: int) -> int:
+    return seconds * 1000 + 1000
+
+
+def write_hiscore(hiscore: float):
     with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
         hiscore_file.write(str(int(hiscore)))
 
@@ -83,7 +88,7 @@ def game_over(launcher, hiscore, sounds):
     return_to_launcher(launcher, hiscore)
 
 
-def won(launcher, hiscore, sounds):
+def won(launcher, hiscore: int, sounds: dict):
     clean_out_sound()
     sounds["win_sound"].play()
     pygame.time.wait(int(sounds["win_sound"].get_length() * 1000))
