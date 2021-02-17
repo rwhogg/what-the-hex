@@ -24,10 +24,12 @@ try:
     from game import colors
     from game import game_resources
     from game import utils
+    from game import win_conditions
 except ImportError:
     import colors
     import game_resources
     import utils
+    import win_conditions
 
 # FIXME: the font colors are overwhelmed by the background...
 #  but I think this might be usable, maybe with some image tweaking
@@ -44,5 +46,5 @@ rhombus_color: pygame.Color = colors.FAINT_GRAY
 # system
 # FIXME: Change some of these for level 2
 # So far, they're just straight imports from the old constants
-num_to_match: int = 20
 starting_time: int = utils.seconds_to_millis_plus_spare(100)
+win_condition: win_conditions.WinConditions = win_conditions.MinMatches(20)

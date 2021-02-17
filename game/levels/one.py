@@ -24,10 +24,12 @@ try:
     from game import colors
     from game import game_resources
     from game import utils
+    from game import win_conditions
 except ImportError:
     import colors
     import game_resources
     import utils
+    import win_conditions
 
 background: str = game_resources.get_background("starry.png")
 music: str = game_resources.get_music("time_driving.ogg")
@@ -40,5 +42,5 @@ refresh_color: pygame.Color = colors.FAINT_BLUE
 rhombus_color: pygame.Color = colors.FAINT_GRAY
 
 # system
-num_to_match: int = 20
 starting_time: int = utils.seconds_to_millis_plus_spare(100)
+win_condition: win_conditions.WinConditions = win_conditions.MinMatches(20)

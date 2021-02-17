@@ -14,6 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import logging
 import os
 
 import pygame
@@ -21,9 +22,11 @@ import pygame
 try:
     from . import colors
     from . import constants
+    from . import hexagon_utils
 except ImportError:
     import colors
     import constants
+    import hexagon_utils
 
 
 def draw_bg(screen, images):
@@ -58,13 +61,27 @@ def draw_stats(screen, font, stats):
     screen.blit(time_text_surface, time_text_rect)
 
 
+def draw_ui(screen, ui_images: dict, hexagon_array, font, stats, colors):
+    draw_bg(screen, ui_images)
+    draw_rhombuses(screen, colors["rhombus_color"])
+    for row in hexagon_array:
+        for hexagon in row:
+            hexagon_utils.draw_hexagon(screen, hexagon)
+    draw_stats(screen, font, stats)
+    draw_bottom(screen, ui_images)
+    pygame.display.flip()
+
+
 def seconds_to_millis_plus_spare(seconds: int) -> int:
     return seconds * 1000 + 1000
 
 
 def write_hiscore(hiscore: float):
-    with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
-        hiscore_file.write(str(int(hiscore)))
+    try:
+        with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
+            hiscore_file.write(str(int(hiscore)))
+    except PermissionError:
+        logging.error("Unable to open high score file")
 
 
 def clean_out_sound():
