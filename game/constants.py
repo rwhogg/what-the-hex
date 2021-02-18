@@ -14,18 +14,23 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import os.path
 import pathlib
 
 import typing
 
 
+# FIXME: don't use this
+# I suspect it's part of the problem on Android, but also I've had permissions
+# issues with Windows that I think result from this.
 def get_homedir():
     return str(pathlib.Path.home())
 
 
 PRETTY_GAME_NAME: str = "What The Hex?"
 PACKAGE: str = "site.rwhogg.whatthehex"
+AUTHOR: str = "Boarish Entertainment"
+
+CONFIG_DATA_FILE: str = ".what-the-hex.config"
 
 # FIXME: several of these shouldn't be constants
 # They should be calculated by resolution
@@ -35,7 +40,6 @@ FONT_SIZE: int = 24
 HEXAGON_ROWS: int = 5
 HEXAGON_COLUMNS: int = 8
 HEXAGON_SIDE_LENGTH: int = 50
-HISCORE_FILE_PATH: str = os.path.join(get_homedir(), ".what-the-hex.hiscore")
 INCREASE_REFRESH_RATE_TIME_MILLIS: int = 20 * 1000
 LOOP_FOREVER: int = -1
 REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS: int = 10 * 1000

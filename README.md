@@ -10,7 +10,7 @@
 
 * [Windows](https://github.com/rwhogg/what-the-hex/releases/download/v0.1.0/What.The.Hex.msi)
 * [macOS](https://github.com/rwhogg/what-the-hex/releases/download/v0.1.0/What.The.Hex_macos.zip)
-* Linux: not currently provided. Yes, I know I'm a Linux user and so this is hypocritical. Bug me about it enough and I'll fix it.
+* Linux: not currently provided. Yes, I know I'm a Linux user and so this is hypocritical. Bug me about it enough, and I'll fix it.
 
 ## Rules
 
@@ -28,15 +28,15 @@
 
 ## Requirements
 
-You'll need at least the following:
-
-* Python 3.7 (3.8 or 3.9 should work, but only 3.7 is supported at this time)
-* Pygame (and dependencies thereof, e.g. SDL)
-* Briefcase
-* Toga (for now - probably depends on how quickly https://github.com/beeware/briefcase/issues/383 is fixed, because I'd prefer guizero)
+You'll need at least Python 3.7 (3.8 or 3.9 should work, but only 3.7 is supported at this time).
+You'll also need Node.js so you can run pyright.
+To build an executable on Windows, you'll need .NET Framework 4 (this is a dependency of Toga)
 
 Get Python via whatever method you prefer.
-Pygame and Briefcase can be acquired with the following:
+
+If you have more than one Python version installed, I'd recommend setting up a virtualenv with the one you want.
+
+Once Python is set up, the other dependencies can be installed with this script:
 
 ```bash
 % ./script/bootstrap
@@ -55,14 +55,10 @@ If you want to build an installable standalone executable, run:
 % briefcase run
 ```
 
-For development, you'll also need flake8, nose, pylint, pytype, and yapf
+Before committing, please run this script:
 
 ```bash
-% pip install flake8 nose pylint yapf
-% script/format.sh
-% script/typecheck.sh
-% script/lint.sh
-% script/test.sh
+% script/precommit.sh
 ```
 
 ## Created By
