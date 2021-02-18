@@ -14,9 +14,12 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import configparser
 import logging
 import os
+import os.path
 
+import appdirs
 import pygame
 
 try:
@@ -77,9 +80,15 @@ def seconds_to_millis_plus_spare(seconds: int) -> int:
 
 
 def write_hiscore(hiscore: float):
+    user_data_dir = appdirs.user_data_dir(constants.PACKAGE, constants.AUTHOR)
+    config_data_file = os.path.join(user_data_dir, constants.CONFIG_DATA_FILE)
+    config = configparser.RawConfigParser()
+    config.read(config_data_file)
+    config.set(configparser.DEFAULTSECT, "hiscore", str(int(hiscore)))
+    os.makedirs(user_data_dir, exist_ok=True)
     try:
-        with open(constants.HISCORE_FILE_PATH, "w") as hiscore_file:
-            hiscore_file.write(str(int(hiscore)))
+        with open(config_data_file, "w") as hiscore_file:
+            config.write(hiscore_file)
     except PermissionError:
         logging.error("Unable to open high score file")
 
@@ -114,8 +123,10 @@ def won(launcher, hiscore: int, sounds: dict):
     return_to_launcher(launcher, hiscore)
 
 
-def get_old_hiscore():
-    if os.path.isfile(constants.HISCORE_FILE_PATH) and os.access(constants.HISCORE_FILE_PATH, os.R_OK):
-        with open(constants.HISCORE_FILE_PATH, "r") as high_score_file:
-            return int(high_score_file.read())
-    return 0
+def load_config():
+    user_data_dir = appdirs.user_data_dir(constants.PACKAGE, constants.AUTHOR)
+    config_data_file = os.path.join(user_data_dir, constants.CONFIG_DATA_FILE)
+    config = configparser.RawConfigParser()
+    config.read(config_data_file)
+    old_hiscore = config.getint(configparser.DEFAULTSECT, "hiscore", fallback=0)
+    return old_hiscore

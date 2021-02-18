@@ -68,6 +68,6 @@ def setup(level_data) -> tuple:
         "refresh_color": level_data.refresh_color,
         "rhombus_color": level_data.rhombus_color
     }
-    previous_hiscore = utils.get_old_hiscore()
+    previous_hiscore = utils.load_config()
 
     return screen, clock, font, previous_hiscore, ui_images, sounds, colors
