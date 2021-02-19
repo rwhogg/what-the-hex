@@ -12,6 +12,7 @@
       <excludeFolder url="file://$MODULE_DIR$/windows" />
       <excludeFolder url="file://$MODULE_DIR$/scancode_windows_files" />
       <excludeFolder url="file://$MODULE_DIR$/android" />
+      <excludeFolder url="file://$MODULE_DIR$/linux" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (what-the-hex)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
