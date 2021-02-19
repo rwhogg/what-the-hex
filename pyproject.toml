@@ -16,16 +16,23 @@ requires = ["appdirs==1.4.4", "toga==0.3.0.dev16", "pygame==2.0.1"]
 
 [tool.briefcase.app.game.windows]
 requires = [
-    "toga-winforms>=0.3.0.dev16"
+    "toga-winforms==0.3.0.dev16"
 ]
 system_installer = true
 
 [tool.briefcase.app.game.macOS]
 requires = [
-    "toga-cocoa>=0.3.0.dev16"
+    "toga-cocoa==0.3.0.dev16"
 ]
+
+[tool.briefcase.app.game.linux]
+requires = [
+    "toga-gtk==0.3.0.dev16"
+]
+# FIXME: there's definitely a lot of system requirements here, both from pygame/SDL and from toga
+# Actually, not sure how pygame handles libraries on Linux. Hmm...
 
 [tool.briefcase.app.game.android]
 requires = [
-    "toga-android>=0.3.0.dev16"
+    "toga-android==0.3.0.dev16"
 ]
