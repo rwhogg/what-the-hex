@@ -22,12 +22,10 @@ try:
     from . import config_utils
     from . import constants
     from . import game_resources
-    from . import utils
 except ImportError:
     import config_utils
     import constants
     import game_resources
-    import utils
 
 
 def check_prerequisites():

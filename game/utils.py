@@ -14,20 +14,12 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import configparser
-import logging
-import os
-import os.path
-
-import appdirs
 import pygame
 
 try:
     from . import config_utils
-    from . import constants
 except ImportError:
     import config_utils
-    import constants
 
 
 def seconds_to_millis_plus_spare(seconds: int) -> int:
