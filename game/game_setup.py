@@ -19,10 +19,12 @@ import sys
 import pygame
 
 try:
+    from . import config_utils
     from . import constants
     from . import game_resources
     from . import utils
 except ImportError:
+    import config_utils
     import constants
     import game_resources
     import utils
@@ -68,6 +70,6 @@ def setup(level_data) -> tuple:
         "refresh_color": level_data.refresh_color,
         "rhombus_color": level_data.rhombus_color
     }
-    previous_hiscore = utils.load_config()
+    previous_hiscore = config_utils.load_config()
 
     return screen, clock, font, previous_hiscore, ui_images, sounds, colors

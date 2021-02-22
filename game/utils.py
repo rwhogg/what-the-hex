@@ -23,8 +23,10 @@ import appdirs
 import pygame
 
 try:
+    from . import config_utils
     from . import constants
 except ImportError:
+    import config_utils
     import constants
 
 
@@ -32,33 +34,19 @@ def seconds_to_millis_plus_spare(seconds: int) -> int:
     return seconds * 1000 + 1000
 
 
-def write_hiscore(hiscore: float):
-    user_data_dir = appdirs.user_data_dir(constants.PACKAGE, constants.AUTHOR)
-    config_data_file = os.path.join(user_data_dir, constants.CONFIG_DATA_FILE)
-    config = configparser.RawConfigParser()
-    config.read(config_data_file)
-    config.set(configparser.DEFAULTSECT, "hiscore", str(int(hiscore)))
-    os.makedirs(user_data_dir, exist_ok=True)
-    try:
-        with open(config_data_file, "w") as hiscore_file:
-            config.write(hiscore_file)
-    except PermissionError:
-        logging.error("Unable to open high score file")
-
-
-def clean_out_sound():
+def clean_out_sound() -> None:
     pygame.mixer.music.stop()
     pygame.time.wait(1000)
 
 
-def return_to_launcher(launcher, hiscore=None):
+def return_to_launcher(launcher, hiscore=None) -> None:
     if hiscore is not None:
-        write_hiscore(hiscore)
+        config_utils.write_hiscore(hiscore)
 
     pygame.quit()
 
 
-def game_over(launcher, hiscore, sounds):
+def game_over(launcher, hiscore, sounds) -> None:
     clean_out_sound()
     sounds["game_over_sound"].play()
     pygame.time.wait(int(sounds["game_over_sound"].get_length() * 1000))
@@ -67,19 +55,10 @@ def game_over(launcher, hiscore, sounds):
     return_to_launcher(launcher, hiscore)
 
 
-def won(launcher, hiscore: int, sounds: dict):
+def won(launcher, hiscore: int, sounds: dict) -> None:
     clean_out_sound()
     sounds["win_sound"].play()
     pygame.time.wait(int(sounds["win_sound"].get_length() * 1000))
     sounds["win_voice"].play()
     pygame.time.wait(int(sounds["win_voice"].get_length() * 1000 + 1500))
     return_to_launcher(launcher, hiscore)
-
-
-def load_config():
-    user_data_dir = appdirs.user_data_dir(constants.PACKAGE, constants.AUTHOR)
-    config_data_file = os.path.join(user_data_dir, constants.CONFIG_DATA_FILE)
-    config = configparser.RawConfigParser()
-    config.read(config_data_file)
-    old_hiscore = config.getint(configparser.DEFAULTSECT, "hiscore", fallback=0)
-    return old_hiscore

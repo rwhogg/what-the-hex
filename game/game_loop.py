@@ -25,7 +25,7 @@ try:
     from . import events
     from . import exceptions
     from . import hexagon_utils
-    from . import setup
+    from . import game_setup
     from . import utils
     from . import win_conditions
 except ImportError:
@@ -34,7 +34,7 @@ except ImportError:
     import events
     import exceptions
     import hexagon_utils
-    import setup
+    import game_setup
     import utils
     import win_conditions
 
@@ -113,7 +113,7 @@ def init_stats(level_data, previous_hiscore: int) -> dict:
 
 
 def run_loop(launcher, level_data):
-    screen, clock, font, previous_hiscore, ui_images, sounds, colors = setup.setup(level_data)
+    screen, clock, font, previous_hiscore, ui_images, sounds, colors = game_setup.setup(level_data)
     hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
                                                        constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS,
                                                        colors["initial_hexagon_color"], colors["edge_color_options"])

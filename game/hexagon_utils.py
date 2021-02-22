@@ -30,6 +30,10 @@ except ImportError:
 
 def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexagon: hexagon_struct.HexagonStruct,
                                 row: int, column: int) -> tuple:
+    # NOTE: this method is rather precarious.
+    # Make sure you know what you're doing if you ever change it. It is very easy to get things wrong here.
+    # (Hopefully, I never have to edit this method ever again...)
+
     hexagons_involved = set()
     count_diamonds = 0
     color_to_flash = None
@@ -103,7 +107,7 @@ def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexa
     return hexagons_involved, count_diamonds, color_to_flash
 
 
-def draw_hexagon(screen: pygame.Surface, hexagon: hexagon_struct.HexagonStruct):
+def draw_hexagon(screen: pygame.Surface, hexagon: hexagon_struct.HexagonStruct) -> None:
     points = hexagon.get_points()
     edges = hexagon.get_edges()
     pygame.draw.polygon(screen, hexagon.base_color, points)
@@ -112,7 +116,8 @@ def draw_hexagon(screen: pygame.Surface, hexagon: hexagon_struct.HexagonStruct):
 
 
 def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArray, num_hexagons_to_refresh: int,
-                                        refresh_color: pygame.Color):
+                                        refresh_color: pygame.Color) -> None:
+    # Note, this mutates the hexagon_array rather than returning anything
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
     num_rows = len(hexagon_array)
@@ -130,7 +135,7 @@ def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArr
             break
 
 
-def random_hexagon(center: typing.List[float], base_color: pygame.Color, color_options):
+def random_hexagon(center: typing.List[float], base_color: pygame.Color, color_options) -> hexagon_struct.HexagonStruct:
     random_colors: typing.List[pygame.Color] = random.choices(color_options, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
@@ -148,18 +153,18 @@ def random_hexagon_array(start: typing.Sequence[float], num_rows: int, num_colum
 
 
 def refresh_matched_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: pygame.Color,
-                             color_options):
+                             color_options) -> None:
     refresh_hexagons(hexagon_array, lambda hexagon: hexagon.was_matched, initial_hexagon_color, color_options)
 
 
 def refresh_background_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: pygame.Color,
-                                color_options):
+                                color_options) -> None:
     refresh_hexagons(hexagon_array, lambda hexagon: hexagon.to_refresh, initial_hexagon_color, color_options)
 
 
 def refresh_hexagons(hexagon_array: hexagon_struct.HexagonArray,
                      predicate: typing.Callable[[hexagon_struct.HexagonStruct],
-                                                bool], initial_hexagon_color: pygame.Color, color_options):
+                                                bool], initial_hexagon_color: pygame.Color, color_options) -> None:
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             if predicate(hexagon_array[row][column]):
