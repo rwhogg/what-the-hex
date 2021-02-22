@@ -103,7 +103,7 @@ def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexa
     return hexagons_involved, count_diamonds, color_to_flash
 
 
-def draw_hexagon(screen, hexagon):
+def draw_hexagon(screen: pygame.Surface, hexagon: hexagon_struct.HexagonStruct):
     points = hexagon.get_points()
     edges = hexagon.get_edges()
     pygame.draw.polygon(screen, hexagon.base_color, points)

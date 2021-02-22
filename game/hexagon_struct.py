@@ -28,7 +28,7 @@ except ImportError:
 
 class HexagonStruct:
 
-    def __init__(self, center, base_color, edge_colors: typing.List[pygame.Color]) -> None:
+    def __init__(self, center: typing.List, base_color: pygame.Color, edge_colors: typing.List[pygame.Color]) -> None:
         if len(edge_colors) != 6:
             raise Exception
         self.center = center

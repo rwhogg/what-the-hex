@@ -15,6 +15,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import math
+import random
 
 import pygame
 
@@ -36,14 +37,18 @@ except ImportError:
     import win_conditions
 
 
-def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen, font, ui_images: dict, sounds: dict,
-              colors: dict, win_condition: win_conditions.WinConditions, launcher) -> dict:
+def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen: pygame.Surface, font, ui_images: dict,
+              sounds: dict, colors: dict, win_condition: win_conditions.WinConditions, launcher) -> dict:
     clock.tick()
 
     if stats["time_remaining"] <= 0:
         raise exceptions.GameOver(stats["current_score"])
     elif win_condition.has_won(stats):
         raise exceptions.Won(stats["current_score"])
+
+    initial_hexagon_color = colors["initial_hexagon_color"]
+    refresh_color = colors["refresh_color"]
+    edge_color_options = colors["edge_color_options"]
 
     hexagon_rotated = None
     row_num = column_num = 0
@@ -52,15 +57,13 @@ def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen, font
             direction = "left" if event.button == 1 else "right"
             hexagon_rotated, row_num, column_num = hexagon_utils.rotate_hexagon(hexagon_array, direction, event.pos)
         elif event.type == events.REFRESH_MATCHED_HEXAGONS_EVENT:
-            hexagon_utils.refresh_matched_hexagons(hexagon_array, colors["initial_hexagon_color"],
-                                                   colors["edge_color_options"])
+            hexagon_utils.refresh_matched_hexagons(hexagon_array, initial_hexagon_color, edge_color_options)
         elif event.type == events.REFRESH_BACKGROUND_HEXAGONS_EVENT:
             if stats["hexagons_to_refresh"] > 0:
-                hexagon_utils.refresh_background_hexagons(hexagon_array, colors["initial_hexagon_color"],
-                                                          colors["edge_color_options"])
+                hexagon_utils.refresh_background_hexagons(hexagon_array, initial_hexagon_color, edge_color_options)
                 sounds["refresh_sound"].play()
                 hexagon_utils.pick_background_hexagons_to_refresh(hexagon_array, stats["hexagons_to_refresh"],
-                                                                  colors["refresh_color"])
+                                                                  refresh_color)
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             stats["hexagons_to_refresh"] += 1
         elif event.type == pygame.QUIT:
@@ -93,28 +96,33 @@ def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen, font
     return stats
 
 
-def run_loop(launcher, level_data):
-    screen, clock, font, previous_hiscore, ui_images, sounds, colors = setup.setup(level_data)
-    hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
-                                                       constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS,
-                                                       colors["initial_hexagon_color"], colors["edge_color_options"])
-
-    # FIXME: turn this into a class so I can get strong typing
-    stats = {
+# FIXME: turn this into a class so I can get strong typing
+def init_stats(level_data, previous_hiscore: int) -> dict:
+    return {
         "current_score": 0,
         "hexagons_to_refresh": 0,
         "previous_hiscore": previous_hiscore,
         "time_remaining": level_data.starting_time,
         # FIXME: needs to be genericized for different win conditions
         "matches": {},
-        "matches_left": level_data.win_condition.matches_needed
+        "matches_left": level_data.win_condition.matches_needed,
+        "advantage_color": (0, 0, 0)
     }
+
+
+def run_loop(launcher, level_data):
+    screen, clock, font, previous_hiscore, ui_images, sounds, colors = setup.setup(level_data)
+    hexagon_array = hexagon_utils.random_hexagon_array([constants.SCREEN_WIDTH / 8, constants.SCREEN_HEIGHT / 6],
+                                                       constants.HEXAGON_ROWS, constants.HEXAGON_COLUMNS,
+                                                       colors["initial_hexagon_color"], colors["edge_color_options"])
+    stats = init_stats(level_data, previous_hiscore)
     win_condition = level_data.win_condition
 
     # first iteration so the screen comes up before the music starts
     game_loop(stats, clock, hexagon_array, screen, font, ui_images, sounds, colors, win_condition, launcher)
 
     stats["hexagons_to_refresh"] = 1
+    stats["advantage_color"] = random.choices(level_data.edge_color_options, k=1)[0]
     pygame.mixer.music.play(constants.LOOP_FOREVER)
     pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
     pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT, constants.INCREASE_REFRESH_RATE_TIME_MILLIS)

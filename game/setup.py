@@ -47,10 +47,10 @@ def setup(level_data) -> tuple:
     }
     pygame.display.set_icon(ui_images["icon"])
     pygame.init()
-    screen = pygame.display.set_mode(constants.SCREEN_SIZE)
+    screen: pygame.Surface = pygame.display.set_mode(constants.SCREEN_SIZE)
     pygame.display.set_caption(constants.PRETTY_GAME_NAME)
-    clock = pygame.time.Clock()
-    font = pygame.font.Font(game_resources.FONT_NAME, constants.FONT_SIZE)
+    clock: pygame.time.Clock = pygame.time.Clock()
+    font: pygame.font.Font = pygame.font.Font(game_resources.FONT_NAME, constants.FONT_SIZE)
     pygame.mixer.music.load(level_data.music)
     sounds = {
         "refresh_sound": pygame.mixer.Sound(game_resources.REFRESH_SOUND_NAME),
