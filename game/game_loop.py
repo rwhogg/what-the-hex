@@ -21,6 +21,7 @@ import pygame
 
 try:
     from . import constants
+    from . import drawing
     from . import events
     from . import exceptions
     from . import hexagon_utils
@@ -29,6 +30,7 @@ try:
     from . import win_conditions
 except ImportError:
     import constants
+    import drawing
     import events
     import exceptions
     import hexagon_utils
@@ -90,7 +92,7 @@ def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen: pyga
     # UI drawing
     stats["matches"] = {"FIXME_ALL": new_match_count}  # FIXME: this has to be a mapping of colors
     stats["matches_left"] -= diamonds_matched
-    utils.draw_ui(screen, ui_images, hexagon_array, font, stats, colors)
+    drawing.draw_ui(screen, ui_images, hexagon_array, font, stats, colors)
 
     stats["time_remaining"] = stats["time_remaining"] - clock.get_time() + extra_time
     return stats
