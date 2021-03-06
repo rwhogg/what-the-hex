@@ -48,7 +48,7 @@ def draw_bottom(screen: pygame.Surface, images: dict, advantage_color: pygame.Co
     advantage_color_rect.center = (int(constants.SCREEN_WIDTH / 2), panel_top + 20)
     screen.blit(advantage_color_surface, advantage_color_rect)
 
-    advantage_hexagon = hexagon_struct.HexagonStruct([constants.SCREEN_WIDTH / 2, images_top + 50], advantage_color,
+    advantage_hexagon = hexagon_struct.HexagonStruct((constants.SCREEN_WIDTH / 2, images_top + 50), advantage_color,
                                                      [advantage_color for i in range(6)])
     hexagon_utils.draw_hexagon(screen, advantage_hexagon)
 

@@ -135,19 +135,21 @@ def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArr
             break
 
 
-def random_hexagon(center: typing.List[float], base_color: pygame.Color, color_options) -> hexagon_struct.HexagonStruct:
+def random_hexagon(center: hexagon_struct.Point, base_color: pygame.Color,
+                   color_options) -> hexagon_struct.HexagonStruct:
     random_colors: typing.List[pygame.Color] = random.choices(color_options, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
 
 def random_hexagon_array(start: typing.Sequence[float], num_rows: int, num_columns: int,
-                         initial_hexagon_color: pygame.Color, color_options) -> hexagon_struct.HexagonArray:
+                         initial_hexagon_color: pygame.Color, color_options: typing.List[pygame.Color])\
+        -> hexagon_struct.HexagonArray:
     hexagons: hexagon_struct.HexagonArray = [[] for _ in range(num_rows)]
     for i in range(num_rows):
         for j in range(num_columns):
             center_x = start[0] + j * constants.HEXAGON_SIDE_LENGTH * math.cos(30) * 14
             center_y = start[1] + i * constants.HEXAGON_SIDE_LENGTH * math.cos(30) * 12.5
-            center = [center_x, center_y]
+            center: hexagon_struct.Point = (center_x, center_y)
             hexagons[i].append(random_hexagon(center, initial_hexagon_color, color_options))
     return hexagons
 

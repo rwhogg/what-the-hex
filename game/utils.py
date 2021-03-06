@@ -31,26 +31,26 @@ def clean_out_sound() -> None:
     pygame.time.wait(1000)
 
 
-def return_to_launcher(launcher, hiscore=None) -> None:
+def return_to_launcher(hiscore=None) -> None:
     if hiscore is not None:
         config_utils.write_hiscore(hiscore)
 
     pygame.quit()
 
 
-def game_over(launcher, hiscore, sounds) -> None:
+def game_over(hiscore, sounds) -> None:
     clean_out_sound()
     sounds["game_over_sound"].play()
     pygame.time.wait(int(sounds["game_over_sound"].get_length() * 1000))
     sounds["game_over_voice"].play()
     pygame.time.wait(int(sounds["game_over_voice"].get_length() * 1000 + 1500))
-    return_to_launcher(launcher, hiscore)
+    return_to_launcher(hiscore)
 
 
-def won(launcher, hiscore: int, sounds: dict) -> None:
+def won(hiscore: int, sounds: dict) -> None:
     clean_out_sound()
     sounds["win_sound"].play()
     pygame.time.wait(int(sounds["win_sound"].get_length() * 1000))
     sounds["win_voice"].play()
     pygame.time.wait(int(sounds["win_voice"].get_length() * 1000 + 1500))
-    return_to_launcher(launcher, hiscore)
+    return_to_launcher(hiscore)

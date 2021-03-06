@@ -25,10 +25,12 @@ try:
 except ImportError:
     import constants
 
+Point = typing.Tuple[float, float]
+
 
 class HexagonStruct:
 
-    def __init__(self, center: typing.List, base_color: pygame.Color, edge_colors: typing.List[pygame.Color]) -> None:
+    def __init__(self, center: Point, base_color: pygame.Color, edge_colors: typing.List[pygame.Color]) -> None:
         if len(edge_colors) != 6:
             raise Exception
         self.center = center
@@ -37,7 +39,7 @@ class HexagonStruct:
         self.was_matched = False
         self.to_refresh = False
 
-    def get_points(self) -> typing.List[typing.Tuple[float, float]]:
+    def get_points(self) -> typing.List[Point]:
         center_x = self.center[0]
         center_y = self.center[1]
         p0 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, center_y - 0.866025 * constants.HEXAGON_SIDE_LENGTH)
@@ -56,17 +58,17 @@ class HexagonStruct:
     def get_small_radius() -> float:
         return constants.HEXAGON_SIDE_LENGTH * math.cos(30)
 
-    def get_edges(self) -> list:
+    def get_edges(self) -> typing.List[typing.List[Point]]:
         points = self.get_points()
         return [[points[a], points[(a + 1) % 6]] for a in range(6)]
 
-    def point_is_inside(self, point) -> bool:
+    def point_is_inside(self, point: Point) -> bool:
         # this isn't strictly correct, but it's accurate enough for my purposes
         # (the 35 is just a little extra tolerance)
         return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= \
             self.get_small_radius() + 35
 
-    def rotate(self, direction) -> None:
+    def rotate(self, direction: str) -> None:
         if direction == "right":
             last_color = self.edge_colors.pop(5)
             self.edge_colors.insert(0, last_color)

@@ -26,7 +26,8 @@ except ImportError:
     import constants
 
 
-def load_config():
+# Note, will probably return something else in the future
+def load_config() -> int:
     user_data_dir = appdirs.user_data_dir(constants.PACKAGE, constants.AUTHOR)
     config_data_file = os.path.join(user_data_dir, constants.CONFIG_DATA_FILE)
     config = configparser.RawConfigParser()
@@ -35,7 +36,7 @@ def load_config():
     return old_hiscore
 
 
-def write_hiscore(hiscore: float):
+def write_hiscore(hiscore: float) -> None:
     user_data_dir = appdirs.user_data_dir(constants.PACKAGE, constants.AUTHOR)
     config_data_file = os.path.join(user_data_dir, constants.CONFIG_DATA_FILE)
     config = configparser.RawConfigParser()
@@ -46,4 +47,4 @@ def write_hiscore(hiscore: float):
         with open(config_data_file, "w") as hiscore_file:
             config.write(hiscore_file)
     except PermissionError:
-        logging.error("Unable to open config file")
+        logging.error("Unable to open config file for writing")

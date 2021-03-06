@@ -133,10 +133,10 @@ def run_loop(launcher, level_data):
             stats = game_loop(stats, clock, hexagon_array, screen, font, ui_images, sounds, colors, win_condition,
                               launcher)
         except exceptions.GameOver as e:
-            utils.game_over(launcher, max(e.score, previous_hiscore), sounds)
+            utils.game_over(max(e.score, previous_hiscore), sounds)
             return
         except exceptions.Won as e:
-            utils.won(launcher, max(e.score, previous_hiscore), sounds)
+            utils.won(max(e.score, previous_hiscore), sounds)
             return
         except exceptions.Quit:
             utils.return_to_launcher(launcher)
