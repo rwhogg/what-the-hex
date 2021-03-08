@@ -14,6 +14,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import random
+import typing
+
 import pygame
 
 try:
@@ -26,13 +29,21 @@ def seconds_to_millis_plus_spare(seconds: int) -> int:
     return seconds * 1000 + 1000
 
 
+def pick_from(lst: list):
+    return random.choices(lst, k=1)[0]
+
+
+def is_number(var: typing.Any):
+    return type(var) in [int, float, complex]
+
+
 def clean_out_sound() -> None:
     pygame.mixer.music.stop()
     pygame.time.wait(1000)
 
 
 def return_to_launcher(hiscore=None) -> None:
-    if hiscore is not None:
+    if is_number(hiscore):
         config_utils.write_hiscore(hiscore)
 
     pygame.quit()

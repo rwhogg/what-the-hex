@@ -32,7 +32,7 @@ def draw_bg(screen: pygame.Surface, images: dict):
     screen.blit(images["bg_image"], pygame.Rect(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 
 
-def draw_bottom(screen: pygame.Surface, images: dict, advantage_color: pygame.Color, font: pygame.font.Font):
+def draw_bottom(screen: pygame.Surface, images: dict, advantage_color: colors.ColorLike, font: pygame.font.Font):
     panel_top = 600
     images_top = 650
     image_size = (100, 100)
@@ -58,7 +58,7 @@ def draw_bottom(screen: pygame.Surface, images: dict, advantage_color: pygame.Co
     screen.blit(images["icon"], pygame.Rect((constants.SCREEN_WIDTH - 125, images_top), image_size))
 
 
-def draw_rhombuses(screen: pygame.Surface, rhombus_color: pygame.Color):
+def draw_rhombuses(screen: pygame.Surface, rhombus_color: colors.ColorLike):
     # FIXME: get rid of these hardcoded numbers
     pygame.draw.rect(screen, rhombus_color, pygame.Rect(150, constants.SCREEN_HEIGHT / 6, 750, 385))
 
@@ -76,9 +76,10 @@ def draw_stats(screen: pygame.Surface, font: pygame.font.Font, stats: dict):
     screen.blit(time_text_surface, time_text_rect)
 
 
-def draw_ui(screen: pygame.Surface, ui_images: dict, hexagon_array, font: pygame.font.Font, stats: dict, colors: dict):
+def draw_ui(screen: pygame.Surface, ui_images: dict, hexagon_array: hexagon_struct.HexagonArray, font: pygame.font.Font,
+            stats: dict, colors_dict: dict):
     draw_bg(screen, ui_images)
-    draw_rhombuses(screen, colors["rhombus_color"])
+    draw_rhombuses(screen, colors_dict["rhombus_color"])
     for row in hexagon_array:
         for hexagon in row:
             hexagon_utils.draw_hexagon(screen, hexagon)

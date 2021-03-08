@@ -21,22 +21,26 @@ import typing
 import pygame
 
 try:
+    from . import colors
     from . import constants
     from . import hexagon_struct
+    from . import utils
 except ImportError:
+    import colors
     import constants
     import hexagon_struct
+    import utils
 
 
 def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexagon: hexagon_struct.HexagonStruct,
-                                row: int, column: int) -> tuple:
+                                row: int, column: int) \
+        -> typing.Tuple[set, typing.Dict[colors.ColorLike, int], typing.Optional[colors.ColorLike]]:
     # NOTE: this method is rather precarious.
     # Make sure you know what you're doing if you ever change it. It is very easy to get things wrong here.
     # (Hopefully, I never have to edit this method ever again...)
 
     hexagons_involved = set()
-    count_diamonds = 0
-    color_to_flash = None
+    match_colors = {}
 
     tre = 0
     bre = 1
@@ -52,12 +56,13 @@ def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexa
         n_eq = hexagon.edge_colors[tle] == hex_n.edge_colors[ble]
         w_eq = hexagon.edge_colors[tle] == hex_w.edge_colors[tre]
         if nw_eq and n_eq and w_eq:
-            count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_nw)
             hexagons_involved.add(hex_n)
             hexagons_involved.add(hex_w)
-            color_to_flash = hexagon.edge_colors[tle]
+            # No need to += 1 here because this is definitely the first instance
+            # Also note that pygame.Color is not hashable, so must convert to tuple
+            match_colors[colors.to_tuple(hexagon.edge_colors[tle])] = 1
     # top-right
     if row != 0 and column != len(hexagon_array[0]) - 1:
         hex_ne = hexagon_array[row - 1][column + 1]
@@ -67,12 +72,14 @@ def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexa
         n_eq = hexagon.edge_colors[tre] == hex_n.edge_colors[bre]
         e_eq = hexagon.edge_colors[tre] == hex_e.edge_colors[tle]
         if ne_eq and n_eq and e_eq:
-            count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_ne)
             hexagons_involved.add(hex_n)
             hexagons_involved.add(hex_e)
-            color_to_flash = hexagon.edge_colors[tre]
+            try:
+                match_colors[colors.to_tuple(hexagon.edge_colors[tre])] += 1
+            except KeyError:
+                match_colors[colors.to_tuple(hexagon.edge_colors[tre])] = 1
     # bottom-right
     if row != len(hexagon_array) - 1 and column != len(hexagon_array[0]) - 1:
         hex_se = hexagon_array[row + 1][column + 1]
@@ -82,12 +89,14 @@ def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexa
         s_eq = hexagon.edge_colors[bre] == hex_s.edge_colors[tre]
         e_eq = hexagon.edge_colors[bre] == hex_e.edge_colors[ble]
         if se_eq and s_eq and e_eq:
-            count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_se)
             hexagons_involved.add(hex_s)
             hexagons_involved.add(hex_e)
-            color_to_flash = hexagon.edge_colors[bre]
+            try:
+                match_colors[colors.to_tuple(hexagon.edge_colors[bre])] += 1
+            except KeyError:
+                match_colors[colors.to_tuple(hexagon.edge_colors[bre])] = 1
     # bottom-left
     if row != len(hexagon_array) - 1 and column != 0:
         hex_sw = hexagon_array[row + 1][column - 1]
@@ -97,14 +106,20 @@ def check_all_adjacent_diamonds(hexagon_array: hexagon_struct.HexagonArray, hexa
         s_eq = hexagon.edge_colors[ble] == hex_s.edge_colors[tle]
         w_eq = hexagon.edge_colors[ble] == hex_w.edge_colors[bre]
         if sw_eq and s_eq and w_eq:
-            count_diamonds += 1
             hexagons_involved.add(hexagon)
             hexagons_involved.add(hex_sw)
             hexagons_involved.add(hex_s)
             hexagons_involved.add(hex_w)
-            color_to_flash = hexagon.edge_colors[ble]
+            try:
+                match_colors[colors.to_tuple(hexagon.edge_colors[ble])] += 1
+            except KeyError:
+                match_colors[colors.to_tuple(hexagon.edge_colors[ble])] = 1
 
-    return hexagons_involved, count_diamonds, color_to_flash
+    match_color_list = list(match_colors.keys())
+    color_to_flash = None
+    if len(match_color_list) != 0:
+        color_to_flash = pygame.Color(utils.pick_from(match_color_list))
+    return hexagons_involved, match_colors, color_to_flash
 
 
 def draw_hexagon(screen: pygame.Surface, hexagon: hexagon_struct.HexagonStruct) -> None:
@@ -116,7 +131,7 @@ def draw_hexagon(screen: pygame.Surface, hexagon: hexagon_struct.HexagonStruct) 
 
 
 def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArray, num_hexagons_to_refresh: int,
-                                        refresh_color: pygame.Color) -> None:
+                                        refresh_color: colors.ColorLike) -> None:
     # Note, this mutates the hexagon_array rather than returning anything
     num_refreshed = 0
     num_columns = len(hexagon_array[0])
@@ -135,14 +150,14 @@ def pick_background_hexagons_to_refresh(hexagon_array: hexagon_struct.HexagonArr
             break
 
 
-def random_hexagon(center: hexagon_struct.Point, base_color: pygame.Color,
-                   color_options) -> hexagon_struct.HexagonStruct:
-    random_colors: typing.List[pygame.Color] = random.choices(color_options, k=6)
+def random_hexagon(center: hexagon_struct.Point, base_color: colors.ColorLike,
+                   color_options: typing.List[colors.ColorLike]) -> hexagon_struct.HexagonStruct:
+    random_colors: typing.List[colors.ColorLike] = random.choices(color_options, k=6)
     return hexagon_struct.HexagonStruct(center, base_color, random_colors)
 
 
 def random_hexagon_array(start: typing.Sequence[float], num_rows: int, num_columns: int,
-                         initial_hexagon_color: pygame.Color, color_options: typing.List[pygame.Color])\
+                         initial_hexagon_color: colors.ColorLike, color_options: typing.List[colors.ColorLike])\
         -> hexagon_struct.HexagonArray:
     hexagons: hexagon_struct.HexagonArray = [[] for _ in range(num_rows)]
     for i in range(num_rows):
@@ -154,19 +169,19 @@ def random_hexagon_array(start: typing.Sequence[float], num_rows: int, num_colum
     return hexagons
 
 
-def refresh_matched_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: pygame.Color,
-                             color_options) -> None:
+def refresh_matched_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: colors.ColorLike,
+                             color_options: typing.List[colors.ColorLike]) -> None:
     refresh_hexagons(hexagon_array, lambda hexagon: hexagon.was_matched, initial_hexagon_color, color_options)
 
 
-def refresh_background_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: pygame.Color,
-                                color_options) -> None:
+def refresh_background_hexagons(hexagon_array: hexagon_struct.HexagonArray, initial_hexagon_color: colors.ColorLike,
+                                color_options: typing.List[colors.ColorLike]) -> None:
     refresh_hexagons(hexagon_array, lambda hexagon: hexagon.to_refresh, initial_hexagon_color, color_options)
 
 
 def refresh_hexagons(hexagon_array: hexagon_struct.HexagonArray,
-                     predicate: typing.Callable[[hexagon_struct.HexagonStruct],
-                                                bool], initial_hexagon_color: pygame.Color, color_options) -> None:
+                     predicate: typing.Callable[[hexagon_struct.HexagonStruct], bool],
+                     initial_hexagon_color: colors.ColorLike, color_options: typing.List[colors.ColorLike]) -> None:
     for row in range(len(hexagon_array)):
         for column in range(len(hexagon_array[row])):
             if predicate(hexagon_array[row][column]):

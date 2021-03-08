@@ -17,12 +17,12 @@
 import math
 import typing
 
-import pygame
-
 # Hack to get imports to work under both nosetests and briefcase
 try:
+    from . import colors
     from . import constants
 except ImportError:
+    import colors
     import constants
 
 Point = typing.Tuple[float, float]
@@ -30,7 +30,7 @@ Point = typing.Tuple[float, float]
 
 class HexagonStruct:
 
-    def __init__(self, center: Point, base_color: pygame.Color, edge_colors: typing.List[pygame.Color]) -> None:
+    def __init__(self, center: Point, base_color: colors.ColorLike, edge_colors: typing.List[colors.ColorLike]) -> None:
         if len(edge_colors) != 6:
             raise Exception
         self.center = center

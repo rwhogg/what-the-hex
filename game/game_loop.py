@@ -15,7 +15,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import math
-import random
 
 import pygame
 
@@ -40,7 +39,7 @@ except ImportError:
 
 
 def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen: pygame.Surface, font, ui_images: dict,
-              sounds: dict, colors: dict, win_condition: win_conditions.WinConditions, launcher) -> dict:
+              sounds: dict, colors: dict, win_condition: win_conditions.WinConditions) -> dict:
     clock.tick()
 
     if stats["time_remaining"] <= 0:
@@ -69,29 +68,32 @@ def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen: pyga
         elif event.type == events.INCREASE_REFRESH_RATE_EVENT:
             stats["hexagons_to_refresh"] += 1
         elif event.type == pygame.QUIT:
-            utils.return_to_launcher(launcher)
+            utils.return_to_launcher()
             raise exceptions.Quit
 
     extra_time = 0
-    diamonds_matched = 0
+    diamonds_matched = {}
+    num_diamonds_matched = 0
     new_match_count = sum(stats.get("matches").values())
     if hexagon_rotated is not None:
         sounds["rotate_sound"].play()
         hexagons_in_match, diamonds_matched, color_to_flash = hexagon_utils.check_all_adjacent_diamonds(
             hexagon_array, hexagon_rotated, row_num, column_num)
-        if diamonds_matched > 0:
-            stats["current_score"] += int(math.pow(diamonds_matched, 2)) * 100
+        num_diamonds_matched = sum(diamonds_matched.values())
+        if num_diamonds_matched > 0:
+            assert color_to_flash is not None
+            stats["current_score"] += int(math.pow(num_diamonds_matched, 2)) * 100
             sounds["match_sound"].play()
-            extra_time += constants.EXTRA_SECONDS * diamonds_matched * 1000
-            new_match_count += diamonds_matched  # FIXME: this has to be a mapping of colors
+            extra_time += constants.EXTRA_SECONDS * num_diamonds_matched * 1000
+            new_match_count += num_diamonds_matched
             for hexagon in hexagons_in_match:
                 hexagon.base_color = color_to_flash
                 hexagon.was_matched = True
             pygame.time.set_timer(events.REFRESH_MATCHED_HEXAGONS_EVENT, 1000, True)
 
     # UI drawing
-    stats["matches"] = {"FIXME_ALL": new_match_count}  # FIXME: this has to be a mapping of colors
-    stats["matches_left"] -= diamonds_matched
+    stats["matches"] = diamonds_matched
+    stats["matches_left"] -= num_diamonds_matched
     drawing.draw_ui(screen, ui_images, hexagon_array, font, stats, colors)
 
     stats["time_remaining"] = stats["time_remaining"] - clock.get_time() + extra_time
@@ -121,17 +123,16 @@ def run_loop(launcher, level_data):
     win_condition = level_data.win_condition
 
     # first iteration so the screen comes up before the music starts
-    game_loop(stats, clock, hexagon_array, screen, font, ui_images, sounds, colors, win_condition, launcher)
+    game_loop(stats, clock, hexagon_array, screen, font, ui_images, sounds, colors, win_condition)
 
     stats["hexagons_to_refresh"] = 1
-    stats["advantage_color"] = random.choices(level_data.edge_color_options, k=1)[0]
+    stats["advantage_color"] = utils.pick_from(level_data.edge_color_options)
     pygame.mixer.music.play(constants.LOOP_FOREVER)
     pygame.time.set_timer(events.REFRESH_BACKGROUND_HEXAGONS_EVENT, constants.REFRESH_BACKGROUND_HEXAGONS_TIME_MILLIS)
     pygame.time.set_timer(events.INCREASE_REFRESH_RATE_EVENT, constants.INCREASE_REFRESH_RATE_TIME_MILLIS)
     while True:
         try:
-            stats = game_loop(stats, clock, hexagon_array, screen, font, ui_images, sounds, colors, win_condition,
-                              launcher)
+            stats = game_loop(stats, clock, hexagon_array, screen, font, ui_images, sounds, colors, win_condition)
         except exceptions.GameOver as e:
             utils.game_over(max(e.score, previous_hiscore), sounds)
             return
