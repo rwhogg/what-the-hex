@@ -34,5 +34,6 @@ requires = [
 
 [tool.briefcase.app.game.android]
 requires = [
+    "rubicon-java",
     "toga-android==0.3.0.dev16"
 ]
