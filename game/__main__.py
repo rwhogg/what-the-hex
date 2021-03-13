@@ -18,8 +18,10 @@ import logging
 import os
 import pathlib
 
-# FIXME: this should be using the appdirs
-logging.basicConfig(filename=os.path.join(str(pathlib.Path.home()), ".what-the-hex.log"), level=logging.INFO)
+try:
+    logging.basicConfig(filename=os.path.join(str(pathlib.Path.home()), ".what-the-hex.log"), level=logging.INFO)
+except PermissionError:
+    print("We can't use this path on Android, FIXME")
 
 # Note, I think Toga is actually running as the main package in Briefcase,
 # so this import style is necessary.
