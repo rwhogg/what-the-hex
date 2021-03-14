@@ -14,11 +14,10 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import math
-
 import pygame
 
 try:
+    from . import colors
     from . import constants
     from . import drawing
     from . import events
@@ -28,6 +27,7 @@ try:
     from . import utils
     from . import win_conditions
 except ImportError:
+    import colors
     import constants
     import drawing
     import events
@@ -82,7 +82,7 @@ def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen: pyga
         num_diamonds_matched = sum(diamonds_matched.values())
         if num_diamonds_matched > 0:
             assert color_to_flash is not None
-            stats["current_score"] += int(math.pow(num_diamonds_matched, 2)) * 100
+            stats["current_score"] += calculate_score(diamonds_matched, stats["advantage_color"])
             sounds["match_sound"].play()
             extra_time += constants.EXTRA_SECONDS * num_diamonds_matched * 1000
             new_match_count += num_diamonds_matched
@@ -98,6 +98,15 @@ def game_loop(stats: dict, clock: pygame.time.Clock, hexagon_array, screen: pyga
 
     stats["time_remaining"] = stats["time_remaining"] - clock.get_time() + extra_time
     return stats
+
+
+def calculate_score(diamonds_matched: dict, advantage_color: colors.ColorLike) -> int:
+    additional_score: int = 0
+    for color in diamonds_matched:
+        num_matched = diamonds_matched[color]
+        multiplier = 300 if color == advantage_color else 100
+        additional_score += num_matched ** 2 * multiplier
+    return additional_score
 
 
 # FIXME: turn this into a class so I can get strong typing
