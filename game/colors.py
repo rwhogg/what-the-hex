@@ -14,8 +14,14 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import typing
+
 import pygame
 import travertino.colors
+
+# Note: explicitly including travertino color classes here, because pygame doesn't know how to handle them
+# Also, pygame only likes integer colors, it rejects floats
+ColorLike = typing.Union[typing.Tuple[int, int, int], typing.Tuple[int, int, int, int], pygame.Color]
 
 BLACK: pygame.Color = pygame.Color(0, 0, 0)
 DARK_GRAY: pygame.Color = pygame.Color(0x2f, 0x4f, 0x4f)
@@ -30,9 +36,9 @@ WHITE: pygame.Color = pygame.Color(255, 255, 255)
 YELLOW: pygame.Color = pygame.Color(255, 0xd7, 0)
 
 
-def to_tuple(color: pygame.Color):
-    return color.r, color.g, color.b
+def to_tuple(color: ColorLike) -> tuple:
+    return (color.r, color.g, color.b) if isinstance(color, pygame.Color) else color
 
 
-def to_travertino(color: pygame.Color):
-    return travertino.colors.rgb(color.r, color.g, color.b)
+def to_travertino(color: ColorLike) -> travertino.colors.rgb:
+    return travertino.colors.rgb(*to_tuple(color))
