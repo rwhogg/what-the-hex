@@ -19,8 +19,7 @@
 * You can rotate any given hexagon 60 degrees counterclockwise with a left click, 60 degrees clockwise with a right click
 * You start with 100 seconds on the clock
 * If a rhombus with 4 hexagons bordering it has all 4 edges the same color, you get a match
-    * It's possible more than one match is made at once - if so, you get geometrically increasing points per match made (100, 200, 400, 800, etc.)
-    * After the hexagons are destroyed, they are randomly regenerated
+    * Most matches are worth 100 points, but each match you make with the current advantage color gives you 300 instead
 * Every 10 seconds, random hexagons are regenerated
     * Hexagons are internally black by default but turn blue when they are selected for replacement
 * The number of hexagons refreshed per cycle increases by 1 every 20 seconds

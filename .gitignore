@@ -155,4 +155,8 @@ scancode_*
 android
 linux
 windows
+
+# Assorted
 wth.geany
+codeqldb-*
+cq-results.csv
