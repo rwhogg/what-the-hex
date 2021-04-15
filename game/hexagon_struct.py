@@ -42,12 +42,13 @@ class HexagonStruct:
     def get_points(self) -> typing.List[Point]:
         center_x = self.center[0]
         center_y = self.center[1]
-        p0 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, center_y - 0.866025 * constants.HEXAGON_SIDE_LENGTH)
+        cos30 = 0.866025
+        p0 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, center_y - cos30 * constants.HEXAGON_SIDE_LENGTH)
         p1 = (constants.HEXAGON_SIDE_LENGTH + center_x, center_y)
-        p2 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, 0.866025 * constants.HEXAGON_SIDE_LENGTH + center_y)
-        p3 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, 0.866025 * constants.HEXAGON_SIDE_LENGTH + center_y)
+        p2 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, cos30 * constants.HEXAGON_SIDE_LENGTH + center_y)
+        p3 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, cos30 * constants.HEXAGON_SIDE_LENGTH + center_y)
         p4 = (center_x - constants.HEXAGON_SIDE_LENGTH, center_y)
-        p5 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, center_y - 0.866025 * constants.HEXAGON_SIDE_LENGTH)
+        p5 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, center_y - cos30 * constants.HEXAGON_SIDE_LENGTH)
         return [p0, p1, p2, p3, p4, p5]
 
     @staticmethod
