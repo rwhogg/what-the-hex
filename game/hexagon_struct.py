@@ -42,12 +42,13 @@ class HexagonStruct:
     def get_points(self) -> typing.List[Point]:
         center_x = self.center[0]
         center_y = self.center[1]
-        p0 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, center_y - 0.866025 * constants.HEXAGON_SIDE_LENGTH)
+        cos30 = 0.866025
+        p0 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, center_y - cos30 * constants.HEXAGON_SIDE_LENGTH)
         p1 = (constants.HEXAGON_SIDE_LENGTH + center_x, center_y)
-        p2 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, 0.866025 * constants.HEXAGON_SIDE_LENGTH + center_y)
-        p3 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, 0.866025 * constants.HEXAGON_SIDE_LENGTH + center_y)
+        p2 = (0.5 * constants.HEXAGON_SIDE_LENGTH + center_x, cos30 * constants.HEXAGON_SIDE_LENGTH + center_y)
+        p3 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, cos30 * constants.HEXAGON_SIDE_LENGTH + center_y)
         p4 = (center_x - constants.HEXAGON_SIDE_LENGTH, center_y)
-        p5 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, center_y - 0.866025 * constants.HEXAGON_SIDE_LENGTH)
+        p5 = (center_x - 0.5 * constants.HEXAGON_SIDE_LENGTH, center_y - cos30 * constants.HEXAGON_SIDE_LENGTH)
         return [p0, p1, p2, p3, p4, p5]
 
     @staticmethod
@@ -56,7 +57,7 @@ class HexagonStruct:
 
     @staticmethod
     def get_small_radius() -> float:
-        return constants.HEXAGON_SIDE_LENGTH * math.cos(30)
+        return constants.HEXAGON_SIDE_LENGTH * math.cos(30 * math.pi / 180)
 
     def get_edges(self) -> typing.List[typing.List[Point]]:
         points = self.get_points()
@@ -64,9 +65,9 @@ class HexagonStruct:
 
     def point_is_inside(self, point: Point) -> bool:
         # this isn't strictly correct, but it's accurate enough for my purposes
-        # (the 35 is just a little extra tolerance)
+        # (the 2 is just a little extra tolerance)
         return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= \
-            self.get_small_radius() + 35
+            self.get_small_radius() + 2
 
     def rotate(self, direction: str) -> None:
         if direction == "right":

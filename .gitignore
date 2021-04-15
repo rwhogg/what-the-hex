@@ -160,3 +160,8 @@ windows
 wth.geany
 codeqldb-*
 cq-results.csv
+conda-env
+game/saves/
+game/cache/
+log.txt
+traceback.txt
