@@ -27,7 +27,7 @@ hexagon = hexagon_struct.HexagonStruct((300, 300), pygame.Color(255, 255, 255),
 
 
 def test_get_big_radius():
-    assert hexagon.get_big_radius() == 100
+    assert hexagon.get_big_radius() == 50
 
 
 def test_rotate():

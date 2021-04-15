@@ -53,7 +53,7 @@ class HexagonStruct:
 
     @staticmethod
     def get_big_radius() -> int:
-        return constants.HEXAGON_SIDE_LENGTH * 2
+        return constants.HEXAGON_SIDE_LENGTH
 
     @staticmethod
     def get_small_radius() -> float:
