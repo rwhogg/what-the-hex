@@ -56,7 +56,7 @@ class HexagonStruct:
 
     @staticmethod
     def get_small_radius() -> float:
-        return constants.HEXAGON_SIDE_LENGTH * math.cos(30)
+        return constants.HEXAGON_SIDE_LENGTH * math.cos(30 * math.pi / 180)
 
     def get_edges(self) -> typing.List[typing.List[Point]]:
         points = self.get_points()
@@ -64,9 +64,9 @@ class HexagonStruct:
 
     def point_is_inside(self, point: Point) -> bool:
         # this isn't strictly correct, but it's accurate enough for my purposes
-        # (the 35 is just a little extra tolerance)
+        # (the 2 is just a little extra tolerance)
         return math.hypot(point[0] - self.center[0], point[1] - self.center[1]) <= \
-            self.get_small_radius() + 35
+            self.get_small_radius() + 2
 
     def rotate(self, direction: str) -> None:
         if direction == "right":
