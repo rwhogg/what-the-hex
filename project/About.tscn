@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://MenuTheme.tres" type="Theme" id=1]
+[ext_resource path="res://ptsans.tres" type="DynamicFont" id=2]
+[ext_resource path="res://BackToMenuButton.cs" type="Script" id=3]
+
+[node name="RootControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = 3.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AboutLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -77.5
+margin_right = 77.5
+margin_bottom = 43.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "About"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -507.0
+margin_top = -207.0
+margin_right = 517.0
+margin_bottom = 315.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = ExtResource( 2 )
+text = "What The Hex? Version: 0.1.0 
+Copyright © 2021, Bob \"Wombat\" Hogg
+
+Licensed under the Apache License, Version 2.0 (the \"License\");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an \"AS IS\" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Godot Version: 3.3.2
+Dopefish Lives!"
+readonly = true
+caret_block_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AboutBackButton" type="Button" parent="."]
+margin_right = 136.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Back"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

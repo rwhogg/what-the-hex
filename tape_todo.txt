@@ -1,0 +1,99 @@
+{
+	"WhatThehex1620215744165": {
+		"name": "What The hex",
+		"items": [
+			{
+				"id": "1361620215673201429671",
+				"name": "Add more powerups",
+				"state": ""
+			},
+			{
+				"id": "1361620215700801297239",
+				"name": "Add some more win conditions/levels/etc",
+				"state": ""
+			},
+			{
+				"id": "1361620215769633971207",
+				"name": "Refine the touch control system for Android",
+				"state": ""
+			},
+			{
+				"id": "1361620215942721166594",
+				"name": "Write the documentation",
+				"state": ""
+			},
+			{
+				"id": "1361620215945744594115",
+				"name": "Fill out the readme",
+				"state": ""
+			},
+			{
+				"id": "1361620215949768920508",
+				"name": "Film a tutorial",
+				"state": ""
+			},
+			{
+				"id": "1361620215957258813675",
+				"name": "Publish the game downloads",
+				"state": ""
+			},
+			{
+				"id": "1361620216007527366257",
+				"name": "Add the missing sound effects (eg when replacing)",
+				"state": ""
+			},
+			{
+				"id": "1361620216044623260579",
+				"name": "Add the victory conditions back in",
+				"state": ""
+			},
+			{
+				"id": "136162021608690415311",
+				"name": "Register a domain on Gandi",
+				"state": ""
+			},
+			{
+				"id": "1361620559355186364684",
+				"name": "Add the escalating number of hexagons replaced per cycle",
+				"state": ""
+			},
+			{
+				"id": "1361620780033971282348",
+				"name": "Set up an MSI package with Wix",
+				"state": ""
+			},
+			{
+				"id": "1361620821621766959973",
+				"name": "Adjust the replacement logic (start time, refresh rate, number selected for cycle, etc.)",
+				"state": ""
+			},
+			{
+				"id": "1361621187178774348199",
+				"name": "Stop the music if you hit game over",
+				"state": ""
+			},
+			{
+				"id": "1361621187202237661499",
+				"name": "Write a new musical theme for the last 20 seconds or so",
+				"state": ""
+			},
+			{
+				"id": "1361621611011605483471",
+				"name": "Fix the alignment in the HTML export",
+				"state": ""
+			},
+			{
+				"id": "1361621793041270947931",
+				"name": "Fix bug where going to the settings screen resets your high score",
+				"state": ""
+			},
+			{
+				"id": "1361621901287562116148",
+				"name": "Experiment with a multiplayer mode",
+				"state": ""
+			}
+		],
+		"vis": "true",
+		"pin": "false"
+	}
+}

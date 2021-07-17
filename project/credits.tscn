@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://CreditsBrowser.cs" type="Script" id=1]
+[ext_resource path="res://ptsans.tres" type="DynamicFont" id=2]
+[ext_resource path="res://MenuTheme.tres" type="Theme" id=3]
+[ext_resource path="res://BackToMenuButton.cs" type="Script" id=4]
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.25993
+margin_bottom = 1.25995
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsBrowser" type="TextEdit" parent="."]
+margin_left = 27.0
+margin_top = 90.4086
+margin_right = 1011.0
+margin_bottom = 568.409
+custom_fonts/font = ExtResource( 2 )
+readonly = true
+virtual_keyboard_enabled = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -510.5
+margin_right = 510.5
+margin_bottom = 43.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Third-Party Licenses"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsBackButton" type="Button" parent="."]
+margin_right = 136.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Back"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

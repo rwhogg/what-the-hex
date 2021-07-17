@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Entranced By The Hex.ogg-054f482f9c187a1806604648f88ac6d6.oggstr"
+
+[deps]
+
+source_file="res://Entranced By The Hex.ogg"
+dest_files=[ "res://.import/Entranced By The Hex.ogg-054f482f9c187a1806604648f88ac6d6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

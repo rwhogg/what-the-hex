@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://MenuTheme.tres" type="Theme" id=1]
+[ext_resource path="res://PlayButton.cs" type="Script" id=2]
+[ext_resource path="res://MenuBackButton.cs" type="Script" id=3]
+[ext_resource path="res://CreditsButton.cs" type="Script" id=4]
+[ext_resource path="res://SettingsButton.cs" type="Script" id=5]
+[ext_resource path="res://Menu.cs" type="Script" id=6]
+[ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://AboutButton.cs" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 45
+font_data = ExtResource( 7 )
+
+[node name="RootControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.25992
+margin_right = 3.25989
+theme = ExtResource( 1 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -119.5
+margin_top = -24.5
+margin_right = 119.5
+margin_bottom = 24.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="ButtonContainer"]
+margin_right = 239.0
+margin_bottom = 49.0
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+enabled_focus_mode = 1
+text = "Play"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsButton" type="Button" parent="ButtonContainer"]
+margin_top = 53.0
+margin_right = 239.0
+margin_bottom = 102.0
+rect_pivot_offset = Vector2( 206.951, -121.741 )
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+enabled_focus_mode = 1
+text = "Settings"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditsButton" type="Button" parent="ButtonContainer"]
+margin_top = 106.0
+margin_right = 239.0
+margin_bottom = 155.0
+rect_pivot_offset = Vector2( 206.951, -121.741 )
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+enabled_focus_mode = 1
+text = "Credits"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AboutButton" type="Button" parent="ButtonContainer"]
+margin_top = 159.0
+margin_right = 239.0
+margin_bottom = 208.0
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+enabled_focus_mode = 1
+text = "About"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="ButtonContainer"]
+margin_top = 212.0
+margin_right = 239.0
+margin_bottom = 261.0
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+enabled_focus_mode = 1
+text = "Back"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleText" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -510.5
+margin_right = 510.5
+margin_bottom = 62.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[color=red][center]What The Hex?[/center][/color]
+"
+text = "What The Hex?
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
