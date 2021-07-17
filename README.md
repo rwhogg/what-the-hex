@@ -60,7 +60,7 @@ Support for a touch-specific control scheme is planned.
 
 ## Reporting Bugs
 
-To report a bug, please send an email to Bob "Wombat" Hogg <wombat@rwhogg.site>.
+To report a bug, please send an email to Bob "Wombat" Hogg &lt;wombat@rwhogg.site&gt;.
 
 ## Created By
 
