@@ -23,13 +23,25 @@ fi
 if [ -x "$(command -v doxygen)" ]; then
     echo "Doxygen is available!"
 elif [[ $(uname -r) =~ .*WSL2 ]]; then
-    sudo apt install doxygen graphviz
+    sudo apt install doxygen
+else
+    echo "Please install doxygen!"
+fi
+
+if [ -x "$(command -v dot)" ]; then
+    echo "Graphviz is available!"
+elif [[ $(uname -r) =~ .*WSL2 ]]; then
+    sudo apt install graphviz
+else
+    echo "Please install Graphviz!"
 fi
 
 if [ -x "$(command -v gendarme)" ]; then
     echo "Gendarme is available!"
 elif [[ $(uname -r) =~ .*WSL2 ]]; then
     sudo apt install gendarme
+else
+    echo "Please install Gendarme!"
 fi
 
 if [ -x "$(command -v git-changelog)" ]; then
@@ -46,10 +58,22 @@ else
     echo "Please install Golang"
 fi
 
-if [ -x "$(command -v choco.exe)" ]; then
-    choco.exe install dos2unix doxygen shellcheck
+if [ -x "$(command -v dos2unix)" ]; then
+    echo "dos2unix is available!"
+elif [ -x "$(command -v choco.exe)" ]; then
+    choco.exe install dos2unix
 elif [[ $(uname -r) =~ .*WSL2 ]]; then
-    echo "Please install Chocolately"
+    sudo apt install dos2unix
 else
-    echo "Bootstrapping for this OS not yet implemented"
+    echo "Please install dos2unix!"
+fi
+
+if [ -x "$(command -v shellcheck)" ]; then
+    echo "shellcheck is available!"
+elif [ -x "$(command -v choco.exe)" ]; then
+    choco.exe install shellcheck
+elif [[ $(uname -r) =~ .*WSL2 ]]; then
+    sudo apt install shellcheck
+else
+    echo "Please install shellcheck!"
 fi
