@@ -4,9 +4,9 @@ This is a reimplementation of What The Hex? in C#, using the [Godot Game Engine]
 
 ![Banner](banner.png)
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rwhogg/WhatTheHexModern?style=social)
-![Lines of code](https://img.shields.io/tokei/lines/github/rwhogg/WhatTheHexModern?style=social)
-![GitHub](https://img.shields.io/github/license/rwhogg/WhatTheHexModern?style=social)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rwhogg/what-the-hex?style=social)
+![Lines of code](https://img.shields.io/tokei/lines/github/rwhogg/what-the-hex?style=social)
+![GitHub](https://img.shields.io/github/license/rwhogg/what-the-hex?style=social)
 
 ## Supported Platforms
 
