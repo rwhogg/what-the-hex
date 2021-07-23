@@ -56,8 +56,6 @@ Touch (Supported on Android only, _might_ work on desktop platforms with a touch
 * Tap on any hexagon: Select
 * Specific touch buttons in the top-right handle rotation of the current hexagon
 
-Support for a touch-specific control scheme is planned.
-
 ## Reporting Bugs
 
 To report a bug, please send an email to Bob "Wombat" Hogg &lt;wombat@rwhogg.site&gt;.
