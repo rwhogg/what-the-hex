@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=1]
 [ext_resource path="res://PlayButton.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Menu.cs" type="Script" id=6]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://AboutButton.cs" type="Script" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.25992
 margin_right = 3.25989
+rect_pivot_offset = Vector2( 527.74, 152 )
 theme = ExtResource( 1 )
 script = ExtResource( 6 )
 __meta__ = {
@@ -119,3 +121,8 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( 507.5, 156 )
+scale = Vector2( 2.15, 1.82 )
+texture = ExtResource( 9 )
