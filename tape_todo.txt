@@ -68,16 +68,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361621187178774348199",
-				"name": "Stop the music if you hit game over",
-				"state": ""
-			},
-			{
-				"id": "1361621187202237661499",
-				"name": "Write a new musical theme for the last 20 seconds or so",
-				"state": ""
-			},
-			{
 				"id": "1361621611011605483471",
 				"name": "Fix the alignment in the HTML export",
 				"state": ""
