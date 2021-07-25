@@ -155,9 +155,9 @@ script = ExtResource( 17 )
 
 [node name="PowerUpLabel" type="Label" parent="."]
 margin_left = 862.0
-margin_top = 315.0
+margin_top = 314.0
 margin_right = 1029.0
-margin_bottom = 384.0
+margin_bottom = 383.0
 custom_fonts/font = ExtResource( 8 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "PowerUp

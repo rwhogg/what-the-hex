@@ -35,6 +35,9 @@ public class GameComponent : Node2D
      */
     public int HiScore { get; set; }
 
+    /**
+     * The color that it is currently most advantageous to target
+     */
     public Color AdvantageColor { get; set; }
 
     /**
@@ -42,6 +45,9 @@ public class GameComponent : Node2D
      */
     public int NumMatchesMade { get; set; }
 
+    /**
+     * The number of advantageous matches made in a row
+     */
     public int NumAdvantageMatchesMade = 0;
 
     private PowerUp ReservedPowerUp = null;
@@ -78,8 +84,7 @@ public class GameComponent : Node2D
         }
 
         // Note: this one is always visible, even on desktop
-        /*TouchScreen*/
-        TextureButton powerUpButton = GetNode</*TouchScreen*/TextureButton>("PowerUpContainer/PowerUpButton");
+        TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
 
         AdvantageColor = Hexagon.RandomColor();
@@ -104,6 +109,18 @@ public class GameComponent : Node2D
     public override void _Process(float delta)
     {
         Update();
+
+        Timer gameTimer = GetNode<Timer>("GameTimer");
+        AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
+        float originalPitchScale = music.PitchScale;
+        if((int) gameTimer.TimeLeft < 20)
+        {
+            music.PitchScale = 1.2f;
+        }
+        else
+        {
+            music.PitchScale = 1.0f;
+        }
     }
 
     private void On_GameTimer_Timeout()
@@ -197,6 +214,12 @@ public class GameComponent : Node2D
             NumAdvantageMatchesMade = 0;
         }
 
+        if(madeAnyMatch)
+        {
+            Timer gameTimer = GetNode<Timer>("GameTimer");
+            gameTimer.Start(gameTimer.TimeLeft + 5);
+        }
+
         if(Score > HiScore)
         {
             HiScore = Score;
@@ -216,13 +239,13 @@ public class GameComponent : Node2D
         // FIXME need random
         PowerUp powerUp = new StopRefreshPowerUp();
         ReservedPowerUp = powerUp;
-        /*TouchScreen*/
-        TextureButton powerUpButton = GetNode</*TouchScreen*/TextureButton>("PowerUpContainer/PowerUpButton");
+        TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.TextureNormal = powerUp.GetTexture();
     }
 
     private void GameOver()
     {
+        GetNode<AudioStreamPlayer>("Music").Stop();
         AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
         gameOverSound.Play();
         if(HexagonGrid != null)
@@ -234,6 +257,8 @@ public class GameComponent : Node2D
         GetNode<Timer>("AdvantageTimer").Stop();
         GetNode<Timer>("RefreshTimer").Stop();
         GetNode<RichTextLabel>("GameOverLabel").Show();
+        GetNode<Label>("PowerUpLabel").Hide();
+
         ConfigFileUtils.SaveHiscore(HiScore);
     }
 }
