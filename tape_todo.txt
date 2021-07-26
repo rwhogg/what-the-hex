@@ -23,11 +23,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361620215945744594115",
-				"name": "Fill out the readme",
-				"state": ""
-			},
-			{
 				"id": "1361620215949768920508",
 				"name": "Film a tutorial",
 				"state": ""
@@ -38,11 +33,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361620216007527366257",
-				"name": "Add the missing sound effects (eg when replacing)",
-				"state": ""
-			},
-			{
 				"id": "1361620216044623260579",
 				"name": "Add the victory conditions back in",
 				"state": ""
@@ -50,11 +40,6 @@
 			{
 				"id": "136162021608690415311",
 				"name": "Register a domain on Gandi",
-				"state": ""
-			},
-			{
-				"id": "1361620559355186364684",
-				"name": "Add the escalating number of hexagons replaced per cycle",
 				"state": ""
 			},
 			{

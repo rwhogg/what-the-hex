@@ -1,12 +1,57 @@
 # What The Hex?
 
-This is a reimplementation of What The Hex? in C#, using the [Godot Game Engine](https://godotengine.org).
+This is What The Hex?, a geometric puzzle game made in C#, using the [Godot Game Engine](https://godotengine.org).
 
 ![Banner](banner.png)
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rwhogg/what-the-hex?style=social)
 ![Lines of code](https://img.shields.io/tokei/lines/github/rwhogg/what-the-hex?style=social)
 ![GitHub](https://img.shields.io/github/license/rwhogg/what-the-hex?style=social)
+
+## Rules
+
+* You begin with an 8 x 5 grid of hexagons
+
+* Each hexagon has one of 4 colors on each edge
+
+* You can rotate any given hexagon 60 degrees counterclockwise with a left click, 60 degrees clockwise with a right click
+
+* You start with 100 seconds on the clock
+
+* If a rhombus with 4 hexagons bordering it has all 4 edges the same color, you get a match
+
+* Most matches are worth 100 points, but each match you make with the current advantage color gives you 300 instead
+
+FIXME verify true
+
+* Every 10 seconds, random hexagons are regenerated
+
+* Hexagons are internally black by default but turn blue when they are selected for replacement
+* The number of hexagons refreshed per cycle increases by 1 every 3 refresh cycles
+
+* You win if you make 20 matches
+
+FIXME unimplemented
+
+## Controls
+
+Joystick (Supported on all platforms):
+
+* D-Pad: Change currently selected hexagon
+* Left shoulder buttons/triggers (L, L1, L2, LB, ZL, etc.): Rotate currently selected hexagon counterclockwise
+* Right shoulder buttons/triggers (R, R1, R2, RB, ZR, etc.): Rotate currently selected hexagon clockwise
+
+Support for using analog sticks to change the currently selected hexagon is planneed.
+
+Mouse (Supported on desktop and web only):
+
+* Left Click: Rotate hexagon under mouse cursor counterclockwise
+* Right Click: Rotate hexagon under mouse cursor clockwise
+
+Touch (Supported on Android only, _might_ work on desktop platforms with a touch screen):
+
+* Tap on any hexagon: Select
+* Specific touch buttons in the top-right handle rotation of the current hexagon
 
 ## Supported Platforms
 
@@ -35,26 +80,6 @@ Tier 5 (Might work in the future, but I don't currently expect it to)
 * Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
 
 For mobile devices, a tablet is recommended, as the screen needs to be able to display at 1024 * 600 resolution smoothly
-
-## Controls
-
-Joystick (Supported on all platforms):
-
-* D-Pad: Change currently selected hexagon
-* Left shoulder buttons/triggers (L, L1, L2, LB, ZL, etc.): Rotate currently selected hexagon counterclockwise
-* Right shoulder buttons/triggers (R, R1, R2, RB, ZR, etc.): Rotate currently selected hexagon clockwise
-
-Support for using analog sticks to change the currently selected hexagon is planneed.
-
-Mouse (Supported on desktop and web only):
-
-* Left Click: Rotate hexagon under mouse cursor counterclockwise
-* Right Click: Rotate hexagon under mouse cursor clockwise
-
-Touch (Supported on Android only, _might_ work on desktop platforms with a touch screen):
-
-* Tap on any hexagon: Select
-* Specific touch buttons in the top-right handle rotation of the current hexagon
 
 ## Reporting Bugs
 
