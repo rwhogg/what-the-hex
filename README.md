@@ -8,6 +8,8 @@ This is What The Hex?, a geometric puzzle game made in C#, using the [Godot Game
 ![Lines of code](https://img.shields.io/tokei/lines/github/rwhogg/what-the-hex?style=social)
 ![GitHub](https://img.shields.io/github/license/rwhogg/what-the-hex?style=social)
 
+![Screenshot](screenshot.png)
+
 ## Rules
 
 * You begin with an 8 x 5 grid of hexagons
