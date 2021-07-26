@@ -39,10 +39,8 @@ public abstract class ThemeButton : Button
      */
     public override void _Pressed()
     {
-        GD.Print("Pressed", this);
         base._Pressed();
         ClickButtonSound.Play();
-        GD.Print("Pressed end", this);
     }
 
     protected virtual void ChangeScene() { }
