@@ -56,6 +56,8 @@ public class GameComponent : Node2D
     private Vector2 HexagonStartPoint = new Vector2(70, 100);
     private int NumHexagonsToReplace = 3;
 
+    private int NumRefreshes = 0;
+
     /**
      * Initializes the Game Component, creates the hexagon grid, and sets up event listeners.
      * Called when the Game Component and all its children (except the hexagon grid)
@@ -113,7 +115,7 @@ public class GameComponent : Node2D
         Timer gameTimer = GetNode<Timer>("GameTimer");
         AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
         float originalPitchScale = music.PitchScale;
-        if((int) gameTimer.TimeLeft < 20)
+        if((int)gameTimer.TimeLeft < 20)
         {
             music.PitchScale = 1.2f;
         }
@@ -136,6 +138,11 @@ public class GameComponent : Node2D
 
     private void On_RefreshTimer_Timeout()
     {
+        NumRefreshes = (NumRefreshes + 1) % 3;
+        if(NumRefreshes == 0)
+        {
+            NumHexagonsToReplace++;
+        }
         if(HexagonGrid != null)
         {
             HexagonGrid.SelectHexagonsForReplacement(NumHexagonsToReplace);
@@ -198,7 +205,6 @@ public class GameComponent : Node2D
         if(madeAnyAdvantageMatch)
         {
             NumAdvantageMatchesMade++;
-            GD.Print("madeAnyAdvantageMatch");
             AdvantageColor = Hexagon.RandomColor();
             Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
             advantageTimer.Stop();
