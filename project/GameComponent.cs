@@ -89,6 +89,9 @@ public class GameComponent : Node2D
         TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
 
+        Button continueButton = GetNode<Button>("ContinueButton");
+        continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
+
         AdvantageColor = Hexagon.RandomColor();
         Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
@@ -183,6 +186,11 @@ public class GameComponent : Node2D
         currentPowerUp.ActivateEffect(this);
     }
 
+    private void On_ContinueButtonPressed()
+    {
+        GetTree().ReloadCurrentScene();
+    }
+
     private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors)
     {
         int additionalScore = 0;
@@ -264,6 +272,10 @@ public class GameComponent : Node2D
         GetNode<Timer>("RefreshTimer").Stop();
         GetNode<RichTextLabel>("GameOverLabel").Show();
         GetNode<Label>("PowerUpLabel").Hide();
+
+        Button continueButton = GetNode<Button>("ContinueButton");
+        continueButton.Disabled = false;
+        continueButton.Show();
 
         ConfigFileUtils.SaveHiscore(HiScore);
     }
