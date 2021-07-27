@@ -58,11 +58,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361621793041270947931",
-				"name": "Fix bug where going to the settings screen resets your high score",
-				"state": ""
-			},
-			{
 				"id": "1361621901287562116148",
 				"name": "Experiment with a multiplayer mode",
 				"state": ""
