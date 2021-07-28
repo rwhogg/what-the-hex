@@ -13,11 +13,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361620215769633971207",
-				"name": "Refine the touch control system for Android",
-				"state": ""
-			},
-			{
 				"id": "1361620215942721166594",
 				"name": "Write the documentation",
 				"state": ""
