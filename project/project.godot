@@ -21,6 +21,10 @@ boot_splash/image="res://boarish-logo-only.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
+[autoload]
+
+Global="*res://Global.cs"
+
 [debug]
 
 settings/stdout/verbose_stdout=true
