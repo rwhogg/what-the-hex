@@ -35,6 +35,10 @@ window/stretch/aspect="keep"
 
 import/fbx/use_fbx=false
 
+[global]
+
+debug=false
+
 [input]
 
 ui_accept={
