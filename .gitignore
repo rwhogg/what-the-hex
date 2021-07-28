@@ -26,5 +26,5 @@ exports/WinApi386
 exports/WinApiAmd64
 exports/Linux
 exports/HTML5
-.secrets/debug.keystore
+.secrets/*.keystore
 exports/Android
