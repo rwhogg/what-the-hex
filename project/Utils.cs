@@ -23,10 +23,17 @@ using static Godot.Colors;
  */
 public static class Utils
 {
+    /**
+     * A font that we can use when we don't care what it looks like (mostly for debugging)
+     */
     public static Font AnyFont { get; } = new Label().GetFont(string.Empty);
 
     private static DynamicFont RocketFont;
 
+    /**
+     * Gets the Kenney Rocket font dynamically
+     * @return The Kenney Rocket font, at size 30 in red, as a dynamic font
+     */
     public static DynamicFont GetRocketFont()
     {
         if(RocketFont == null)
@@ -39,9 +46,22 @@ public static class Utils
         return RocketFont;
     }
 
+    /**
+     * Returns the number of currently connected controllers.
+     * @return int The number of currently connected controllers.
+     */
+    public static int GetNumControllers()
+    {
+        return Input.GetConnectedJoypads().Count;
+    }
+
+    /**
+     * Returns true if at least one controller is connected.
+     * @return true if at least one controller is connected, false otherwise.
+     */
     public static bool IsControllerMode()
     {
-        return Input.GetConnectedJoypads().Count > 0;
+        return GetNumControllers() > 0;
     }
 
     public static string ColorMap(Color color)
