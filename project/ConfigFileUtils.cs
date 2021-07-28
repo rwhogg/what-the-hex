@@ -76,6 +76,10 @@ public static class ConfigFileUtils
         return (bool)configFile.GetValue("music", "enabled", defaultValue);
     }
 
+    /**
+     * Set if we should or should not play music
+     * @param should True if we should play music and false if we should not
+     */
     public static void SetShouldPlayMusic(bool should)
     {
         var configFile = GetConfigFile();
