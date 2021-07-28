@@ -28,3 +28,4 @@ exports/Linux
 exports/HTML5
 .secrets/*.keystore
 exports/Android
+project/android/.idea/
