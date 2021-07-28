@@ -25,6 +25,7 @@ public class PlayButton : ThemeButton
      */
     protected override void ChangeScene()
     {
+        Global.Is2Player = false;
         GetTree().ChangeScene("res://GameScene.tscn");
     }
 }
