@@ -41,7 +41,7 @@ public class Hexagon : Node2D
     /**
      * If true, this hexagon is currently selected for rotation
      */
-    public bool Selected { get; set; }
+    public bool[] Selected = { false, false };
 
     /**
      * If true, this hexagon is set to be replaced
@@ -80,6 +80,8 @@ public class Hexagon : Node2D
 
     private static int DefaultRefreshTimeSeconds = 5;
 
+    private static Color[] CursorColors = { Red, Green };
+
     /**
      * Wrapper class for a grid of hexagons
      */
@@ -100,7 +102,7 @@ public class Hexagon : Node2D
 
         private int NumCols;
 
-        private Hexagon SelectedHexagon = null;
+        private Hexagon[] SelectedHexagons = new Hexagon[Global.Is2Player ? 2 : 1];
 
         /**
          * Starts off a grid at the specified start point.
@@ -132,6 +134,9 @@ public class Hexagon : Node2D
                 {
                     return;
                 }
+
+                int controllerIndex = eventControllerButton.Device;
+
                 switch((JoystickList)eventControllerButton.ButtonIndex)
                 {
                     case DpadUp:
@@ -145,9 +150,9 @@ public class Hexagon : Node2D
                             new int[] { 0, 1 },
                         };
                         int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
-                        Hexagon currentlySelectedHexagon = SelectedHexagon;
-                        SelectedHexagon.Selected = false;
-                        int newI = SelectedHexagon.i + dir[0];
+                        Hexagon currentlySelectedHexagon = SelectedHexagons[controllerIndex];
+                        SelectedHexagons[controllerIndex].Selected[controllerIndex] = false;
+                        int newI = SelectedHexagons[controllerIndex].i + dir[0];
                         if(newI < 0)
                         {
                             newI = 0;
@@ -156,7 +161,7 @@ public class Hexagon : Node2D
                         {
                             newI = NumRows - 1;
                         }
-                        int newJ = SelectedHexagon.j + dir[1];
+                        int newJ = SelectedHexagons[controllerIndex].j + dir[1];
                         if(newJ < 0)
                         {
                             newJ = 0;
@@ -166,18 +171,18 @@ public class Hexagon : Node2D
                             newJ = NumCols - 1;
                         }
                         Hexagon newlySelectedHexagon = Array[newI, newJ];
-                        newlySelectedHexagon.Selected = true;
-                        SelectedHexagon = newlySelectedHexagon;
+                        newlySelectedHexagon.Selected[controllerIndex] = true;
+                        SelectedHexagons[controllerIndex] = newlySelectedHexagon;
                         break;
                     case L:
                     case L2:
                         // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
                         // They are way too easy to use intentionally.
-                        HandleRotation(SelectedHexagon, Direction.LEFT);
+                        HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT, controllerIndex);
                         break;
                     case R:
                     case R2:
-                        HandleRotation(SelectedHexagon, Direction.RIGHT);
+                        HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
                         break;
                 }
                 return;
@@ -201,15 +206,15 @@ public class Hexagon : Node2D
                 if(OS.HasTouchscreenUiHint())
                 {
                     // on touch screen devices, a tap should be equivalent to a select, not a rotation
-                    SelectedHexagon.Selected = false;
-                    SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j);
+                    SelectedHexagons[0].Selected[0] = false;
+                    SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j, 0);
                     return;
                 }
                 else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
                 {
                     direction = Direction.RIGHT;
                 }
-                HandleRotation(affectedHexagon, direction);
+                HandleRotation(affectedHexagon, direction, 0);
             }
         }
 
@@ -217,11 +222,12 @@ public class Hexagon : Node2D
          * Select the hexagon at the specified position
          * @param i Row to select
          * @param j Column to select
+         * @param playerIndex Currently acting player
          */
-        public void SetSelectedHexagon(int i, int j)
+        public void SetSelectedHexagon(int i, int j, int playerIndex)
         {
-            Array[i, j].Selected = true;
-            SelectedHexagon = Array[i, j];
+            Array[i, j].Selected[playerIndex] = true;
+            SelectedHexagons[playerIndex] = Array[i, j];
         }
 
         /**
@@ -247,14 +253,16 @@ public class Hexagon : Node2D
         /**
          * Force the currently selected hexagon to rotate
          * @param direction Which direction to rotate
+         * @param playerIndex Currently active player
          */
-        public void RotateSelected(Direction direction)
+        public void RotateSelected(Direction direction, int playerIndex)
         {
-            HandleRotation(SelectedHexagon, direction);
+            HandleRotation(SelectedHexagons[playerIndex], direction, playerIndex);
         }
 
-        private void HandleRotation(Hexagon affectedHexagon, Direction direction)
+        private void HandleRotation(Hexagon affectedHexagon, Direction direction, int playerIndex)
         {
+            // FIXME this is not handled right!
             affectedHexagon.Rot(direction);
             Color colorToFlash = DefaultHexColor;
             Godot.Collections.Dictionary<Color, int> matchedColors = null;
@@ -424,7 +432,7 @@ public class Hexagon : Node2D
     public Hexagon()
     {
         MarkedForReplacement = false;
-        Selected = false;
+        Selected = new bool[] { false, false };
         Matched = false;
     }
 
@@ -440,7 +448,7 @@ public class Hexagon : Node2D
         BaseColor = baseColor;
         EdgeColors = edgeColors;
         MarkedForReplacement = false;
-        Selected = false;
+        Selected = new bool[] { false, false };
         Matched = false;
     }
 
@@ -477,9 +485,13 @@ public class Hexagon : Node2D
             DrawLine(hexagonPoints[i], hexagonPoints[i + 1], EdgeColors[i], EdgeThickness);
         }
         DrawLine(hexagonPoints[hexagonPoints.Length - 1], hexagonPoints[0], EdgeColors[EdgeColors.Count - 1], EdgeThickness);
-        if(Selected && ShouldShowSelections())
+        if(Selected[0] && ShouldShowSelections())
         {
-            DrawCircle(new Vector2(0, 0), 5, Red);
+            DrawCircle(new Vector2(0, 0), 5, CursorColors[0]);
+        }
+        else if(Selected[1] && ShouldShowSelections())
+        {
+            DrawCircle(new Vector2(0, 0), 5, CursorColors[1]);
         }
         if(OS.IsDebugBuild())
         {

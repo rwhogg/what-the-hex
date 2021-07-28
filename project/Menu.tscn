@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=1]
 [ext_resource path="res://PlayButton.cs" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://AboutButton.cs" type="Script" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://MultiplayerButton.cs" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -31,10 +32,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -119.5
+margin_left = -118.5
 margin_top = -24.5
-margin_right = 119.5
-margin_bottom = 24.5
+margin_right = 120.5
+margin_bottom = 289.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -51,10 +52,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingsButton" type="Button" parent="ButtonContainer"]
+[node name="MultiplayerButton" type="Button" parent="ButtonContainer"]
 margin_top = 53.0
 margin_right = 239.0
 margin_bottom = 102.0
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+disabled = true
+enabled_focus_mode = 1
+text = "2player"
+script = ExtResource( 10 )
+
+[node name="SettingsButton" type="Button" parent="ButtonContainer"]
+margin_top = 106.0
+margin_right = 239.0
+margin_bottom = 155.0
 rect_pivot_offset = Vector2( 206.951, -121.741 )
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
@@ -66,9 +78,9 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="ButtonContainer"]
-margin_top = 106.0
+margin_top = 159.0
 margin_right = 239.0
-margin_bottom = 155.0
+margin_bottom = 208.0
 rect_pivot_offset = Vector2( 206.951, -121.741 )
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
@@ -80,9 +92,9 @@ __meta__ = {
 }
 
 [node name="AboutButton" type="Button" parent="ButtonContainer"]
-margin_top = 159.0
+margin_top = 212.0
 margin_right = 239.0
-margin_bottom = 208.0
+margin_bottom = 261.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
@@ -93,9 +105,9 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="ButtonContainer"]
-margin_top = 212.0
+margin_top = 265.0
 margin_right = 239.0
-margin_bottom = 261.0
+margin_bottom = 314.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1

@@ -70,7 +70,11 @@ public class GameComponent : Node2D
         NumMatchesMade = 0;
 
         HexagonGrid = Hexagon.RandomHexagonGrid(5, 8, HexagonStartPoint, Black);
-        HexagonGrid.SetSelectedHexagon(0, 0);
+        HexagonGrid.SetSelectedHexagon(0, 0, 0);
+        if(Global.Is2Player)
+        {
+            HexagonGrid.SetSelectedHexagon(1, 0, 1);
+        }
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Hexagon.Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
 
@@ -158,7 +162,7 @@ public class GameComponent : Node2D
     {
         if(HexagonGrid != null)
         {
-            HexagonGrid.RotateSelected(Direction.CLOCKWISE);
+            HexagonGrid.RotateSelected(Direction.CLOCKWISE, 0);
         }
     }
 
@@ -166,7 +170,7 @@ public class GameComponent : Node2D
     {
         if(HexagonGrid != null)
         {
-            HexagonGrid.RotateSelected(Direction.COUNTERCLOCKWISE);
+            HexagonGrid.RotateSelected(Direction.COUNTERCLOCKWISE, 0);
         }
     }
 
