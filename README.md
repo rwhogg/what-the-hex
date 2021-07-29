@@ -1,8 +1,6 @@
-# What The Hex?
+![Banner](banner.png)
 
 This is What The Hex?, a geometric puzzle game made in C#, using the [Godot Game Engine](https://godotengine.org).
-
-![Banner](banner.png)
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rwhogg/what-the-hex?style=social)
 ![Lines of code](https://img.shields.io/tokei/lines/github/rwhogg/what-the-hex?style=social)
@@ -12,7 +10,7 @@ This is What The Hex?, a geometric puzzle game made in C#, using the [Godot Game
 
 _The pursuit of true hexcellence requires that you clear your mind and become one with the geometry of the universe..._
 
-## Rules
+# Rules
 
 * You begin with an 8 x 5 grid of hexagons
 
@@ -37,7 +35,7 @@ FIXME verify true
 
 FIXME unimplemented
 
-## Controls
+# Controls
 
 Joystick (Supported on all platforms):
 
@@ -55,7 +53,7 @@ Touch (Supported on Android only, _might_ work on desktop platforms with a touch
 * Tap on any hexagon: Select
 * Specific touch buttons in the top-right handle rotation of the current hexagon
 
-## Supported Platforms
+# Supported Platforms
 
 Tier 1 (Should Work Well):
 
@@ -79,25 +77,25 @@ Tier 5 (Might work in the future, but I don't currently expect it to)
 
 For mobile devices, a tablet is recommended, as the screen needs to be able to display at 1024 * 600 resolution smoothly
 
-## Reporting Bugs
+# Reporting Bugs
 
 To report a bug, please send an email to Bob "Wombat" Hogg &lt;wombat@rwhogg.site&gt;.
 
-## Created By
+# Created By
 
 ![Wombat OSG](wombat-osg.png)
 A Division Of
 ![Boarish Entertainment](boarish-entertainment.png)
 
-## Copyright
+# Copyright
 
 See the files [COPYING](COPYING) and [LICENSE.txt](LICENSE.txt)
 
-## Third-Party Licenses
+# Third-Party Licenses
 
 See the file [THIRD-PARTY-LICENSES.txt](project/THIRD-PARTY-LICENSES.txt)
 
-## Acknowledgements
+# Acknowledgements
 
 What The Hex? is built on the Godot Engine and on [Mono](https://www.mono-project.com/).
 
