@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-
 using Godot;
 using Godot.Collections;
 
@@ -53,10 +51,14 @@ public class GameComponent : Node2D
     private IPowerUp ReservedPowerUp = null;
 
     private Hexagon.Grid HexagonGrid;
+
     private Vector2 HexagonStartPoint = new Vector2(70, 100);
+
     private int NumHexagonsToReplace = 3;
 
     private int NumRefreshes = 0;
+
+    private System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
     /**
      * Initializes the Game Component, creates the hexagon grid, and sets up event listeners.
@@ -108,6 +110,9 @@ public class GameComponent : Node2D
         refreshTimer.Connect("timeout", this, nameof(On_RefreshTimer_Timeout));
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
+
+        // FIXME
+        WinConditions.Add(new NumMatchesWinCondition(20));
     }
 
     /**
@@ -250,6 +255,28 @@ public class GameComponent : Node2D
 
         AudioStreamPlayer soundPlayer = GetNode<AudioStreamPlayer>(matchedColors.Count > 0 ? "MatchSoundPlayer" : "RotateSoundPlayer");
         soundPlayer.Play();
+
+        if(madeAnyMatch)
+        {
+            CheckWin();
+        }
+    }
+
+    private void CheckWin()
+    {
+        bool hasWon = WinConditions.Count() > 0;
+        foreach(IWinCondition wc in WinConditions)
+        {
+            if(!wc.HasWon(this))
+            {
+                hasWon = false;
+            }
+        }
+        if(hasWon)
+        {
+            // FIXME
+            OS.Alert("WIN");
+        }
     }
 
     private void AssignPowerup()
