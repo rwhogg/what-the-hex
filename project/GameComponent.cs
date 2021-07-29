@@ -58,6 +58,10 @@ public class GameComponent : Node2D
 
     private int NumRefreshes = 0;
 
+    // FIXME: test this on Android and update KNOWN_ISSUES.md if necessary
+    // Also, consider looking into doing this for Switch pro controllers too
+    private string SN30_PRO_MAPPING_WINDOWS = "03000000c82d00000121000000000000,8BitDo SN30 Pro for Android,a:b0,b:b1,y:b4,x:b3,start:b11,back:b10,leftstick:b13,rightstick:b14,leftshoulder:b6,rightshoulder:b7,dpup:b12,dpleft:b14,dpdown:b13,dpright:b15,leftx:a0,lefty:a2,rightx:a5,righty:a5,lefttrigger:b8,righttrigger:b9,platform:Windows";
+
     /**
      * Initializes the Game Component, creates the hexagon grid, and sets up event listeners.
      * Called when the Game Component and all its children (except the hexagon grid)
@@ -104,6 +108,11 @@ public class GameComponent : Node2D
         refreshTimer.Connect("timeout", this, nameof(On_RefreshTimer_Timeout));
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
+
+        if(OS.GetName() == "Windows")
+        {
+            Input.AddJoyMapping(SN30_PRO_MAPPING_WINDOWS, true);
+        }
     }
 
     /**
