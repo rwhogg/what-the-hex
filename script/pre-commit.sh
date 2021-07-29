@@ -3,7 +3,6 @@
 pushd project || exit
 dotnet format "WhatTheHex.csproj"
 addlicense -c 'Bob "Wombat" Hogg' -l apache ./*.cs
-unix2dos ./*.cs
 dos2unix project.godot
 
 popd || exit
