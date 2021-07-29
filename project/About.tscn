@@ -37,7 +37,7 @@ margin_right = 517.0
 margin_bottom = 315.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = ExtResource( 2 )
-text = "What The Hex? Version: 0.1.0 
+text = "What The Hex? Version: 0.1.0
 Copyright © 2021, Bob \"Wombat\" Hogg
 
 Licensed under the Apache License, Version 2.0 (the \"License\");

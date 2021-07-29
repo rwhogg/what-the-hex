@@ -28,4 +28,14 @@ exports/Linux
 exports/HTML5
 .secrets/*.keystore
 exports/Android
+
+# Android studio
 project/android/.idea/
+
+# Godot Git plugin
+project/bin/win64/release/libgitapi.dll
+project/bin/win64/release/libgitapi.exp
+project/bin/win64/release/libgitapi.pdb
+project/git_api.gdnlib
+project/git_api.gdns
+*.binlog
