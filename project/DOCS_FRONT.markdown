@@ -1,3 +1,3 @@
 # What The Hex? API Documentation
 
-API Documentation 
+API Documentation

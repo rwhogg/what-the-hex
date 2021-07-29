@@ -610,7 +610,6 @@ public class Hexagon : Node2D
 
     private bool ShouldShowSelections()
     {
-
         bool isControllerMode = Utils.IsControllerMode();
         bool hasTouch = OS.HasTouchscreenUiHint();
         return isControllerMode || hasTouch;
