@@ -16,7 +16,7 @@
 
 using Godot;
 
-public interface PowerUp
+public interface IPowerUp
 {
     Texture GetTexture();
 

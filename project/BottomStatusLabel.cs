@@ -12,13 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+using System;
+using System.Globalization;
 
 using Godot;
 
+/**
+ * Script for the bottom status bar
+ */
 public class BottomStatusLabel : RichTextLabel
 {
     private int RecentScore;
+
+    private CultureInfo culture = ConfigFileUtils.GetCulture();
 
     public override void _Process(float delta)
     {
@@ -27,12 +33,16 @@ public class BottomStatusLabel : RichTextLabel
         string colorName = Utils.ColorMap(gameComponent.AdvantageColor);
         int advantageTimeLeft = (int)gameComponent.GetNode<Timer>("AdvantageTimer").TimeLeft;
         int refreshTimeLeft = (int)gameComponent.GetNode<Timer>("RefreshTimer").TimeLeft;
-        BbcodeText = "Advantage: [color=" + (colorName == "pink" ? "#ff69b4" : colorName) + "]" + colorName + "[/color] " + advantageTimeLeft +
-            "   Refresh: " + refreshTimeLeft +
-            "   " + (RecentScore > 0 ? "+" + RecentScore.ToString() : "");
-
+        BbcodeText = "Advantage: [color=" + (colorName == "pink" ? "#ff69b4" : colorName) + "]" + colorName + "[/color] " +
+            advantageTimeLeft.ToString(culture) +
+            "   Refresh: " + refreshTimeLeft.ToString(culture) +
+            "   " + (RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty);
     }
 
+    /**
+     * Show the score increment
+     * @param score Additional score to show
+     */
     public void FlashScore(int score)
     {
         SceneTreeTimer timer = GetTree().CreateTimer(1.0f);
