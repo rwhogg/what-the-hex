@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 using Godot;
 
@@ -80,6 +81,7 @@ public class Hexagon : Node2D
 
     private static int DefaultRefreshTimeSeconds = 5;
 
+    private static CultureInfo culture = ConfigFileUtils.GetCulture();
     private static Color[] CursorColors = { Red, Green };
 
     /**
@@ -410,7 +412,7 @@ public class Hexagon : Node2D
             {
                 if(OS.IsDebugBuild())
                 {
-                    GD.Print("Bad Click! i, j: " + i + ", " + j);
+                    GD.Print("Bad Click! i, j: " + i.ToString(culture) + ", " + j.ToString(culture));
                     GD.Print("Click Position is " + clickPos);
                 }
                 return null;
@@ -495,11 +497,11 @@ public class Hexagon : Node2D
         }
         if(OS.IsDebugBuild())
         {
-            DrawString(Utils.AnyFont, new Vector2(-25, 30), String.Format("({0},{1})", (int)Position.x, (int)Position.y));
+            DrawString(Utils.AnyFont, new Vector2(-25, 30), String.Format(culture, "({0},{1})", (int)Position.x, (int)Position.y));
         }
         if(HexRefreshTimer != null && HexRefreshTimer.TimeLeft > 0)
         {
-            DrawString(RocketFont, new Vector2(-10, 0), String.Format("{0}", (int)HexRefreshTimer.TimeLeft + 1), Red);
+            DrawString(RocketFont, new Vector2(-10, 0), String.Format(culture, "{0}", (int)HexRefreshTimer.TimeLeft + 1), Red);
         }
     }
 
@@ -563,7 +565,7 @@ public class Hexagon : Node2D
         }
         if(OS.IsDebugBuild())
         {
-            GD.Print("Marked " + i + ", " + j + " for replacement");
+            GD.Print("Marked " + i.ToString(culture) + ", " + j.ToString(culture) + " for replacement");
         }
         MarkedForReplacement = true;
         HexRefreshTimer.Start(DefaultRefreshTimeSeconds);

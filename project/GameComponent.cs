@@ -50,7 +50,7 @@ public class GameComponent : Node2D
      */
     public int NumAdvantageMatchesMade = 0;
 
-    private PowerUp ReservedPowerUp = null;
+    private IPowerUp ReservedPowerUp = null;
 
     private Hexagon.Grid HexagonGrid;
     private Vector2 HexagonStartPoint = new Vector2(70, 100);
@@ -176,7 +176,7 @@ public class GameComponent : Node2D
 
     private void On_PowerUpActivated()
     {
-        PowerUp currentPowerUp = ReservedPowerUp;
+        IPowerUp currentPowerUp = ReservedPowerUp;
         if(currentPowerUp == null)
         {
             return;
@@ -255,7 +255,7 @@ public class GameComponent : Node2D
     private void AssignPowerup()
     {
         // FIXME need random
-        PowerUp powerUp = new StopRefreshPowerUp();
+        IPowerUp powerUp = new StopRefreshPowerUp();
         ReservedPowerUp = powerUp;
         TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.TextureNormal = powerUp.GetTexture();

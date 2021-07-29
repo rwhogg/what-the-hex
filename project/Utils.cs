@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+using System;
 
 using Godot;
 
@@ -83,6 +83,6 @@ public static class Utils
             return "yellow";
         }
 
-        throw new System.Exception("Unknown color specified");
+        throw new ArgumentException("Unknown color specified");
     }
 }
