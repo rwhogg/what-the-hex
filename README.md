@@ -66,11 +66,11 @@ Tier 2 (Will Probably Work Well):
 * macOS (Can't test this at the moment, but no reason to believe it will be an issue)
 
 
-Tier 4 (Might work if compiled from source, but no promises)
+Tier 3 (Might work if compiled from source, but no promises)
 
 * iOS
 
-Tier 5 (Might work in the future, but I don't currently expect it to)
+Tier 4 (Might work in the future, but I don't currently expect it to)
 
 * Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271 . For some reason the Edge browser here doesn't work either - maybe it will after the Chromium-based Edge is made available to all Xbox users.
 * Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
