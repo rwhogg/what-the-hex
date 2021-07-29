@@ -51,6 +51,16 @@
 				"id": "1361621901287562116148",
 				"name": "Experiment with a multiplayer mode",
 				"state": ""
+			},
+			{
+				"id": "136162752964998931528",
+				"name": "Consider making the hexagon edge thickness configurable",
+				"state": ""
+			},
+			{
+				"id": "1361627529665500600479",
+				"name": "Make a new music track or two",
+				"state": ""
 			}
 		],
 		"vis": "true",
