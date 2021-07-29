@@ -45,8 +45,6 @@ Joystick (Supported on all platforms):
 * Left shoulder buttons/triggers (L, L1, L2, LB, ZL, etc.): Rotate currently selected hexagon counterclockwise
 * Right shoulder buttons/triggers (R, R1, R2, RB, ZR, etc.): Rotate currently selected hexagon clockwise
 
-Support for using analog sticks to change the currently selected hexagon is planneed.
-
 Mouse (Supported on desktop and web only):
 
 * Left Click: Rotate hexagon under mouse cursor counterclockwise
@@ -69,9 +67,6 @@ Tier 2 (Will Probably Work Well):
 
 * macOS (Can't test this at the moment, but no reason to believe it will be an issue)
 
-Tier 3 (Works With Significant Issues)
-
-* Desktop HTML5 (Currently works on Firefox and Edge. It works on Brave, but only with Shields Down. The alignment is currently all wrong.)
 
 Tier 4 (Might work if compiled from source, but no promises)
 
@@ -79,7 +74,6 @@ Tier 4 (Might work if compiled from source, but no promises)
 
 Tier 5 (Might work in the future, but I don't currently expect it to)
 
-* Mobile HTML5 (The resolution is all wrong and touch events don't work. Will require a lot of work to get this up to snuff)
 * Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271 . For some reason the Edge browser here doesn't work either - maybe it will after the Chromium-based Edge is made available to all Xbox users.
 * Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
 
