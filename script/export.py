@@ -2,16 +2,20 @@
 
 import os.path
 import re
+import sys
+
+if sys.version_info < (3, 6):
+    print("Run with Python 3 please")
+    sys.exit(1)
 
 from configparser import ConfigParser
-from sys import argv, exit
 from os import chdir, getenv, mkdir
 from subprocess import Popen
 
 chdir("project")
 
-if len(argv) > 1:
-    export_names = filter(lambda s: not (s.startswith("python") or s.endswith(".py")), argv)
+if len(sys.argv) > 1:
+    export_names = filter(lambda s: not (s.startswith("python") or s.endswith(".py")), sys.argv)
 else:
     print("Exporting all")
     cfg = ConfigParser()
