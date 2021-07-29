@@ -48,11 +48,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361621611011605483471",
-				"name": "Fix the alignment in the HTML export",
-				"state": ""
-			},
-			{
 				"id": "1361621901287562116148",
 				"name": "Experiment with a multiplayer mode",
 				"state": ""
