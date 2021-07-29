@@ -30,7 +30,7 @@ public class TitleScreen : Control
     private bool CanStart = false;
 
     // FIXME: test this on Android and update KNOWN_ISSUES.md if necessary
-    // Also, consider looking into doing this for Switch pro controllers too
+    private string N64_REPLICA_MAPPING_WINDOWS = "03000000632500007505000000000000,N64 Replica,a:b1,b:b2,start:b12,leftshoulder:b4,rightshoulder:b5,dpup:b12,dpleft:b14,dpdown:b13,dpright:b15,leftx:a0,lefty:a1,righttrigger:b6,platform:Windows";
     private string SN30_PRO_MAPPING_WINDOWS = "03000000c82d00000121000000000000,8BitDo SN30 Pro for Android,a:b0,b:b1,y:b4,x:b3,start:b11,back:b10,leftstick:b13,rightstick:b14,leftshoulder:b6,rightshoulder:b7,dpup:b12,dpleft:b14,dpdown:b13,dpright:b15,leftx:a0,lefty:a2,rightx:a5,righty:a5,lefttrigger:b8,righttrigger:b9,platform:Windows";
     private string WIRED_FIGHT_PAD_MAPPING_WINDOWS = "030000006f0e00008501000000000000,Wired Fight Pad Pro for Nintendo Switch,a:b2,b:b1,y:b0,x:b3,start:b9,back:b8,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:b12,dpleft:b14,dpdown:b13,dpright:b15,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7,platform:Windows";
 
@@ -45,6 +45,7 @@ public class TitleScreen : Control
             {
                 Input.AddJoyMapping(SN30_PRO_MAPPING_WINDOWS, true);
                 Input.AddJoyMapping(WIRED_FIGHT_PAD_MAPPING_WINDOWS, true);
+                Input.AddJoyMapping(N64_REPLICA_MAPPING_WINDOWS, true);
             }
 
             OS.SetWindowTitle("What The Hex?");
