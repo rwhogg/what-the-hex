@@ -260,7 +260,7 @@ public class GameComponent : Node2D
 
     private void CheckWin()
     {
-        bool hasWon = WinConditions.Count() > 0;
+        bool hasWon = WinConditions.Count > 0;
         foreach(IWinCondition wc in WinConditions)
         {
             if(!wc.HasWon(this))
