@@ -87,6 +87,10 @@ public static class ConfigFileUtils
         SaveConfigFile(configFile);
     }
 
+    /**
+     * Set the thickness of the hexagons
+     * @param thickness Edge thickness
+     */
     public static void SetEdgeThickness(int thickness)
     {
         var configFile = GetConfigFile();
@@ -94,6 +98,10 @@ public static class ConfigFileUtils
         SaveConfigFile(configFile);
     }
 
+    /**
+     * Retrieve the currently configured edge thickness
+     * @return The currently configured edge thickness
+     */
     public static int GetEdgeThickness()
     {
         var configFile = GetConfigFile();
