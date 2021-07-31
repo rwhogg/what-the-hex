@@ -87,6 +87,19 @@ public static class ConfigFileUtils
         SaveConfigFile(configFile);
     }
 
+    public static void SetEdgeThickness(int thickness)
+    {
+        var configFile = GetConfigFile();
+        configFile.SetValue("hexagons", "edge_thickness", thickness);
+        SaveConfigFile(configFile);
+    }
+
+    public static int GetEdgeThickness()
+    {
+        var configFile = GetConfigFile();
+        return (int)configFile.GetValue("hexagons", "edge_thickness", 6);
+    }
+
     private static ConfigFile GetConfigFile()
     {
         if(LoadedConfigFile != null)

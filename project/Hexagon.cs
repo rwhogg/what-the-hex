@@ -73,7 +73,7 @@ public class Hexagon : Node2D
 
     private static float Cos30 = (float)Cos(Deg2Rad(30));
 
-    private static int EdgeThickness = 6; // just a coincidence that 6 was a nice edge size
+    private static int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
 
     private static Random Rand = new Random();
 
