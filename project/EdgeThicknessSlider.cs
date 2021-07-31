@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 using Godot;
 
+/**
+ * Slider for determining the thickness of the hexagon edges
+ */
 public class EdgeThicknessSlider : HSlider
 {
     // Called when the node enters the scene tree for the first time.

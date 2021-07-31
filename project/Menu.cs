@@ -49,19 +49,24 @@ public class Menu : Control
     /**
      * Processes the input. Support for up and down.
      */
-    public override void _Input(InputEvent inputEvent)
+    public override void _Input(InputEvent @event)
     {
-        if(inputEvent.IsActionPressed("ui_up"))
+        if(@event == null)
+        {
+            throw new ArgumentNullException(nameof(@event));
+        }
+
+        if(@event.IsActionPressed("ui_up"))
         {
             selected = Math.Max(selected - 1, 0);
             Buttons[selected].GrabFocus();
         }
-        else if(inputEvent.IsActionPressed("ui_down"))
+        else if(@event.IsActionPressed("ui_down"))
         {
             selected = Math.Min(selected + 1, BackButtonIndex);
             Buttons[selected].GrabFocus();
         }
-        else if(inputEvent.IsActionPressed("ui_cancel"))
+        else if(@event.IsActionPressed("ui_cancel"))
         {
             Buttons[BackButtonIndex]._Pressed();
         }

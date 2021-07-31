@@ -38,4 +38,8 @@ project/bin/win64/release/libgitapi.exp
 project/bin/win64/release/libgitapi.pdb
 project/git_api.gdnlib
 project/git_api.gdns
+
 *.binlog
+
+# Visual Studio
+.vs

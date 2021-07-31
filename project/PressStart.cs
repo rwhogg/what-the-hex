@@ -16,8 +16,15 @@
 
 using Godot;
 
+/**
+ * Label that displays "Press Start To Play" or "Press Enter To Play"
+ * Label depends on whether or not a controller is detected.
+ */
 public class PressStart : Label
 {
+    /**
+     * Called when this node and its children enter the scene tree
+     */
     public override void _Ready()
     {
         if(Utils.IsControllerMode())

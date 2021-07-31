@@ -10,3 +10,10 @@ end_of_line = lf
 csharp_space_after_keywords_in_control_flow_statements = false
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = true
+
+# CLS compliance - don't know, don't really care
+dotnet_diagnostic.CA1014.Severity = none
+# Enum overlap (I'm fine with this)
+dotnet_diagnostic.CA1069.severity = none
+# we're only using the one assembly... no reason to use namespaces
+dotnet_diagnostic.CA1050.Severity = none

@@ -67,7 +67,7 @@ public class Hexagon : Node2D
     /**
      * List of all possible options for edge colors
      */
-    public static Color[] EdgeColorOptions { get; } = { Green, Purple, HotPink, Yellow };
+    private static Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
 
     private static float SideLength = 50.0F;
 
@@ -98,7 +98,7 @@ public class Hexagon : Node2D
         /**
          * The underlying 2D array of hexagons
          */
-        public Hexagon[,] Array { get; set; }
+        public Hexagon[,] Array;
 
         private int NumRows;
 
@@ -123,101 +123,109 @@ public class Hexagon : Node2D
          * Handle input for mouse clicks and joystick buttons
          * @param inputEvent Input event
          */
-        public override void _UnhandledInput(InputEvent inputEvent)
+        public override void _UnhandledInput(InputEvent @event)
         {
-            Hexagon affectedHexagon = null;
-            Direction direction = Direction.LEFT;
-
-            if(@inputEvent is InputEventJoypadButton eventControllerButton)
+            if(@event is InputEventJoypadButton eventControllerButton)
             {
                 GetTree().SetInputAsHandled();
-                // ensure we don't double up the actions
-                if(@inputEvent.IsPressed())
-                {
-                    return;
-                }
+                HandleButtonPress(eventControllerButton);
+            }
+            else if(@event is InputEventMouseButton eventMouseButton)
+            {
+                HandleMouseClick(eventMouseButton);
+            }
+        }
+
+        private void HandleButtonPress(InputEventJoypadButton eventControllerButton)
+        {
+            // ensure we don't double up the actions
+            if(eventControllerButton.IsPressed())
+            {
+                return;
+            }
 
                 int controllerIndex = eventControllerButton.Device;
 
-                switch((JoystickList)eventControllerButton.ButtonIndex)
-                {
-                    case DpadUp:
-                    case DpadDown:
-                    case DpadLeft:
-                    case DpadRight:
-                        int[][] dirsToGo ={
-                            new int[] { -1, 0 },
-                            new int[] { 1, 0 },
-                            new int[] { 0, -1 },
-                            new int[] { 0, 1 },
-                        };
-                        int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
+            switch((JoystickList)eventControllerButton.ButtonIndex)
+            {
+                case DpadUp:
+                case DpadDown:
+                case DpadLeft:
+                case DpadRight:
+                    int[][] dirsToGo ={
+                        new int[] { -1, 0 },
+                        new int[] { 1, 0 },
+                        new int[] { 0, -1 },
+                        new int[] { 0, 1 },
+                    };
+                    int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
                         Hexagon currentlySelectedHexagon = SelectedHexagons[controllerIndex];
                         SelectedHexagons[controllerIndex].Selected[controllerIndex] = false;
                         int newI = SelectedHexagons[controllerIndex].i + dir[0];
-                        if(newI < 0)
-                        {
-                            newI = 0;
-                        }
-                        else if(newI >= NumRows)
-                        {
-                            newI = NumRows - 1;
-                        }
+                    if(newI < 0)
+                    {
+                        newI = 0;
+                    }
+                    else if(newI >= NumRows)
+                    {
+                        newI = NumRows - 1;
+                    }
                         int newJ = SelectedHexagons[controllerIndex].j + dir[1];
-                        if(newJ < 0)
-                        {
-                            newJ = 0;
-                        }
-                        else if(newJ >= NumCols)
-                        {
-                            newJ = NumCols - 1;
-                        }
-                        Hexagon newlySelectedHexagon = Array[newI, newJ];
+                    if(newJ < 0)
+                    {
+                        newJ = 0;
+                    }
+                    else if(newJ >= NumCols)
+                    {
+                        newJ = NumCols - 1;
+                    }
+                    Hexagon newlySelectedHexagon = Array[newI, newJ];
                         newlySelectedHexagon.Selected[controllerIndex] = true;
                         SelectedHexagons[controllerIndex] = newlySelectedHexagon;
-                        break;
-                    case L:
-                    case L2:
-                        // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
-                        // They are way too easy to use intentionally.
+                    break;
+                case L:
+                case L2:
+                    // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
+                    // They are way too easy to use intentionally.
                         HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT, controllerIndex);
-                        break;
-                    case R:
-                    case R2:
+                    break;
+                case R:
+                case R2:
                         HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
-                        break;
-                }
+                    break;
+            }
+        }
+
+        private void HandleMouseClick(InputEventMouseButton eventMouseButton)
+        {
+            // ensure we don't double-rotate from a single click
+            if(eventMouseButton.IsPressed())
+            {
                 return;
             }
-            else if(@inputEvent is InputEventMouseButton eventMouseButton)
+
+            Vector2 clickPos = eventMouseButton.Position - Position; // offset because we were one diagonal hexagon down
+            Hexagon affectedHexagon = GetAffectedHexagon(clickPos);
+            if(affectedHexagon == null)
             {
-                // ensure we don't double-rotate from a single click
-                if(@inputEvent.IsPressed())
-                {
-                    return;
-                }
+                return;
+            }
 
-                Vector2 clickPos = eventMouseButton.Position - Position; // offset because we were one diagonal hexagon down
-                affectedHexagon = GetAffectedHexagon(clickPos);
-                if(affectedHexagon == null)
-                {
-                    return;
-                }
+            GetTree().SetInputAsHandled();
 
-                GetTree().SetInputAsHandled();
-                if(OS.HasTouchscreenUiHint())
-                {
-                    // on touch screen devices, a tap should be equivalent to a select, not a rotation
+            Direction direction = Direction.LEFT;
+            if(OS.HasTouchscreenUiHint())
+            {
+                // on touch screen devices, a tap should be equivalent to a select, not a rotation
                     SelectedHexagons[0].Selected[0] = false;
                     SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j, 0);
-                    return;
-                }
-                else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
-                {
-                    direction = Direction.RIGHT;
-                }
-                HandleRotation(affectedHexagon, direction, 0);
+                return;
             }
+            else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
+            {
+                direction = Direction.RIGHT;
+            }
+                HandleRotation(affectedHexagon, direction, 0);
         }
 
         /**
@@ -241,8 +249,10 @@ public class Hexagon : Node2D
             int n = 0;
             while(n < numHexagonsToReplace)
             {
+#pragma warning disable CA5394
                 int randomRow = Rand.Next(0, NumRows);
                 int randomCol = Rand.Next(0, NumCols);
+#pragma warning restore CA5394
                 if(Array[randomRow, randomCol].MarkedForReplacement)
                 {
                     continue;
@@ -282,7 +292,7 @@ public class Hexagon : Node2D
             {
                 if(OS.IsDebugBuild())
                 {
-                    GD.Print("Matched hex " + hexagon.i + ", " + hexagon.j);
+                    GD.Print("Matched hex " + hexagon.i.ToString(culture) + ", " + hexagon.j.ToString(culture));
                 }
                 hexagon.Matched = true;
                 hexagon.AbortReplacement();
@@ -422,9 +432,15 @@ public class Hexagon : Node2D
         }
     }
 
+    /**
+     * Get a random edge color
+     * @return Color A randomly chosen edge color
+     */
     public static Color RandomColor()
     {
+#pragma warning disable CA5394
         return EdgeColorOptions[Rand.Next(0, EdgeColorOptions.Length)];
+#pragma warning restore CA5394
     }
 
     /**
@@ -505,7 +521,7 @@ public class Hexagon : Node2D
         }
     }
 
-    private Vector2[] GetPoints()
+    private static Vector2[] GetPoints()
     {
         float centerX = 0;
         float centerY = 0;
@@ -592,7 +608,7 @@ public class Hexagon : Node2D
         AbortReplacement();
         if(OS.IsDebugBuild())
         {
-            GD.Print("Hex " + i + "," + j + " refreshed");
+            GD.Print("Hex " + i.ToString(culture) + "," + j.ToString(culture) + " refreshed");
         }
         Refresh();
     }
@@ -622,7 +638,7 @@ public class Hexagon : Node2D
         return BaseColor;
     }
 
-    private bool ShouldShowSelections()
+    private static bool ShouldShowSelections()
     {
         bool isControllerMode = Utils.IsControllerMode();
         bool hasTouch = OS.HasTouchscreenUiHint();

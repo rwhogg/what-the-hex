@@ -16,12 +16,18 @@
 
 using Godot;
 
+/**
+ * Root control for the preferences menu
+ */
 public class Preferences : Control
 {
     private bool ShouldPlayMusic { get; set; }
 
     private HSlider ThicknessSlider;
 
+    /**
+     * Called when this node and its children enter the scene tree
+     */
     public override void _Ready()
     {
         ShouldPlayMusic = ConfigFileUtils.ShouldPlayMusic();

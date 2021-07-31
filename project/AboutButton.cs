@@ -13,9 +13,6 @@
 // limitations under the License.
 
 
-
-using Godot;
-
 /**
  * Script for the About button on the menu scene.
  */

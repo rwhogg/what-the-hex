@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+using System;
 
 using Godot;
 
@@ -24,6 +24,11 @@ public class BackToMenuButton : ThemeButton
 {
     public override void _Input(InputEvent @event)
     {
+        if(@event == null)
+        {
+            throw new ArgumentNullException(nameof(@event));
+        }
+
         base._Input(@event);
         if(@event.IsActionPressed("ui_cancel"))
         {

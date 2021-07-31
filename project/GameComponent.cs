@@ -46,9 +46,9 @@ public class GameComponent : Node2D
     /**
      * The number of advantageous matches made in a row
      */
-    public int NumAdvantageMatchesMade = 0;
+    public int NumAdvantageMatchesMade;
 
-    private IPowerUp ReservedPowerUp = null;
+    private IPowerUp ReservedPowerUp;
 
     private Hexagon.Grid HexagonGrid;
 
@@ -56,7 +56,7 @@ public class GameComponent : Node2D
 
     private int NumHexagonsToReplace = 3;
 
-    private int NumRefreshes = 0;
+    private int NumRefreshes;
 
     private System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 

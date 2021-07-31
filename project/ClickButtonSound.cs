@@ -13,11 +13,16 @@
 // limitations under the License.
 
 
-
 using Godot;
 
+/**
+ * Audio stream player for when someone clicks on a menu button
+ */
 public class ClickButtonSound : AudioStreamPlayer
 {
+    /**
+     * Called when this node and its children enter thescene tree
+     */
     public override void _Ready()
     {
         base._Ready();

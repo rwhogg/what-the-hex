@@ -12,7 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/**
+ * Interface for checking for victory conditions
+ */
 public interface IWinCondition
 {
+    /**
+     * Checks if this win condition has been satisfied.
+     (all conditions must be satisfied,not just one necessarily)
+     * @param game The game component
+     */
     bool HasWon(GameComponent game);
 }

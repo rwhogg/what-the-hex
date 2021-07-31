@@ -12,17 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+
+/**
+ * Win condition that is based on making a certain number of matches
+ */
 public class NumMatchesWinCondition : IWinCondition
 {
     private int MatchesToWin;
 
+    /**
+     * Constructor
+     * @param matches The number of matches it takes to win
+     */
     public NumMatchesWinCondition(int matches)
     {
         MatchesToWin = matches;
     }
 
+    /**
+     * Check if we have met this win condition
+     * @param game The game component
+     */
     public bool HasWon(GameComponent game)
     {
+        if(game == null)
+        {
+            throw new ArgumentNullException(nameof(game));
+        }
         return game.NumMatchesMade >= MatchesToWin;
     }
 }
