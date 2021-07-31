@@ -15,3 +15,5 @@ dotnet_separate_import_directive_groups = true
 dotnet_diagnostic.CA1014.Severity = none
 # Enum overlap (I'm fine with this)
 dotnet_diagnostic.CA1069.severity = none
+# we're only using the one assembly... no reason to use namespaces
+dotnet_diagnostic.CA1050.Severity = none
