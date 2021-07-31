@@ -12,18 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+using System.Globalization;
 
 using Godot;
 
 using static Godot.Mathf;
 
+/**
+ * Label saying how many more advantage matches we need until the next powerup
+ */
 public class PowerUpLabel : Label
 {
+    private CultureInfo culture = ConfigFileUtils.GetCulture();
+
     public override void _Process(float delta)
     {
         GameComponent gameComponent = GetTree().Root.GetNode<GameComponent>("GameComponent");
-        string advantageLeft = Max(3 - gameComponent.NumAdvantageMatchesMade, 0).ToString();
+        string advantageLeft = Max(3 - gameComponent.NumAdvantageMatchesMade, 0).ToString(culture);
         Text = "Powerup\nNext: " + advantageLeft;
     }
 }

@@ -275,7 +275,7 @@ public class Hexagon : Node2D
             {
                 if(OS.IsDebugBuild())
                 {
-                    GD.Print("Matched hex " + hexagon.i + ", " + hexagon.j);
+                    GD.Print("Matched hex " + hexagon.i.ToString(culture) + ", " + hexagon.j.ToString(culture));
                 }
                 hexagon.Matched = true;
                 hexagon.AbortReplacement();
@@ -581,7 +581,7 @@ public class Hexagon : Node2D
         AbortReplacement();
         if(OS.IsDebugBuild())
         {
-            GD.Print("Hex " + i + "," + j + " refreshed");
+            GD.Print("Hex " + i.ToString(culture) + "," + j.ToString(culture) + " refreshed");
         }
         Refresh();
     }
