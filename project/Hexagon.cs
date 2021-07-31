@@ -67,7 +67,7 @@ public class Hexagon : Node2D
     /**
      * List of all possible options for edge colors
      */
-    public static Color[] EdgeColorOptions { get; } = { Green, Purple, HotPink, Yellow };
+    private static Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
 
     private static float SideLength = 50.0F;
 
@@ -124,96 +124,104 @@ public class Hexagon : Node2D
          */
         public override void _UnhandledInput(InputEvent inputEvent)
         {
-            Hexagon affectedHexagon = null;
-            Direction direction = Direction.LEFT;
-
             if(@inputEvent is InputEventJoypadButton eventControllerButton)
             {
                 GetTree().SetInputAsHandled();
-                // ensure we don't double up the actions
-                if(@inputEvent.IsPressed())
-                {
-                    return;
-                }
-                switch((JoystickList)eventControllerButton.ButtonIndex)
-                {
-                    case DpadUp:
-                    case DpadDown:
-                    case DpadLeft:
-                    case DpadRight:
-                        int[][] dirsToGo ={
-                            new int[] { -1, 0 },
-                            new int[] { 1, 0 },
-                            new int[] { 0, -1 },
-                            new int[] { 0, 1 },
-                        };
-                        int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
-                        Hexagon currentlySelectedHexagon = SelectedHexagon;
-                        SelectedHexagon.Selected = false;
-                        int newI = SelectedHexagon.i + dir[0];
-                        if(newI < 0)
-                        {
-                            newI = 0;
-                        }
-                        else if(newI >= NumRows)
-                        {
-                            newI = NumRows - 1;
-                        }
-                        int newJ = SelectedHexagon.j + dir[1];
-                        if(newJ < 0)
-                        {
-                            newJ = 0;
-                        }
-                        else if(newJ >= NumCols)
-                        {
-                            newJ = NumCols - 1;
-                        }
-                        Hexagon newlySelectedHexagon = Array[newI, newJ];
-                        newlySelectedHexagon.Selected = true;
-                        SelectedHexagon = newlySelectedHexagon;
-                        break;
-                    case L:
-                    case L2:
-                        // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
-                        // They are way too easy to use intentionally.
-                        HandleRotation(SelectedHexagon, Direction.LEFT);
-                        break;
-                    case R:
-                    case R2:
-                        HandleRotation(SelectedHexagon, Direction.RIGHT);
-                        break;
-                }
-                return;
+                HandleButtonPress(eventControllerButton);
             }
             else if(@inputEvent is InputEventMouseButton eventMouseButton)
             {
-                // ensure we don't double-rotate from a single click
-                if(@inputEvent.IsPressed())
-                {
-                    return;
-                }
-
-                Vector2 clickPos = eventMouseButton.Position - Position; // offset because we were one diagonal hexagon down
-                affectedHexagon = GetAffectedHexagon(clickPos);
-                if(affectedHexagon == null)
-                {
-                    return;
-                }
-
-                GetTree().SetInputAsHandled();
-                if(OS.HasTouchscreenUiHint())
-                {
-                    // on touch screen devices, a tap should be equivalent to a select, not a rotation
-                    SelectedHexagon.Selected = false;
-                    SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j);
-                    return;
-                }
-                else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
-                {
-                    direction = Direction.RIGHT;
-                }
-                HandleRotation(affectedHexagon, direction);
+                HandleMouseClick(eventMouseButton);
             }
+        }
+
+        private void HandleButtonPress(InputEventJoypadButton eventControllerButton)
+        {
+            // ensure we don't double up the actions
+            if(eventControllerButton.IsPressed())
+            {
+                return;
+            }
+            switch((JoystickList)eventControllerButton.ButtonIndex)
+            {
+                case DpadUp:
+                case DpadDown:
+                case DpadLeft:
+                case DpadRight:
+                    int[][] dirsToGo ={
+                        new int[] { -1, 0 },
+                        new int[] { 1, 0 },
+                        new int[] { 0, -1 },
+                        new int[] { 0, 1 },
+                    };
+                    int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
+                    Hexagon currentlySelectedHexagon = SelectedHexagon;
+                    SelectedHexagon.Selected = false;
+                    int newI = SelectedHexagon.i + dir[0];
+                    if(newI < 0)
+                    {
+                        newI = 0;
+                    }
+                    else if(newI >= NumRows)
+                    {
+                        newI = NumRows - 1;
+                    }
+                    int newJ = SelectedHexagon.j + dir[1];
+                    if(newJ < 0)
+                    {
+                        newJ = 0;
+                    }
+                    else if(newJ >= NumCols)
+                    {
+                        newJ = NumCols - 1;
+                    }
+                    Hexagon newlySelectedHexagon = Array[newI, newJ];
+                    newlySelectedHexagon.Selected = true;
+                    SelectedHexagon = newlySelectedHexagon;
+                    break;
+                case L:
+                case L2:
+                    // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
+                    // They are way too easy to use intentionally.
+                    HandleRotation(SelectedHexagon, Direction.LEFT);
+                    break;
+                case R:
+                case R2:
+                    HandleRotation(SelectedHexagon, Direction.RIGHT);
+                    break;
+            }
+        }
+
+        private void HandleMouseClick(InputEventMouseButton eventMouseButton)
+        {
+            // ensure we don't double-rotate from a single click
+            if(eventMouseButton.IsPressed())
+            {
+                return;
+            }
+
+            Vector2 clickPos = eventMouseButton.Position - Position; // offset because we were one diagonal hexagon down
+            Hexagon affectedHexagon = GetAffectedHexagon(clickPos);
+            if(affectedHexagon == null)
+            {
+                return;
+            }
+
+            GetTree().SetInputAsHandled();
+
+            Direction direction = Direction.LEFT;
+            if(OS.HasTouchscreenUiHint())
+            {
+                // on touch screen devices, a tap should be equivalent to a select, not a rotation
+                SelectedHexagon.Selected = false;
+                SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j);
+                return;
+            }
+            else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
+            {
+                direction = Direction.RIGHT;
+            }
+            HandleRotation(affectedHexagon, direction);
         }
 
         /**
@@ -415,6 +423,10 @@ public class Hexagon : Node2D
         }
     }
 
+    /**
+     * Get a random edge color
+     * @return Color A randomly chosen edge color
+     */
     public static Color RandomColor()
     {
         return EdgeColorOptions[Rand.Next(0, EdgeColorOptions.Length)];
