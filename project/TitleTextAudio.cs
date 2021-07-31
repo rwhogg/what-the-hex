@@ -13,13 +13,16 @@
 // limitations under the License.
 
 
-
-using System;
-
 using Godot;
 
+/**
+ * Audio stream player that plays my voiceover after a brief delay
+ */
 public class TitleTextAudio : AudioStreamPlayer
 {
+    /**
+     * Called when this node and its children enter the scene tree
+     */
     public override void _Ready()
     {
         SceneTreeTimer timer = GetTree().CreateTimer(1.0f);
