@@ -73,7 +73,7 @@ public class GameComponent : Node2D
 
         HexagonGrid = Hexagon.RandomHexagonGrid(5, 8, HexagonStartPoint, Black);
         HexagonGrid.SetSelectedHexagon(0, 0, 0);
-        if(Global.Is2Player)
+        if(RuntimeConfig.Is2Player)
         {
             HexagonGrid.SetSelectedHexagon(1, 0, 1);
         }

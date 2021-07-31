@@ -104,7 +104,7 @@ public class Hexagon : Node2D
 
         private int NumCols;
 
-        private Hexagon[] SelectedHexagons = new Hexagon[Global.Is2Player ? 2 : 1];
+        private Hexagon[] SelectedHexagons = new Hexagon[RuntimeConfig.Is2Player ? 2 : 1];
 
         /**
          * Starts off a grid at the specified start point.

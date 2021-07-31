@@ -32,7 +32,7 @@ public class MultiplayerButton : ThemeButton
      */
     protected override void ChangeScene()
     {
-        Global.Is2Player = true;
+        RuntimeConfig.Is2Player = true;
         GetTree().ChangeScene("res://GameScene.tscn");
     }
 
