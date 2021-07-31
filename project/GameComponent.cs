@@ -50,7 +50,7 @@ public class GameComponent : Node2D
 
     private IPowerUp ReservedPowerUp;
 
-    private Hexagon.Grid HexagonGrid;
+    private Grid HexagonGrid;
 
     private Vector2 HexagonStartPoint = new Vector2(70, 100);
 
@@ -71,10 +71,10 @@ public class GameComponent : Node2D
         Score = 0;
         NumMatchesMade = 0;
 
-        HexagonGrid = Hexagon.RandomHexagonGrid(5, 8, HexagonStartPoint, Black);
+        HexagonGrid = Hexagon.RandomHexagonGrid(5, 8, HexagonStartPoint, Hexagon.DefaultHexColor);
         HexagonGrid.SetSelectedHexagon(0, 0);
         AddChild(HexagonGrid);
-        HexagonGrid.Connect(nameof(Hexagon.Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
+        HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
 
         TouchScreenButton rotateClockwiseButton = GetNodeOrNull<TouchScreenButton>("RotateClockwiseButton");
         if(rotateClockwiseButton != null && rotateClockwiseButton.ShapeVisible)
