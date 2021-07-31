@@ -97,7 +97,7 @@ public class Hexagon : Node2D
         /**
          * The underlying 2D array of hexagons
          */
-        public Hexagon[,] Array { get; set; }
+        public Hexagon[,] Array;
 
         private int NumRows;
 
