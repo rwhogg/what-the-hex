@@ -15,7 +15,6 @@
 using Godot;
 using Godot.Collections;
 
-using static Godot.Colors;
 using static Godot.Mathf;
 
 /**
@@ -144,7 +143,6 @@ public class GameComponent : Node2D
 
     private void On_AdvantageTimer_Timeout()
     {
-        GD.Print("On_AdvantageTimer_Timeout");
         AdvantageColor = Hexagon.RandomColor();
     }
 
