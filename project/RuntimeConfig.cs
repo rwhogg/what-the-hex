@@ -17,9 +17,9 @@ using Godot;
 /**
  * Globals that we can use to configure the game scene
  */
-public class Global : Node
+public class RuntimeConfig : Node
 {
-    // FIXME rename this class
+    // FIXME handle this when merging
 
     /**
      * True if we are in 2-player mode
