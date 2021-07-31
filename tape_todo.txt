@@ -53,11 +53,6 @@
 				"state": ""
 			},
 			{
-				"id": "136162752964998931528",
-				"name": "Consider making the hexagon edge thickness configurable",
-				"state": ""
-			},
-			{
 				"id": "1361627529665500600479",
 				"name": "Make a new music track or two",
 				"state": ""

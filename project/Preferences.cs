@@ -19,11 +19,15 @@ using Godot;
 public class Preferences : Control
 {
     private bool ShouldPlayMusic { get; set; }
+
+    private HSlider ThicknessSlider;
+
     public override void _Ready()
     {
         ShouldPlayMusic = ConfigFileUtils.ShouldPlayMusic();
         Connect("tree_exited", this, nameof(SavePreferences));
         GetNode<CheckBox>("PlayMusicCheckBox").Connect("toggled", this, nameof(SetShouldPlayMusic));
+        ThicknessSlider = GetNode<HSlider>("EdgeThicknessSlider");
     }
 
     private void SetShouldPlayMusic(bool should)
@@ -34,5 +38,6 @@ public class Preferences : Control
     private void SavePreferences()
     {
         ConfigFileUtils.SetShouldPlayMusic(ShouldPlayMusic);
+        ConfigFileUtils.SetEdgeThickness((int)ThicknessSlider.Value);
     }
 }
