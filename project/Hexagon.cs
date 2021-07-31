@@ -84,12 +84,6 @@ public class Hexagon : Node2D
     private static Color[] CursorColors = { Red, Green };
 
     /**
-
-                int controllerIndex = eventControllerButton.Device;
-
-         * @param playerIndex Currently acting player
-         * @param playerIndex Currently active player
-            // FIXME this is not handled right!
      * Get a random edge color
      * @return Color A randomly chosen edge color
      */
