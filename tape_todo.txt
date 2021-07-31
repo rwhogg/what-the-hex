@@ -33,11 +33,6 @@
 				"state": ""
 			},
 			{
-				"id": "136162021608690415311",
-				"name": "Register a domain on Gandi",
-				"state": ""
-			},
-			{
 				"id": "1361620780033971282348",
 				"name": "Set up an MSI package with Wix",
 				"state": ""
