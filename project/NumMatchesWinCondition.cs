@@ -38,7 +38,7 @@ public class NumMatchesWinCondition : IWinCondition
     {
         if(game == null)
         {
-            throw new ArgumentException("Null game!");
+            throw new ArgumentNullException(nameof(game));
         }
         return game.NumMatchesMade >= MatchesToWin;
     }

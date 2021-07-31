@@ -38,7 +38,6 @@ public class StopRefreshPowerUp : Godot.Object, IPowerUp
         if(Texture.GetData() == null)
         {
             Image clock = GD.Load<StreamTexture>("res://clock.png").GetData();
-            GD.Print("clock", clock);
             Texture.CreateFromImage(clock);
         }
     }
@@ -50,6 +49,11 @@ public class StopRefreshPowerUp : Godot.Object, IPowerUp
 
     public void ActivateEffect(GameComponent game)
     {
+        if(game == null)
+        {
+            throw new ArgumentNullException(nameof(game));
+        }
+
         Timer refreshTimer = game.GetNode<Timer>("RefreshTimer");
         RefreshWaitTime = refreshTimer.WaitTime;
         refreshTimer.Stop();

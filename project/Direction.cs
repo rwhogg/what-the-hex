@@ -13,13 +13,13 @@
 // limitations under the License.
 
 
-
 /**
  * Enum that specifies a "direction" - either left or right.
  * Can correspond to mouse button clicks, controller buttons,
  * touch screen button presses, and rotations.
  * LEFT should map to CounterClockwise, RIGHT to Clockwise.
  */
+ [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA1027:Mark enums with FlagsAttribute", Justification = "Not combinable flags")]
 public enum Direction
 {
     LEFT = 0,

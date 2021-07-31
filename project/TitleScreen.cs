@@ -27,7 +27,7 @@ public class TitleScreen : Control
 
     private static string StarGroupName = "stars";
 
-    private bool CanStart = false;
+    private bool CanStart;
 
     // FIXME: test this on Android and update KNOWN_ISSUES.md if necessary
     private string N64_REPLICA_MAPPING_WINDOWS = "03000000632500007505000000000000,N64 Replica,a:b1,b:b2,start:b12,leftshoulder:b4,rightshoulder:b5,dpup:b12,dpleft:b14,dpdown:b13,dpright:b15,leftx:a0,lefty:a1,righttrigger:b6,platform:Windows";
@@ -90,12 +90,12 @@ public class TitleScreen : Control
         }
     }
 
-    public override void _UnhandledInput(InputEvent inputEvent)
+    public override void _UnhandledInput(InputEvent @event)
     {
         // This is for Android touch events...
         // Apparently the input map didn't really work
         GetTree().SetInputAsHandled();
-        if(@inputEvent is InputEventScreenTouch touch)
+        if(@event is InputEventScreenTouch touch)
         {
             GoToMenu();
         }
@@ -117,7 +117,7 @@ public class TitleScreen : Control
         }
         for(int i = 1; i <= 5; i++)
         {
-            StarSprite star = new StarSprite();
+            StarSprite star = new StarSprite(); // FIXME look up if this is disposed by Godot or not...
             star.Position = new Vector2(Random.RandiRange(600, 800), Random.RandiRange(100, 400));
             AddChild(star);
             star.AddToGroup(StarGroupName);

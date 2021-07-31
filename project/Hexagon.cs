@@ -103,7 +103,7 @@ public class Hexagon : Node2D
 
         private int NumCols;
 
-        private Hexagon SelectedHexagon = null;
+        private Hexagon SelectedHexagon;
 
         /**
          * Starts off a grid at the specified start point.
@@ -122,14 +122,14 @@ public class Hexagon : Node2D
          * Handle input for mouse clicks and joystick buttons
          * @param inputEvent Input event
          */
-        public override void _UnhandledInput(InputEvent inputEvent)
+        public override void _UnhandledInput(InputEvent @event)
         {
-            if(@inputEvent is InputEventJoypadButton eventControllerButton)
+            if(@event is InputEventJoypadButton eventControllerButton)
             {
                 GetTree().SetInputAsHandled();
                 HandleButtonPress(eventControllerButton);
             }
-            else if(@inputEvent is InputEventMouseButton eventMouseButton)
+            else if(@event is InputEventMouseButton eventMouseButton)
             {
                 HandleMouseClick(eventMouseButton);
             }
@@ -244,8 +244,10 @@ public class Hexagon : Node2D
             int n = 0;
             while(n < numHexagonsToReplace)
             {
+#pragma warning disable CA5394
                 int randomRow = Rand.Next(0, NumRows);
                 int randomCol = Rand.Next(0, NumCols);
+#pragma warning restore CA5394
                 if(Array[randomRow, randomCol].MarkedForReplacement)
                 {
                     continue;
@@ -429,7 +431,9 @@ public class Hexagon : Node2D
      */
     public static Color RandomColor()
     {
+#pragma warning disable CA5394
         return EdgeColorOptions[Rand.Next(0, EdgeColorOptions.Length)];
+#pragma warning restore CA5394
     }
 
     /**
@@ -506,7 +510,7 @@ public class Hexagon : Node2D
         }
     }
 
-    private Vector2[] GetPoints()
+    private static Vector2[] GetPoints()
     {
         float centerX = 0;
         float centerY = 0;
@@ -623,7 +627,7 @@ public class Hexagon : Node2D
         return BaseColor;
     }
 
-    private bool ShouldShowSelections()
+    private static bool ShouldShowSelections()
     {
         bool isControllerMode = Utils.IsControllerMode();
         bool hasTouch = OS.HasTouchscreenUiHint();

@@ -14,7 +14,15 @@
 
 using Godot;
 
+/**
+ * Globals that we can use to configure the game scene
+ */
 public class Global : Node
 {
-    public static bool Is2Player = false;
+    // FIXME rename this class
+
+    /**
+     * True if we are in 2-player mode
+     */
+    public static bool Is2Player;
 }
