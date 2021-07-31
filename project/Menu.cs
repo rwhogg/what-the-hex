@@ -50,6 +50,11 @@ public class Menu : Control
      */
     public override void _Input(InputEvent @event)
     {
+        if(@event == null)
+        {
+            throw new ArgumentNullException(nameof(@event));
+        }
+
         if(@event.IsActionPressed("ui_up"))
         {
             selected = Math.Max(selected - 1, 0);
