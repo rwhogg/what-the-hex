@@ -15,6 +15,7 @@
 
 
 using System;
+using System.Globalization;
 
 using Godot;
 
@@ -23,6 +24,8 @@ using Godot;
  */
 public class RefreshLabel : RichTextLabel
 {
+    private CultureInfo culture = ConfigFileUtils.GetCulture();
+
     /**
      * Updates the refresh timer display.
      * Called once per frame.
@@ -32,6 +35,6 @@ public class RefreshLabel : RichTextLabel
     {
         Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/RefreshTimer");
         int timeLeft = (int)timer.TimeLeft + 1;
-        this.BbcodeText = String.Format("[color=red][right]{0}[/right][/color]", timeLeft);
+        this.BbcodeText = String.Format("[color=red][right]{0}[/right][/color]", timeLeft.ToString(culture));
     }
 }

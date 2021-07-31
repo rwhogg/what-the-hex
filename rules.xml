@@ -8,8 +8,8 @@
         <rules include="*" from="Gendarme.Rules.Design.Generic.dll" exclude="AvoidDeclaringCustomDelegatesRule"/>
         <rules include="*" from="Gendarme.Rules.Design.Linq.dll"/>
         <rules include="*" from="Gendarme.Rules.Exceptions.dll"/>
-        <!-- Godot has a convention for handlers that uses underscores in names -->
-        <rules include="*" from="Gendarme.Rules.Naming.dll" exclude="AvoidNonAlphanumericIdentifierRule | UseCorrectCasingRule"/>
+        <!-- Godot has a convention for handlers that uses underscores in names, and the "correct suffix" check seems to be getting a false positive -->
+        <rules include="*" from="Gendarme.Rules.Naming.dll" exclude="AvoidNonAlphanumericIdentifierRule | UseCorrectCasingRule | UseCorrectSuffixRule"/>
         <!-- Doesn't seem to handle Godot callbacks correctly -->
         <rules include="*" from="Gendarme.Rules.Performance.dll" exclude="AvoidUncalledPrivateCodeRule"/>
         <rules include="*" from="Gendarme.Rules.Portability.dll"/>
