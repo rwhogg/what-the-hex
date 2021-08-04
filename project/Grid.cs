@@ -54,6 +54,11 @@ public class Grid : Node2D
     private static CultureInfo culture = ConfigFileUtils.GetCulture();
 
     /**
+     * Do not use. Only for constructing Mono temp objects
+     */
+    public Grid() {}
+
+    /**
      * Starts off a grid at the specified start point.
      * @param startPoint Top-left point of the grid
      * @param numRows Number of rows
