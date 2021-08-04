@@ -70,7 +70,7 @@ public class GameComponent : Node2D
         Score = 0;
         NumMatchesMade = 0;
 
-        HexagonGrid = Hexagon.RandomHexagonGrid(5, 8, HexagonStartPoint, Hexagon.DefaultHexColor);
+        HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
         HexagonGrid.SetSelectedHexagon(0, 0);
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));

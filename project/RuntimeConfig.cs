@@ -19,10 +19,14 @@ using Godot;
  */
 public class RuntimeConfig : Node
 {
-    // FIXME handle this when merging
-
     /**
      * True if we are in 2-player mode
      */
     public static bool Is2Player;
+
+    /**
+     * Lists the number of hexagons in each row
+     * (the number of columns is determined by the length)
+     */
+    public static int[] HexesPerRow;
 }
