@@ -27,7 +27,7 @@ using static Godot.Mathf;
 public class Grid : Node2D
 {
     // FIXME: the hexagon and the grid classes are so tightly intertwined, and also they
-    // probably have game logic embedded in them. It would be better if I could 
+    // probably have game logic embedded in them. It would be better if I could
     // sort out what should be where, and maybe also move some of the logic into signals
     // emitted by the hexagons and grid as appropriate, with the game logic moved to the game
     // component in signal handlers
