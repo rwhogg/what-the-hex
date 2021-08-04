@@ -56,7 +56,7 @@ public class Grid : Node2D
     /**
      * Do not use. Only for constructing Mono temp objects
      */
-    public Grid() {}
+    public Grid() { }
 
     /**
      * Starts off a grid at the specified start point.
