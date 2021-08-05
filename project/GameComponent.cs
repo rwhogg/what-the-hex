@@ -107,7 +107,7 @@ public class GameComponent : Node2D
         GetNode<RichTextLabel>("GameOverLabel").Hide();
 
         // FIXME
-        WinConditions.Add(new NumMatchesWinCondition(20));
+        WinConditions.Add(new NumMatchesWinCondition(RuntimeConfig.MatchesNeeded));
     }
 
     /**
@@ -268,7 +268,7 @@ public class GameComponent : Node2D
         }
         if(hasWon)
         {
-            // FIXME
+            EndOfGame();
             OS.Alert("WIN");
         }
     }
@@ -282,26 +282,30 @@ public class GameComponent : Node2D
         powerUpButton.TextureNormal = powerUp.GetTexture();
     }
 
-    private void GameOver()
+    private void EndOfGame()
     {
         GetNode<AudioStreamPlayer>("Music").Stop();
-        AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
-        gameOverSound.Play();
+        GetNode<Timer>("AdvantageTimer").Stop();
+        GetNode<Timer>("RefreshTimer").Stop();
+        GetNode<Label>("PowerUpLabel").Hide();
         if(HexagonGrid != null)
         {
             RemoveChild(HexagonGrid);
             HexagonGrid.QueueFree();
             HexagonGrid = null;
         }
-        GetNode<Timer>("AdvantageTimer").Stop();
-        GetNode<Timer>("RefreshTimer").Stop();
-        GetNode<RichTextLabel>("GameOverLabel").Show();
-        GetNode<Label>("PowerUpLabel").Hide();
+        ConfigFileUtils.SaveHiscore(HiScore);
+    }
+
+    private void GameOver()
+    {
+        EndOfGame();
+        AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
+        gameOverSound.Play();
+        GetNode<RichTextLabel>("GameOverLabel").Show();        
 
         Button continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
         continueButton.Show();
-
-        ConfigFileUtils.SaveHiscore(HiScore);
     }
 }

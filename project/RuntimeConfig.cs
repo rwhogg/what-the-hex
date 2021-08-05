@@ -29,4 +29,7 @@ public class RuntimeConfig : Node
      * (the number of columns is determined by the length)
      */
     public static int[] HexesPerRow;
+
+    // FIXME
+    public static int MatchesNeeded = 3;
 }
