@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://PowerUpButton.cs" type="Script" id=17]
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=18]
 [ext_resource path="res://background.png" type="Texture" id=19]
+[ext_resource path="res://Win.ogg" type="AudioStream" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -201,3 +202,6 @@ text = "Continue?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WinSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )

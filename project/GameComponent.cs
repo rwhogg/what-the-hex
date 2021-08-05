@@ -301,7 +301,7 @@ public class GameComponent : Node2D
         EndOfGame();
         AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
         gameOverSound.Play();
-        GetNode<RichTextLabel>("GameOverLabel").Show();        
+        GetNode<RichTextLabel>("GameOverLabel").Show();
 
         Button continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
