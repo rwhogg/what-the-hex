@@ -43,3 +43,10 @@ project/git_api.gdns
 
 # Visual Studio
 .vs
+
+# Global stuff
+
+*_BASE_*
+*_REMOTE_*
+*_LOCAL_*
+*.orig
