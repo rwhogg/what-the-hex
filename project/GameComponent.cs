@@ -87,17 +87,17 @@ public class GameComponent : Node2D
         }
 
         // Note: this one is always visible, even on desktop
-        TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
+        var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
 
-        Button continueButton = GetNode<Button>("ContinueButton");
+        var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
 
         AdvantageColor = Hexagon.RandomColor();
         Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
 
-        Timer gameTimer = GetNode<Timer>("GameTimer");
+        var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect("timeout", this, nameof(On_GameTimer_Timeout));
         gameTimer.Start(100.0f);
 
@@ -106,7 +106,6 @@ public class GameComponent : Node2D
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
 
-        // FIXME
         WinConditions.Add(new NumMatchesWinCondition(RuntimeConfig.MatchesNeeded));
     }
 
