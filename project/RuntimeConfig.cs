@@ -28,8 +28,8 @@ public class RuntimeConfig : Node
      * Lists the number of hexagons in each row
      * (the number of columns is determined by the length)
      */
-    public static int[] HexesPerRow;
+    public static int[] HexesPerRow; // FIXME default this so base game scene is playable again
 
     // FIXME
-    public static int MatchesNeeded = 3;
+    public static int MatchesNeeded = 20;
 }

@@ -268,7 +268,7 @@ public class GameComponent : Node2D
         if(hasWon)
         {
             EndOfGame();
-            OS.Alert("WIN");
+            GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
         }
     }
 
