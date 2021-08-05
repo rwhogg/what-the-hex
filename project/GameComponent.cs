@@ -70,7 +70,7 @@ public class GameComponent : Node2D
         Score = 0;
         NumMatchesMade = 0;
 
-        HexagonGrid = Hexagon.RandomHexagonGrid(5, 8, HexagonStartPoint, Hexagon.DefaultHexColor);
+        HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
         HexagonGrid.SetSelectedHexagon(0, 0, 0);
         if(RuntimeConfig.Is2Player)
         {
@@ -91,17 +91,17 @@ public class GameComponent : Node2D
         }
 
         // Note: this one is always visible, even on desktop
-        TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
+        var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
 
-        Button continueButton = GetNode<Button>("ContinueButton");
+        var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
 
         AdvantageColor = Hexagon.RandomColor();
         Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
 
-        Timer gameTimer = GetNode<Timer>("GameTimer");
+        var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect("timeout", this, nameof(On_GameTimer_Timeout));
         gameTimer.Start(100.0f);
 
@@ -110,8 +110,7 @@ public class GameComponent : Node2D
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
 
-        // FIXME
-        WinConditions.Add(new NumMatchesWinCondition(20));
+        WinConditions.Add(new NumMatchesWinCondition(RuntimeConfig.MatchesNeeded));
     }
 
     /**
@@ -272,8 +271,8 @@ public class GameComponent : Node2D
         }
         if(hasWon)
         {
-            // FIXME
-            OS.Alert("WIN");
+            EndOfGame();
+            GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
         }
     }
 
@@ -286,26 +285,30 @@ public class GameComponent : Node2D
         powerUpButton.TextureNormal = powerUp.GetTexture();
     }
 
-    private void GameOver()
+    private void EndOfGame()
     {
         GetNode<AudioStreamPlayer>("Music").Stop();
-        AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
-        gameOverSound.Play();
+        GetNode<Timer>("AdvantageTimer").Stop();
+        GetNode<Timer>("RefreshTimer").Stop();
+        GetNode<Label>("PowerUpLabel").Hide();
         if(HexagonGrid != null)
         {
             RemoveChild(HexagonGrid);
             HexagonGrid.QueueFree();
             HexagonGrid = null;
         }
-        GetNode<Timer>("AdvantageTimer").Stop();
-        GetNode<Timer>("RefreshTimer").Stop();
+        ConfigFileUtils.SaveHiscore(HiScore);
+    }
+
+    private void GameOver()
+    {
+        EndOfGame();
+        AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
+        gameOverSound.Play();
         GetNode<RichTextLabel>("GameOverLabel").Show();
-        GetNode<Label>("PowerUpLabel").Hide();
 
         Button continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
         continueButton.Show();
-
-        ConfigFileUtils.SaveHiscore(HiScore);
     }
 }

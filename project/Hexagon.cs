@@ -330,14 +330,16 @@ public class Hexagon : Node2D
      * @param basePosition Position of the top-left hexagon in the grid
      * @param baseColor Base color of every hexagon
      */
-    public static Grid RandomHexagonGrid(int numRows, int numCols, Vector2 basePosition, Color baseColor)
+    public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
     {
         // FIXME: most of this stuff should move into the grid class
-        Grid grid = new Grid(basePosition, numRows, numCols);
-        Hexagon[,] array = new Hexagon[numRows, numCols];
+        Grid grid = new Grid(basePosition, hexagonsPerRow);
+        int numRows = hexagonsPerRow.Length;
+        Hexagon[][] array = new Hexagon[numRows][];
         for(int i = 0; i < numRows; i++)
         {
-            for(int j = 0; j < numCols; j++)
+            array[i] = new Hexagon[hexagonsPerRow[i]];
+            for(int j = 0; j < hexagonsPerRow[i]; j++)
             {
                 float xPos = (float)(j * BigRadius() * 2);
                 float yPos = (float)(i * SmallRadius() * 2);
@@ -350,10 +352,10 @@ public class Hexagon : Node2D
                 yPos += EdgeThickness * i * 0.8F;
 
                 Vector2 position = new Vector2(xPos, yPos);
-                array[i, j] = RandomHexagon(position, baseColor);
-                array[i, j].i = i;
-                array[i, j].j = j;
-                grid.AddChild(array[i, j], true);
+                array[i][j] = RandomHexagon(position, baseColor);
+                array[i][j].i = i;
+                array[i][j].j = j;
+                grid.AddChild(array[i][j], true);
             }
         }
 

@@ -39,13 +39,11 @@ public class Grid : Node2D
     public delegate void HexagonRotated(Hexagon rotatedHexagon, Godot.Collections.Array matchedHexagons, Godot.Collections.Dictionary<Color, int> matchedColors);
 
     /**
-     * The underlying 2D array of hexagons
+     * The underlying jagged array of hexagons
      */
-    public Hexagon[,] Array;
+    public Hexagon[][] Array;
 
-    private int NumRows;
-
-    private int NumCols;
+    private int[] HexagonsPerRow;
 
     private Hexagon[] SelectedHexagons = new Hexagon[1 + Convert.ToInt32(RuntimeConfig.Is2Player)];
 
@@ -53,17 +51,22 @@ public class Grid : Node2D
 
     private static CultureInfo culture = ConfigFileUtils.GetCulture();
 
+    // FIXME: something here is throwing an exception
+
+    /**
+     * Do not use. Only for constructing Mono temp objects
+     */
+    public Grid() { }
+
     /**
      * Starts off a grid at the specified start point.
      * @param startPoint Top-left point of the grid
-     * @param numRows Number of rows
-     * @param numCols Number of columns
+     * @param hexagonsPerRow Number of hexagons per row
      */
-    public Grid(Vector2 startPoint, int numRows, int numCols)
+    public Grid(Vector2 startPoint, int[] hexagonsPerRow)
     {
         Position = startPoint;
-        NumRows = numRows;
-        NumCols = numCols;
+        HexagonsPerRow = hexagonsPerRow;
     }
 
     /**
@@ -109,24 +112,25 @@ public class Grid : Node2D
                 Hexagon currentlySelectedHexagon = SelectedHexagons[controllerIndex];
                 SelectedHexagons[controllerIndex].Selected[controllerIndex] = false;
                 int newI = SelectedHexagons[controllerIndex].i + dir[0];
+                int numRows = HexagonsPerRow.Length;
                 if(newI < 0)
                 {
                     newI = 0;
                 }
-                else if(newI >= NumRows)
+                else if(newI >= numRows)
                 {
-                    newI = NumRows - 1;
+                    newI = numRows - 1;
                 }
                 int newJ = SelectedHexagons[controllerIndex].j + dir[1];
                 if(newJ < 0)
                 {
                     newJ = 0;
                 }
-                else if(newJ >= NumCols)
+                else if(newJ >= HexagonsPerRow[newI])
                 {
-                    newJ = NumCols - 1;
+                    newJ = HexagonsPerRow[newI] - 1;
                 }
-                Hexagon newlySelectedHexagon = Array[newI, newJ];
+                Hexagon newlySelectedHexagon = Array[newI][newJ];
                 newlySelectedHexagon.Selected[controllerIndex] = true;
                 SelectedHexagons[controllerIndex] = newlySelectedHexagon;
                 break;
@@ -183,8 +187,8 @@ public class Grid : Node2D
      */
     public void SetSelectedHexagon(int i, int j, int playerIndex)
     {
-        Array[i, j].Selected = true;
-        SelectedHexagons[playerIndex] = Array[i, j];
+        Array[i][j].Selected = true;
+        SelectedHexagons[playerIndex] = Array[i][j];
     }
 
     /**
@@ -197,14 +201,14 @@ public class Grid : Node2D
         while(n < numHexagonsToReplace)
         {
 #pragma warning disable CA5394
-            int randomRow = Rand.Next(0, NumRows);
-            int randomCol = Rand.Next(0, NumCols);
+            int randomRow = Rand.Next(0, HexagonsPerRow.Length);
+            int randomCol = Rand.Next(0, HexagonsPerRow[randomRow]);
 #pragma warning restore CA5394
-            if(Array[randomRow, randomCol].MarkedForReplacement)
+            if(Array[randomRow][randomCol].MarkedForReplacement)
             {
                 continue;
             }
-            Array[randomRow, randomCol].StartRefreshTimer();
+            Array[randomRow][randomCol].StartRefreshTimer();
             n++;
         }
     }
@@ -261,12 +265,16 @@ public class Grid : Node2D
         int row = (int)affectedHexagon.i;
         int column = (int)affectedHexagon.j;
 
+        // FIXME: 2 issues here
+        // 1. This logic might have to be adjusted to handle layouts with unequal columns per row
+        // 2. More generally, look into refactoring this (in trunk). Maybe the checking logic can be abstracted?
+
         // top-left
         if(row != 0 && column != 0)
         {
-            Hexagon hexNW = Array[row - 1, column - 1];
-            Hexagon hexN = Array[row - 1, column];
-            Hexagon hexW = Array[row, column - 1];
+            Hexagon hexNW = Array[row - 1][column - 1];
+            Hexagon hexN = Array[row - 1][column];
+            Hexagon hexW = Array[row][column - 1];
             bool nwEq = affectedHexagon.EdgeColors[tle] == hexNW.EdgeColors[bre];
             bool nEq = affectedHexagon.EdgeColors[tle] == hexN.EdgeColors[ble];
             bool wEq = affectedHexagon.EdgeColors[tle] == hexW.EdgeColors[tre];
@@ -281,11 +289,11 @@ public class Grid : Node2D
             }
         }
         // top-right
-        if(row != 0 && column != NumCols - 1)
+        if(row != 0 && column != HexagonsPerRow[row] - 1)
         {
-            Hexagon hexNE = Array[row - 1, column + 1];
-            Hexagon hexN = Array[row - 1, column];
-            Hexagon hexE = Array[row, column + 1];
+            Hexagon hexNE = Array[row - 1][column + 1];
+            Hexagon hexN = Array[row - 1][column];
+            Hexagon hexE = Array[row][column + 1];
             bool neEq = affectedHexagon.EdgeColors[tre] == hexNE.EdgeColors[ble];
             bool nEq = affectedHexagon.EdgeColors[tre] == hexN.EdgeColors[bre];
             bool eEq = affectedHexagon.EdgeColors[tre] == hexE.EdgeColors[tle];
@@ -307,11 +315,11 @@ public class Grid : Node2D
         }
 
         // bottom-right
-        if(row != NumRows - 1 && column != NumCols - 1)
+        if(row != HexagonsPerRow.Length - 1 && column != HexagonsPerRow[row] - 1)
         {
-            Hexagon hexSE = Array[row + 1, column + 1];
-            Hexagon hexS = Array[row + 1, column];
-            Hexagon hexE = Array[row, column + 1];
+            Hexagon hexSE = Array[row + 1][column + 1];
+            Hexagon hexS = Array[row + 1][column];
+            Hexagon hexE = Array[row][column + 1];
             bool seEq = affectedHexagon.EdgeColors[bre] == hexSE.EdgeColors[tle];
             bool sEq = affectedHexagon.EdgeColors[bre] == hexS.EdgeColors[tre];
             bool eEq = affectedHexagon.EdgeColors[bre] == hexE.EdgeColors[ble];
@@ -333,11 +341,11 @@ public class Grid : Node2D
         }
 
         // bottom-left
-        if(row != NumRows - 1 && column != 0)
+        if(row != HexagonsPerRow.Length - 1 && column != 0)
         {
-            Hexagon hexSW = Array[row + 1, column - 1];
-            Hexagon hexS = Array[row + 1, column];
-            Hexagon hexW = Array[row, column - 1];
+            Hexagon hexSW = Array[row + 1][column - 1];
+            Hexagon hexS = Array[row + 1][column];
+            Hexagon hexW = Array[row][column - 1];
             bool swEq = affectedHexagon.EdgeColors[ble] == hexSW.EdgeColors[tre];
             bool sEq = affectedHexagon.EdgeColors[ble] == hexS.EdgeColors[tle];
             bool wEq = affectedHexagon.EdgeColors[ble] == hexW.EdgeColors[bre];
@@ -363,9 +371,10 @@ public class Grid : Node2D
 
     private Hexagon GetAffectedHexagon(Vector2 clickPos)
     {
+        // FIXME: does this need to be adjusted for a different edge thickness???
         int j = RoundToInt(clickPos.x / (2 * Hexagon.BigRadius() + 0.2F * Hexagon.EdgeThickness));
         int i = RoundToInt(clickPos.y / (2 * Hexagon.SmallRadius() + 0.8F * Hexagon.EdgeThickness));
-        if(j >= NumCols || i >= NumRows)
+        if(i >= HexagonsPerRow.Length || j >= HexagonsPerRow[i])
         {
             if(OS.IsDebugBuild())
             {
@@ -375,6 +384,6 @@ public class Grid : Node2D
             return null;
         }
 
-        return Array[i, j];
+        return Array[i][j];
     }
 }
