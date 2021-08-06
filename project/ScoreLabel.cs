@@ -21,7 +21,7 @@ using Godot;
 
 public class ScoreLabel : RichTextLabel
 {
-    private CultureInfo Culture = ConfigFileUtils.GetCulture();
+    private readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 
     public override void _Process(float delta)
     {

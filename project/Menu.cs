@@ -26,7 +26,7 @@ public class Menu : Control
     private Button[] Buttons;
     private int selected = -1;
 
-    private static int BackButtonIndex = 4;
+    private const int BackButtonIndex = 4;
 
     /**
      * Set up the button indices.

@@ -78,7 +78,7 @@ public class Hexagon : Node2D
 
     public static Color DefaultHexColor = Black;
 
-    private static int DefaultRefreshTimeSeconds = 5;
+    private const int DefaultRefreshTimeSeconds = 5;
 
     private static CultureInfo culture = ConfigFileUtils.GetCulture();
 

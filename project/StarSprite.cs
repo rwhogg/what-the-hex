@@ -18,9 +18,9 @@ using Godot;
 
 public class StarSprite : AnimatedSprite
 {
-    private static SpriteFrames StarFrames = new SpriteFrames();
+    private static readonly SpriteFrames StarFrames = new SpriteFrames();
 
-    private static ImageTexture StarTexture = new ImageTexture();
+    private static readonly ImageTexture StarTexture = new ImageTexture();
 
     public override void _Ready()
     {

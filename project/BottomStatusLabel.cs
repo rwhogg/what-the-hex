@@ -24,7 +24,7 @@ public class BottomStatusLabel : RichTextLabel
 {
     private int RecentScore;
 
-    private CultureInfo culture = ConfigFileUtils.GetCulture();
+    private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     public override void _Process(float delta)
     {

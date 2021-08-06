@@ -24,7 +24,7 @@ using Godot;
  */
 public class RefreshLabel : RichTextLabel
 {
-    private CultureInfo culture = ConfigFileUtils.GetCulture();
+    private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     /**
      * Updates the refresh timer display.
