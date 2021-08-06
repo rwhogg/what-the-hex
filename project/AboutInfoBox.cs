@@ -19,6 +19,6 @@ public class AboutInfoBox : TextEdit
 {
     public override void _Ready()
     {
-        Text = Text.Replace("0.1.0", GitVersionInformation.FullSemVer);
+        Text = Text.Replace("_vers_", GitVersionInformation.FullSemVer);
     }
 }
