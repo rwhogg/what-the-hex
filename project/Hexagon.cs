@@ -66,21 +66,21 @@ public class Hexagon : Node2D
     /**
      * List of all possible options for edge colors
      */
-    private static Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
+    private static readonly Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
 
-    private static float SideLength = 50.0F;
+    private const float SideLength = 50.0F;
 
-    private static float Cos30 = (float)Cos(Deg2Rad(30));
+    private static readonly float Cos30 = (float)Cos(Deg2Rad(30));
 
     public static int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
 
-    private static Random Rand = new Random();
+    private static readonly Random Rand = new Random();
 
     public static Color DefaultHexColor = Black;
 
     private const int DefaultRefreshTimeSeconds = 5;
 
-    private static CultureInfo culture = ConfigFileUtils.GetCulture();
+    private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     /**
      * Get a random edge color
