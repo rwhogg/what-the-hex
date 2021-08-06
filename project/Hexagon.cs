@@ -53,15 +53,19 @@ public class Hexagon : Node2D
      */
     public bool Matched { get; set; }
 
-    public int i { get; set; }
+    public int I { get; set; }
 
-    public int j { get; set; }
+    public int J { get; set; }
 
     private DynamicFont RocketFont;
 
     private Timer HexRefreshTimer;
 
     private Timer ColorFlashTimer;
+
+    public static int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
+
+    public static readonly Color DefaultHexColor = Black;
 
     /**
      * List of all possible options for edge colors
@@ -72,13 +76,11 @@ public class Hexagon : Node2D
 
     private static readonly float Cos30 = (float)Cos(Deg2Rad(30));
 
-    public static int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
+    private const int DefaultRefreshTimeSeconds = 5;
+
+    private static readonly bool IsDebug = OS.IsDebugBuild();
 
     private static readonly Random Rand = new Random();
-
-    public static readonly Color DefaultHexColor = Black;
-
-    private const int DefaultRefreshTimeSeconds = 5;
 
     private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
@@ -157,7 +159,7 @@ public class Hexagon : Node2D
         {
             DrawCircle(new Vector2(0, 0), 5, Red);
         }
-        if(OS.IsDebugBuild())
+        if(IsDebug)
         {
             DrawString(Utils.AnyFont, new Vector2(-25, 30), String.Format(culture, "({0},{1})", (int)Position.x, (int)Position.y));
         }
@@ -225,9 +227,9 @@ public class Hexagon : Node2D
             AddChild(HexRefreshTimer, true);
             HexRefreshTimer.Connect("timeout", this, nameof(On_HexRefresh_Timer_Timeout));
         }
-        if(OS.IsDebugBuild())
+        if(IsDebug)
         {
-            GD.Print("Marked " + i.ToString(culture) + ", " + j.ToString(culture) + " for replacement");
+            GD.Print("Marked " + I.ToString(culture) + ", " + J.ToString(culture) + " for replacement");
         }
         MarkedForReplacement = true;
         HexRefreshTimer.Start(DefaultRefreshTimeSeconds);
@@ -252,9 +254,9 @@ public class Hexagon : Node2D
     private void On_HexRefresh_Timer_Timeout()
     {
         AbortReplacement();
-        if(OS.IsDebugBuild())
+        if(IsDebug)
         {
-            GD.Print("Hex " + i.ToString(culture) + "," + j.ToString(culture) + " refreshed");
+            GD.Print("Hex " + I.ToString(culture) + "," + J.ToString(culture) + " refreshed");
         }
         Refresh();
     }
@@ -352,8 +354,8 @@ public class Hexagon : Node2D
 
                 Vector2 position = new Vector2(xPos, yPos);
                 array[i][j] = RandomHexagon(position, baseColor);
-                array[i][j].i = i;
-                array[i][j].j = j;
+                array[i][j].I = i;
+                array[i][j].J = j;
                 grid.AddChild(array[i][j], true);
             }
         }

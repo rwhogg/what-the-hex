@@ -71,7 +71,7 @@ public class Grid : Node2D
 
     /**
      * Handle input for mouse clicks and joystick buttons
-     * @param inputEvent Input event
+     * @param @event Input event
      */
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -107,7 +107,7 @@ public class Grid : Node2D
                 };
                 int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
                 SelectedHexagon.Selected = false;
-                int newI = SelectedHexagon.i + dir[0];
+                int newI = SelectedHexagon.I + dir[0];
                 int numRows = HexagonsPerRow.Length;
                 if(newI < 0)
                 {
@@ -117,7 +117,7 @@ public class Grid : Node2D
                 {
                     newI = numRows - 1;
                 }
-                int newJ = SelectedHexagon.j + dir[1];
+                int newJ = SelectedHexagon.J + dir[1];
                 if(newJ < 0)
                 {
                     newJ = 0;
@@ -165,7 +165,7 @@ public class Grid : Node2D
         {
             // on touch screen devices, a tap should be equivalent to a select, not a rotation
             SelectedHexagon.Selected = false;
-            SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j);
+            SetSelectedHexagon(affectedHexagon.I, affectedHexagon.J);
             return;
         }
         else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
@@ -235,7 +235,7 @@ public class Grid : Node2D
         {
             if(OS.IsDebugBuild())
             {
-                GD.Print("Matched hex " + hexagon.i.ToString(culture) + ", " + hexagon.j.ToString(culture));
+                GD.Print("Matched hex " + hexagon.I.ToString(culture) + ", " + hexagon.J.ToString(culture));
             }
             hexagon.Matched = true;
             hexagon.AbortReplacement();
@@ -254,8 +254,8 @@ public class Grid : Node2D
         int bre = 1;
         int ble = 3;
         int tle = 4;
-        int row = (int)affectedHexagon.i;
-        int column = (int)affectedHexagon.j;
+        int row = (int)affectedHexagon.I;
+        int column = (int)affectedHexagon.J;
 
         // FIXME: 2 issues here
         // 1. This logic might have to be adjusted to handle layouts with unequal columns per row
