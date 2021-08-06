@@ -45,7 +45,7 @@ public class GameComponent : Node2D
     /**
      * The number of advantageous matches made in a row
      */
-    public int NumAdvantageMatchesMade;
+    public int NumAdvantageMatchesMade { get; set; }
 
     private IPowerUp ReservedPowerUp;
 

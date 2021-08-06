@@ -76,7 +76,7 @@ public class Hexagon : Node2D
 
     private static readonly Random Rand = new Random();
 
-    public static Color DefaultHexColor = Black;
+    public static readonly Color DefaultHexColor = Black;
 
     private const int DefaultRefreshTimeSeconds = 5;
 
@@ -110,11 +110,11 @@ public class Hexagon : Node2D
      * @param baseColor Base color
      * @param edgeColors Edge colors
      */
-    public Hexagon(Vector2 center, Color baseColor, List<Color> edgeColors)
+    public Hexagon(Vector2 center, Color baseColor, IReadOnlyCollection<Color> edgeColors)
     {
         Position = center;
         BaseColor = baseColor;
-        EdgeColors = edgeColors;
+        EdgeColors = new List<Color>(edgeColors);
         MarkedForReplacement = false;
         Selected = false;
         Matched = false;
@@ -328,6 +328,10 @@ public class Hexagon : Node2D
     public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
     {
         // FIXME: most of this stuff should move into the grid class
+        if(hexagonsPerRow == null)
+        {
+            throw new ArgumentNullException(nameof(hexagonsPerRow));
+        }
         Grid grid = new Grid(basePosition, hexagonsPerRow);
         int numRows = hexagonsPerRow.Length;
         Hexagon[][] array = new Hexagon[numRows][];
