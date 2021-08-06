@@ -51,8 +51,6 @@ public class Grid : Node2D
 
     private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
-    // FIXME: something here is throwing an exception
-
     /**
      * Do not use. Only for constructing Mono temp objects
      */
@@ -71,7 +69,7 @@ public class Grid : Node2D
 
     /**
      * Handle input for mouse clicks and joystick buttons
-     * @param @event Input event
+     * @param event Input event
      */
     public override void _UnhandledInput(InputEvent @event)
     {

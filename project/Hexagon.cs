@@ -53,8 +53,14 @@ public class Hexagon : Node2D
      */
     public bool Matched { get; set; }
 
+    /**
+     * Row index of this hexagon
+     */
     public int I { get; set; }
 
+    /**
+     * Column index of this hexagon
+     */
     public int J { get; set; }
 
     private DynamicFont RocketFont;
@@ -63,8 +69,14 @@ public class Hexagon : Node2D
 
     private Timer ColorFlashTimer;
 
-    public static int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
+    /**
+     * How thick this hexagon's edges are, in pixels
+     */
+    public static readonly int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
 
+    /**
+     * Default background hexagon color
+     */
     public static readonly Color DefaultHexColor = Black;
 
     /**

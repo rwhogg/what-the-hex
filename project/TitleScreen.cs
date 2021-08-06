@@ -90,10 +90,13 @@ public class TitleScreen : Control
         }
     }
 
+    /**
+     * Handles otherwise unhandled touch events, to enter the menu screen
+     * @param event Input event
+     */
     public override void _UnhandledInput(InputEvent @event)
     {
-        // This is for Android touch events...
-        // Apparently the input map didn't really work
+        // This is for Android touch events, because not handled by the input map
         GetTree().SetInputAsHandled();
         if(@event is InputEventScreenTouch)
         {

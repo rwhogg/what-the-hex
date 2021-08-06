@@ -47,6 +47,7 @@ public class Menu : Control
 
     /**
      * Processes the input. Support for up and down.
+     * @param event Input event
      */
     public override void _Input(InputEvent @event)
     {
