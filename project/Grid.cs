@@ -43,13 +43,13 @@ public class Grid : Node2D
      */
     public Hexagon[][] Array;
 
-    private int[] HexagonsPerRow;
+    private readonly int[] HexagonsPerRow;
 
     private Hexagon SelectedHexagon;
 
-    private static Random Rand = new Random();
+    private static readonly Random Rand = new Random();
 
-    private static CultureInfo culture = ConfigFileUtils.GetCulture();
+    private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     // FIXME: something here is throwing an exception
 

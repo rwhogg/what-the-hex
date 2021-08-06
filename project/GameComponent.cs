@@ -57,7 +57,7 @@ public class GameComponent : Node2D
 
     private int NumRefreshes;
 
-    private System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
+    private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
     /**
      * Initializes the Game Component, creates the hexagon grid, and sets up event listeners.
@@ -120,7 +120,7 @@ public class GameComponent : Node2D
 
         Timer gameTimer = GetNode<Timer>("GameTimer");
         AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
-        float originalPitchScale = music.PitchScale;
+        _ = music.PitchScale;
         if((int)gameTimer.TimeLeft < 20)
         {
             music.PitchScale = 1.2f;
