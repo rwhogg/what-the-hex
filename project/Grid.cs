@@ -106,7 +106,6 @@ public class Grid : Node2D
                     new int[] { 0, 1 },
                 };
                 int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
-                Hexagon currentlySelectedHexagon = SelectedHexagon;
                 SelectedHexagon.Selected = false;
                 int newI = SelectedHexagon.i + dir[0];
                 int numRows = HexagonsPerRow.Length;
@@ -222,8 +221,7 @@ public class Grid : Node2D
     {
         affectedHexagon.Rot(direction);
         Color colorToFlash = Hexagon.DefaultHexColor;
-        Godot.Collections.Dictionary<Color, int> matchedColors = null;
-        HashSet<Hexagon> matchedHexagons = CheckMatches(affectedHexagon, out matchedColors);
+        HashSet<Hexagon> matchedHexagons = CheckMatches(affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors);
         if(matchedColors.Keys.Count > 0)
         {
             foreach(var pair in matchedColors)
