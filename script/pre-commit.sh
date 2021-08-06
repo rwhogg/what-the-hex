@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 pushd project || exit
-dotnet.exe format "WhatTheHex.csproj"
+dotnet.exe format --fix-style info --fix-whitespace --fix-analyzers info "WhatTheHex.csproj"
 addlicense -c 'Bob "Wombat" Hogg' -l apache ./*.cs
 ../script/format.sh
 popd || exit

@@ -193,7 +193,11 @@ public class GameComponent : Node2D
         GetTree().ReloadCurrentScene();
     }
 
+#pragma warning disable IDE0060
+#pragma warning disable CA1801
     private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors)
+#pragma warning restore CA1801
+#pragma warning restore IDE0060
     {
         int additionalScore = 0;
         bool madeAnyAdvantageMatch = false;
