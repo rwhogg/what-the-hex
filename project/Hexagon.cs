@@ -322,9 +322,8 @@ public class Hexagon : Node2D
 
     /**
      * Create a new grid of hexagons, each of which has random edge colors
-     * @param numRows Number of rows
-     * @param numCols Number of columns
      * @param basePosition Position of the top-left hexagon in the grid
+     * @param hexagonsPerRow Number of hexagons that appear in each row
      * @param baseColor Base color of every hexagon
      */
     public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
