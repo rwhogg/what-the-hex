@@ -50,3 +50,6 @@ project/git_api.gdns
 *_REMOTE_*
 *_LOCAL_*
 *.orig
+appinspector.log.txt
+output.html
+_BACKUP_*
