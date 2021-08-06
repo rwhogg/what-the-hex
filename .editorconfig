@@ -11,6 +11,9 @@ csharp_space_after_keywords_in_control_flow_statements = false
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = true
 
+# Automatically removes redundant imports
+dotnet_diagnostic.IDE0005.severity = warning
+
 # CLS compliance - don't know, don't really care
 dotnet_diagnostic.CA1014.Severity = none
 # Enum overlap (I'm fine with this)
