@@ -82,6 +82,18 @@ public class Grid : Node2D
         {
             HandleMouseClick(eventMouseButton);
         }
+        else if(@event is InputEventKey eventKey)
+        {
+            HandleKeyPress(eventKey);
+        }
+    }
+
+    private void HandleKeyPress(InputEventKey eventKey)
+    {
+        if(eventKey.Scancode == (int)KeyList.Escape)
+        {
+            Pause();
+        }
     }
 
     private void HandleButtonPress(InputEventJoypadButton eventControllerButton)
@@ -138,7 +150,17 @@ public class Grid : Node2D
             case R2:
                 HandleRotation(SelectedHexagon, Direction.RIGHT);
                 break;
+            case Start:
+                Pause();
+                break;
         }
+    }
+
+    private void Pause()
+    {
+        GetTree().Paused = true;
+        OS.Alert("PAUSED", "Pause");
+        GetTree().Paused = false;
     }
 
     private void HandleMouseClick(InputEventMouseButton eventMouseButton)

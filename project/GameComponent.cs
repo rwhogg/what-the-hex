@@ -94,7 +94,7 @@ public class GameComponent : Node2D
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
 
         AdvantageColor = Hexagon.RandomColor();
-        Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
+        var advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
 
         var gameTimer = GetNode<Timer>("GameTimer");
@@ -118,8 +118,8 @@ public class GameComponent : Node2D
     {
         Update();
 
-        Timer gameTimer = GetNode<Timer>("GameTimer");
-        AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
+        var gameTimer = GetNode<Timer>("GameTimer");
+        var music = GetNode<AudioStreamPlayer>("Music");
         _ = music.PitchScale;
         if((int)gameTimer.TimeLeft < 20)
         {
@@ -250,7 +250,7 @@ public class GameComponent : Node2D
             bottomStatusLabel.FlashScore(additionalScore);
         }
 
-        AudioStreamPlayer soundPlayer = GetNode<AudioStreamPlayer>(matchedColors.Count > 0 ? "MatchSoundPlayer" : "RotateSoundPlayer");
+        var soundPlayer = GetNode<AudioStreamPlayer>(matchedColors.Count > 0 ? "MatchSoundPlayer" : "RotateSoundPlayer");
         soundPlayer.Play();
 
         if(madeAnyMatch)
