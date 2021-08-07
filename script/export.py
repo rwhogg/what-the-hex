@@ -24,6 +24,9 @@ else:
     export_names = map(lambda export: cfg.get(export, "name").replace('"', ''), exports)
 
 godot = getenv("GODOT")
+if godot is None:
+    print("Set the environment variable GODOT")
+    sys.exit(1)
 
 for export_name in export_names:
     try:
