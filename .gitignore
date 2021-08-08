@@ -52,3 +52,4 @@ project/git_api.gdns
 *.orig
 appinspector.log.txt
 output.html
+*.cqldb
