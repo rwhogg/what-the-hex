@@ -1,3 +1,4 @@
 # False positive
 R:Gendarme.Rules.Performance.UseStringEmptyRule
 M:System.Void Utils::.cctor()
+M:System.Void GitVersionInformation::.cctor()
