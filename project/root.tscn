@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://TitleScreen.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ptsans.tres" type="DynamicFont" id=8]
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=9]
 [ext_resource path="res://PressStart.cs" type="Script" id=10]
+[ext_resource path="res://TitleText.cs" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -32,8 +33,9 @@ __meta__ = {
 [node name="TitleText" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -510.5
-margin_right = 510.5
+margin_left = -508.255
+margin_top = 3.03984e-05
+margin_right = 512.745
 margin_bottom = 62.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
@@ -42,6 +44,7 @@ bbcode_text = "[color=red][center]What The Hex?[/center][/color]
 text = "What The Hex?
 "
 scroll_active = false
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

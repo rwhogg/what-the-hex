@@ -57,7 +57,7 @@ public class TitleScreen : Control
                 Input.AddJoyMapping(SN30_PRO_MAPPING_ANDROID, true);
             }
 
-            OS.SetWindowTitle("What The Hex?");
+            OS.SetWindowTitle(Tr("GAME_TITLE_CLEAN"));
             Timer starCreateTimer = GetNode<Timer>("StarCreateTimer");
             Timer starDeleteTimer = GetNode<Timer>("StarDeleteTimer");
             starCreateTimer.Connect("timeout", this, nameof(GenerateStars));

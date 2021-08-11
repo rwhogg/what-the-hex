@@ -20,6 +20,7 @@ run/main_scene="res://root.tscn"
 boot_splash/image="res://boarish-logo-only.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
+config/name_fr="Qu'est-ce Que L'Hexagone?"
 
 [debug]
 
