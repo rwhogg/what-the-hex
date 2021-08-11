@@ -108,6 +108,11 @@ ui_start={
  ]
 }
 
+[locale]
+
+fallback="en_US"
+translations=PoolStringArray( "res://translations.en_US.translation" )
+
 [mono]
 
 export/include_scripts_content=true
