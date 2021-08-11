@@ -38,6 +38,9 @@ public class ScoreLabel : RichTextLabel
         int score = game.Score;
         int matches = game.NumMatchesMade;
         int hiscore = game.HiScore;
-        BbcodeText = String.Format(Culture, "[color=red]TIME {0} MATCH {2} SCORE {1} " + Tr("HIGHSCORE") + " {3}[/color]", timeLeft, score, matches, hiscore);
+        BbcodeText = String.Format(Culture,
+            "[color=red]{0} {1} {2} {3} {4} {5} {6} {7}[/color]",
+            Tr("TIME"), timeLeft, Tr("MATCH"), matches, Tr("SCORE"), score, Tr("HIGHSCORE"), hiscore
+        );
     }
 }

@@ -111,7 +111,7 @@ ui_start={
 [locale]
 
 fallback="en_US"
-translations=PoolStringArray( "res://translations.en_US.translation" )
+translations=PoolStringArray( "res://translations.en_US.translation", "res://translations.fr.translation" )
 
 [mono]
 
