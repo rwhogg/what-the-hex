@@ -20,7 +20,7 @@ else:
     print("Exporting all")
     cfg = ConfigParser()
     cfg.read("export_presets.cfg")
-    exports = filter(lambda section: re.match("^preset.\d$", section) is not None, cfg.sections())
+    exports = filter(lambda section: re.match(r"^preset.\d$", section) is not None, cfg.sections())
     export_names = map(lambda export: cfg.get(export, "name").replace('"', ''), exports)
 
 godot = getenv("GODOT")

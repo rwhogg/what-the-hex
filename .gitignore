@@ -53,3 +53,4 @@ project/git_api.gdns
 appinspector.log.txt
 output.html
 *.cqldb
+super-linter.log
