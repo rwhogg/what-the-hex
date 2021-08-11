@@ -18,6 +18,9 @@
  */
 public class AboutButton : ThemeButton
 {
+    /**
+     * Change to the About scene
+     */
     protected override void ChangeScene()
     {
         GetTree().ChangeScene("res://About.tscn");

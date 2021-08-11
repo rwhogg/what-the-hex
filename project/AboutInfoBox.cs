@@ -15,8 +15,15 @@
 
 using Godot;
 
+/**
+ * Script for the About box
+ */
 public class AboutInfoBox : TextEdit
 {
+    /**
+     * Called when this object and its children enter the scene tree.
+     * Replaces the version number in the about box automatically.
+     */
     public override void _Ready()
     {
         Text = Text.Replace("_vers_", GitVersionInformation.FullSemVer);
