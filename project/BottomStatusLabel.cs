@@ -42,6 +42,7 @@ public class BottomStatusLabel : RichTextLabel
         string advantageColor = (colorName == "pink" ? "#ff69b4" : colorName);
         string recentScoreToShow = RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty;
         BbcodeText = String.Format(
+            culture,
             "{0}: [color={1}]{2}[/color] {3} {4}: {5}\t{6}",
             advantageLabel,
             advantageColor,
