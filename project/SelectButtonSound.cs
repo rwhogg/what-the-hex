@@ -16,10 +16,17 @@
 
 using Godot;
 
+/**
+ * Script for playing a sound when you click the select button
+ */
 public class SelectButtonSound : AudioStreamPlayer
 {
+    /**
+     * Called when this node and its children enter the scene tree
+     */
     public override void _Ready()
     {
+        // FIXME I should rename that sound file
         base._Ready();
         Stream = GD.Load<AudioStreamOGGVorbis>("res://menu-5.ogg");
     }

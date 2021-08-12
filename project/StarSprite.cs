@@ -16,12 +16,18 @@
 
 using Godot;
 
+/**
+ * Sprite for the stars that appear on the title screen
+ */
 public class StarSprite : AnimatedSprite
 {
     private static readonly SpriteFrames StarFrames = new SpriteFrames();
 
     private static readonly ImageTexture StarTexture = new ImageTexture();
 
+    /**
+     * Called when this node enters the scene tree
+     */
     public override void _Ready()
     {
         base._Ready();
