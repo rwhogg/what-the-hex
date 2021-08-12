@@ -78,6 +78,11 @@ public class TitleScreen : Control
         GenerateStars();
     }
 
+    /**
+     * Called once per frame.
+     * Handles the input.
+     * @param delta Time since last frame
+     */
     public override void _Process(float delta)
     {
         if(!CanStart)

@@ -17,10 +17,16 @@ using System.Globalization;
 
 using Godot;
 
+/**
+ * Script for the title screen text
+ */
 public class TitleText : RichTextLabel
 {
     private readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 
+    /**
+     * Called when this node and its children enter the scene tree
+     */
     public override void _Ready()
     {
         BbcodeText = String.Format(Culture, "[color=red][center]{0}[/center][/color]", Tr("GAME_TITLE_CLEAN"));
