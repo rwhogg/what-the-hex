@@ -147,11 +147,11 @@ public class Grid : Node2D
             case L2:
                 // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
                 // They are way too easy to use intentionally.
-                HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT);
+                HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT, controllerIndex);
                 break;
             case R:
             case R2:
-                HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT);
+                HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
                 break;
             case Start:
                 Pause();
