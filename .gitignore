@@ -53,3 +53,5 @@ project/git_api.gdns
 appinspector.log.txt
 output.html
 _BACKUP_*
+super-linter.log
+*.cqldb
