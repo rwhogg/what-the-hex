@@ -38,8 +38,10 @@ public static class Utils
     {
         if(RocketFont == null)
         {
-            RocketFont = new DynamicFont();
-            RocketFont.FontData = ResourceLoader.Load<DynamicFontData>("KenneyRocket.ttf");
+            RocketFont = new DynamicFont
+            {
+                FontData = ResourceLoader.Load<DynamicFontData>("KenneyRocket.ttf")
+            };
         }
         RocketFont.OutlineColor = Red;
         RocketFont.Size = 30;

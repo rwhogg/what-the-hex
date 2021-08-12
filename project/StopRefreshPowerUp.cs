@@ -23,7 +23,7 @@ using Godot;
  */
 public class StopRefreshPowerUp : Godot.Object, IPowerUp
 {
-    public static ImageTexture Texture = new ImageTexture();
+    public static readonly ImageTexture Texture = new ImageTexture();
 
     public int StopRefreshTime { get; }
 

@@ -24,19 +24,34 @@ public class BottomStatusLabel : RichTextLabel
 {
     private int RecentScore;
 
-    private CultureInfo culture = ConfigFileUtils.GetCulture();
+    private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
+    /**
+     * Called once per frame.
+     * Reads statistics from the GameComponent and displays them at the bottom
+     */
     public override void _Process(float delta)
     {
         base._Process(delta);
-        GameComponent gameComponent = GetTree().Root.GetNode<GameComponent>("GameComponent");
+        var gameComponent = GetTree().Root.GetNode<GameComponent>("GameComponent");
         string colorName = Utils.ColorMap(gameComponent.AdvantageColor);
-        int advantageTimeLeft = (int)gameComponent.GetNode<Timer>("AdvantageTimer").TimeLeft;
-        int refreshTimeLeft = (int)gameComponent.GetNode<Timer>("RefreshTimer").TimeLeft;
-        BbcodeText = "Advantage: [color=" + (colorName == "pink" ? "#ff69b4" : colorName) + "]" + colorName + "[/color] " +
-            advantageTimeLeft.ToString(culture) +
-            "   Refresh: " + refreshTimeLeft.ToString(culture) +
-            "   " + (RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty);
+        string advantageTimeLeft = ((int)gameComponent.GetNode<Timer>("AdvantageTimer").TimeLeft).ToString(culture);
+        string refreshTimeLeft = ((int)gameComponent.GetNode<Timer>("RefreshTimer").TimeLeft).ToString(culture);
+        string advantageLabel = Tr("ADVANTAGE");
+        string refreshLabel = Tr("REFRESH");
+        string advantageColor = (colorName == "pink" ? "#ff69b4" : colorName);
+        string recentScoreToShow = RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty;
+        BbcodeText = String.Format(
+            culture,
+            "{0}: [color={1}]{2}[/color] {3} {4}: {5}\t{6}",
+            advantageLabel,
+            advantageColor,
+            colorName,
+            advantageTimeLeft,
+            refreshLabel,
+            refreshTimeLeft,
+            recentScoreToShow
+        );
     }
 
     /**

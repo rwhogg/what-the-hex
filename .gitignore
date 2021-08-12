@@ -54,4 +54,5 @@ appinspector.log.txt
 output.html
 _BACKUP_*
 super-linter.log
+.~lock.*#
 *.cqldb

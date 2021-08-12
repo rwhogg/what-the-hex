@@ -23,7 +23,7 @@ using static Godot.Mathf;
  */
 public class PowerUpLabel : Label
 {
-    private CultureInfo culture = ConfigFileUtils.GetCulture();
+    private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     public override void _Process(float delta)
     {

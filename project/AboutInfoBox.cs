@@ -13,28 +13,19 @@
 // limitations under the License.
 
 
-
-using System;
-using System.Globalization;
-
 using Godot;
 
 /**
- * Script for the refresh timer label in the game scene
+ * Script for the About box
  */
-public class RefreshLabel : RichTextLabel
+public class AboutInfoBox : TextEdit
 {
-    private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
-
     /**
-     * Updates the refresh timer display.
-     * Called once per frame.
-     * @param delta Time in seconds since last frame.
+     * Called when this object and its children enter the scene tree.
+     * Replaces the version number in the about box automatically.
      */
-    public override void _Process(float delta)
+    public override void _Ready()
     {
-        Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/RefreshTimer");
-        int timeLeft = (int)timer.TimeLeft + 1;
-        this.BbcodeText = String.Format(culture, "[color=red][right]{0}[/right][/color]", timeLeft.ToString(culture));
+        Text = Text.Replace("_vers_", GitVersionInformation.FullSemVer);
     }
 }

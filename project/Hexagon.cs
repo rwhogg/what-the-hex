@@ -53,9 +53,15 @@ public class Hexagon : Node2D
      */
     public bool Matched { get; set; }
 
-    public int i { get; set; }
+    /**
+     * Row index of this hexagon
+     */
+    public int I { get; set; }
 
-    public int j { get; set; }
+    /**
+     * Column index of this hexagon
+     */
+    public int J { get; set; }
 
     private DynamicFont RocketFont;
 
@@ -64,24 +70,32 @@ public class Hexagon : Node2D
     private Timer ColorFlashTimer;
 
     /**
+     * How thick this hexagon's edges are, in pixels
+     */
+    public static readonly int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
+
+    /**
+     * Default background hexagon color
+     */
+    public static readonly Color DefaultHexColor = Black;
+
+    /**
      * List of all possible options for edge colors
      */
-    private static Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
+    private static readonly Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
 
-    private static float SideLength = 50.0F;
+    private const float SideLength = 50.0F;
 
-    private static float Cos30 = (float)Cos(Deg2Rad(30));
+    private static readonly float Cos30 = (float)Cos(Deg2Rad(30));
 
-    public static int EdgeThickness = ConfigFileUtils.GetEdgeThickness();
+    private const int DefaultRefreshTimeSeconds = 5;
 
-    private static Random Rand = new Random();
+    private static readonly bool IsDebug = OS.IsDebugBuild();
 
-    public static Color DefaultHexColor = Black;
-
-    private static int DefaultRefreshTimeSeconds = 5;
-
-    private static CultureInfo culture = ConfigFileUtils.GetCulture();
+    private static readonly Random Rand = new Random();
     private static Color[] CursorColors = { Red, Green };
+
+    private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     /**
      * Get a random edge color
@@ -111,11 +125,11 @@ public class Hexagon : Node2D
      * @param baseColor Base color
      * @param edgeColors Edge colors
      */
-    public Hexagon(Vector2 center, Color baseColor, List<Color> edgeColors)
+    public Hexagon(Vector2 center, Color baseColor, IReadOnlyCollection<Color> edgeColors)
     {
         Position = center;
         BaseColor = baseColor;
-        EdgeColors = edgeColors;
+        EdgeColors = new List<Color>(edgeColors);
         MarkedForReplacement = false;
         Selected = new bool[] { false, false };
         Matched = false;
@@ -162,7 +176,7 @@ public class Hexagon : Node2D
         {
             DrawCircle(new Vector2(0, 0), 5, CursorColors[1]);
         }
-        if(OS.IsDebugBuild())
+        if(IsDebug)
         {
             DrawString(Utils.AnyFont, new Vector2(-25, 30), String.Format(culture, "({0},{1})", (int)Position.x, (int)Position.y));
         }
@@ -230,9 +244,9 @@ public class Hexagon : Node2D
             AddChild(HexRefreshTimer, true);
             HexRefreshTimer.Connect("timeout", this, nameof(On_HexRefresh_Timer_Timeout));
         }
-        if(OS.IsDebugBuild())
+        if(IsDebug)
         {
-            GD.Print("Marked " + i.ToString(culture) + ", " + j.ToString(culture) + " for replacement");
+            GD.Print("Marked " + I.ToString(culture) + ", " + J.ToString(culture) + " for replacement");
         }
         MarkedForReplacement = true;
         HexRefreshTimer.Start(DefaultRefreshTimeSeconds);
@@ -257,9 +271,9 @@ public class Hexagon : Node2D
     private void On_HexRefresh_Timer_Timeout()
     {
         AbortReplacement();
-        if(OS.IsDebugBuild())
+        if(IsDebug)
         {
-            GD.Print("Hex " + i.ToString(culture) + "," + j.ToString(culture) + " refreshed");
+            GD.Print("Hex " + I.ToString(culture) + "," + J.ToString(culture) + " refreshed");
         }
         Refresh();
     }
@@ -325,14 +339,17 @@ public class Hexagon : Node2D
 
     /**
      * Create a new grid of hexagons, each of which has random edge colors
-     * @param numRows Number of rows
-     * @param numCols Number of columns
      * @param basePosition Position of the top-left hexagon in the grid
+     * @param hexagonsPerRow Number of hexagons that appear in each row
      * @param baseColor Base color of every hexagon
      */
     public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
     {
         // FIXME: most of this stuff should move into the grid class
+        if(hexagonsPerRow == null)
+        {
+            throw new ArgumentNullException(nameof(hexagonsPerRow));
+        }
         Grid grid = new Grid(basePosition, hexagonsPerRow);
         int numRows = hexagonsPerRow.Length;
         Hexagon[][] array = new Hexagon[numRows][];
@@ -353,8 +370,8 @@ public class Hexagon : Node2D
 
                 Vector2 position = new Vector2(xPos, yPos);
                 array[i][j] = RandomHexagon(position, baseColor);
-                array[i][j].i = i;
-                array[i][j].j = j;
+                array[i][j].I = i;
+                array[i][j].J = j;
                 grid.AddChild(array[i][j], true);
             }
         }

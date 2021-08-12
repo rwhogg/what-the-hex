@@ -16,8 +16,14 @@
 
 using Godot;
 
+/**
+ * Script for playing music from the title screen
+ */
 public class TitleMusic : AudioStreamPlayer
 {
+    /**
+     * Called when this node and its children enter the scene tree
+     */
     public override void _Ready()
     {
         var titleTextAudio = GetTree().Root.GetNode("MainControl/TitleTextAudio");

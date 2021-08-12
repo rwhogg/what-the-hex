@@ -45,7 +45,7 @@ public class GameComponent : Node2D
     /**
      * The number of advantageous matches made in a row
      */
-    public int NumAdvantageMatchesMade;
+    public int NumAdvantageMatchesMade { get; set; }
 
     private IPowerUp ReservedPowerUp;
 
@@ -57,7 +57,7 @@ public class GameComponent : Node2D
 
     private int NumRefreshes;
 
-    private System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
+    private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
     /**
      * Initializes the Game Component, creates the hexagon grid, and sets up event listeners.
@@ -98,7 +98,7 @@ public class GameComponent : Node2D
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
 
         AdvantageColor = Hexagon.RandomColor();
-        Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
+        var advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
 
         var gameTimer = GetNode<Timer>("GameTimer");
@@ -122,9 +122,9 @@ public class GameComponent : Node2D
     {
         Update();
 
-        Timer gameTimer = GetNode<Timer>("GameTimer");
-        AudioStreamPlayer music = GetNode<AudioStreamPlayer>("Music");
-        float originalPitchScale = music.PitchScale;
+        var gameTimer = GetNode<Timer>("GameTimer");
+        var music = GetNode<AudioStreamPlayer>("Music");
+        _ = music.PitchScale;
         if((int)gameTimer.TimeLeft < 20)
         {
             music.PitchScale = 1.2f;
@@ -197,7 +197,11 @@ public class GameComponent : Node2D
         GetTree().ReloadCurrentScene();
     }
 
+#pragma warning disable IDE0060
+#pragma warning disable CA1801
     private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors)
+#pragma warning restore CA1801
+#pragma warning restore IDE0060
     {
         int additionalScore = 0;
         bool madeAnyAdvantageMatch = false;
@@ -250,7 +254,7 @@ public class GameComponent : Node2D
             bottomStatusLabel.FlashScore(additionalScore);
         }
 
-        AudioStreamPlayer soundPlayer = GetNode<AudioStreamPlayer>(matchedColors.Count > 0 ? "MatchSoundPlayer" : "RotateSoundPlayer");
+        var soundPlayer = GetNode<AudioStreamPlayer>(matchedColors.Count > 0 ? "MatchSoundPlayer" : "RotateSoundPlayer");
         soundPlayer.Play();
 
         if(madeAnyMatch)

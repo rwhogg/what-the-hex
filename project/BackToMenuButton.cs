@@ -22,6 +22,10 @@ using Godot;
 */
 public class BackToMenuButton : ThemeButton
 {
+    /**
+     * Receives ui_cancel events to go back to the main menu
+     * @param event Input event
+     */
     public override void _Input(InputEvent @event)
     {
         if(@event == null)

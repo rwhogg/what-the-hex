@@ -1,3 +1,7 @@
 # False positive
 R:Gendarme.Rules.Performance.UseStringEmptyRule
 M:System.Void Utils::.cctor()
+M:System.Void GitVersionInformation::.cctor()
+# The method it recommends is seemingly undefined? Maybe Mono doesn't implement it
+R:Gendarme.Rules.Globalization.PreferStringComparisonOverrideRule
+M:System.Void AboutInfoBox::_Ready()

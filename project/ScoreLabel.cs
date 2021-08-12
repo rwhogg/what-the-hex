@@ -19,10 +19,17 @@ using System.Globalization;
 
 using Godot;
 
+/**
+ *  Label that displays score details
+ */
 public class ScoreLabel : RichTextLabel
 {
-    private CultureInfo Culture = ConfigFileUtils.GetCulture();
+    private readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 
+    /**
+     * Called once per frame.
+     * @param delta Time since last frame
+     */
     public override void _Process(float delta)
     {
         Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/GameTimer");
@@ -31,6 +38,9 @@ public class ScoreLabel : RichTextLabel
         int score = game.Score;
         int matches = game.NumMatchesMade;
         int hiscore = game.HiScore;
-        BbcodeText = String.Format(Culture, "[color=red]TIME {0} MATCH {2} SCORE {1} HISCORE {3}[/color]", timeLeft, score, matches, hiscore);
+        BbcodeText = String.Format(Culture,
+            "[color=red]{0} {1} {2} {3} {4} {5} {6} {7}[/color]",
+            Tr("TIME"), timeLeft, Tr("MATCH"), matches, Tr("SCORE"), score, Tr("HIGHSCORE"), hiscore
+        );
     }
 }

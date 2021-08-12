@@ -5,6 +5,8 @@ This is What The Hex?, a geometric puzzle game made in C#, using the [Godot Game
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rwhogg/what-the-hex?style=social)
 ![Lines of code](https://img.shields.io/tokei/lines/github/rwhogg/what-the-hex?style=social)
 ![GitHub](https://img.shields.io/github/license/rwhogg/what-the-hex?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/rwhogg/what-the-hex?style=social)
+![Maintenance](https://img.shields.io/maintenance/yes/2021?style=social)
 
 ![Screenshot](screenshot.png)
 

@@ -26,7 +26,7 @@ public class Menu : Control
     private Button[] Buttons;
     private int selected = -1;
 
-    private static int BackButtonIndex = 5;
+    private const int BackButtonIndex = 4;
 
     /**
      * Set up the button indices.
@@ -48,6 +48,7 @@ public class Menu : Control
 
     /**
      * Processes the input. Support for up and down.
+     * @param event Input event
      */
     public override void _Input(InputEvent @event)
     {

@@ -24,7 +24,7 @@ using Godot;
 public static class ConfigFileUtils
 {
     // on Windows, this corresponds to ~/AppData/Roaming/Godot/app_userdata/<Game Name>/WhatTheHex.cfg
-    private static string ConfigFileLocation = "user://WhatTheHex.cfg";
+    private const string ConfigFileLocation = "user://WhatTheHex.cfg";
 
     private static ConfigFile LoadedConfigFile;
 
@@ -72,7 +72,7 @@ public static class ConfigFileUtils
     public static bool ShouldPlayMusic()
     {
         var configFile = GetConfigFile();
-        var defaultValue = OS.IsDebugBuild() ? false : true;
+        var defaultValue = !OS.IsDebugBuild();
         return (bool)configFile.GetValue("music", "enabled", defaultValue);
     }
 

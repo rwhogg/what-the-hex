@@ -20,6 +20,7 @@ run/main_scene="res://root.tscn"
 boot_splash/image="res://boarish-logo-only.png"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
+config/name_fr="Qu'est-ce Que L'Hexagone?"
 
 [debug]
 
@@ -107,6 +108,11 @@ ui_start={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[locale]
+
+fallback="en_US"
+translations=PoolStringArray( "res://translations.en_US.translation", "res://translations.fr.translation" )
 
 [mono]
 

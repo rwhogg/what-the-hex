@@ -17,8 +17,9 @@
 using Godot;
 
 /**
- * Label that displays "Press Start To Play" or "Press Enter To Play"
- * Label depends on whether or not a controller is detected.
+ * Label that displays "Press Start To Play" or equivalent
+ * Label depends on whether or not a controller is detected,
+ * and on whether or not we have a touchscreen.
  */
 public class PressStart : Label
 {
@@ -29,15 +30,15 @@ public class PressStart : Label
     {
         if(Utils.IsControllerMode())
         {
-            Text = "Press Start To Play";
+            Text = Tr("PRESS_START_TO_PLAY");
         }
         else if(!OS.HasTouchscreenUiHint())
         {
-            Text = "Press Enter To Play";
+            Text = Tr("PRESS_ENTER_TO_PLAY");
         }
         else
         {
-            Text = "Tap Screen To Play";
+            Text = Tr("TAP_SCREEN_TO_PLAY");
         }
     }
 }

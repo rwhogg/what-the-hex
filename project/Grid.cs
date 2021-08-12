@@ -43,15 +43,13 @@ public class Grid : Node2D
      */
     public Hexagon[][] Array;
 
-    private int[] HexagonsPerRow;
+    private readonly int[] HexagonsPerRow;
 
     private Hexagon[] SelectedHexagons = new Hexagon[1 + Convert.ToInt32(RuntimeConfig.Is2Player)];
 
-    private static Random Rand = new Random();
+    private static readonly Random Rand = new Random();
 
-    private static CultureInfo culture = ConfigFileUtils.GetCulture();
-
-    // FIXME: something here is throwing an exception
+    private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     /**
      * Do not use. Only for constructing Mono temp objects
@@ -71,7 +69,7 @@ public class Grid : Node2D
 
     /**
      * Handle input for mouse clicks and joystick buttons
-     * @param inputEvent Input event
+     * @param event Input event
      */
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -83,6 +81,18 @@ public class Grid : Node2D
         else if(@event is InputEventMouseButton eventMouseButton)
         {
             HandleMouseClick(eventMouseButton);
+        }
+        else if(@event is InputEventKey eventKey)
+        {
+            HandleKeyPress(eventKey);
+        }
+    }
+
+    private void HandleKeyPress(InputEventKey eventKey)
+    {
+        if(eventKey.Scancode == (int)KeyList.Escape)
+        {
+            Pause();
         }
     }
 
@@ -111,7 +121,7 @@ public class Grid : Node2D
                 int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
                 Hexagon currentlySelectedHexagon = SelectedHexagons[controllerIndex];
                 SelectedHexagons[controllerIndex].Selected[controllerIndex] = false;
-                int newI = SelectedHexagons[controllerIndex].i + dir[0];
+                int newI = SelectedHexagons[controllerIndex].I+ dir[0];
                 int numRows = HexagonsPerRow.Length;
                 if(newI < 0)
                 {
@@ -121,7 +131,7 @@ public class Grid : Node2D
                 {
                     newI = numRows - 1;
                 }
-                int newJ = SelectedHexagons[controllerIndex].j + dir[1];
+                int newJ = SelectedHexagons[controllerIndex]Jj + dir[1];
                 if(newJ < 0)
                 {
                     newJ = 0;
@@ -144,7 +154,17 @@ public class Grid : Node2D
             case R2:
                 HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
                 break;
+            case Start:
+                Pause();
+                break;
         }
+    }
+
+    private void Pause()
+    {
+        GetTree().Paused = true;
+        OS.Alert("PAUSED", "Pause");
+        GetTree().Paused = false;
     }
 
     private void HandleMouseClick(InputEventMouseButton eventMouseButton)
@@ -169,7 +189,7 @@ public class Grid : Node2D
         {
             // on touch screen devices, a tap should be equivalent to a select, not a rotation
             SelectedHexagons[0].Selected[0] = false;
-            SetSelectedHexagon(affectedHexagon.i, affectedHexagon.j);
+            SetSelectedHexagon(affectedHexagon.I, affectedHexagon.J);
             return;
         }
         else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
@@ -228,8 +248,7 @@ public class Grid : Node2D
         // FIXME not handled correctly
         affectedHexagon.Rot(direction);
         Color colorToFlash = Hexagon.DefaultHexColor;
-        Godot.Collections.Dictionary<Color, int> matchedColors = null;
-        HashSet<Hexagon> matchedHexagons = CheckMatches(affectedHexagon, out matchedColors);
+        HashSet<Hexagon> matchedHexagons = CheckMatches(affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors);
         if(matchedColors.Keys.Count > 0)
         {
             foreach(var pair in matchedColors)
@@ -243,7 +262,7 @@ public class Grid : Node2D
         {
             if(OS.IsDebugBuild())
             {
-                GD.Print("Matched hex " + hexagon.i.ToString(culture) + ", " + hexagon.j.ToString(culture));
+                GD.Print("Matched hex " + hexagon.I.ToString(culture) + ", " + hexagon.J.ToString(culture));
             }
             hexagon.Matched = true;
             hexagon.AbortReplacement();
@@ -262,8 +281,8 @@ public class Grid : Node2D
         int bre = 1;
         int ble = 3;
         int tle = 4;
-        int row = (int)affectedHexagon.i;
-        int column = (int)affectedHexagon.j;
+        int row = (int)affectedHexagon.I;
+        int column = (int)affectedHexagon.J;
 
         // FIXME: 2 issues here
         // 1. This logic might have to be adjusted to handle layouts with unequal columns per row

@@ -19,7 +19,7 @@ using System;
  */
 public class NumMatchesWinCondition : IWinCondition
 {
-    private int MatchesToWin;
+    private readonly int MatchesToWin;
 
     /**
      * Constructor
