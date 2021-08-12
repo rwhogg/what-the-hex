@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 using Godot;
 
 public class MultiplayerButton : ThemeButton
@@ -41,7 +39,7 @@ public class MultiplayerButton : ThemeButton
         Disabled = ShouldDisable();
     }
 
-    private bool ShouldDisable()
+    private static bool ShouldDisable()
     {
         return Utils.GetNumControllers() < 2;
     }

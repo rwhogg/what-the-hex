@@ -93,7 +93,7 @@ public class Hexagon : Node2D
     private static readonly bool IsDebug = OS.IsDebugBuild();
 
     private static readonly Random Rand = new Random();
-    private static Color[] CursorColors = { Red, Green };
+    private static readonly Color[] CursorColors = { Red, Green };
 
     private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
