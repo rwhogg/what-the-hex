@@ -1,4 +1,4 @@
-// Copyright 2021 Bob &#34;Wombat&#34; Hogg
+// Copyright 2021 Bob "Wombat" Hogg
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,9 @@ public class StopRefreshPowerUp : Godot.Object, IPowerUp
 {
     public static readonly ImageTexture Texture = new ImageTexture();
 
+    /**
+     * How long the refreshes stop for
+     */
     public int StopRefreshTime { get; }
 
     private float RefreshWaitTime;

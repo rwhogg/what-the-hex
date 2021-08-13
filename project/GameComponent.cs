@@ -70,6 +70,10 @@ public class GameComponent : Node2D
         Score = 0;
         NumMatchesMade = 0;
 
+        if(RuntimeConfig.HexesPerRow == null)
+        {
+            RuntimeConfig.DefaultLayout();
+        }
         HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
         HexagonGrid.SetSelectedHexagon(0, 0);
         AddChild(HexagonGrid);

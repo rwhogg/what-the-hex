@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Globalization;
 
 using Godot;
@@ -25,10 +26,15 @@ public class PowerUpLabel : Label
 {
     private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
+    /**
+     * Called once per frame.
+     * Takes the advantage count left from the GameComponent.
+     * @param delta Time since last frame
+     */
     public override void _Process(float delta)
     {
         GameComponent gameComponent = GetTree().Root.GetNode<GameComponent>("GameComponent");
         string advantageLeft = Max(3 - gameComponent.NumAdvantageMatchesMade, 0).ToString(culture);
-        Text = "Powerup\nNext: " + advantageLeft;
+        Text = String.Format(culture,"{0}\n{1}: {2}", Tr("POWERUP"), Tr("NEXT"), advantageLeft);
     }
 }

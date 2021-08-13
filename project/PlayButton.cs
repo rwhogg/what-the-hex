@@ -25,12 +25,8 @@ public class PlayButton : ThemeButton
      */
     protected override void ChangeScene()
     {
+        RuntimeConfig.DefaultLayout();
         RuntimeConfig.Is2Player = false;
-        RuntimeConfig.HexesPerRow = new int[5];
-        for(int i = 0; i < 5; i++)
-        {
-            RuntimeConfig.HexesPerRow[i] = 8;
-        }
         GetTree().ChangeScene("res://GameScene.tscn");
     }
 }
