@@ -1,4 +1,4 @@
-// Copyright 2021 Bob &#34;Wombat&#34; Hogg
+// Copyright 2021 Bob "Wombat" Hogg
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,14 +22,22 @@ public class RuntimeConfig : Node
     /**
      * True if we are in 2-player mode
      */
-    public static bool Is2Player;
+    public static bool Is2Player { get; set; }
 
     /**
      * Lists the number of hexagons in each row
      * (the number of columns is determined by the length)
      */
-    public static int[] HexesPerRow; // FIXME default this so base game scene is playable again
+    public static int[] HexesPerRow { get; set; }
 
-    // FIXME
-    public static int MatchesNeeded = 20;
+    public static int MatchesNeeded { get; set; }
+
+    public static void DefaultLayout()
+    {
+        RuntimeConfig.HexesPerRow = new int[5];
+        for(int i = 0; i < 5; i++)
+        {
+            RuntimeConfig.HexesPerRow[i] = 8;
+        }
+    }
 }
