@@ -18,8 +18,8 @@ fi
 
 if [ -x "$(command -v dotnet-format)" ]; then
     echo "dotnet-format is available!"
-elif [ -x "$(command -v dotnet)" ]; then
-    dotnet tool install -g dotnet-format
+elif [ -x "$(command -v dotnet.exe)" ]; then
+    dotnet.exe tool install -g dotnet-format
 else
     echo "Please install .NET"
 fi
