@@ -171,7 +171,7 @@ public class Grid : Node2D
         // note, we assume mouse clicks are only used by a single player for now
 
         // ensure we don't double-rotate from a single click and that we don't accidentally trigger from the mouse wheel
-        if(eventMouseButton.IsPressed() || eventMouseButton.ButtonIndex >= (int) ButtonList.Middle)
+        if(eventMouseButton.IsPressed() || eventMouseButton.ButtonIndex >= (int)ButtonList.Middle)
         {
             return;
         }
