@@ -1,9 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[sub_resource type="DynamicFontData" id=4]
+[sub_resource type="DynamicFontData" id=1]
 font_path = "res://Kenney_Space.ttf"
 
 [resource]
 size = 28
 outline_color = Color( 0.835294, 0.137255, 0.105882, 1 )
-font_data = SubResource( 4 )
+font_data = SubResource( 1 )

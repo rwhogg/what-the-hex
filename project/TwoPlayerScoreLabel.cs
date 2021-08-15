@@ -32,10 +32,21 @@ public class TwoPlayerScoreLabel : ScoreLabel
         base._Process(delta);
         Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/GameTimer");
         GameComponent game = GetTree().Root.GetNode<GameComponent>("GameComponent");
+
+        if(!Visible)
+        {
+            return;
+        }
+
         int timeLeft = (int)timer.TimeLeft;
         int score1 = game.Scores[0];
         int score2 = game.Scores[1];
-        BbcodeText = String.Format(Culture,"[color=red]P1: {0}\tTIME: {1}\t P2: {2}[/color]", score1, timeLeft, score2);
+        BbcodeText = String.Format(Culture,
+            "[color=red]P1: {0}[/color]\t\t\t\t\t\t\t\t[color=blue]TIME: {1}[/color]\t\t\t\t\t\t\t\t[color=green]P2: {2}[/color]",
+            score1,
+            timeLeft,
+            score2
+        );
         // FIXME use localization
     }
 }

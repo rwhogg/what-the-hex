@@ -36,7 +36,7 @@ font_data = ExtResource( 2 )
 font_path = "res://Kenney_Space.ttf"
 
 [sub_resource type="DynamicFont" id=5]
-size = 26
+size = 22
 outline_color = Color( 0.835294, 0.137255, 0.105882, 1 )
 font_data = SubResource( 4 )
 
