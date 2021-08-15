@@ -45,7 +45,7 @@ margin_bottom = 49.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
-text = "Play"
+text = "PLAY"
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -59,7 +59,7 @@ rect_pivot_offset = Vector2( 206.951, -121.741 )
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
-text = "Settings"
+text = "SETTINGS"
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -73,7 +73,7 @@ rect_pivot_offset = Vector2( 206.951, -121.741 )
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
-text = "Credits"
+text = "CREDITS"
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -86,7 +86,7 @@ margin_bottom = 208.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
-text = "About"
+text = "ABOUT"
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,7 +99,7 @@ margin_bottom = 261.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
-text = "Back"
+text = "BACK"
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
