@@ -6,10 +6,10 @@
 
 if [ -z "$GODOT" ]; then
     echo "Set the environment variable GODOT"
-elif [ "$($GODOT --version | tr -d '[:space:]')" = "3.3.2.stable.mono.official" ]; then
+elif [ "$($GODOT --version | tr -d '[:space:]')" = "3.3.3.rc1.mono.official.dec840452" ]; then
     echo "Godot Mono is available!"
 else
-    echo "Please install Godot Mono edition 3.3.2 if you have not done so already"
+    echo "Please install Godot Mono edition 3.3.3-rc1 if you have not done so already"
 fi
 
 if [ -x "$(command -v brew)" ]; then
@@ -39,4 +39,3 @@ elif [ -x "$(command -v go)" ]; then
 else
     echo "Please install Golang"
 fi
-
