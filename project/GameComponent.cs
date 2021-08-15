@@ -110,7 +110,8 @@ public class GameComponent : Node2D
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
 
-        WinConditions.Add(new NumMatchesWinCondition(RuntimeConfig.MatchesNeeded));
+        int matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
+        WinConditions.Add(new NumMatchesWinCondition(matchesNeeded));
     }
 
     /**

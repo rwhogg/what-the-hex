@@ -22,16 +22,15 @@ public class RuntimeConfig : Node
     /**
      * True if we are in 2-player mode
      */
-    public static bool Is2Player;
+    public static bool Is2Player { get; set; }
 
     /**
      * Lists the number of hexagons in each row
      * (the number of columns is determined by the length)
      */
-    public static int[] HexesPerRow;
+    public static int[] HexesPerRow { get; set; }
 
-    // FIXME
-    public static int MatchesNeeded = 20;
+    public static int MatchesNeeded { get; set; }
 
     public static void DefaultLayout()
     {

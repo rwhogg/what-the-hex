@@ -35,6 +35,6 @@ public class PowerUpLabel : Label
     {
         GameComponent gameComponent = GetTree().Root.GetNode<GameComponent>("GameComponent");
         string advantageLeft = Max(3 - gameComponent.NumAdvantageMatchesMade, 0).ToString(culture);
-        Text = String.Format(culture,"{0}\n{1}: {2}", Tr("POWERUP"), Tr("NEXT"), advantageLeft);
+        Text = String.Format(culture, "{0}\n{1}: {2}", Tr("POWERUP"), Tr("NEXT"), advantageLeft);
     }
 }
