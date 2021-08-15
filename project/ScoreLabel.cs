@@ -13,8 +13,6 @@
 // limitations under the License.
 
 
-
-using System;
 using System.Globalization;
 
 using Godot;
@@ -24,23 +22,5 @@ using Godot;
  */
 public class ScoreLabel : RichTextLabel
 {
-    private readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
-
-    /**
-     * Called once per frame.
-     * @param delta Time since last frame
-     */
-    public override void _Process(float delta)
-    {
-        Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/GameTimer");
-        GameComponent game = GetTree().Root.GetNode<GameComponent>("GameComponent");
-        int timeLeft = (int)timer.TimeLeft;
-        int score = game.Score;
-        int matches = game.NumMatchesMade;
-        int hiscore = game.HiScore;
-        BbcodeText = String.Format(Culture,
-            "[color=red]{0} {1} {2} {3} {4} {5} {6} {7}[/color]",
-            Tr("TIME"), timeLeft, Tr("MATCH"), matches, Tr("SCORE"), score, Tr("HIGHSCORE"), hiscore
-        );
-    }
+    protected readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 }

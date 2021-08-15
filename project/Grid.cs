@@ -246,7 +246,6 @@ public class Grid : Node2D
 
     private void HandleRotation(Hexagon affectedHexagon, Direction direction, int playerIndex)
     {
-        // FIXME not handled correctly
         affectedHexagon.Rot(direction);
         Color colorToFlash = Hexagon.DefaultHexColor;
         HashSet<Hexagon> matchedHexagons = CheckMatches(affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors);
@@ -271,7 +270,7 @@ public class Grid : Node2D
             hexagon.Refresh();
             hexagons[i++] = hexagon;
         }
-        EmitSignal(nameof(HexagonRotated), affectedHexagon, hexagons, matchedColors);
+        EmitSignal(nameof(HexagonRotated), affectedHexagon, hexagons, matchedColors, playerIndex);
     }
 
     private HashSet<Hexagon> CheckMatches(Hexagon affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors)

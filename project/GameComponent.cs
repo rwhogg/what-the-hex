@@ -25,7 +25,7 @@ public class GameComponent : Node2D
     /**
      * The current score
      */
-    public int Score { get; set; }
+    public int[] Scores { get; set; }
 
     /**
      * The current high score (not yet saved necessarily)
@@ -67,7 +67,22 @@ public class GameComponent : Node2D
     public override void _Ready()
     {
         HiScore = ConfigFileUtils.LoadHiscore();
-        Score = 0;
+        Scores = new int[RuntimeConfig.Is2Player ? 2 : 1];
+
+        // FIXME: supposedly there is a static Array.Fill method, but it doesn't seem to be found
+        Scores[0] = 0;
+        if(RuntimeConfig.Is2Player)
+        {
+            Scores[1] = 0;
+            // FIXME: maybe it makes sense to split some of these details into subclasses... and perhaps even scene inheritance?
+            GetNode<RichTextLabel>("TopPanelContainer/OnePlayerScoreLabel").Hide();
+            GetNode<RichTextLabel>("TopPanelContainer/TwoPlayerScoreLabel").Show();
+        }
+        else
+        {
+            GetNode<RichTextLabel>("TopPanelContainer/TwoPlayerScoreLabel").Hide();
+        }
+
         NumMatchesMade = 0;
 
         if(RuntimeConfig.HexesPerRow == null)
@@ -204,7 +219,7 @@ public class GameComponent : Node2D
 
 #pragma warning disable IDE0060
 #pragma warning disable CA1801
-    private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors)
+    private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors, int playerIndex)
 #pragma warning restore CA1801
 #pragma warning restore IDE0060
     {
@@ -224,7 +239,7 @@ public class GameComponent : Node2D
                 madeAnyMatch = true;
             }
         }
-        Score += additionalScore;
+        Scores[playerIndex] += additionalScore;
         if(madeAnyAdvantageMatch)
         {
             NumAdvantageMatchesMade++;
@@ -249,9 +264,9 @@ public class GameComponent : Node2D
             gameTimer.Start(gameTimer.TimeLeft + 5);
         }
 
-        if(Score > HiScore)
+        if(!RuntimeConfig.Is2Player && Scores[0] > HiScore)
         {
-            HiScore = Score;
+            HiScore = Scores[0];
         }
         if(additionalScore > 0)
         {
