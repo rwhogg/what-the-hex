@@ -195,7 +195,9 @@ public class GameComponent : Node2D
             return;
         }
         ReservedPowerUp = null;
-        TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
+
+        // FIXME: see about moving this into a method of the PowerUpButton. Not a huge fan of futzing with the internal textures here
+        var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.TextureNormal = null;
 
         GetNode<AudioStreamPlayer>("PowerUpSoundPlayer").Play();
@@ -261,7 +263,7 @@ public class GameComponent : Node2D
         }
         if(additionalScore > 0)
         {
-            BottomStatusLabel bottomStatusLabel = GetNode<BottomStatusLabel>("BottomPanelContainer/BottomStatusLabel");
+            var bottomStatusLabel = GetNode<BottomStatusLabel>("BottomPanelContainer/BottomStatusLabel");
             bottomStatusLabel.FlashScore(additionalScore);
         }
 
@@ -296,7 +298,7 @@ public class GameComponent : Node2D
         // FIXME need random
         IPowerUp powerUp = new StopRefreshPowerUp();
         ReservedPowerUp = powerUp;
-        TextureButton powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
+        var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.TextureNormal = powerUp.GetTexture();
     }
 
@@ -322,7 +324,7 @@ public class GameComponent : Node2D
         gameOverSound.Play();
         GetNode<RichTextLabel>("GameOverLabel").Show();
 
-        Button continueButton = GetNode<Button>("ContinueButton");
+        var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
         continueButton.Show();
     }
