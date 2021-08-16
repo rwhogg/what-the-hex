@@ -70,14 +70,7 @@ public class GameComponent : Node2D
         Score = 0;
         NumMatchesMade = 0;
 
-        if(RuntimeConfig.HexesPerRow == null)
-        {
-            RuntimeConfig.DefaultLayout();
-        }
-        HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
-        HexagonGrid.SetSelectedHexagon(0, 0);
-        AddChild(HexagonGrid);
-        HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
+        InitGrid();
 
         SetUpButtonHandlers();
 
@@ -89,6 +82,18 @@ public class GameComponent : Node2D
 
         int matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
         WinConditions.Add(new NumMatchesWinCondition(matchesNeeded));
+    }
+
+    private void InitGrid()
+    {
+        if(RuntimeConfig.HexesPerRow == null)
+        {
+            RuntimeConfig.DefaultLayout();
+        }
+        HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
+        HexagonGrid.SetSelectedHexagon(0, 0);
+        AddChild(HexagonGrid);
+        HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
     }
 
     private void SetUpButtonHandlers()
