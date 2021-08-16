@@ -33,11 +33,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361620780033971282348",
-				"name": "Set up an MSI package with Wix",
-				"state": ""
-			},
-			{
 				"id": "1361620821621766959973",
 				"name": "Adjust the replacement logic (start time, refresh rate, number selected for cycle, etc.)",
 				"state": ""
