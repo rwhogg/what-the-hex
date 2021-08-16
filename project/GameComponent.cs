@@ -57,6 +57,10 @@ public class GameComponent : Node2D
 
     private int NumRefreshes;
 
+    private const float AdvantageTime = 15.0f;
+
+    private const float GameStartTime = 100.0f;
+
     private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
     /**
@@ -119,15 +123,16 @@ public class GameComponent : Node2D
 
     private void StartTimers()
     {
+        var timeoutSignal = "timeout";
         var advantageTimer = GetNode<Timer>("AdvantageTimer");
-        advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
+        advantageTimer.Connect(timeoutSignal, this, nameof(On_AdvantageTimer_Timeout));
 
         var gameTimer = GetNode<Timer>("GameTimer");
-        gameTimer.Connect("timeout", this, nameof(On_GameTimer_Timeout));
-        gameTimer.Start(100.0f);
+        gameTimer.Connect(timeoutSignal, this, nameof(On_GameTimer_Timeout));
+        gameTimer.Start(GameStartTime);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
-        refreshTimer.Connect("timeout", this, nameof(On_RefreshTimer_Timeout));
+        refreshTimer.Connect(timeoutSignal, this, nameof(On_RefreshTimer_Timeout));
     }
 
     /**
@@ -244,7 +249,7 @@ public class GameComponent : Node2D
             AdvantageColor = Hexagon.RandomColor();
             var advantageTimer = GetNode<Timer>("AdvantageTimer");
             advantageTimer.Stop();
-            advantageTimer.Start(15.0f);
+            advantageTimer.Start(AdvantageTime);
             if(NumAdvantageMatchesMade == 3)
             {
                 AssignPowerup();
