@@ -55,6 +55,12 @@ public class GameComponent : Node2D
 
     private int NumHexagonsToReplace = 3;
 
+    private const float AdvantageTime = 15.0f;
+
+    private const float GameStartTime = 100.0f;
+
+    private const string TimeoutSignal = "timeout";
+
     private int NumRefreshes;
 
     private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
@@ -118,14 +124,14 @@ public class GameComponent : Node2D
 
         AdvantageColor = Hexagon.RandomColor();
         var advantageTimer = GetNode<Timer>("AdvantageTimer");
-        advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
+        advantageTimer.Connect(TimeoutSignal, this, nameof(On_AdvantageTimer_Timeout));
 
         var gameTimer = GetNode<Timer>("GameTimer");
-        gameTimer.Connect("timeout", this, nameof(On_GameTimer_Timeout));
-        gameTimer.Start(100.0f);
+        gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
+        gameTimer.Start(GameStartTime);
 
         Timer refreshTimer = GetNode<Timer>("RefreshTimer");
-        refreshTimer.Connect("timeout", this, nameof(On_RefreshTimer_Timeout));
+        refreshTimer.Connect(TimeoutSignal, this, nameof(On_RefreshTimer_Timeout));
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
 
@@ -246,7 +252,7 @@ public class GameComponent : Node2D
             AdvantageColor = Hexagon.RandomColor();
             Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
             advantageTimer.Stop();
-            advantageTimer.Start(15.0f);
+            advantageTimer.Start(AdvantageTime);
             if(NumAdvantageMatchesMade == 3)
             {
                 AssignPowerup();
