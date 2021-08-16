@@ -26,16 +26,12 @@ _The pursuit of true hexcellence requires that you clear your mind and become on
 
 * Most matches are worth 100 points, but each match you make with the current advantage color gives you 300 instead
 
-FIXME verify true
-
 * Every 10 seconds, random hexagons are regenerated
 
 * Hexagons are internally black by default but turn blue when they are selected for replacement
 * The number of hexagons refreshed per cycle increases by 1 every 3 refresh cycles
 
 * You win if you make 20 matches
-
-FIXME unimplemented
 
 # Controls
 
@@ -61,12 +57,13 @@ Tier 1 (Should Work Well):
 
 * Android/Chrome OS/Fire OS (ARM)
 * GNU/Linux (amd64)
+* HTML5/Web Browsers
+    * Note that mobile Safari does not support the screen orientation API, so you may have trouble fitting that one onto the screen
 * Windows (x86)
 
 Tier 2 (Will Probably Work Well):
 
 * macOS (Can't test this at the moment, but no reason to believe it will be an issue)
-
 
 Tier 3 (Might work if compiled from source, but no promises)
 
@@ -76,8 +73,6 @@ Tier 4 (Might work in the future, but I don't currently expect it to)
 
 * Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271 . For some reason the Edge browser here doesn't work either - maybe it will after the Chromium-based Edge is made available to all Xbox users.
 * Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
-
-For mobile devices, a tablet is recommended, as the screen needs to be able to display at 1024 * 600 resolution smoothly
 
 # Reporting Bugs
 
