@@ -28,6 +28,7 @@ exports/Linux
 exports/HTML5
 .secrets/*.keystore
 exports/Android
+exports/Win_x86
 
 # Android studio
 project/android/.idea/
