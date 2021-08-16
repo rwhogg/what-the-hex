@@ -79,12 +79,26 @@ public class GameComponent : Node2D
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
 
-        TouchScreenButton rotateClockwiseButton = GetNodeOrNull<TouchScreenButton>("RotateClockwiseButton");
+        SetUpButtonHandlers();
+
+        AdvantageColor = Hexagon.RandomColor();
+
+        StartTimers();
+
+        GetNode<RichTextLabel>("GameOverLabel").Hide();
+
+        int matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
+        WinConditions.Add(new NumMatchesWinCondition(matchesNeeded));
+    }
+
+    private void SetUpButtonHandlers()
+    {
+        var rotateClockwiseButton = GetNodeOrNull<TouchScreenButton>("RotateClockwiseButton");
         if(rotateClockwiseButton != null && rotateClockwiseButton.ShapeVisible)
         {
             if(OS.HasTouchscreenUiHint())
             {
-                TouchScreenButton rotateCounterClockwiseButton = GetNode<TouchScreenButton>("RotateCounterClockwiseButton");
+                var rotateCounterClockwiseButton = GetNode<TouchScreenButton>("RotateCounterClockwiseButton");
                 rotateClockwiseButton.Connect("pressed", this, nameof(On_TouchRotateClockwise));
                 rotateCounterClockwiseButton.Connect("pressed", this, nameof(On_TouchRotateCounterClockwise));
             }
@@ -96,8 +110,10 @@ public class GameComponent : Node2D
 
         var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
+    }
 
-        AdvantageColor = Hexagon.RandomColor();
+    private void StartTimers()
+    {
         var advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect("timeout", this, nameof(On_AdvantageTimer_Timeout));
 
@@ -105,13 +121,8 @@ public class GameComponent : Node2D
         gameTimer.Connect("timeout", this, nameof(On_GameTimer_Timeout));
         gameTimer.Start(100.0f);
 
-        Timer refreshTimer = GetNode<Timer>("RefreshTimer");
+        var refreshTimer = GetNode<Timer>("RefreshTimer");
         refreshTimer.Connect("timeout", this, nameof(On_RefreshTimer_Timeout));
-
-        GetNode<RichTextLabel>("GameOverLabel").Hide();
-
-        int matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
-        WinConditions.Add(new NumMatchesWinCondition(matchesNeeded));
     }
 
     /**
@@ -156,8 +167,7 @@ public class GameComponent : Node2D
         if(HexagonGrid != null)
         {
             HexagonGrid.SelectHexagonsForReplacement(NumHexagonsToReplace);
-            AudioStreamPlayer refreshSoundPlayer = GetNode<AudioStreamPlayer>("RefreshSoundPlayer");
-            refreshSoundPlayer.Play();
+            GetNode<AudioStreamPlayer>("RefreshSoundPlayer").Play();
         }
     }
 
@@ -225,7 +235,7 @@ public class GameComponent : Node2D
         {
             NumAdvantageMatchesMade++;
             AdvantageColor = Hexagon.RandomColor();
-            Timer advantageTimer = GetNode<Timer>("AdvantageTimer");
+            var advantageTimer = GetNode<Timer>("AdvantageTimer");
             advantageTimer.Stop();
             advantageTimer.Start(15.0f);
             if(NumAdvantageMatchesMade == 3)
@@ -241,7 +251,7 @@ public class GameComponent : Node2D
 
         if(madeAnyMatch)
         {
-            Timer gameTimer = GetNode<Timer>("GameTimer");
+            var gameTimer = GetNode<Timer>("GameTimer");
             gameTimer.Start(gameTimer.TimeLeft + 5);
         }
 
