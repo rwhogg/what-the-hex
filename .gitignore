@@ -53,8 +53,7 @@ project/git_api.gdns
 *.orig
 appinspector.log.txt
 output.html
-_BACKUP_*
+*.cqldb
 super-linter.log
 .~lock.*#
-*.cqldb
 exports/Win_x86_nsis

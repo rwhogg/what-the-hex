@@ -63,10 +63,6 @@ public class GameComponent : Node2D
 
     private int NumRefreshes;
 
-    private const float AdvantageTime = 15.0f;
-
-    private const float GameStartTime = 100.0f;
-
     private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
     /**
