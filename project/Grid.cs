@@ -42,6 +42,8 @@ public class Grid : Node2D
      * The underlying jagged array of hexagons
      */
     public Hexagon[][] Array;
+    // FIXME: Consider changing the field 'Array' to a private or internal field and add a 'SetArray' method.
+    // Would have to look into the specifics of how I would want to do that
 
     private readonly int[] HexagonsPerRow;
 
