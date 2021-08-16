@@ -5,3 +5,6 @@ M:System.Void GitVersionInformation::.cctor()
 # The method it recommends is seemingly undefined? Maybe Mono doesn't implement it
 R:Gendarme.Rules.Globalization.PreferStringComparisonOverrideRule
 M:System.Void AboutInfoBox::_Ready()
+# Can't deduplicate due to existing signal interface
+R:Gendarme.Rules.Smells.AvoidCodeDuplicatedInSameClassRule
+M:System.Void GameComponent::On_TouchRotateClockwise()

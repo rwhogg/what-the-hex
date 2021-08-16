@@ -42,6 +42,8 @@ public class Grid : Node2D
      * The underlying jagged array of hexagons
      */
     public Hexagon[][] Array;
+    // FIXME: Consider changing the field 'Array' to a private or internal field and add a 'SetArray' method.
+    // Would have to look into the specifics of how I would want to do that
 
     private readonly int[] HexagonsPerRow;
 
@@ -299,10 +301,7 @@ public class Grid : Node2D
             bool wEq = affectedHexagon.EdgeColors[tle] == hexW.EdgeColors[tre];
             if(nwEq && nEq && wEq)
             {
-                matchedHexagons.Add(affectedHexagon);
-                matchedHexagons.Add(hexNW);
-                matchedHexagons.Add(hexN);
-                matchedHexagons.Add(hexW);
+                matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexNW, hexN, hexW });
                 // No need to += 1 here because this is definitely the first instance
                 matchedColors[affectedHexagon.EdgeColors[tle]] = 1;
             }
@@ -318,10 +317,7 @@ public class Grid : Node2D
             bool eEq = affectedHexagon.EdgeColors[tre] == hexE.EdgeColors[tle];
             if(neEq && nEq && eEq)
             {
-                matchedHexagons.Add(affectedHexagon);
-                matchedHexagons.Add(hexNE);
-                matchedHexagons.Add(hexN);
-                matchedHexagons.Add(hexE);
+                matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexNE, hexN, hexE });
                 if(matchedColors.ContainsKey(affectedHexagon.EdgeColors[tre]))
                 {
                     matchedColors[affectedHexagon.EdgeColors[tre]] += 1;
@@ -344,10 +340,7 @@ public class Grid : Node2D
             bool eEq = affectedHexagon.EdgeColors[bre] == hexE.EdgeColors[ble];
             if(seEq && sEq && eEq)
             {
-                matchedHexagons.Add(affectedHexagon);
-                matchedHexagons.Add(hexSE);
-                matchedHexagons.Add(hexS);
-                matchedHexagons.Add(hexE);
+                matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexSE, hexS, hexE });
                 if(matchedColors.ContainsKey(affectedHexagon.EdgeColors[bre]))
                 {
                     matchedColors[affectedHexagon.EdgeColors[bre]] += 1;
@@ -370,10 +363,7 @@ public class Grid : Node2D
             bool wEq = affectedHexagon.EdgeColors[ble] == hexW.EdgeColors[bre];
             if(swEq && sEq && wEq)
             {
-                matchedHexagons.Add(affectedHexagon);
-                matchedHexagons.Add(hexSW);
-                matchedHexagons.Add(hexS);
-                matchedHexagons.Add(hexW);
+                matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexSW, hexS, hexW });
                 if(matchedColors.ContainsKey(affectedHexagon.EdgeColors[ble]))
                 {
                     matchedColors[affectedHexagon.EdgeColors[ble]] += 1;
@@ -390,7 +380,6 @@ public class Grid : Node2D
 
     private Hexagon GetAffectedHexagon(Vector2 clickPos)
     {
-        // FIXME: does this need to be adjusted for a different edge thickness???
         int j = RoundToInt(clickPos.x / (2 * Hexagon.BigRadius() + 0.2F * Hexagon.EdgeThickness));
         int i = RoundToInt(clickPos.y / (2 * Hexagon.SmallRadius() + 0.8F * Hexagon.EdgeThickness));
         if(i >= HexagonsPerRow.Length || j >= HexagonsPerRow[i])
