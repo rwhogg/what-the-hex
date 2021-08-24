@@ -62,7 +62,7 @@ public class RuntimeConfig : Node
                 popup = ResourceLoader.Load<PackedScene>("res://PausePopup.tscn").Instance<PopupDialog>();
                 gameComponent.AddChild(popup);
                 popup.GetNode("ButtonContainer/ResumeButton").Connect("pressed", this, nameof(Resume));
-                popup.GetNode("ButtonContainer/QuitButton").Connect("pressed", this, nameof(Quit));
+                // popup.GetNode("ButtonContainer/QuitButton").Connect("pressed", this, nameof(Quit));
                 popup.PopupCentered();
                 sceneTree.Paused = true;
             }
@@ -77,16 +77,5 @@ public class RuntimeConfig : Node
             popup.QueueFree();
             popup = null;
         }
-    }
-
-    private void Quit()
-    {
-        GetTree().Paused = false;
-        if(popup != null)
-        {
-            popup.QueueFree();
-            popup = null;
-        }
-        GetTree().ChangeScene("res://Menu.tscn");
     }
 }
