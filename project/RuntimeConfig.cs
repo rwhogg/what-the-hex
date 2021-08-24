@@ -32,6 +32,14 @@ public class RuntimeConfig : Node
 
     public static int MatchesNeeded { get; set; }
 
+    private static PopupDialog popup;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        popup = null;
+    }
+
     public static void DefaultLayout()
     {
         RuntimeConfig.HexesPerRow = new int[5];
@@ -39,5 +47,54 @@ public class RuntimeConfig : Node
         {
             RuntimeConfig.HexesPerRow[i] = 8;
         }
+    }
+
+    public override async void _Process(float delta)
+    {
+        base._Process(delta);
+
+        var sceneTree = GetTree();
+        var root = sceneTree.Root;
+        var gameComponent = root.GetNodeOrNull<GameComponent>("GameComponent");
+        if(gameComponent == null)
+        {
+            return;
+        }
+
+        if(Input.IsActionJustPressed("ui_pause"))
+        {
+            var pauseSoundPlayer = gameComponent.GetNode<AudioStreamPlayer>("PauseSoundPlayer");
+            pauseSoundPlayer.Play();
+            await ToSignal(pauseSoundPlayer, "finished");
+
+            if(popup == null)
+            {
+                popup = ResourceLoader.Load<PackedScene>("res://PausePopup.tscn").Instance<PopupDialog>();
+                gameComponent.AddChild(popup);
+                popup.GetNode("ButtonContainer/ResumeButton").Connect("pressed", this, nameof(Resume));
+                popup.PopupCentered();
+                sceneTree.Paused = true;
+            }
+        }
+    }
+
+    public static void NukePopup()
+    {
+        if(popup != null)
+        {
+            popup.QueueFree();
+            popup = null;
+        }
+    }
+
+    private async void Resume()
+    {
+        var sceneTree = GetTree();
+        sceneTree.Paused = false;
+        NukePopup();
+
+        var pauseSoundPlayer = sceneTree.Root.GetNodeOrNull<AudioStreamPlayer>("GameComponent/PauseSoundPlayer");
+        pauseSoundPlayer.Play();
+        await ToSignal(pauseSoundPlayer, "finished");
     }
 }

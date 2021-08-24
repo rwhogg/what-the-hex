@@ -49,7 +49,7 @@ public class TitleScreen : Control
             // When you go back to the title screen from the menu, it's sucking up input events from the menu
             // which immediately dumps you back in the menu...
             SceneTreeTimer startTimer = GetTree().CreateTimer(1.0f);
-            startTimer.Connect(TIMEOUT_SIGNAL, this, nameof(AllowStart));
+            startTimer.Connect(TIMEOUT_SIGNAL, this, nameof(AllowStart)); // FIXME see if you can use async here https://docs.godotengine.org/en/stable/getting_started/scripting/c_sharp/c_sharp_differences.html?#yield
         }
         catch(IOException)
         {

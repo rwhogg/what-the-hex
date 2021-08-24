@@ -21,6 +21,7 @@
 [ext_resource path="res://background.png" type="Texture" id=19]
 [ext_resource path="res://Win.ogg" type="AudioStream" id=20]
 [ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
+[ext_resource path="res://pause.wav" type="AudioStream" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -228,3 +229,6 @@ __meta__ = {
 
 [node name="WinSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
+
+[node name="PauseSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
