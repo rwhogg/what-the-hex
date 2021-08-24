@@ -58,7 +58,7 @@ Tier 1 (Should Work Well):
 * Android/Chrome OS/Fire OS (ARM)
 * GNU/Linux (amd64)
 * HTML5/Web Browsers
-    * Note that mobile Safari does not support the screen orientation API, so you may have trouble fitting that one onto the screen
+    * Note that mobile browsers on iOS do not support the screen orientation API, so you may have trouble fitting that one onto the screen
 * Windows (x86)
 
 Tier 2 (Will Probably Work Well):
@@ -71,7 +71,7 @@ Tier 3 (Might work if compiled from source, but no promises)
 
 Tier 4 (Might work in the future, but I don't currently expect it to)
 
-* Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271 . For some reason the Edge browser here doesn't work either - maybe it will after the Chromium-based Edge is made available to all Xbox users.
+* Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271
 * Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
 
 # Reporting Bugs
@@ -86,7 +86,10 @@ A Division Of
 
 # Copyright
 
-See the files [COPYING](COPYING) and [LICENSE.txt](LICENSE.txt)
+See the file [LICENSE.txt](LICENSE.txt)
+
+Exception: If you are redistributing modified versions of What The Hex? in binary form, please remove
+the Boarish Entertainment splash screen. See [NOTICE](NOTICE) for details
 
 # Third-Party Licenses
 
