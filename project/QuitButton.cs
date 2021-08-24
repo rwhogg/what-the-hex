@@ -1,3 +1,4 @@
+using Godot;
 
 public class QuitButton : ThemeButton
 {
@@ -8,12 +9,7 @@ public class QuitButton : ThemeButton
     protected override void ChangeScene()
     {
         GetTree().Paused = false;
-        var popup = GetTree().Root.GetNodeOrNull("PausePopupRoot");
-        if(popup != null)
-        {
-            popup.QueueFree();
-            popup = null;
-        }
+        RuntimeConfig.NukePopup();
         GetTree().ChangeScene("res://Menu.tscn");
     }
 }
