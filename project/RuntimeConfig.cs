@@ -32,6 +32,8 @@ public class RuntimeConfig : Node
 
     public static int MatchesNeeded { get; set; }
 
+    private static PopupDialog popup;
+
     public static void DefaultLayout()
     {
         RuntimeConfig.HexesPerRow = new int[5];
@@ -46,16 +48,45 @@ public class RuntimeConfig : Node
         base._Process(delta);
 
         var sceneTree = GetTree();
-        if(sceneTree.Root.GetNodeOrNull<GameComponent>("GameComponent") == null)
+        var root = sceneTree.Root;
+        var gameComponent = root.GetNodeOrNull<GameComponent>("GameComponent");
+        if(gameComponent == null)
         {
             return;
         }
 
         if(Input.IsActionJustPressed("ui_pause"))
         {
-            sceneTree.Paused = true;
-            OS.Alert("PAUSED", "VERY Pause");
-            sceneTree.Paused = false;
+            if(popup == null)
+            {
+                popup = ResourceLoader.Load<PackedScene>("res://PausePopup.tscn").Instance<PopupDialog>();
+                gameComponent.AddChild(popup);
+                popup.GetNode("ButtonContainer/ResumeButton").Connect("pressed", this, nameof(Resume));
+                popup.GetNode("ButtonContainer/QuitButton").Connect("pressed", this, nameof(Quit));
+                popup.PopupCentered();
+                sceneTree.Paused = true;
+            }
         }
+    }
+
+    private void Resume()
+    {
+        GetTree().Paused = false;
+        if(popup != null)
+        {
+            popup.QueueFree();
+            popup = null;
+        }
+    }
+
+    private void Quit()
+    {
+        GetTree().Paused = false;
+        if(popup != null)
+        {
+            popup.QueueFree();
+            popup = null;
+        }
+        GetTree().ChangeScene("res://Menu.tscn");
     }
 }
