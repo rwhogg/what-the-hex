@@ -12,4 +12,4 @@ git status | grep modified | awk '{print $2}' | xargs sed -i 's/&#34;Wombat&#34;
 
 popd || exit
 
-shellcheck script/bootstrap.sh script/changelog.sh script/gendocs.sh script/lint.sh script/pre-commit.sh
+shellcheck script/bootstrap.sh script/changelog.sh script/gendocs.sh script/lint.sh script/precommit.sh
