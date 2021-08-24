@@ -89,7 +89,7 @@ A Division Of
 See the file [LICENSE.txt](LICENSE.txt)
 
 Exception: If you are redistributing modified versions of What The Hex? in binary form, please remove
-the Boarish Entertainment splash screen. See [NOTICE](NOTICE) for details
+the Boarish Entertainment splash screen. See [NOTICE](NOTICE) for details.
 
 # Third-Party Licenses
 
