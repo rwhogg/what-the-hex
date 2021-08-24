@@ -40,4 +40,22 @@ public class RuntimeConfig : Node
             RuntimeConfig.HexesPerRow[i] = 8;
         }
     }
+
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+
+        var sceneTree = GetTree();
+        if(sceneTree.Root.GetNodeOrNull<GameComponent>("GameComponent") == null)
+        {
+            return;
+        }
+
+        if(Input.IsActionJustPressed("ui_pause"))
+        {
+            sceneTree.Paused = true;
+            OS.Alert("PAUSED", "VERY Pause");
+            sceneTree.Paused = false;
+        }
+    }
 }
