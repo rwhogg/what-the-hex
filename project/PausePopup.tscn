@@ -12,6 +12,7 @@ margin_left = 1.05945
 margin_top = 3.17841
 margin_right = 1.05945
 margin_bottom = 3.17841
+theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,7 +24,11 @@ margin_left = -82.0
 margin_right = 82.0
 margin_bottom = 56.0
 custom_fonts/normal_font = ExtResource( 1 )
+custom_colors/default_color = Color( 1, 0, 0, 1 )
 text = "Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonContainer" type="VSplitContainer" parent="."]
 anchor_left = 0.5
@@ -42,10 +47,12 @@ __meta__ = {
 [node name="ResumeButton" type="Button" parent="ButtonContainer"]
 margin_right = 209.0
 margin_bottom = 49.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Resume"
 
 [node name="QuitButton" type="Button" parent="ButtonContainer"]
 margin_top = 61.0
 margin_right = 209.0
 margin_bottom = 110.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Quit"
