@@ -13,9 +13,6 @@
 // limitations under the License.
 
 
-
-using Godot;
-
 public class QuitButton : ThemeButton
 {
     /**
