@@ -13,6 +13,9 @@
 // limitations under the License.
 
 
+/**
+ * QuitButton on the pause menu
+ */
 public class QuitButton : ThemeButton
 {
     /**
