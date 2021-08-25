@@ -98,6 +98,7 @@ public class GameComponent : Node2D
         HexagonGrid.SetSelectedHexagon(0, 0);
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
+        HexagonGrid.Connect(nameof(Grid.PowerUpActivated), this, nameof(On_PowerUpActivated));
     }
 
     private void SetUpButtonHandlers()
