@@ -150,7 +150,7 @@ public class GameComponent : Node2D
         _ = music.PitchScale;
         if((int)gameTimer.TimeLeft < 20)
         {
-            music.PitchScale = 1.2f;
+            music.PitchScale = 1.15f;
         }
         else
         {
