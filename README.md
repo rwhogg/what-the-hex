@@ -40,6 +40,7 @@ Joystick (Supported on all platforms):
 * D-Pad: Change currently selected hexagon
 * Left shoulder buttons/triggers (L, L1, L2, LB, ZL, etc.): Rotate currently selected hexagon counterclockwise
 * Right shoulder buttons/triggers (R, R1, R2, RB, ZR, etc.): Rotate currently selected hexagon clockwise
+* Y (Switch), X (Xbox), and Square (PlayStation): Activate powerup
 
 Mouse (Supported on desktop and web only):
 
