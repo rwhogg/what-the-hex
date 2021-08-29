@@ -48,11 +48,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361630255870978744535",
-				"name": "Support A and B for rotation",
-				"state": ""
-			},
-			{
 				"id": "1361630256341257762739",
 				"name": "Let the controller be used to handle the Continue button",
 				"state": ""

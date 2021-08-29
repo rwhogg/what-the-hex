@@ -38,8 +38,8 @@ _The pursuit of true hexcellence requires that you clear your mind and become on
 Joystick (Supported on all platforms):
 
 * D-Pad: Change currently selected hexagon
-* Left shoulder buttons/triggers (L, L1, L2, LB, ZL, etc.): Rotate currently selected hexagon counterclockwise
-* Right shoulder buttons/triggers (R, R1, R2, RB, ZR, etc.): Rotate currently selected hexagon clockwise
+* Left shoulder buttons/triggers (L, L1, L2, LB, ZL, etc.) OR B (Switch), A (Xbox), X (PlayStation): Rotate currently selected hexagon counterclockwise
+* Right shoulder buttons/triggers (R, R1, R2, RB, ZR, etc.) OR A (Switch), B (Xbox), Circle (PlayStation): Rotate currently selected hexagon clockwise
 * Y (Switch), X (Xbox), and Square (PlayStation): Activate powerup
 
 Mouse (Supported on desktop and web only):

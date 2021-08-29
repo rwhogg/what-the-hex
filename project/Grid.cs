@@ -145,15 +145,17 @@ public class Grid : Node2D
                 break;
             case L:
             case L2:
+            case DsB: // Also XboxA, SonyX
                 // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
                 // They are way too easy to use intentionally.
                 HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT, controllerIndex);
                 break;
             case R:
             case R2:
+            case DsA: // Also XboxB, SonyCircle
                 HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
                 break;
-            case DsY:
+            case DsY: // Also XboxX, SonySquare
                 HandlePowerUp();
                 break;
         }

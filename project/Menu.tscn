@@ -18,8 +18,9 @@ font_data = ExtResource( 7 )
 [node name="RootControl" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.25992
-margin_right = 3.25989
+margin_left = 3.0
+margin_right = 3.0
+margin_bottom = 25.0
 rect_pivot_offset = Vector2( 527.74, 152 )
 theme = ExtResource( 1 )
 script = ExtResource( 6 )
@@ -33,16 +34,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -118.5
-margin_top = -24.5
-margin_right = 120.5
-margin_bottom = 289.5
+margin_top = -48.5
+margin_right = 142.5
+margin_bottom = 283.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayButton" type="Button" parent="ButtonContainer"]
-margin_right = 239.0
-margin_bottom = 49.0
+margin_right = 261.0
+margin_bottom = 52.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
@@ -53,9 +54,9 @@ __meta__ = {
 }
 
 [node name="MultiplayerButton" type="Button" parent="ButtonContainer"]
-margin_top = 53.0
-margin_right = 239.0
-margin_bottom = 102.0
+margin_top = 56.0
+margin_right = 261.0
+margin_bottom = 108.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 disabled = true
@@ -64,9 +65,9 @@ text = "2player"
 script = ExtResource( 10 )
 
 [node name="SettingsButton" type="Button" parent="ButtonContainer"]
-margin_top = 106.0
-margin_right = 239.0
-margin_bottom = 155.0
+margin_top = 112.0
+margin_right = 261.0
+margin_bottom = 164.0
 rect_pivot_offset = Vector2( 206.951, -121.741 )
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
@@ -78,9 +79,9 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="ButtonContainer"]
-margin_top = 159.0
-margin_right = 239.0
-margin_bottom = 208.0
+margin_top = 168.0
+margin_right = 261.0
+margin_bottom = 220.0
 rect_pivot_offset = Vector2( 206.951, -121.741 )
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
@@ -92,9 +93,9 @@ __meta__ = {
 }
 
 [node name="AboutButton" type="Button" parent="ButtonContainer"]
-margin_top = 212.0
-margin_right = 239.0
-margin_bottom = 261.0
+margin_top = 224.0
+margin_right = 261.0
+margin_bottom = 276.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
@@ -105,9 +106,9 @@ __meta__ = {
 }
 
 [node name="BackButton" type="Button" parent="ButtonContainer"]
-margin_top = 265.0
-margin_right = 239.0
-margin_bottom = 314.0
+margin_top = 280.0
+margin_right = 261.0
+margin_bottom = 332.0
 focus_mode = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 enabled_focus_mode = 1
