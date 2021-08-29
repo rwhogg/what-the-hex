@@ -106,8 +106,6 @@ public class Grid : Node2D
             return;
         }
 
-        GD.Print("Controller index: " + controllerIndex);
-
         switch((JoystickList)eventControllerButton.ButtonIndex)
         {
             case DpadUp:
