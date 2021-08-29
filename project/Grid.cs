@@ -38,6 +38,10 @@ public class Grid : Node2D
     [Signal]
     public delegate void HexagonRotated(Hexagon rotatedHexagon, Godot.Collections.Array matchedHexagons, Godot.Collections.Dictionary<Color, int> matchedColors);
 
+    // FIXME: this signal should definitely NOT be emitted by the grid, but we're doing most of the non-trivial button handling here for now, so it's gotta go here for now
+    [Signal]
+    public delegate void PowerUpActivated();
+
     /**
      * The underlying jagged array of hexagons
      */
@@ -86,6 +90,7 @@ public class Grid : Node2D
         }
     }
 
+    // FIXME: I wonder if the button press handling can be moved to a different class
     private void HandleButtonPress(InputEventJoypadButton eventControllerButton)
     {
         // ensure we don't double up the actions
@@ -142,6 +147,9 @@ public class Grid : Node2D
             case R:
             case R2:
                 HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
+                break;
+            case DsY:
+                HandlePowerUp();
                 break;
         }
     }
@@ -251,6 +259,13 @@ public class Grid : Node2D
             hexagons[i++] = hexagon;
         }
         EmitSignal(nameof(HexagonRotated), affectedHexagon, hexagons, matchedColors, playerIndex);
+    }
+
+    private void HandlePowerUp()
+    {
+        // FIXME: the grid really should not be handling button presses
+        // not to mention that this signal is definitely not something it should be handling either
+        EmitSignal(nameof(PowerUpActivated));
     }
 
     private HashSet<Hexagon> CheckMatches(Hexagon affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors)

@@ -119,6 +119,7 @@ public class GameComponent : Node2D
         }
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
+        HexagonGrid.Connect(nameof(Grid.PowerUpActivated), this, nameof(On_PowerUpActivated));
     }
 
     private void SetUpButtonHandlers()
@@ -170,7 +171,7 @@ public class GameComponent : Node2D
         _ = music.PitchScale;
         if((int)gameTimer.TimeLeft < 20)
         {
-            music.PitchScale = 1.2f;
+            music.PitchScale = 1.15f;
         }
         else
         {
