@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
@@ -21,7 +21,7 @@
 [ext_resource path="res://background.png" type="Texture" id=19]
 [ext_resource path="res://Win.ogg" type="AudioStream" id=20]
 [ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
-[ext_resource path="res://pause.wav" type="AudioStream" id=21]
+[ext_resource path="res://pause.wav" type="AudioStream" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -154,6 +154,7 @@ custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 bbcode_enabled = true
 text = "Advantage: Green (15) Refresh: 20 +100"
+scroll_active = false
 script = ExtResource( 6 )
 
 [node name="PowerUpContainer" type="CenterContainer" parent="."]
@@ -231,4 +232,4 @@ stream = ExtResource( 16 )
 stream = ExtResource( 20 )
 
 [node name="PauseSoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
+stream = ExtResource( 22 )
