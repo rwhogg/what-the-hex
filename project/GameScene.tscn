@@ -22,10 +22,10 @@
 [ext_resource path="res://Win.ogg" type="AudioStream" id=20]
 [ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
 [ext_resource path="res://pause.wav" type="AudioStream" id=22]
-[ext_resource path="res://its_a_tie.ogg" type="AudioStream" id=23]
-[ext_resource path="res://victory.ogg" type="AudioStream" id=24]
-[ext_resource path="res://player_2.ogg" type="AudioStream" id=25]
-[ext_resource path="res://player_1.ogg" type="AudioStream" id=26]
+[ext_resource path="res://its_a_tie.wav" type="AudioStream" id=23]
+[ext_resource path="res://victory.wav" type="AudioStream" id=24]
+[ext_resource path="res://player_2.wav" type="AudioStream" id=25]
+[ext_resource path="res://player_1.wav" type="AudioStream" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
