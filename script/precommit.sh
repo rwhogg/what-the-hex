@@ -2,7 +2,7 @@
 
 pushd project || exit
 
-dotnet.exe format --fix-style info --fix-whitespace --fix-analyzers info "WhatTheHex.csproj"
+dotnet format --fix-style info --fix-whitespace --fix-analyzers info "WhatTheHex.csproj"
 
 # Add license and address overzealous HTML-escaping of my name
 addlicense -c 'Bob "Wombat" Hogg' -l apache ./*.cs
