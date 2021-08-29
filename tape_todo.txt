@@ -41,6 +41,16 @@
 				"id": "1361627529665500600479",
 				"name": "Make a new music track or two",
 				"state": ""
+			},
+			{
+				"id": "136163025584667545767",
+				"name": "Convert all the .ogg and .mp3 files to .wav with FFMPEG",
+				"state": ""
+			},
+			{
+				"id": "1361630255870978744535",
+				"name": "Support A and B for rotation",
+				"state": ""
 			}
 		],
 		"vis": "true",
