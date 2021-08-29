@@ -42,7 +42,7 @@ public class TwoPlayerScoreLabel : ScoreLabel
         int score1 = game.Scores[0];
         int score2 = game.Scores[1];
         BbcodeText = String.Format(Culture,
-            "[color=red]P1: {0}[/color]\t\t\t\t\t\t\t\t[color=blue]TIME: {1}[/color]\t\t\t\t\t\t\t\t[color=green]P2: {2}[/color]",
+            "[color=red]P1: {0}[/color]\t\t\t\t\t\t\t[color=blue]TIME: {1}[/color]\t\t\t\t\t\t\t\t[color=green]P2: {2}[/color]",
             score1,
             timeLeft,
             score2
