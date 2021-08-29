@@ -85,6 +85,7 @@ public class GameComponent : Node2D
             // FIXME: maybe it makes sense to split some of these details into subclasses... and perhaps even scene inheritance?
             GetNode<RichTextLabel>("TopPanelContainer/OnePlayerScoreLabel").Hide();
             GetNode<RichTextLabel>("TopPanelContainer/TwoPlayerScoreLabel").Show();
+            GetNode<Label>("PowerUpLabel").Hide(); // FIXME support this for multiplayer too
         }
         else
         {
@@ -121,7 +122,12 @@ public class GameComponent : Node2D
         }
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
-        HexagonGrid.Connect(nameof(Grid.PowerUpActivated), this, nameof(On_PowerUpActivated));
+
+        if(!RuntimeConfig.Is2Player)
+        {
+            // FIXME: support for multiplayer as well
+            HexagonGrid.Connect(nameof(Grid.PowerUpActivated), this, nameof(On_PowerUpActivated));
+        }
     }
 
     private void SetUpButtonHandlers()
@@ -137,9 +143,13 @@ public class GameComponent : Node2D
             }
         }
 
-        // Note: this one is always visible, even on desktop
-        var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
-        powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
+        // Note: this one is always visible (in single player), even on desktop
+        if(!RuntimeConfig.Is2Player)
+        {
+            // FIXME: support this for multiplayer as well
+            var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
+            powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
+        }
 
         var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
@@ -283,7 +293,11 @@ public class GameComponent : Node2D
             advantageTimer.Start(AdvantageTime);
             if(NumAdvantageMatchesMade == 3)
             {
-                AssignPowerup();
+                if(!RuntimeConfig.Is2Player)
+                {
+                    // FIXME: support for 2 player as well
+                    AssignPowerup();
+                }
                 NumAdvantageMatchesMade = 0;
             }
         }
