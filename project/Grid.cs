@@ -100,6 +100,13 @@ public class Grid : Node2D
         }
 
         int controllerIndex = eventControllerButton.Device;
+        if(controllerIndex != 0 && !RuntimeConfig.Is2Player)
+        {
+            // ensure we don't get index-out-of-bounds exceptions because the controller index maps to the player
+            return;
+        }
+
+        GD.Print("Controller index: " + controllerIndex);
 
         switch((JoystickList)eventControllerButton.ButtonIndex)
         {
