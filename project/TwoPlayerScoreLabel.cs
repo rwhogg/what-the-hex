@@ -42,11 +42,13 @@ public class TwoPlayerScoreLabel : ScoreLabel
         int score1 = game.Scores[0];
         int score2 = game.Scores[1];
         BbcodeText = String.Format(Culture,
-            "[color=red]P1: {0}[/color]\t\t\t\t\t\t\t[color=blue]TIME: {1}[/color]\t\t\t\t\t\t\t\t[color=green]P2: {2}[/color]",
+            "[color=red]{0}: {1}[/color]\t\t\t\t\t\t\t[color=blue]{2}: {3}[/color]\t\t\t\t\t\t\t\t[color=green]{4}: {5}[/color]",
+            Tr("PLAYER_ONE"),
             score1,
+            Tr("TIME"),
             timeLeft,
+            Tr("PLAYER_TWO"),
             score2
         );
-        // FIXME use localization
     }
 }
