@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
@@ -22,6 +22,10 @@
 [ext_resource path="res://Win.ogg" type="AudioStream" id=20]
 [ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
 [ext_resource path="res://pause.wav" type="AudioStream" id=22]
+[ext_resource path="res://its_a_tie.ogg" type="AudioStream" id=23]
+[ext_resource path="res://victory.ogg" type="AudioStream" id=24]
+[ext_resource path="res://player_2.ogg" type="AudioStream" id=25]
+[ext_resource path="res://player_1.ogg" type="AudioStream" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -56,13 +60,6 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="GameTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="RefreshTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
 
 [node name="RotateClockwiseButton" type="TouchScreenButton" parent="."]
 position = Vector2( 871.765, 184 )
@@ -189,10 +186,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AdvantageTimer" type="Timer" parent="."]
-wait_time = 15.0
-autostart = true
-
 [node name="ContinueButton" type="Button" parent="."]
 visible = false
 margin_left = 248.0
@@ -206,6 +199,17 @@ text = "Continue?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="AdvantageTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -233,3 +237,15 @@ stream = ExtResource( 20 )
 
 [node name="PauseSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 22 )
+
+[node name="TieSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+
+[node name="PlayerOneSynthVoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+
+[node name="PlayerTwoSynthVoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+
+[node name="WinSynthVoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 24 )

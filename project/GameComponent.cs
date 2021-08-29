@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Diagnostics.Contracts;
+
 using Godot;
 using Godot.Collections;
 
@@ -181,7 +183,14 @@ public class GameComponent : Node2D
 
     private void On_GameTimer_Timeout()
     {
-        GameOver();
+        if(RuntimeConfig.Is2Player)
+        {
+            DetermineWinner();
+        }
+        else
+        {
+            GameOver();
+        }
     }
 
     private void On_AdvantageTimer_Timeout()
@@ -283,7 +292,7 @@ public class GameComponent : Node2D
             NumAdvantageMatchesMade = 0;
         }
 
-        if(madeAnyMatch)
+        if(madeAnyMatch && !RuntimeConfig.Is2Player)
         {
             var gameTimer = GetNode<Timer>("GameTimer");
             gameTimer.Start(gameTimer.TimeLeft + 5);
@@ -322,6 +331,7 @@ public class GameComponent : Node2D
         {
             EndOfGame();
             GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
+            ConfigFileUtils.SaveHiscore(Scores[0]);
         }
     }
 
@@ -346,16 +356,57 @@ public class GameComponent : Node2D
             HexagonGrid.QueueFree();
             HexagonGrid = null;
         }
-        ConfigFileUtils.SaveHiscore(HiScore);
+    }
+
+    private void DetermineWinner()
+    {
+        Contract.Assert(RuntimeConfig.Is2Player);
+        EndOfGame();
+        if(Scores[0] == Scores[1])
+        {
+            HandleTie();
+        }
+        else if(Scores[0] > Scores[1])
+        {
+            HandleVictory(0);
+        }
+        else
+        {
+            HandleVictory(1);
+        }
+    }
+
+    private void HandleTie()
+    {
+        var tieSound = GetNode<AudioStreamPlayer>("TieSoundPlayer");
+        tieSound.Play();
+        EnableContinueButton();
+    }
+
+    private async void HandleVictory(int winnerIndex)
+    {
+        var winnerSound = GetNode<AudioStreamPlayer>("WinSynthVoicePlayer");
+        var playerSound = GetNode<AudioStreamPlayer>("Player" + (winnerIndex == 0 ? "One" : "Two") + "SynthVoicePlayer");
+        playerSound.Play();
+        await ToSignal(playerSound, "finished");
+        winnerSound.Play();
+
+        EnableContinueButton();
     }
 
     private void GameOver()
     {
         EndOfGame();
-        AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
+        ConfigFileUtils.SaveHiscore(HiScore);
+        var gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
         gameOverSound.Play();
         GetNode<RichTextLabel>("GameOverLabel").Show();
 
+        EnableContinueButton();
+    }
+
+    private void EnableContinueButton()
+    {
         var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
         continueButton.Show();
