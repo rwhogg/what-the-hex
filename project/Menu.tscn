@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=1]
 [ext_resource path="res://PlayButton.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://AboutButton.cs" type="Script" id=8]
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://MultiplayerButton.cs" type="Script" id=10]
+[ext_resource path="res://MainMenuQuitButton.cs" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -34,9 +35,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -118.5
-margin_top = -48.5
+margin_top = -103.5
 margin_right = 142.5
-margin_bottom = 283.5
+margin_bottom = 284.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -118,6 +119,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="QuitButton" type="Button" parent="ButtonContainer"]
+margin_top = 336.0
+margin_right = 261.0
+margin_bottom = 388.0
+focus_mode = 1
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+enabled_focus_mode = 1
+text = "QUIT"
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TitleText" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -136,6 +150,6 @@ __meta__ = {
 }
 
 [node name="Icon" type="Sprite" parent="."]
-position = Vector2( 507.5, 156 )
+position = Vector2( 507.5, 126 )
 scale = Vector2( 2.15, 1.82 )
 texture = ExtResource( 9 )

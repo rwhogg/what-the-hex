@@ -26,7 +26,7 @@ public class Menu : Control
     private Button[] Buttons;
     private int selected = -1;
 
-    private const int BackButtonIndex = 5;
+    private const int QuitButtonIndex = 6;
 
     /**
      * Set up the button indices.
@@ -35,13 +35,14 @@ public class Menu : Control
     public override void _Ready()
     {
         selected = 0;
-        Buttons = new Button[BackButtonIndex + 1];
+        Buttons = new Button[QuitButtonIndex + 1];
         Buttons[0] = GetNode<Button>("ButtonContainer/PlayButton");
         Buttons[1] = GetNode<Button>("ButtonContainer/MultiplayerButton");
         Buttons[2] = GetNode<Button>("ButtonContainer/SettingsButton");
         Buttons[3] = GetNode<Button>("ButtonContainer/CreditsButton");
         Buttons[4] = GetNode<Button>("ButtonContainer/AboutButton");
-        Buttons[BackButtonIndex] = GetNode<Button>("ButtonContainer/BackButton");
+        Buttons[5] = GetNode<Button>("ButtonContainer/BackButton");
+        Buttons[QuitButtonIndex] = GetNode<Button>("ButtonContainer/QuitButton");
 
         Buttons[selected].GrabFocus();
     }
@@ -64,12 +65,12 @@ public class Menu : Control
         }
         else if(@event.IsActionPressed("ui_down"))
         {
-            selected = Math.Min(selected + 1, BackButtonIndex);
+            selected = Math.Min(selected + 1, QuitButtonIndex);
             Buttons[selected].GrabFocus();
         }
         else if(@event.IsActionPressed("ui_cancel"))
         {
-            Buttons[BackButtonIndex]._Pressed();
+            Buttons[QuitButtonIndex]._Pressed();
         }
         // Note: no need to handle ui_accept here
         // it seems like Godot has already bound that for me
