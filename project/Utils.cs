@@ -66,8 +66,18 @@ public static class Utils
         return GetNumControllers() > 0;
     }
 
+    /**
+     * Map a Godot color to a BBCode color string
+     * @param color The Godot color enum
+     * @return The BBCode color string
+     */
     public static string ColorMap(Color color)
     {
+        if(color == null)
+        {
+            throw new ArgumentNullException(nameof(color));
+        }
+
         if(color == Green)
         {
             return "green";
