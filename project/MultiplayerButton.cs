@@ -39,6 +39,12 @@ public class MultiplayerButton : ThemeButton
         Disabled = ShouldDisable();
     }
 
+    private void CheckDisable(int device, bool connected)
+    {
+        // this overload is only needed so that the signal signature matches
+        CheckDisable();
+    }
+
     private static bool ShouldDisable()
     {
         return Utils.GetNumControllers() < 2;
