@@ -41,7 +41,7 @@ public class Hexagon : Node2D
     /**
      * If true, this hexagon is currently selected for rotation
      */
-    public bool Selected { get; set; }
+    public bool[] Selected = { false, false };
 
     /**
      * If true, this hexagon is set to be replaced
@@ -93,6 +93,7 @@ public class Hexagon : Node2D
     private static readonly bool IsDebug = OS.IsDebugBuild();
 
     private static readonly Random Rand = new Random();
+    private static readonly Color[] CursorColors = { Red, Green };
 
     private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
@@ -114,7 +115,7 @@ public class Hexagon : Node2D
     public Hexagon()
     {
         MarkedForReplacement = false;
-        Selected = false;
+        Selected = new bool[] { false, false };
         Matched = false;
     }
 
@@ -130,7 +131,7 @@ public class Hexagon : Node2D
         BaseColor = baseColor;
         EdgeColors = new List<Color>(edgeColors);
         MarkedForReplacement = false;
-        Selected = false;
+        Selected = new bool[] { false, false };
         Matched = false;
     }
 
@@ -167,9 +168,13 @@ public class Hexagon : Node2D
             DrawLine(hexagonPoints[i], hexagonPoints[i + 1], EdgeColors[i], EdgeThickness);
         }
         DrawLine(hexagonPoints[hexagonPoints.Length - 1], hexagonPoints[0], EdgeColors[EdgeColors.Count - 1], EdgeThickness);
-        if(Selected && ShouldShowSelections())
+        if(Selected[0] && ShouldShowSelections())
         {
-            DrawCircle(new Vector2(0, 0), 5, Red);
+            DrawCircle(new Vector2(0, 0), 5, CursorColors[0]);
+        }
+        else if(Selected[1] && ShouldShowSelections())
+        {
+            DrawCircle(new Vector2(0, 0), 5, CursorColors[1]);
         }
         if(IsDebug)
         {

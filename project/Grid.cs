@@ -51,7 +51,7 @@ public class Grid : Node2D
 
     private readonly int[] HexagonsPerRow;
 
-    private Hexagon SelectedHexagon;
+    private readonly Hexagon[] SelectedHexagons = new Hexagon[1 + Convert.ToInt32(RuntimeConfig.Is2Player)];
 
     private static readonly Random Rand = new Random();
 
@@ -98,6 +98,14 @@ public class Grid : Node2D
         {
             return;
         }
+
+        int controllerIndex = eventControllerButton.Device;
+        if(controllerIndex != 0 && !RuntimeConfig.Is2Player)
+        {
+            // ensure we don't get index-out-of-bounds exceptions because the controller index maps to the player
+            return;
+        }
+
         switch((JoystickList)eventControllerButton.ButtonIndex)
         {
             case DpadUp:
@@ -111,8 +119,8 @@ public class Grid : Node2D
                     new int[] { 0, 1 },
                 };
                 int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
-                SelectedHexagon.Selected = false;
-                int newI = SelectedHexagon.I + dir[0];
+                SelectedHexagons[controllerIndex].Selected[controllerIndex] = false;
+                int newI = SelectedHexagons[controllerIndex].I + dir[0];
                 int numRows = HexagonsPerRow.Length;
                 if(newI < 0)
                 {
@@ -122,7 +130,7 @@ public class Grid : Node2D
                 {
                     newI = numRows - 1;
                 }
-                int newJ = SelectedHexagon.J + dir[1];
+                int newJ = SelectedHexagons[controllerIndex].J + dir[1];
                 if(newJ < 0)
                 {
                     newJ = 0;
@@ -132,18 +140,18 @@ public class Grid : Node2D
                     newJ = HexagonsPerRow[newI] - 1;
                 }
                 Hexagon newlySelectedHexagon = Array[newI][newJ];
-                newlySelectedHexagon.Selected = true;
-                SelectedHexagon = newlySelectedHexagon;
+                newlySelectedHexagon.Selected[controllerIndex] = true;
+                SelectedHexagons[controllerIndex] = newlySelectedHexagon;
                 break;
             case L:
             case L2:
                 // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
                 // They are way too easy to use intentionally.
-                HandleRotation(SelectedHexagon, Direction.LEFT);
+                HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT, controllerIndex);
                 break;
             case R:
             case R2:
-                HandleRotation(SelectedHexagon, Direction.RIGHT);
+                HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
                 break;
             case DsY:
                 HandlePowerUp();
@@ -153,6 +161,8 @@ public class Grid : Node2D
 
     private void HandleMouseClick(InputEventMouseButton eventMouseButton)
     {
+        // note, we assume mouse clicks are only used by a single player for now
+
         // ensure we don't double-rotate from a single click and that we don't accidentally trigger from the mouse wheel
         if(eventMouseButton.IsPressed() || eventMouseButton.ButtonIndex >= (int)ButtonList.Middle)
         {
@@ -172,26 +182,27 @@ public class Grid : Node2D
         if(OS.HasTouchscreenUiHint())
         {
             // on touch screen devices, a tap should be equivalent to a select, not a rotation
-            SelectedHexagon.Selected = false;
-            SetSelectedHexagon(affectedHexagon.I, affectedHexagon.J);
+            SelectedHexagons[0].Selected[0] = false;
+            SetSelectedHexagon(affectedHexagon.I, affectedHexagon.J, 0);
             return;
         }
         else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
         {
             direction = Direction.RIGHT;
         }
-        HandleRotation(affectedHexagon, direction);
+        HandleRotation(affectedHexagon, direction, 0);
     }
 
     /**
      * Select the hexagon at the specified position
      * @param i Row to select
      * @param j Column to select
+     * @param playerIndex Currently acting player
      */
-    public void SetSelectedHexagon(int i, int j)
+    public void SetSelectedHexagon(int i, int j, int playerIndex)
     {
-        Array[i][j].Selected = true;
-        SelectedHexagon = Array[i][j];
+        Array[i][j].Selected[playerIndex] = true;
+        SelectedHexagons[playerIndex] = Array[i][j];
     }
 
     /**
@@ -219,13 +230,14 @@ public class Grid : Node2D
     /**
      * Force the currently selected hexagon to rotate
      * @param direction Which direction to rotate
+     * @param playerIndex Currently active player
      */
-    public void RotateSelected(Direction direction)
+    public void RotateSelected(Direction direction, int playerIndex)
     {
-        HandleRotation(SelectedHexagon, direction);
+        HandleRotation(SelectedHexagons[playerIndex], direction, playerIndex);
     }
 
-    private void HandleRotation(Hexagon affectedHexagon, Direction direction)
+    private void HandleRotation(Hexagon affectedHexagon, Direction direction, int playerIndex)
     {
         affectedHexagon.Rot(direction);
         Color colorToFlash = Hexagon.DefaultHexColor;
@@ -251,7 +263,7 @@ public class Grid : Node2D
             hexagon.Refresh();
             hexagons[i++] = hexagon;
         }
-        EmitSignal(nameof(HexagonRotated), affectedHexagon, hexagons, matchedColors);
+        EmitSignal(nameof(HexagonRotated), affectedHexagon, hexagons, matchedColors, playerIndex);
     }
 
     private void HandlePowerUp()

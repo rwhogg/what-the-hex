@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Diagnostics.Contracts;
+
 using Godot;
 using Godot.Collections;
 
@@ -25,7 +27,7 @@ public class GameComponent : Node2D
     /**
      * The current score
      */
-    public int Score { get; set; }
+    public int[] Scores { get; set; }
 
     /**
      * The current high score (not yet saved necessarily)
@@ -55,11 +57,13 @@ public class GameComponent : Node2D
 
     private int NumHexagonsToReplace = 3;
 
-    private int NumRefreshes;
-
     private const float AdvantageTime = 15.0f;
 
     private const float GameStartTime = 100.0f;
+
+    private const string TimeoutSignal = "timeout";
+
+    private int NumRefreshes;
 
     private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
@@ -71,7 +75,23 @@ public class GameComponent : Node2D
     public override void _Ready()
     {
         HiScore = ConfigFileUtils.LoadHiscore();
-        Score = 0;
+        Scores = new int[RuntimeConfig.Is2Player ? 2 : 1];
+
+        // FIXME: supposedly there is a static Array.Fill method, but it doesn't seem to be found
+        Scores[0] = 0;
+        if(RuntimeConfig.Is2Player)
+        {
+            Scores[1] = 0;
+            // FIXME: maybe it makes sense to split some of these details into subclasses... and perhaps even scene inheritance?
+            GetNode<RichTextLabel>("TopPanelContainer/OnePlayerScoreLabel").Hide();
+            GetNode<RichTextLabel>("TopPanelContainer/TwoPlayerScoreLabel").Show();
+            GetNode<Label>("PowerUpLabel").Hide(); // FIXME support this for multiplayer too
+        }
+        else
+        {
+            GetNode<RichTextLabel>("TopPanelContainer/TwoPlayerScoreLabel").Hide();
+        }
+
         NumMatchesMade = 0;
 
         InitGrid();
@@ -95,10 +115,19 @@ public class GameComponent : Node2D
             RuntimeConfig.DefaultLayout();
         }
         HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
-        HexagonGrid.SetSelectedHexagon(0, 0);
+        HexagonGrid.SetSelectedHexagon(0, 0, 0);
+        if(RuntimeConfig.Is2Player)
+        {
+            HexagonGrid.SetSelectedHexagon(1, 0, 1);
+        }
         AddChild(HexagonGrid);
         HexagonGrid.Connect(nameof(Grid.HexagonRotated), this, nameof(On_Hexagon_Rotated));
-        HexagonGrid.Connect(nameof(Grid.PowerUpActivated), this, nameof(On_PowerUpActivated));
+
+        if(!RuntimeConfig.Is2Player)
+        {
+            // FIXME: support for multiplayer as well
+            HexagonGrid.Connect(nameof(Grid.PowerUpActivated), this, nameof(On_PowerUpActivated));
+        }
     }
 
     private void SetUpButtonHandlers()
@@ -114,9 +143,13 @@ public class GameComponent : Node2D
             }
         }
 
-        // Note: this one is always visible, even on desktop
-        var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
-        powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
+        // Note: this one is always visible (in single player), even on desktop
+        if(!RuntimeConfig.Is2Player)
+        {
+            // FIXME: support this for multiplayer as well
+            var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
+            powerUpButton.Connect("pressed", this, nameof(On_PowerUpActivated));
+        }
 
         var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Connect("pressed", this, nameof(On_ContinueButtonPressed));
@@ -160,7 +193,14 @@ public class GameComponent : Node2D
 
     private void On_GameTimer_Timeout()
     {
-        GameOver();
+        if(RuntimeConfig.Is2Player)
+        {
+            DetermineWinner();
+        }
+        else
+        {
+            GameOver();
+        }
     }
 
     private void On_AdvantageTimer_Timeout()
@@ -186,7 +226,7 @@ public class GameComponent : Node2D
     {
         if(HexagonGrid != null)
         {
-            HexagonGrid.RotateSelected(Direction.CLOCKWISE);
+            HexagonGrid.RotateSelected(Direction.CLOCKWISE, 0);
         }
     }
 
@@ -194,7 +234,7 @@ public class GameComponent : Node2D
     {
         if(HexagonGrid != null)
         {
-            HexagonGrid.RotateSelected(Direction.COUNTERCLOCKWISE);
+            HexagonGrid.RotateSelected(Direction.COUNTERCLOCKWISE, 0);
         }
     }
 
@@ -223,7 +263,7 @@ public class GameComponent : Node2D
 
 #pragma warning disable IDE0060
 #pragma warning disable CA1801
-    private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors)
+    private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors, int playerIndex)
 #pragma warning restore CA1801
 #pragma warning restore IDE0060
     {
@@ -243,7 +283,7 @@ public class GameComponent : Node2D
                 madeAnyMatch = true;
             }
         }
-        Score += additionalScore;
+        Scores[playerIndex] += additionalScore;
         if(madeAnyAdvantageMatch)
         {
             NumAdvantageMatchesMade++;
@@ -253,7 +293,11 @@ public class GameComponent : Node2D
             advantageTimer.Start(AdvantageTime);
             if(NumAdvantageMatchesMade == 3)
             {
-                AssignPowerup();
+                if(!RuntimeConfig.Is2Player)
+                {
+                    // FIXME: support for 2 player as well
+                    AssignPowerup();
+                }
                 NumAdvantageMatchesMade = 0;
             }
         }
@@ -262,15 +306,15 @@ public class GameComponent : Node2D
             NumAdvantageMatchesMade = 0;
         }
 
-        if(madeAnyMatch)
+        if(madeAnyMatch && !RuntimeConfig.Is2Player)
         {
             var gameTimer = GetNode<Timer>("GameTimer");
             gameTimer.Start(gameTimer.TimeLeft + 5);
         }
 
-        if(Score > HiScore)
+        if(!RuntimeConfig.Is2Player && Scores[0] > HiScore)
         {
-            HiScore = Score;
+            HiScore = Scores[0];
         }
         if(additionalScore > 0)
         {
@@ -301,6 +345,7 @@ public class GameComponent : Node2D
         {
             EndOfGame();
             GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
+            ConfigFileUtils.SaveHiscore(Scores[0]);
         }
     }
 
@@ -325,16 +370,57 @@ public class GameComponent : Node2D
             HexagonGrid.QueueFree();
             HexagonGrid = null;
         }
-        ConfigFileUtils.SaveHiscore(HiScore);
+    }
+
+    private void DetermineWinner()
+    {
+        Contract.Assert(RuntimeConfig.Is2Player);
+        EndOfGame();
+        if(Scores[0] == Scores[1])
+        {
+            HandleTie();
+        }
+        else if(Scores[0] > Scores[1])
+        {
+            HandleVictory(0);
+        }
+        else
+        {
+            HandleVictory(1);
+        }
+    }
+
+    private void HandleTie()
+    {
+        var tieSound = GetNode<AudioStreamPlayer>("TieSoundPlayer");
+        tieSound.Play();
+        EnableContinueButton();
+    }
+
+    private async void HandleVictory(int winnerIndex)
+    {
+        var winnerSound = GetNode<AudioStreamPlayer>("WinSynthVoicePlayer");
+        var playerSound = GetNode<AudioStreamPlayer>("Player" + (winnerIndex == 0 ? "One" : "Two") + "SynthVoicePlayer");
+        playerSound.Play();
+        await ToSignal(playerSound, "finished");
+        winnerSound.Play();
+
+        EnableContinueButton();
     }
 
     private void GameOver()
     {
         EndOfGame();
-        AudioStreamPlayer gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
+        ConfigFileUtils.SaveHiscore(HiScore);
+        var gameOverSound = GetNode<AudioStreamPlayer>("GameOverSoundPlayer");
         gameOverSound.Play();
         GetNode<RichTextLabel>("GameOverLabel").Show();
 
+        EnableContinueButton();
+    }
+
+    private void EnableContinueButton()
+    {
         var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
         continueButton.Show();

@@ -26,7 +26,7 @@ public class Menu : Control
     private Button[] Buttons;
     private int selected = -1;
 
-    private const int BackButtonIndex = 4;
+    private const int BackButtonIndex = 5;
 
     /**
      * Set up the button indices.
@@ -35,11 +35,12 @@ public class Menu : Control
     public override void _Ready()
     {
         selected = 0;
-        Buttons = new Button[5];
+        Buttons = new Button[BackButtonIndex + 1];
         Buttons[0] = GetNode<Button>("ButtonContainer/PlayButton");
-        Buttons[1] = GetNode<Button>("ButtonContainer/SettingsButton");
-        Buttons[2] = GetNode<Button>("ButtonContainer/CreditsButton");
-        Buttons[3] = GetNode<Button>("ButtonContainer/AboutButton");
+        Buttons[1] = GetNode<Button>("ButtonContainer/MultiplayerButton");
+        Buttons[2] = GetNode<Button>("ButtonContainer/SettingsButton");
+        Buttons[3] = GetNode<Button>("ButtonContainer/CreditsButton");
+        Buttons[4] = GetNode<Button>("ButtonContainer/AboutButton");
         Buttons[BackButtonIndex] = GetNode<Button>("ButtonContainer/BackButton");
 
         Buttons[selected].GrabFocus();

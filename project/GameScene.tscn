@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://TheHexWillHealYou.ogg" type="AudioStream" id=3]
-[ext_resource path="res://ScoreLabel.cs" type="Script" id=4]
+[ext_resource path="res://TwoPlayerScoreLabel.cs" type="Script" id=4]
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=5]
 [ext_resource path="res://BottomStatusLabel.cs" type="Script" id=6]
 [ext_resource path="res://Music.cs" type="Script" id=7]
@@ -20,7 +20,12 @@
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=18]
 [ext_resource path="res://background.png" type="Texture" id=19]
 [ext_resource path="res://Win.ogg" type="AudioStream" id=20]
-[ext_resource path="res://pause.wav" type="AudioStream" id=21]
+[ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
+[ext_resource path="res://pause.wav" type="AudioStream" id=22]
+[ext_resource path="res://its_a_tie.wav" type="AudioStream" id=23]
+[ext_resource path="res://victory.wav" type="AudioStream" id=24]
+[ext_resource path="res://player_2.wav" type="AudioStream" id=25]
+[ext_resource path="res://player_1.wav" type="AudioStream" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -31,6 +36,14 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=3]
 size = 29
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Kenney_Space.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
+outline_color = Color( 0.835294, 0.137255, 0.105882, 1 )
+font_data = SubResource( 4 )
 
 [node name="GameComponent" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,13 +60,6 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="GameTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="RefreshTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
 
 [node name="RotateClockwiseButton" type="TouchScreenButton" parent="."]
 position = Vector2( 871.765, 184 )
@@ -96,7 +102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScoreLabel" type="RichTextLabel" parent="TopPanelContainer"]
+[node name="OnePlayerScoreLabel" type="RichTextLabel" parent="TopPanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1028.0
@@ -106,10 +112,24 @@ bbcode_enabled = true
 bbcode_text = "[color=red]TIME 0 MATCHES 0	SCORE 0 HISCORE 0[/color]"
 text = "TIME 0 MATCHES 0	SCORE 0 HISCORE 0"
 scroll_active = false
-script = ExtResource( 4 )
+script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TwoPlayerScoreLabel" type="RichTextLabel" parent="TopPanelContainer"]
+visible = false
+anchor_top = 0.0196078
+anchor_bottom = 0.0196078
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1028.0
+margin_bottom = 44.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[color=red]P1: {0}\\tTIME: {1}\\t P2: {2}[/color]"
+text = "P1: {0}\\tTIME: {1}\\t P2: {2}"
+script = ExtResource( 4 )
 
 [node name="BottomPanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -131,6 +151,7 @@ custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 bbcode_enabled = true
 text = "Advantage: Green (15) Refresh: 20 +100"
+scroll_active = false
 script = ExtResource( 6 )
 
 [node name="PowerUpContainer" type="CenterContainer" parent="."]
@@ -165,10 +186,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AdvantageTimer" type="Timer" parent="."]
-wait_time = 15.0
-autostart = true
-
 [node name="ContinueButton" type="Button" parent="."]
 visible = false
 margin_left = 248.0
@@ -182,6 +199,17 @@ text = "Continue?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="AdvantageTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -208,4 +236,16 @@ stream = ExtResource( 16 )
 stream = ExtResource( 20 )
 
 [node name="PauseSoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
+stream = ExtResource( 22 )
+
+[node name="TieSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+
+[node name="PlayerOneSynthVoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+
+[node name="PlayerTwoSynthVoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+
+[node name="WinSynthVoicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 24 )
