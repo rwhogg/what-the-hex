@@ -157,16 +157,15 @@ public class GameComponent : Node2D
 
     private void StartTimers()
     {
-        var timeoutSignal = "timeout";
         var advantageTimer = GetNode<Timer>("AdvantageTimer");
-        advantageTimer.Connect(timeoutSignal, this, nameof(On_AdvantageTimer_Timeout));
+        advantageTimer.Connect(TimeoutSignal, this, nameof(On_AdvantageTimer_Timeout));
 
         var gameTimer = GetNode<Timer>("GameTimer");
-        gameTimer.Connect(timeoutSignal, this, nameof(On_GameTimer_Timeout));
+        gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
         gameTimer.Start(GameStartTime);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
-        refreshTimer.Connect(timeoutSignal, this, nameof(On_RefreshTimer_Timeout));
+        refreshTimer.Connect(TimeoutSignal, this, nameof(On_RefreshTimer_Timeout));
     }
 
     /**
