@@ -16,14 +16,6 @@ if [ -x "$(command -v brew)" ]; then
     brew bundle check -v --file=script/Brewfile || brew bundle --file=script/Brewfile -v --no-lock
 fi
 
-if [ -x "$(command -v dotnet-format)" ]; then
-    echo "dotnet-format is available!"
-elif [ -x "$(command -v dotnet.exe)" ]; then
-    dotnet.exe tool install -g dotnet-format
-else
-    echo "Please install .NET"
-fi
-
 if [ -x "$(command -v gendarme)" ]; then
     echo "Gendarme is available!"
 elif [[ $(uname -r) =~ .*WSL2 ]]; then

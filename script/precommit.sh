@@ -2,6 +2,7 @@
 
 pushd project || exit
 
+dotnet tool restore
 dotnet tool run dotnet-format --fix-style info --fix-whitespace --fix-analyzers info "WhatTheHex.csproj"
 
 # Add license and address overzealous HTML-escaping of my name
