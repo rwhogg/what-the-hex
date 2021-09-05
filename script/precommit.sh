@@ -2,11 +2,11 @@
 
 pushd project || exit
 
-dotnet.exe tool run dotnet-format --fix-style info --fix-whitespace --fix-analyzers info "WhatTheHex.csproj"
+dotnet tool run dotnet-format --fix-style info --fix-whitespace --fix-analyzers info "WhatTheHex.csproj"
 
 # Add license and address overzealous HTML-escaping of my name
 addlicense -c 'Bob "Wombat" Hogg' -l apache ./*.cs
-git status | grep modified | awk '{print $2}' | xargs sed -i 's/&#34;Wombat&#34;/"Wombat"/g'
+git status | grep modified | grep -v precommit.sh | awk '{print $2}' | xargs sed -i 's/&#34;Wombat&#34;/"Wombat"/g'
 
 ../script/format.sh
 
