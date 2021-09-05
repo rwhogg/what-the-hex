@@ -1,0 +1,19 @@
+# FIXME change this to JSON
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ trunk ]
+  pull_request:
+    branches: [ trunk ]
+
+jobs:
+
+  build:
+
+    runs-on: macos-11
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag what-the-hex-build-container:$(date +%s)
