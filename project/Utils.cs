@@ -73,11 +73,6 @@ public static class Utils
      */
     public static string ColorMap(Color color)
     {
-        if(color == null)
-        {
-            throw new ArgumentNullException(nameof(color));
-        }
-
         if(color == Green)
         {
             return "green";
