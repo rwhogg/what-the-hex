@@ -6,14 +6,14 @@
 
 if [ -z "$GODOT" ]; then
     echo "Set the environment variable GODOT"
-elif [ "$($GODOT --version | tr -d '[:space:]')" = "3.3.3.stable.mono.official" ]; then
+elif [ "$($GODOT --version | tr -d '[:space:]' | grep 3.3.3.stable.mono.official)" ]; then
     echo "Godot Mono is available!"
 else
     echo "Please install Godot Mono edition 3.3.3 if you have not done so already"
 fi
 
 if [ -x "$(command -v brew)" ]; then
-    brew bundle --file=script/Brewfile --no-lock
+    brew bundle check -v --file=script/Brewfile || brew bundle --file=script/Brewfile -v --no-lock
 fi
 
 if [ -x "$(command -v dotnet-format)" ]; then

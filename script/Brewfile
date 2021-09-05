@@ -1,7 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
 brew "gettext"
-# brew "dotnet"
+brew "dotnet"
 brew "moz-git-tools"
 brew "willgit"
 brew "graphviz"
