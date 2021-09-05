@@ -27,8 +27,7 @@ fi
 if [ -x "$(command -v addlicense)" ]; then
     echo "addlicense is available!"
 elif [ -x "$(command -v go)" ]; then
-    # FIXME: use go install instead
-    go get -u github.com/google/addlicense
+    go install github.com/google/addlicense@latest
 else
     echo "Please install Golang"
 fi
