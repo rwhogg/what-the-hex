@@ -15,5 +15,5 @@ COPY ./script/bootstrap.sh script
 COPY ./script/Brewfile script
 RUN bash script/bootstrap.sh
 
-ENV PATH="/home/linuxbrew/go/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH="/home/linuxbrew/_godot/Godot_v3.3.3-stable_mono_linux_headless.64:/home/linuxbrew/go/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ENV DOTNET_CLI_TELEMETRY_OPTOUT="true"
