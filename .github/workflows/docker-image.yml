@@ -17,4 +17,4 @@ jobs:
             run: bash ./script/build-docker-image.sh
         -
             name: Build solutions
-            run: docker run what-the-hex-build-container:latest godot --build-solutions
+            run: docker run what-the-hex-build-container:latest -v project:/project /bin/bash -c "cd /project && godot --build-solutions"
