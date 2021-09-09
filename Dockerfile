@@ -8,12 +8,13 @@ RUN mv Godot_v3.3.3-stable_mono_linux_headless_64.zip _godot/godot.zip
 RUN unzip _godot/godot.zip
 RUN rm -rf _godot
 RUN mv Godot_v3.3.3-stable_mono_linux_headless_64/ _godot
-ENV GODOT="/home/linuxbrew/_godot/Godot_v3.3.3-stable_mono_linux_headless.64"
+RUN ln _godot/Godot_v3.3.3-stable_mono_linux_headless.64 _godot/godot
+ENV GODOT="/home/linuxbrew/_godot/godot"
 
 RUN mkdir script
 COPY ./script/bootstrap.sh script
 COPY ./script/Brewfile script
 RUN bash script/bootstrap.sh
 
-ENV PATH="/home/linuxbrew/_godot/Godot_v3.3.3-stable_mono_linux_headless.64:/home/linuxbrew/go/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH="/home/linuxbrew/_godot:/home/linuxbrew/go/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ENV DOTNET_CLI_TELEMETRY_OPTOUT="true"
