@@ -59,7 +59,7 @@ Tier 1 (Should Work Well):
 * Android/Chrome OS/Fire OS (ARM)
 * GNU/Linux (amd64)
 * HTML5/Web Browsers
-    * Note that mobile browsers on iOS do not support the screen orientation API, so you may have trouble fitting that one onto the screen
+    * Note that mobile browsers on iOS do not support the screen orientation API, so you may have trouble fitting that one onto the screen.
 * Windows (x86)
 
 Tier 2 (Will Probably Work Well):
