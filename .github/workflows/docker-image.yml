@@ -17,4 +17,4 @@ jobs:
             run: docker build . --file Dockerfile --tag what-the-hex-build-container:latest
         -
             name: Build solutions
-            run: docker exec what-the-hex-build-container:latest godot --build-solutions
+            run: docker run what-the-hex-build-container:latest godot --build-solutions
