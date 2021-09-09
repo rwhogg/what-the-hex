@@ -1,21 +1,27 @@
 name: .NET
 
 on:
-  push:
-    branches: [ trunk ]
+    push:
+        branches: [ trunk ]
 
 jobs:
-  build:
+    build:
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+        steps:
+            - uses: actions/checkout@v2
+            - 
+                name: Setup .NET
+                uses: actions/setup-dotnet@v1
+                with:
+                    dotnet-version: 5.0.x
+            - 
+                name: Change directory
+                run: cd project
+            -
+                name: Restore dependencies
+                run: dotnet restore
+            -
+                name: Build
+                run: dotnet build --no-restore
