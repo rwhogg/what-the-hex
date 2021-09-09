@@ -16,12 +16,9 @@ jobs:
                 uses: actions/setup-dotnet@v1
                 with:
                     dotnet-version: 5.0.x
-            - 
-                name: Change directory
-                run: cd project
             -
                 name: Restore dependencies
-                run: dotnet restore
+                run: cd project && dotnet restore
             -
                 name: Build
-                run: dotnet build --no-restore
+                run: cd project && dotnet build --no-restore
