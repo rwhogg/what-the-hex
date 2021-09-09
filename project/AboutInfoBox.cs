@@ -26,6 +26,8 @@ public class AboutInfoBox : TextEdit
      */
     public override void _Ready()
     {
+        // Note: if this file complains about GitVersionInformation not existing,
+        // run "dotnet restore" followed by "dotnet build"
         Text = Text.Replace("_vers_", GitVersionInformation.FullSemVer);
     }
 }
