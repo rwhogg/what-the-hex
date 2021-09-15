@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://kenney_space.tres" type="DynamicFont" id=1]
+[ext_resource path="res://BottomStatusLabel.cs" type="Script" id=2]
+
+[sub_resource type="Theme" id=1]
+
+[node name="BottomPanelContainer" type="PanelContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 540.0
+margin_right = 1024.0
+margin_bottom = 600.0
+theme = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomStatusLabel" type="RichTextLabel" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 53.0
+custom_fonts/normal_font = ExtResource( 1 )
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+bbcode_enabled = true
+text = "Advantage: Green (15) Refresh: 20 +100"
+scroll_active = false
+script = ExtResource( 2 )

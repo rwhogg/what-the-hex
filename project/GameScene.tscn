@@ -1,11 +1,11 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://GameOver.wav" type="AudioStream" id=3]
-[ext_resource path="res://TwoPlayerScoreLabel.cs" type="Script" id=4]
+[ext_resource path="res://TopPanelContainer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=5]
-[ext_resource path="res://BottomStatusLabel.cs" type="Script" id=6]
+[ext_resource path="res://BottomPanelContainer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Music.cs" type="Script" id=7]
 [ext_resource path="res://kenney_rocket.tres" type="DynamicFont" id=8]
 [ext_resource path="res://PowerUpLabel.cs" type="Script" id=9]
@@ -20,30 +20,15 @@
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=18]
 [ext_resource path="res://background.png" type="Texture" id=19]
 [ext_resource path="res://TheHexWillHealYou.wav" type="AudioStream" id=20]
-[ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
 [ext_resource path="res://pause.wav" type="AudioStream" id=22]
 [ext_resource path="res://its_a_tie.wav" type="AudioStream" id=23]
 [ext_resource path="res://victory.wav" type="AudioStream" id=24]
 [ext_resource path="res://player_2.wav" type="AudioStream" id=25]
 [ext_resource path="res://player_1.wav" type="AudioStream" id=26]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 80
 font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=2]
-
-[sub_resource type="DynamicFont" id=3]
-size = 29
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFontData" id=4]
-font_path = "res://Kenney_Space.ttf"
-
-[sub_resource type="DynamicFont" id=5]
-size = 22
-outline_color = Color( 0.835294, 0.137255, 0.105882, 1 )
-font_data = SubResource( 4 )
 
 [node name="GameComponent" type="Node2D"]
 script = ExtResource( 1 )
@@ -82,7 +67,7 @@ margin_left = 166.314
 margin_top = 174.402
 margin_right = 851.314
 margin_bottom = 283.402
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 text = "Game Over"
 __meta__ = {
@@ -90,69 +75,9 @@ __meta__ = {
 "_editor_description_": "Label that displays during a Game Over"
 }
 
-[node name="TopPanelContainer" type="PanelContainer" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -4.0
-margin_top = -4.0
-margin_right = 1031.0
-margin_bottom = 47.0
-theme = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TopPanelContainer" parent="." instance=ExtResource( 4 )]
 
-[node name="OnePlayerScoreLabel" type="RichTextLabel" parent="TopPanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1028.0
-margin_bottom = 44.0
-custom_fonts/normal_font = SubResource( 3 )
-bbcode_enabled = true
-bbcode_text = "[color=red]TIME 0 MATCHES 0	SCORE 0 HISCORE 0[/color]"
-text = "TIME 0 MATCHES 0	SCORE 0 HISCORE 0"
-scroll_active = false
-script = ExtResource( 21 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TwoPlayerScoreLabel" type="RichTextLabel" parent="TopPanelContainer"]
-visible = false
-anchor_top = 0.0196078
-anchor_bottom = 0.0196078
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1028.0
-margin_bottom = 44.0
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[color=red]P1: {0}\\tTIME: {1}\\t P2: {2}[/color]"
-text = "P1: {0}\\tTIME: {1}\\t P2: {2}"
-script = ExtResource( 4 )
-
-[node name="BottomPanelContainer" type="PanelContainer" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_top = 540.0
-margin_right = 1024.0
-margin_bottom = 600.0
-theme = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BottomStatusLabel" type="RichTextLabel" parent="BottomPanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 53.0
-custom_fonts/normal_font = ExtResource( 5 )
-custom_colors/default_color = Color( 1, 0, 0, 1 )
-bbcode_enabled = true
-text = "Advantage: Green (15) Refresh: 20 +100"
-scroll_active = false
-script = ExtResource( 6 )
+[node name="BottomPanelContainer" parent="." instance=ExtResource( 6 )]
 
 [node name="PowerUpContainer" type="CenterContainer" parent="."]
 margin_left = 856.0
