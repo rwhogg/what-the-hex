@@ -1,54 +1,49 @@
 {
-	"WhatThehex1620215744165": {
+	"WhatThehex1631665877394": {
 		"name": "What The hex",
 		"items": [
 			{
-				"id": "1361620215673201429671",
+				"id": "136163166587739772975",
 				"name": "Add more powerups",
 				"state": ""
 			},
 			{
-				"id": "1361620215700801297239",
+				"id": "1361631665877400447600",
 				"name": "Add some more win conditions/levels/etc",
 				"state": ""
 			},
 			{
-				"id": "1361620215942721166594",
+				"id": "1361631665877401526819",
 				"name": "Write the documentation",
 				"state": ""
 			},
 			{
-				"id": "1361620215949768920508",
+				"id": "1361631665877401977974",
 				"name": "Film a tutorial",
 				"state": ""
 			},
 			{
-				"id": "1361620215957258813675",
+				"id": "1361631665877401662754",
 				"name": "Publish the game downloads",
 				"state": ""
 			},
 			{
-				"id": "1361620216044623260579",
+				"id": "1361631665877402679591",
 				"name": "Add the victory conditions back in",
 				"state": ""
 			},
 			{
-				"id": "1361620821621766959973",
+				"id": "1361631665877402757252",
 				"name": "Adjust the replacement logic (start time, refresh rate, number selected for cycle, etc.)",
 				"state": ""
 			},
 			{
-				"id": "1361627529665500600479",
-				"name": "Make a new music track or two",
-				"state": ""
-			},
-			{
-				"id": "136163025584667545767",
+				"id": "1361631665877403405754",
 				"name": "Convert all the .ogg and .mp3 files to .wav with FFMPEG",
 				"state": ""
 			},
 			{
-				"id": "1361630256341257762739",
+				"id": "1361631665877403921473",
 				"name": "Let the controller be used to handle the Continue button",
 				"state": ""
 			}
