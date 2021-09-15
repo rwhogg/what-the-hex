@@ -28,6 +28,6 @@ public class SelectButtonSound : AudioStreamPlayer
     {
         // FIXME I should rename that sound file
         base._Ready();
-        Stream = GD.Load<AudioStreamOGGVorbis>("res://menu-5.ogg");
+        Stream = GD.Load<AudioStream>("res://menu-5.wav");
     }
 }

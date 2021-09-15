@@ -2,24 +2,24 @@
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://TheHexWillHealYou.ogg" type="AudioStream" id=3]
+[ext_resource path="res://GameOver.wav" type="AudioStream" id=3]
 [ext_resource path="res://TwoPlayerScoreLabel.cs" type="Script" id=4]
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=5]
 [ext_resource path="res://BottomStatusLabel.cs" type="Script" id=6]
 [ext_resource path="res://Music.cs" type="Script" id=7]
 [ext_resource path="res://kenney_rocket.tres" type="DynamicFont" id=8]
 [ext_resource path="res://PowerUpLabel.cs" type="Script" id=9]
-[ext_resource path="res://GameOver.ogg" type="AudioStream" id=10]
-[ext_resource path="res://rotate.ogg" type="AudioStream" id=11]
+[ext_resource path="res://refresh.wav" type="AudioStream" id=10]
+[ext_resource path="res://rotate.wav" type="AudioStream" id=11]
 [ext_resource path="res://rot_clock.png" type="Texture" id=12]
 [ext_resource path="res://rot_counterclock.png" type="Texture" id=13]
 [ext_resource path="res://match.wav" type="AudioStream" id=14]
-[ext_resource path="res://refresh.ogg" type="AudioStream" id=15]
-[ext_resource path="res://powerUp.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Win.wav" type="AudioStream" id=15]
+[ext_resource path="res://powerUp.wav" type="AudioStream" id=16]
 [ext_resource path="res://PowerUpButton.cs" type="Script" id=17]
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=18]
 [ext_resource path="res://background.png" type="Texture" id=19]
-[ext_resource path="res://Win.ogg" type="AudioStream" id=20]
+[ext_resource path="res://TheHexWillHealYou.wav" type="AudioStream" id=20]
 [ext_resource path="res://OnePlayerScoreLabel.cs" type="Script" id=21]
 [ext_resource path="res://pause.wav" type="AudioStream" id=22]
 [ext_resource path="res://its_a_tie.wav" type="AudioStream" id=23]
@@ -212,18 +212,18 @@ wait_time = 15.0
 autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 20 )
 script = ExtResource( 7 )
 
 [node name="RefreshSoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 10 )
 
 [node name="MatchSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 
 [node name="GameOverSoundPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
-stream = ExtResource( 10 )
+stream = ExtResource( 3 )
 
 [node name="RotateSoundPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
@@ -233,7 +233,7 @@ stream = ExtResource( 11 )
 stream = ExtResource( 16 )
 
 [node name="WinSoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 20 )
+stream = ExtResource( 15 )
 
 [node name="PauseSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 22 )

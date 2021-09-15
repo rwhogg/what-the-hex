@@ -38,11 +38,6 @@
 				"state": ""
 			},
 			{
-				"id": "1361631665877403405754",
-				"name": "Convert all the .ogg and .mp3 files to .wav with FFMPEG",
-				"state": ""
-			},
-			{
 				"id": "1361631665877403921473",
 				"name": "Let the controller be used to handle the Continue button",
 				"state": ""

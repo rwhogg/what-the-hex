@@ -26,6 +26,6 @@ public class ClickButtonSound : AudioStreamPlayer
     public override void _Ready()
     {
         base._Ready();
-        Stream = GD.Load<AudioStreamOGGVorbis>("res://confirmation_002.ogg");
+        Stream = GD.Load<AudioStream>("res://confirmation_002.wav");
     }
 }
