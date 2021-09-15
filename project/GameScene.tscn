@@ -58,23 +58,6 @@ scale = Vector2( 0.210319, 0.210319 )
 normal = ExtResource( 13 )
 visibility_mode = 1
 
-[node name="GameOverLabel" type="RichTextLabel" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 166.314
-margin_top = 174.402
-margin_right = 851.314
-margin_bottom = 283.402
-custom_fonts/normal_font = SubResource( 2 )
-custom_colors/default_color = Color( 1, 0, 0, 1 )
-text = "Game Over"
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Label that displays during a Game Over"
-}
-
 [node name="TopPanelContainer" parent="." instance=ExtResource( 4 )]
 
 [node name="BottomPanelContainer" parent="." instance=ExtResource( 6 )]
@@ -109,6 +92,23 @@ Next: 3"
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
+}
+
+[node name="GameOverLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 166.314
+margin_top = 174.402
+margin_right = 851.314
+margin_bottom = 283.402
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Label that displays during a Game Over"
 }
 
 [node name="ContinueButton" type="Button" parent="."]
