@@ -59,8 +59,6 @@ public class GameComponent : Node2D
 
     private const float AdvantageTime = 15.0f;
 
-    private const float GameStartTime = 100.0f;
-
     private const string TimeoutSignal = "timeout";
 
     private int NumRefreshes;
@@ -162,7 +160,7 @@ public class GameComponent : Node2D
 
         var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
-        gameTimer.Start(GameStartTime);
+        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : 100.0f);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
         refreshTimer.Connect(TimeoutSignal, this, nameof(On_RefreshTimer_Timeout));

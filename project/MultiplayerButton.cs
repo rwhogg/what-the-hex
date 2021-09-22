@@ -16,6 +16,8 @@ using Godot;
 
 public class MultiplayerButton : ThemeButton
 {
+    private const string MultiplayerConfigScene = "res://MultiplayerConfig.tscn";
+
     /**
      * Called when this button and its children enter the scene tree.
      */
@@ -26,23 +28,24 @@ public class MultiplayerButton : ThemeButton
     }
 
     /**
-     * Called when the button is pressed
+     * Called when the button is pressed.
      */
     protected override void ChangeScene()
     {
         RuntimeConfig.Is2Player = true;
-        GetTree().ChangeScene("res://GameScene.tscn");
+        GetTree().ChangeScene(MultiplayerConfigScene);
     }
 
     private void CheckDisable()
     {
         Disabled = ShouldDisable();
     }
+
 #pragma warning disable CA1801
     private void CheckDisable(int device, bool connected)
 #pragma warning restore CA1801
     {
-        // this overload (2 arguments) is only needed so that the signal signature matches
+        // this overload (2 arguments) is only needed so that the signal signatures matches
         CheckDisable();
     }
 

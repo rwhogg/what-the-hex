@@ -12,23 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-using Godot;
-
-/**
- * Script for the Credits Browser
- */
-public class CreditsBrowser : TextEdit
+public class MultiplayerPlayButton : ThemeButton
 {
-    /**
-     * Displays the third party licenses file contents in the "editor".
-     * Runs when this component enters the scene tree.
-     */
-    public override void _Ready()
+    private const string GameScene = "res://GameScene.tscn";
+
+    protected override void ChangeScene()
     {
-        var file = new File();
-        _ = file.Open("res://THIRD-PARTY-LICENSES.txt", File.ModeFlags.Read);
-        Text = file.GetAsText();
-        file.Dispose();
+        RuntimeConfig.Is2Player = true;
+        RuntimeConfig.GameStartTime = GetTree().Root.GetNode<MultiplayerConfig>("MultiplayerConfig").GameTime;
+        GetTree().ChangeScene(GameScene);
     }
 }

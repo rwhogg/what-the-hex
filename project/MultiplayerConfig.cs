@@ -15,20 +15,17 @@
 
 using Godot;
 
-/**
- * Script for the Credits Browser
- */
-public class CreditsBrowser : TextEdit
+public class MultiplayerConfig : Control
 {
-    /**
-     * Displays the third party licenses file contents in the "editor".
-     * Runs when this component enters the scene tree.
-     */
+    public float GameTime = 100.0f;
+
     public override void _Ready()
     {
-        var file = new File();
-        _ = file.Open("res://THIRD-PARTY-LICENSES.txt", File.ModeFlags.Read);
-        Text = file.GetAsText();
-        file.Dispose();
+        GetNode<SpinBox>("GameTimeSelect").Connect("value_changed", this, nameof(SetGameTime));
+    }
+
+    private void SetGameTime(float value)
+    {
+        GameTime = value;
     }
 }

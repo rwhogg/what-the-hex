@@ -32,6 +32,8 @@ public class RuntimeConfig : Node
 
     public static int MatchesNeeded { get; set; }
 
+    public static float GameStartTime { get; set; }
+
     private static PopupDialog popup;
 
     public override void _Ready()
