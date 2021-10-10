@@ -1,6 +1,5 @@
-asset_src/EntrancedByTheHex.1bd -linguist-detectable
-asset_src/TheHexWilHealYou.1bd -linguist-detectable
-
 * text=auto eol=lf
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
+
+*.1bd -linguist-detectable
