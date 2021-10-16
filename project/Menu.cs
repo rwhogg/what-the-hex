@@ -48,7 +48,7 @@ public class Menu : Control
     }
 
     /**
-     * Processes the input. Support for up and down.
+     * Processes the input.
      * @param event Input event
      */
     public override void _Input(InputEvent @event)
@@ -66,6 +66,11 @@ public class Menu : Control
         else if(@event.IsActionPressed("ui_down"))
         {
             selected = Math.Min(selected + 1, QuitButtonIndex);
+            Buttons[selected].GrabFocus();
+        }
+        else if(@event.IsActionPressed("ui_select"))
+        {
+            selected = (selected + 1) % (QuitButtonIndex + 1);
             Buttons[selected].GrabFocus();
         }
         else if(@event.IsActionPressed("ui_cancel"))
