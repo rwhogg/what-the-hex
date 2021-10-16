@@ -26,7 +26,7 @@
 [ext_resource path="res://player_2.wav" type="AudioStream" id=25]
 [ext_resource path="res://player_1.wav" type="AudioStream" id=26]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 80
 font_data = ExtResource( 2 )
 
@@ -103,7 +103,7 @@ margin_left = 166.314
 margin_top = 174.402
 margin_right = 851.314
 margin_bottom = 283.402
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 text = "Game Over"
 __meta__ = {
