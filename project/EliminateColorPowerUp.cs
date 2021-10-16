@@ -29,6 +29,6 @@ public class EliminateColorPowerUp : Godot.Object, IPowerUp
             throw new ArgumentNullException(nameof(game));
         }
 
-        
+        throw new Exception("Unimplemented");
     }
 }
