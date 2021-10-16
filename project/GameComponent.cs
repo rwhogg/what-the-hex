@@ -353,7 +353,7 @@ public class GameComponent : Node2D
         powerUpButton.TextureNormal = powerUp.GetTexture();
     }
 
-    private IPowerUp RandomPowerUp()
+    private static IPowerUp RandomPowerUp()
     {
         // FIXME
         return new StopRefreshPowerUp();

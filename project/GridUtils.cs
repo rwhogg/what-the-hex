@@ -1,3 +1,17 @@
+// Copyright 2021 Bob "Wombat" Hogg
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 using System;
 using System.Collections.Generic;
 
@@ -120,31 +134,31 @@ class GridUtils
         switch(side)
         {
             case Side.TL:
-                n1 = new int[]{row - 1, column - 1};
-                n2 = new int[]{row - 1, column};
-                n3 = new int[]{row, column - 1};
-                edgesToCheck = new int[]{bre, ble, tre};
+                n1 = new int[] { row - 1, column - 1 };
+                n2 = new int[] { row - 1, column };
+                n3 = new int[] { row, column - 1 };
+                edgesToCheck = new int[] { bre, ble, tre };
                 originalEdge = tle;
                 break;
             case Side.TR:
-                n1 = new int[]{row - 1, column + 1};
-                n2 = new int[]{row - 1, column};
-                n3 = new int[]{row, column + 1};
-                edgesToCheck = new int[]{ble, bre, tle};
+                n1 = new int[] { row - 1, column + 1 };
+                n2 = new int[] { row - 1, column };
+                n3 = new int[] { row, column + 1 };
+                edgesToCheck = new int[] { ble, bre, tle };
                 originalEdge = tre;
                 break;
             case Side.BR:
-                n1 = new int[]{row + 1, column + 1};
-                n2 = new int[]{row + 1, column};
-                n3 = new int[]{row, column + 1};
-                edgesToCheck = new int[]{tle, tre, ble};
+                n1 = new int[] { row + 1, column + 1 };
+                n2 = new int[] { row + 1, column };
+                n3 = new int[] { row, column + 1 };
+                edgesToCheck = new int[] { tle, tre, ble };
                 originalEdge = bre;
                 break;
             case Side.BL:
-                n1 = new int[]{row + 1, column - 1};
-                n2 = new int[]{row + 1, column};
-                n3 = new int[]{row, column - 1};
-                edgesToCheck = new int[]{tre, tle, bre};
+                n1 = new int[] { row + 1, column - 1 };
+                n2 = new int[] { row + 1, column };
+                n3 = new int[] { row, column - 1 };
+                edgesToCheck = new int[] { tre, tle, bre };
                 originalEdge = ble;
                 break;
             default:
