@@ -151,11 +151,15 @@ class GridUtils
                 throw new Exception("BAD SIDE CHECK");
         }
 
-        Color colorToCheck = affectedHexagon.EdgeColors[originalEdge];
-        bool n1eq = colorToCheck == Array[n1[0]][n1[1]].EdgeColors[edgesToCheck[0]];
-        bool n2eq = colorToCheck == Array[n2[0]][n2[1]].EdgeColors[edgesToCheck[1]];
-        bool n3eq = colorToCheck == Array[n3[0]][n3[1]].EdgeColors[edgesToCheck[2]];
+        return CheckEdges(affectedHexagon, Array, n1, n2, n3, edgesToCheck, originalEdge);
+    }
 
-        return n1eq && n2eq && n3eq;
+    private static bool CheckEdges(Hexagon affectedHexagon, Hexagon[][] Array, int[] n1, int[] n2, int[] n3, int[] edgesToCheck, int originalEdge)
+    {
+        Color colorToCheck = affectedHexagon.EdgeColors[originalEdge];
+        return
+            (colorToCheck == Array[n1[0]][n1[1]].EdgeColors[edgesToCheck[0]]) &&
+            (colorToCheck == Array[n2[0]][n2[1]].EdgeColors[edgesToCheck[1]]) &&
+            (colorToCheck == Array[n3[0]][n3[1]].EdgeColors[edgesToCheck[2]]);
     }
 }
