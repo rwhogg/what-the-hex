@@ -93,7 +93,6 @@ public class Hexagon : Node2D
     private static readonly bool IsDebug = OS.IsDebugBuild();
 
     private static readonly Random Rand = new Random();
-    private static readonly Color[] CursorColors = { Red, Green };
 
     private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
@@ -170,11 +169,11 @@ public class Hexagon : Node2D
         DrawLine(hexagonPoints[hexagonPoints.Length - 1], hexagonPoints[0], EdgeColors[EdgeColors.Count - 1], EdgeThickness);
         if(Selected[0] && ShouldShowSelections())
         {
-            DrawCircle(new Vector2(0, 0), 5, CursorColors[0]);
+            DrawCircle(new Vector2(0, 0), 5, Colors.PlayerColors[0]);
         }
         else if(Selected[1] && ShouldShowSelections())
         {
-            DrawCircle(new Vector2(0, 0), 5, CursorColors[1]);
+            DrawCircle(new Vector2(0, 0), 5, Colors.PlayerColors[1]);
         }
         if(IsDebug)
         {

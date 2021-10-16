@@ -75,7 +75,6 @@ public class GameComponent : Node2D
         HiScore = ConfigFileUtils.LoadHiscore();
         Scores = new int[RuntimeConfig.Is2Player ? 2 : 1];
 
-        // FIXME: supposedly there is a static Array.Fill method, but it doesn't seem to be found
         Scores[0] = 0;
         if(RuntimeConfig.Is2Player)
         {

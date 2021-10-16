@@ -89,6 +89,10 @@ public static class Utils
         {
             return "yellow";
         }
+        if(color == Red)
+        {
+            return "red";
+        }
 
         throw new ArgumentException("Unknown color specified");
     }

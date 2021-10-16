@@ -1,1 +1,12 @@
 # Known Issues
+
+* Not all menus can be controlled via gamepad
+
+Unfortunately, this was my first major project with Godot, so I didn't reall
+take the best advantage of its scene and theming architecture.
+As a result, the UI is kinda all over the place.
+Sorry about that.
+
+* My replica N64 gamepad is mistaken for a PS3 controller
+
+Uh... yeah.
