@@ -292,7 +292,7 @@ public class GameComponent : Node2D
                 if(!RuntimeConfig.Is2Player)
                 {
                     // FIXME: support for 2 player as well
-                    AssignPowerup();
+                    AssignPowerUp();
                 }
                 NumAdvantageMatchesMade = 0;
             }
@@ -345,13 +345,18 @@ public class GameComponent : Node2D
         }
     }
 
-    private void AssignPowerup()
+    private void AssignPowerUp()
     {
-        // FIXME need random
-        IPowerUp powerUp = new StopRefreshPowerUp();
+        IPowerUp powerUp = RandomPowerUp();
         ReservedPowerUp = powerUp;
         var powerUpButton = GetNode<TextureButton>("PowerUpContainer/PowerUpButton");
         powerUpButton.TextureNormal = powerUp.GetTexture();
+    }
+
+    private IPowerUp RandomPowerUp()
+    {
+        // FIXME
+        return new StopRefreshPowerUp();
     }
 
     private void EndOfGame()
