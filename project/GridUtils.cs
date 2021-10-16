@@ -116,6 +116,48 @@ class GridUtils
         return matchedHexagons;
     }
 
+    /**
+     * Create a new grid of hexagons, each of which has random edge colors
+     * @param basePosition Position of the top-left hexagon in the grid
+     * @param hexagonsPerRow Number of hexagons that appear in each row
+     * @param baseColor Base color of every hexagon
+     */
+    public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
+    {
+        if(hexagonsPerRow == null)
+        {
+            throw new ArgumentNullException(nameof(hexagonsPerRow));
+        }
+        Grid grid = new Grid(basePosition, hexagonsPerRow);
+        int numRows = hexagonsPerRow.Length;
+        Hexagon[][] array = new Hexagon[numRows][];
+        for(int i = 0; i < numRows; i++)
+        {
+            array[i] = new Hexagon[hexagonsPerRow[i]];
+            for(int j = 0; j < hexagonsPerRow[i]; j++)
+            {
+                float xPos = (float)(j * Hexagon.BigRadius() * 2);
+                float yPos = (float)(i * Hexagon.SmallRadius() * 2);
+
+                // Bit of a buffer so the edge colors don't overlap
+                // (the hardcoded constants are just eyeballed to look reasonable)
+                // but that said, they were used in deriving the math for GetAffectedHexagon(),
+                // so don't change them without thinking
+                xPos += Hexagon.EdgeThickness * j * 0.2F;
+                yPos += Hexagon.EdgeThickness * i * 0.8F;
+
+                Vector2 position = new Vector2(xPos, yPos);
+                array[i][j] = HexagonUtils.RandomHexagon(position, baseColor);
+                array[i][j].I = i;
+                array[i][j].J = j;
+                grid.AddChild(array[i][j], true);
+            }
+        }
+
+        grid.Array = array;
+        return grid;
+    }
+
     private static bool CheckSide(Hexagon affectedHexagon, Side side, Hexagon[][] Array)
     {
         int tre = 0;

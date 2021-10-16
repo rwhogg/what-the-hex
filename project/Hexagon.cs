@@ -82,9 +82,9 @@ public class Hexagon : Node2D
     /**
      * List of all possible options for edge colors
      */
-    private static readonly Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
+    public static readonly Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
 
-    private const float SideLength = 50.0F;
+    public static readonly float SideLength = 50.0F;
 
     private static readonly float Cos30 = (float)Cos(Deg2Rad(30));
 
@@ -92,20 +92,7 @@ public class Hexagon : Node2D
 
     private static readonly bool IsDebug = OS.IsDebugBuild();
 
-    private static readonly Random Rand = new Random();
-
     private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
-
-    /**
-     * Get a random edge color
-     * @return Color A randomly chosen edge color
-     */
-    public static Color RandomColor()
-    {
-#pragma warning disable CA5394
-        return EdgeColorOptions[Rand.Next(0, EdgeColorOptions.Length)];
-#pragma warning restore CA5394
-    }
 
     /**
      * Do not use this constructor.
@@ -290,7 +277,7 @@ public class Hexagon : Node2D
 
     public void Refresh()
     {
-        EdgeColors = RandomEdgeColors();
+        EdgeColors = HexagonUtils.RandomEdgeColors(EdgeColorOptions);
     }
 
     private Color GetHexColor()
@@ -323,69 +310,5 @@ public class Hexagon : Node2D
     public static float SmallRadius()
     {
         return Cos30 * BigRadius();
-    }
-
-    /**
-     * Create a new hexagon with randomly chosen edge colors
-     * @param center Center position
-     * @param baseColor Base color
-     */
-    public static Hexagon RandomHexagon(Vector2 center, Color baseColor)
-    {
-        List<Color> edgeColors = RandomEdgeColors();
-        return new Hexagon(center, baseColor, edgeColors);
-    }
-
-    /**
-     * Create a new grid of hexagons, each of which has random edge colors
-     * @param basePosition Position of the top-left hexagon in the grid
-     * @param hexagonsPerRow Number of hexagons that appear in each row
-     * @param baseColor Base color of every hexagon
-     */
-    public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
-    {
-        // FIXME: most of this stuff should move into the grid class
-        if(hexagonsPerRow == null)
-        {
-            throw new ArgumentNullException(nameof(hexagonsPerRow));
-        }
-        Grid grid = new Grid(basePosition, hexagonsPerRow);
-        int numRows = hexagonsPerRow.Length;
-        Hexagon[][] array = new Hexagon[numRows][];
-        for(int i = 0; i < numRows; i++)
-        {
-            array[i] = new Hexagon[hexagonsPerRow[i]];
-            for(int j = 0; j < hexagonsPerRow[i]; j++)
-            {
-                float xPos = (float)(j * BigRadius() * 2);
-                float yPos = (float)(i * SmallRadius() * 2);
-
-                // Bit of a buffer so the edge colors don't overlap
-                // (the hardcoded constants are just eyeballed to look reasonable)
-                // but that said, they were used in deriving the math for GetAffectedHexagon(),
-                // so don't change them without thinking
-                xPos += EdgeThickness * j * 0.2F;
-                yPos += EdgeThickness * i * 0.8F;
-
-                Vector2 position = new Vector2(xPos, yPos);
-                array[i][j] = RandomHexagon(position, baseColor);
-                array[i][j].I = i;
-                array[i][j].J = j;
-                grid.AddChild(array[i][j], true);
-            }
-        }
-
-        grid.Array = array;
-        return grid;
-    }
-
-    private static List<Color> RandomEdgeColors()
-    {
-        List<Color> edgeColors = new List<Color>();
-        for(int i = 0; i < 6; i++)
-        {
-            edgeColors.Add(RandomColor());
-        }
-        return edgeColors;
     }
 }

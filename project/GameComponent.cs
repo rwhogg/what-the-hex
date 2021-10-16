@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Diagnostics.Contracts;
 
 using Godot;
@@ -95,7 +96,7 @@ public class GameComponent : Node2D
 
         SetUpButtonHandlers();
 
-        AdvantageColor = Hexagon.RandomColor();
+        AdvantageColor = HexagonUtils.RandomColor();
 
         StartTimers();
 
@@ -111,7 +112,7 @@ public class GameComponent : Node2D
         {
             RuntimeConfig.DefaultLayout();
         }
-        HexagonGrid = Hexagon.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
+        HexagonGrid = GridUtils.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
         HexagonGrid.SetSelectedHexagon(0, 0, 0);
         if(RuntimeConfig.Is2Player)
         {
@@ -201,7 +202,7 @@ public class GameComponent : Node2D
 
     private void On_AdvantageTimer_Timeout()
     {
-        AdvantageColor = Hexagon.RandomColor();
+        AdvantageColor = HexagonUtils.RandomColor();
     }
 
     private void On_RefreshTimer_Timeout()
@@ -259,7 +260,7 @@ public class GameComponent : Node2D
 
 #pragma warning disable IDE0060
 #pragma warning disable CA1801
-    private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Array matchedHexagons, Dictionary<Color, int> matchedColors, int playerIndex)
+    private void On_Hexagon_Rotated(Hexagon rotatedHexagon, Godot.Collections.Array matchedHexagons, Dictionary<Color, int> matchedColors, int playerIndex)
 #pragma warning restore CA1801
 #pragma warning restore IDE0060
     {
@@ -283,7 +284,7 @@ public class GameComponent : Node2D
         if(madeAnyAdvantageMatch)
         {
             NumAdvantageMatchesMade++;
-            AdvantageColor = Hexagon.RandomColor();
+            AdvantageColor = HexagonUtils.RandomColor();
             var advantageTimer = GetNode<Timer>("AdvantageTimer");
             advantageTimer.Stop();
             advantageTimer.Start(AdvantageTime);

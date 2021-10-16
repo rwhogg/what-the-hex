@@ -57,7 +57,7 @@ public class StopRefreshPowerUp : Godot.Object, IPowerUp
             throw new ArgumentNullException(nameof(game));
         }
 
-        Timer refreshTimer = game.GetNode<Timer>("RefreshTimer");
+        var refreshTimer = game.GetNode<Timer>("RefreshTimer");
         RefreshWaitTime = refreshTimer.WaitTime;
         refreshTimer.Stop();
         SceneTreeTimer waitTimer = game.GetTree().CreateTimer(StopRefreshTime);
@@ -68,7 +68,7 @@ public class StopRefreshPowerUp : Godot.Object, IPowerUp
 
     private void RestartRefreshTimer()
     {
-        Timer refreshTimer = Game.GetNode<Timer>("RefreshTimer");
+        var refreshTimer = Game.GetNode<Timer>("RefreshTimer");
         refreshTimer.Start(RefreshWaitTime);
     }
 }
