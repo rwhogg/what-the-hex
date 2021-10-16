@@ -354,10 +354,14 @@ public class GameComponent : Node2D
         powerUpButton.TextureNormal = powerUp.GetTexture();
     }
 
-    private static IPowerUp RandomPowerUp()
+    private IPowerUp RandomPowerUp()
     {
-        // FIXME
-        return new StopRefreshPowerUp();
+        int random = (new Random()).Next(0, 2);
+        if(random == 0)
+        {
+            return new StopRefreshPowerUp();
+        }
+        return new EliminateColorPowerUp();
     }
 
     private void EndOfGame()
@@ -365,6 +369,7 @@ public class GameComponent : Node2D
         GetNode<AudioStreamPlayer>("Music").Stop();
         GetNode<Timer>("AdvantageTimer").Stop();
         GetNode<Timer>("RefreshTimer").Stop();
+        GetNode<Timer>("GameTimer").Stop();
         GetNode<Label>("PowerUpLabel").Hide();
         if(HexagonGrid != null)
         {
