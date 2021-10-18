@@ -20,6 +20,6 @@ public static class Colors
 {
     public static Color[] GetPlayerColors()
     {
-        return new Color[]{ Red, Green };
+        return new Color[] { Red, Green };
     }
 }
