@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 using Godot;
 
-class GridUtils
+public static class GridUtils
 {
     enum Side
     {
@@ -29,6 +29,19 @@ class GridUtils
 
     public static HashSet<Hexagon> CheckMatches(Hexagon[][] Array, Hexagon affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors, int[] HexagonsPerRow)
     {
+        if(Array == null)
+        {
+            throw new ArgumentNullException(nameof(Array));
+        }
+        if(affectedHexagon == null)
+        {
+            throw new ArgumentNullException(nameof(affectedHexagon));
+        }
+        if(HexagonsPerRow == null)
+        {
+            throw new ArgumentNullException(nameof(HexagonsPerRow));
+        }
+
         HashSet<Hexagon> matchedHexagons = new HashSet<Hexagon>();
         matchedColors = new Godot.Collections.Dictionary<Color, int>();
         int tre = 0;
@@ -204,7 +217,7 @@ class GridUtils
                 originalEdge = ble;
                 break;
             default:
-                throw new Exception("BAD SIDE CHECK");
+                throw new ArgumentException("BAD SIDE CHECK");
         }
 
         return CheckEdges(affectedHexagon, Array, n1, n2, n3, edgesToCheck, originalEdge);

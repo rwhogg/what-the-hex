@@ -13,19 +13,25 @@
 // limitations under the License.
 
 using System;
+using System.Globalization;
 
 using Godot;
 
 public class ControllerLabel : RichTextLabel
 {
+#pragma warning disable CS0649
     [Export]
     private readonly int ControllerIndex;
+#pragma warning restore CS0649
+
+    private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 
     public override void _Ready()
     {
         BbcodeText = String.Format(
+            culture,
             "[color={0}]P{1}: {2}[/color]",
-            Utils.ColorMap(Colors.PlayerColors[ControllerIndex]),
+            Utils.ColorMap(Colors.GetPlayerColors()[ControllerIndex]),
             ControllerIndex + 1,
             GetControllerName()
         );

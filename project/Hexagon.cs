@@ -156,11 +156,11 @@ public class Hexagon : Node2D
         DrawLine(hexagonPoints[hexagonPoints.Length - 1], hexagonPoints[0], EdgeColors[EdgeColors.Count - 1], EdgeThickness);
         if(Selected[0] && ShouldShowSelections())
         {
-            DrawCircle(new Vector2(0, 0), 5, Colors.PlayerColors[0]);
+            DrawCircle(new Vector2(0, 0), 5, Colors.GetPlayerColors()[0]);
         }
         else if(Selected[1] && ShouldShowSelections())
         {
-            DrawCircle(new Vector2(0, 0), 5, Colors.PlayerColors[1]);
+            DrawCircle(new Vector2(0, 0), 5, Colors.GetPlayerColors()[1]);
         }
         if(IsDebug)
         {
