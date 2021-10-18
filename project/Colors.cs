@@ -16,7 +16,10 @@ using Godot;
 
 using static Godot.Colors;
 
-class Colors
+public static class Colors
 {
-    public static readonly Color[] PlayerColors = { Red, Green };
+    public static Color[] GetPlayerColors()
+    {
+        return new Color[]{ Red, Green };
+    }
 }

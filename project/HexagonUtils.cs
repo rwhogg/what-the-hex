@@ -76,6 +76,11 @@ public static class HexagonUtils
      */
     public static Color RandomColor(Color[] edgeColorOptions)
     {
+        if(edgeColorOptions == null)
+        {
+            throw new ArgumentNullException(nameof(edgeColorOptions));
+        }
+
 #pragma warning disable CA5394
         return edgeColorOptions[Rand.Next(0, edgeColorOptions.Length)];
 #pragma warning restore CA5394
