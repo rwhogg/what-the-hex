@@ -94,3 +94,5 @@ script = ExtResource( 6 )
 [node name="StarCreateTimer" type="Timer" parent="."]
 
 [node name="StarDeleteTimer" type="Timer" parent="."]
+
+[node name="AttractModeTimer" type="Timer" parent="."]
