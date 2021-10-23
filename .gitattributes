@@ -2,5 +2,4 @@
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 
-# NOT actually vendored, but this gets Linguist to do the right thing
-asset_src linguist-vendored
+*.1bd -linguist-detectable
