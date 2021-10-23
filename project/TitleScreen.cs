@@ -96,6 +96,7 @@ public class TitleScreen : Control
 
     private void GoToMenu()
     {
+        RuntimeConfig.IsInert = false;
         GetTree().ChangeScene("res://Menu.tscn");
     }
 
@@ -135,9 +136,8 @@ public class TitleScreen : Control
 
     private void AttractMode()
     {
-        GD.Print("Trigger attract mode");
-        // FIXME
-        //GetTree().ChangeScene("res://GameScene.tscn");
+        RuntimeConfig.IsInert = true;
+        GetTree().ChangeScene("res://GameScene.tscn");
     }
 
     private void AllowStart()

@@ -34,6 +34,8 @@ public class RuntimeConfig : Node
 
     public static float GameStartTime { get; set; }
 
+    public static bool IsInert { get; set; }
+
     private static PopupDialog popup;
 
     public override void _Ready()

@@ -134,14 +134,19 @@ public static class GridUtils
      * @param basePosition Position of the top-left hexagon in the grid
      * @param hexagonsPerRow Number of hexagons that appear in each row
      * @param baseColor Base color of every hexagon
+     * @param isInert If true, return an inert grid
      */
-    public static Grid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor)
+    public static BaseGrid RandomHexagonGrid(Vector2 basePosition, int[] hexagonsPerRow, Color baseColor, bool isInert)
     {
         if(hexagonsPerRow == null)
         {
             throw new ArgumentNullException(nameof(hexagonsPerRow));
         }
-        Grid grid = new Grid(basePosition, hexagonsPerRow);
+        BaseGrid grid = new Grid(basePosition, hexagonsPerRow);
+        if(isInert)
+        {
+            grid = new BaseGrid(basePosition, hexagonsPerRow);
+        }
         int numRows = hexagonsPerRow.Length;
         Hexagon[][] array = new Hexagon[numRows][];
         for(int i = 0; i < numRows; i++)
