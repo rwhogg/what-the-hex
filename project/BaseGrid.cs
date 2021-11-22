@@ -118,6 +118,10 @@ public class BaseGrid : Node2D
 
     protected void HandleRotation(Hexagon affectedHexagon, Direction direction, int playerIndex)
     {
+        if(affectedHexagon == null)
+        {
+            throw new ArgumentNullException(nameof(affectedHexagon));
+        }
         affectedHexagon.Rot(direction);
         Color colorToFlash = Hexagon.DefaultHexColor;
         HashSet<Hexagon> matchedHexagons = GridUtils.CheckMatches(HexArray, affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors, HexagonsPerRow);

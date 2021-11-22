@@ -45,7 +45,7 @@ public class MultiplayerButton : ThemeButton
     private void CheckDisable(int device, bool connected)
 #pragma warning restore CA1801
     {
-        // this overload (2 arguments) is only needed so that the signal signatures matches
+        // this overload (2 arguments) is only needed so that the signal signatures match
         CheckDisable();
     }
 

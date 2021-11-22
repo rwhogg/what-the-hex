@@ -1,6 +1,6 @@
 <gendarme>
     <ruleset name="WhatTheHex">
-        <rules include="*" from="Gendarme.Rules.BadPractice.dll"/>
+        <rules include="*" from="Gendarme.Rules.BadPractice.dll" exclude="AvoidVisibleConstantFieldRule"/>
         <rules include="*" from="Gendarme.Rules.Correctness.dll"/>
         <!-- I don't use namespaces, but I do use nested types. And the assemblies are only for my use, so I won't use them with CLS or COM. Out parameters are fine in my book -->
         <rules include="*" from="Gendarme.Rules.Design.dll" exclude="AvoidRefAndOutParametersRule | AvoidVisibleNestedTypesRule | MarkAssemblyWithCLSCompliantRule | MarkAssemblyWithComVisibleRule"/>
@@ -20,6 +20,5 @@
         <rules include="*" from="Gendarme.Rules.Maintainability.dll"/>
         <rules include="*" from="Gendarme.Rules.Globalization.dll"/>
         <rules include="*" from="Gendarme.Rules.Smells.dll" exclude="AvoidSpeculativeGeneralityRule"/>
-        <rules include="*" from="Gendarme.Rules.BadPractice.dll"/>
     </ruleset>
 </gendarme>

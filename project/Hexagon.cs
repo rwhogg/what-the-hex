@@ -84,7 +84,7 @@ public class Hexagon : Node2D
      */
     public static readonly Color[] EdgeColorOptions = { Green, Purple, HotPink, Yellow };
 
-    public static readonly float SideLength = 50.0F;
+    public const float SideLength = 50.0F;
 
     private static readonly float Cos30 = (float)Cos(Deg2Rad(30));
 
