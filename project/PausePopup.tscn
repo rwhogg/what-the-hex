@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=1]
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=2]
 [ext_resource path="res://QuitButton.cs" type="Script" id=3]
+[ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://ControllerLabel.cs" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 45
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 4 )
 
 [node name="PausePopupRoot" type="PopupDialog"]
 pause_mode = 2
@@ -21,8 +31,8 @@ __meta__ = {
 [node name="PauseMenuTitle" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -82.0
-margin_right = 103.0
+margin_left = -92.5
+margin_right = 92.5
 margin_bottom = 56.0
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 custom_fonts/normal_font = ExtResource( 1 )
@@ -36,10 +46,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -104.5
-margin_top = -24.5
-margin_right = 104.5
-margin_bottom = 24.5
+margin_left = -113.5
+margin_top = -58.0
+margin_right = 113.5
+margin_bottom = 58.0
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -58,3 +68,42 @@ margin_bottom = 116.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "QUIT"
 script = ExtResource( 3 )
+
+[node name="P1ControllerLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -196.5
+margin_top = -149.0
+margin_right = 196.5
+margin_bottom = -87.0
+rect_pivot_offset = Vector2( 262.16, 0 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[color=red]P1: Switch[/color]"
+text = "P1: Switch"
+scroll_active = false
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P2ControllerLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -196.5
+margin_top = -62.0
+margin_right = 196.5
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=green]P2: PS [/color]"
+text = "P2: PS "
+scroll_active = false
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+ControllerIndex = 1
