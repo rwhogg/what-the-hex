@@ -54,7 +54,7 @@ public class BaseGrid : Node2D
 
     private static readonly Random Rand = new Random();
 
-    private static readonly CultureInfo culture = ConfigFileUtils.GetCulture();
+    private static readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 
     /**
      * Do not use. Only for constructing Mono temp objects
@@ -134,7 +134,7 @@ public class BaseGrid : Node2D
         {
             if(OS.IsDebugBuild())
             {
-                GD.Print("Matched hex " + hexagon.I.ToString(culture) + ", " + hexagon.J.ToString(culture));
+                GD.Print("Matched hex " + hexagon.I.ToString(Culture) + ", " + hexagon.J.ToString(Culture));
             }
             hexagon.Matched = true;
             hexagon.AbortReplacement();
@@ -160,7 +160,7 @@ public class BaseGrid : Node2D
         {
             if(OS.IsDebugBuild())
             {
-                GD.Print("Bad Click! i, j: " + i.ToString(culture) + ", " + j.ToString(culture));
+                GD.Print("Bad Click! i, j: " + i.ToString(Culture) + ", " + j.ToString(Culture));
                 GD.Print("Click Position is " + clickPos);
             }
             return null;
