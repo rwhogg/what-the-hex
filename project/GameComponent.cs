@@ -204,6 +204,10 @@ public class GameComponent : Node2D
         }
     }
 
+    /**
+     * Handles input.
+     * @param @event Input event.
+     */
     public override void _Input(InputEvent @event)
     {
         if(RuntimeConfig.IsInert)
