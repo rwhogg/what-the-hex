@@ -14,3 +14,6 @@ M:System.Void ConfigFileUtils::SetShouldPlayMusic(System.Boolean)
 R:Gendarme.Rules.Performance.AvoidUnusedParametersRule
 # needed to satisfy signal interface
 M:System.Void MultiplayerButton::CheckDisable(System.Int32,System.Boolean)
+R:Gendarme.Rules.Smells.AvoidLongMethodsRule
+# Refactoring this method is dangerous. Don't touch it!
+M:System.Boolean GridUtils::CheckSide(Hexagon,GridUtils/Side,Hexagon[][])
