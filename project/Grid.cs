@@ -29,9 +29,6 @@ public class Grid : BaseGrid
     // emitted by the hexagons and grid as appropriate, with the game logic moved to the game
     // component in signal handlers
 
-    private readonly int[] HexagonsPerRow;
-
-    private readonly Hexagon[] SelectedHexagons = new Hexagon[1 + Convert.ToInt32(RuntimeConfig.Is2Player)];
     /**
      * Do not use. Only for constructing Mono temp objects
      */

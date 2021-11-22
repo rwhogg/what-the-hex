@@ -48,9 +48,9 @@ public class BaseGrid : Node2D
     // FIXME: Consider changing the field 'Array' to a private or internal field and add a 'SetArray' method.
     // Would have to look into the specifics of how I would want to do that
 
-    private readonly int[] HexagonsPerRow;
+    protected readonly int[] HexagonsPerRow;
 
-    private readonly Hexagon[] SelectedHexagons = new Hexagon[1 + Convert.ToInt32(RuntimeConfig.Is2Player)];
+    protected readonly Hexagon[] SelectedHexagons = new Hexagon[1 + Convert.ToInt32(RuntimeConfig.Is2Player)];
 
     private static readonly Random Rand = new Random();
 
