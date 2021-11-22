@@ -57,3 +57,4 @@ output.html
 super-linter.log
 .~lock.*#
 exports/Win_x86_nsis
+.ionide/symbolCache.db
