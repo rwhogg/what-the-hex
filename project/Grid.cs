@@ -109,7 +109,7 @@ public class Grid : BaseGrid
                 {
                     newJ = HexagonsPerRow[newI] - 1;
                 }
-                Hexagon newlySelectedHexagon = Array[newI][newJ];
+                Hexagon newlySelectedHexagon = HexArray[newI][newJ];
                 newlySelectedHexagon.Selected[controllerIndex] = true;
                 SelectedHexagons[controllerIndex] = newlySelectedHexagon;
                 break;

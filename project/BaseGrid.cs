@@ -44,8 +44,8 @@ public class BaseGrid : Node2D
     /**
      * The underlying jagged array of hexagons
      */
-    public Hexagon[][] Array;
-    // FIXME: Consider changing the field 'Array' to a private or internal field and add a 'SetArray' method.
+    public Hexagon[][] HexArray;
+    // FIXME: Consider changing the field 'HexArray' to a private or internal field and add a 'SetHexArray' method.
     // Would have to look into the specifics of how I would want to do that
 
     protected readonly int[] HexagonsPerRow;
@@ -80,8 +80,8 @@ public class BaseGrid : Node2D
      */
     public void SetSelectedHexagon(int i, int j, int playerIndex)
     {
-        Array[i][j].Selected[playerIndex] = true;
-        SelectedHexagons[playerIndex] = Array[i][j];
+        HexArray[i][j].Selected[playerIndex] = true;
+        SelectedHexagons[playerIndex] = HexArray[i][j];
     }
 
     /**
@@ -97,11 +97,11 @@ public class BaseGrid : Node2D
             int randomRow = Rand.Next(0, HexagonsPerRow.Length);
             int randomCol = Rand.Next(0, HexagonsPerRow[randomRow]);
 #pragma warning restore CA5394
-            if(Array[randomRow][randomCol].MarkedForReplacement)
+            if(HexArray[randomRow][randomCol].MarkedForReplacement)
             {
                 continue;
             }
-            Array[randomRow][randomCol].StartRefreshTimer();
+            HexArray[randomRow][randomCol].StartRefreshTimer();
             n++;
         }
     }
@@ -120,7 +120,7 @@ public class BaseGrid : Node2D
     {
         affectedHexagon.Rot(direction);
         Color colorToFlash = Hexagon.DefaultHexColor;
-        HashSet<Hexagon> matchedHexagons = GridUtils.CheckMatches(Array, affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors, HexagonsPerRow);
+        HashSet<Hexagon> matchedHexagons = GridUtils.CheckMatches(HexArray, affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors, HexagonsPerRow);
         if(matchedColors.Keys.Count > 0)
         {
             foreach(var pair in matchedColors)
@@ -166,6 +166,6 @@ public class BaseGrid : Node2D
             return null;
         }
 
-        return Array[i][j];
+        return HexArray[i][j];
     }
 }

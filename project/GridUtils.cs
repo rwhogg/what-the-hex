@@ -27,11 +27,11 @@ public static class GridUtils
         BR
     }
 
-    public static HashSet<Hexagon> CheckMatches(Hexagon[][] Array, Hexagon affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors, int[] HexagonsPerRow)
+    public static HashSet<Hexagon> CheckMatches(Hexagon[][] HexArray, Hexagon affectedHexagon, out Godot.Collections.Dictionary<Color, int> matchedColors, int[] HexagonsPerRow)
     {
-        if(Array == null)
+        if(HexArray == null)
         {
-            throw new ArgumentNullException(nameof(Array));
+            throw new ArgumentNullException(nameof(HexArray));
         }
         if(affectedHexagon == null)
         {
@@ -56,10 +56,10 @@ public static class GridUtils
         // top-left
         if(row != 0 && column != 0)
         {
-            Hexagon hexNW = Array[row - 1][column - 1];
-            Hexagon hexN = Array[row - 1][column];
-            Hexagon hexW = Array[row][column - 1];
-            if(CheckSide(affectedHexagon, Side.TL, Array))
+            Hexagon hexNW = HexArray[row - 1][column - 1];
+            Hexagon hexN = HexArray[row - 1][column];
+            Hexagon hexW = HexArray[row][column - 1];
+            if(CheckSide(affectedHexagon, Side.TL, HexArray))
             {
                 matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexNW, hexN, hexW });
                 // No need to += 1 here because this is definitely the first instance
@@ -69,10 +69,10 @@ public static class GridUtils
         // top-right
         if(row != 0 && column != HexagonsPerRow[row] - 1)
         {
-            Hexagon hexNE = Array[row - 1][column + 1];
-            Hexagon hexN = Array[row - 1][column];
-            Hexagon hexE = Array[row][column + 1];
-            if(CheckSide(affectedHexagon, Side.TR, Array))
+            Hexagon hexNE = HexArray[row - 1][column + 1];
+            Hexagon hexN = HexArray[row - 1][column];
+            Hexagon hexE = HexArray[row][column + 1];
+            if(CheckSide(affectedHexagon, Side.TR, HexArray))
             {
                 matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexNE, hexN, hexE });
                 if(matchedColors.ContainsKey(affectedHexagon.EdgeColors[tre]))
@@ -89,10 +89,10 @@ public static class GridUtils
         // bottom-right
         if(row != HexagonsPerRow.Length - 1 && column != HexagonsPerRow[row] - 1)
         {
-            Hexagon hexSE = Array[row + 1][column + 1];
-            Hexagon hexS = Array[row + 1][column];
-            Hexagon hexE = Array[row][column + 1];
-            if(CheckSide(affectedHexagon, Side.BR, Array))
+            Hexagon hexSE = HexArray[row + 1][column + 1];
+            Hexagon hexS = HexArray[row + 1][column];
+            Hexagon hexE = HexArray[row][column + 1];
+            if(CheckSide(affectedHexagon, Side.BR, HexArray))
             {
                 matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexSE, hexS, hexE });
                 if(matchedColors.ContainsKey(affectedHexagon.EdgeColors[bre]))
@@ -109,10 +109,10 @@ public static class GridUtils
         // bottom-left
         if(row != HexagonsPerRow.Length - 1 && column != 0)
         {
-            Hexagon hexSW = Array[row + 1][column - 1];
-            Hexagon hexS = Array[row + 1][column];
-            Hexagon hexW = Array[row][column - 1];
-            if(CheckSide(affectedHexagon, Side.BL, Array))
+            Hexagon hexSW = HexArray[row + 1][column - 1];
+            Hexagon hexS = HexArray[row + 1][column];
+            Hexagon hexW = HexArray[row][column - 1];
+            if(CheckSide(affectedHexagon, Side.BL, HexArray))
             {
                 matchedHexagons.UnionWith(new Hexagon[] { affectedHexagon, hexSW, hexS, hexW });
                 if(matchedColors.ContainsKey(affectedHexagon.EdgeColors[ble]))
@@ -148,10 +148,10 @@ public static class GridUtils
             grid = new BaseGrid(basePosition, hexagonsPerRow);
         }
         int numRows = hexagonsPerRow.Length;
-        Hexagon[][] array = new Hexagon[numRows][];
+        Hexagon[][] hexArray = new Hexagon[numRows][];
         for(int i = 0; i < numRows; i++)
         {
-            array[i] = new Hexagon[hexagonsPerRow[i]];
+            hexArray[i] = new Hexagon[hexagonsPerRow[i]];
             for(int j = 0; j < hexagonsPerRow[i]; j++)
             {
                 float xPos = (float)(j * Hexagon.BigRadius() * 2);
@@ -165,18 +165,18 @@ public static class GridUtils
                 yPos += Hexagon.EdgeThickness * i * 0.8F;
 
                 Vector2 position = new Vector2(xPos, yPos);
-                array[i][j] = HexagonUtils.RandomHexagon(position, baseColor);
-                array[i][j].I = i;
-                array[i][j].J = j;
-                grid.AddChild(array[i][j], true);
+                hexArray[i][j] = HexagonUtils.RandomHexagon(position, baseColor);
+                hexArray[i][j].I = i;
+                hexArray[i][j].J = j;
+                grid.AddChild(hexArray[i][j], true);
             }
         }
 
-        grid.Array = array;
+        grid.HexArray = hexArray;
         return grid;
     }
 
-    private static bool CheckSide(Hexagon affectedHexagon, Side side, Hexagon[][] Array)
+    private static bool CheckSide(Hexagon affectedHexagon, Side side, Hexagon[][] HexArray)
     {
         int tre = 0;
         int bre = 1;
@@ -225,15 +225,15 @@ public static class GridUtils
                 throw new ArgumentException("BAD SIDE CHECK");
         }
 
-        return CheckEdges(affectedHexagon, Array, n1, n2, n3, edgesToCheck, originalEdge);
+        return CheckEdges(affectedHexagon, HexArray, n1, n2, n3, edgesToCheck, originalEdge);
     }
 
-    private static bool CheckEdges(Hexagon affectedHexagon, Hexagon[][] Array, int[] n1, int[] n2, int[] n3, int[] edgesToCheck, int originalEdge)
+    private static bool CheckEdges(Hexagon affectedHexagon, Hexagon[][] HexArray, int[] n1, int[] n2, int[] n3, int[] edgesToCheck, int originalEdge)
     {
         Color colorToCheck = affectedHexagon.EdgeColors[originalEdge];
         return
-            (colorToCheck == Array[n1[0]][n1[1]].EdgeColors[edgesToCheck[0]]) &&
-            (colorToCheck == Array[n2[0]][n2[1]].EdgeColors[edgesToCheck[1]]) &&
-            (colorToCheck == Array[n3[0]][n3[1]].EdgeColors[edgesToCheck[2]]);
+            (colorToCheck == HexArray[n1[0]][n1[1]].EdgeColors[edgesToCheck[0]]) &&
+            (colorToCheck == HexArray[n2[0]][n2[1]].EdgeColors[edgesToCheck[1]]) &&
+            (colorToCheck == HexArray[n3[0]][n3[1]].EdgeColors[edgesToCheck[2]]);
     }
 }
