@@ -24,8 +24,8 @@ anchor_right = 0.5
 margin_left = -82.0
 margin_right = 103.0
 margin_bottom = 56.0
-custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 1, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 1 )
 text = "Pause"
 __meta__ = {
 "_edit_use_anchors_": false
