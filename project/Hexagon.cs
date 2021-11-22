@@ -191,7 +191,7 @@ public class Hexagon : Node2D
      */
     public void Rot(Direction direction)
     {
-        if(direction == Direction.LEFT)
+        if(direction == Direction.COUNTERCLOCKWISE)
         {
             Color firstEdgeColor = EdgeColors[0];
             EdgeColors.RemoveAt(0);

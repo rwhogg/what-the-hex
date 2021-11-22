@@ -14,6 +14,7 @@
 
 using Godot;
 
+using static Godot.KeyList;
 using static Godot.JoystickList;
 
 /**
@@ -55,6 +56,66 @@ public class Grid : BaseGrid
         else if(@event is InputEventMouseButton eventMouseButton)
         {
             HandleMouseClick(eventMouseButton);
+        }
+        else if(@event is InputEventKey eventKey)
+        {
+            HandleKey(eventKey);
+        }
+    }
+
+    private void HandleKey(InputEventKey eventKey)
+    {
+        // ensure we don't double up the actions
+        if(eventKey.IsPressed())
+        {
+            return;
+        }
+
+        // For now, always treat the keyboard as player 1
+        switch((KeyList)eventKey.Scancode)
+        {
+            case Left:
+            case Up:
+            case Right:
+            case Down:
+                int[][] dirsToGo ={
+                    new int[] { 0, -1 },
+                    new int[] { -1, 0 },
+                    new int[] { 0, 1 },
+                    new int[] { 1, 0 },
+                };
+                int[] dir = dirsToGo[eventKey.Scancode - (uint)Left]; // Left is actually the lowest key
+                SelectedHexagons[0].Selected[0] = false;
+                int newI = SelectedHexagons[0].I + dir[0];
+                int numRows = HexagonsPerRow.Length;
+                if(newI < 0)
+                {
+                    newI = 0;
+                }
+                else if(newI >= numRows)
+                {
+                    newI = numRows - 1;
+                }
+                int newJ = SelectedHexagons[0].J + dir[1];
+                if(newJ < 0)
+                {
+                    newJ = 0;
+                }
+                else if(newJ >= HexagonsPerRow[newI])
+                {
+                    newJ = HexagonsPerRow[newI] - 1;
+                }
+                Hexagon newlySelectedHexagon = HexArray[newI][newJ];
+                newlySelectedHexagon.Selected[0] = true;
+                SelectedHexagons[0] = newlySelectedHexagon;
+                break;
+            case Space:
+                // For now, only allowing clockwise rotations
+                HandleRotation(SelectedHexagons[0], Direction.CLOCKWISE, 0);
+                break;
+            case KeyList.Control:
+                HandlePowerUp();
+                break;
         }
     }
 
@@ -111,17 +172,17 @@ public class Grid : BaseGrid
                 newlySelectedHexagon.Selected[controllerIndex] = true;
                 SelectedHexagons[controllerIndex] = newlySelectedHexagon;
                 break;
-            case L:
+            case JoystickList.L:
             case L2:
             case DsB: // Also XboxA, SonyX
                 // Note: deliberately not supporting control stick / C stick triggers (L3 and R3 in Godot).
                 // They are way too easy to use intentionally.
-                HandleRotation(SelectedHexagons[controllerIndex], Direction.LEFT, controllerIndex);
+                HandleRotation(SelectedHexagons[controllerIndex], Direction.COUNTERCLOCKWISE, controllerIndex);
                 break;
-            case R:
+            case JoystickList.R:
             case R2:
             case DsA: // Also XboxB, SonyCircle
-                HandleRotation(SelectedHexagons[controllerIndex], Direction.RIGHT, controllerIndex);
+                HandleRotation(SelectedHexagons[controllerIndex], Direction.CLOCKWISE, controllerIndex);
                 break;
             case DsY: // Also XboxX, SonySquare
                 HandlePowerUp();
@@ -148,7 +209,7 @@ public class Grid : BaseGrid
 
         GetTree().SetInputAsHandled();
 
-        Direction direction = Direction.LEFT;
+        Direction direction = Direction.COUNTERCLOCKWISE;
         if(OS.HasTouchscreenUiHint())
         {
             // on touch screen devices, a tap should be equivalent to a select, not a rotation
@@ -158,7 +219,7 @@ public class Grid : BaseGrid
         }
         else if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
         {
-            direction = Direction.RIGHT;
+            direction = Direction.CLOCKWISE;
         }
         HandleRotation(affectedHexagon, direction, 0);
     }
