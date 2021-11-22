@@ -38,7 +38,7 @@ margin_bottom = 44.0
 custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=red]TIME 0 MATCHES 0	SCORE 0 HISCORE 0[/color]"
-text = "[color=red]TIME 0 MATCHES 0	SCORE 0 HISCORE 0[/color]"
+text = "TIME 0 MATCHES 0	SCORE 0 HISCORE 0"
 scroll_active = false
 script = ExtResource( 3 )
 __meta__ = {
@@ -56,5 +56,5 @@ margin_bottom = 44.0
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[color=red]P1: {0}\\tTIME: {1}\\t P2: {2}[/color]"
-text = "[color=red]P1: {0}\\tTIME: {1}\\t P2: {2}[/color]"
+text = "P1: {0}\\tTIME: {1}\\t P2: {2}"
 script = ExtResource( 2 )
