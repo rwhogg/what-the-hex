@@ -17,3 +17,7 @@ M:System.Void MultiplayerButton::CheckDisable(System.Int32,System.Boolean)
 R:Gendarme.Rules.Smells.AvoidLongMethodsRule
 # Refactoring this method is dangerous. Don't touch it!
 M:System.Boolean GridUtils::CheckSide(Hexagon,GridUtils/Side,Hexagon[][])
+R:Gendarme.Rules.Smells.AvoidCodeDuplicatedInSiblingClassesRule
+# Not really much point in consolidating these
+M:System.Void OnePlayerScoreLabel::_Process(System.Single)
+M:System.Void TwoPlayerScoreLabel::_Process(System.Single)
