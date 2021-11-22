@@ -212,7 +212,7 @@ public class GameComponent : Node2D
     {
         if(RuntimeConfig.IsInert)
         {
-            if(@event is InputEventJoypadButton j || @event is InputEventMouseButton m || @event is InputEventKey k)
+            if(@event is InputEventJoypadButton || @event is InputEventMouseButton || @event is InputEventKey)
             {
                 GetTree().ChangeScene("root.tscn");
             }
