@@ -49,6 +49,8 @@ public class GameComponent : Node2D
      */
     public int NumAdvantageMatchesMade { get; set; }
 
+    public bool GameEnded = false;
+
     private IPowerUp ReservedPowerUp;
 
     private BaseGrid HexagonGrid;
@@ -171,7 +173,7 @@ public class GameComponent : Node2D
 
         var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
-        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : 100.0f);
+        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : 10.0f);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
         refreshTimer.Connect(TimeoutSignal, this, nameof(On_RefreshTimer_Timeout));
@@ -217,6 +219,18 @@ public class GameComponent : Node2D
                 GetTree().ChangeScene("root.tscn");
             }
             return;
+        }
+        else if(GameEnded)
+        {
+            // allow continue via gamepad
+            if(@event is InputEventJoypadButton eventJoypadButton)
+            {
+                if((JoystickList)eventJoypadButton.ButtonIndex == JoystickList.Start)
+                {
+                    On_ContinueButtonPressed();
+                    return;
+                }
+            }
         }
         base._Input(@event);
     }
@@ -405,6 +419,7 @@ public class GameComponent : Node2D
             HexagonGrid.QueueFree();
             HexagonGrid = null;
         }
+        GameEnded = true;
     }
 
     private void DetermineWinner()

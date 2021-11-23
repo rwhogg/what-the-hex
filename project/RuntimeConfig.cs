@@ -65,7 +65,7 @@ public class RuntimeConfig : Node
             return;
         }
 
-        if(Input.IsActionJustPressed("ui_pause"))
+        if(!gameComponent.GameEnded && Input.IsActionJustPressed("ui_pause"))
         {
             var pauseSoundPlayer = gameComponent.GetNode<AudioStreamPlayer>("PauseSoundPlayer");
             pauseSoundPlayer.Play();
