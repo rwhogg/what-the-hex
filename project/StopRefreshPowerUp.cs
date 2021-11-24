@@ -40,7 +40,7 @@ public class StopRefreshPowerUp : Godot.Object, IPowerUp
 
         if(Texture.GetData() == null)
         {
-            Image clock = GD.Load<StreamTexture>("res://clock.png").GetData();
+            Image clock = GD.Load<StreamTexture>("res://images/clock.png").GetData();
             Texture.CreateFromImage(clock);
         }
     }

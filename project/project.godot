@@ -17,9 +17,9 @@ _global_script_class_icons={
 config/name="WhatTheHex"
 config/description="What The Hex? is a simple yet addictive puzzle game involving rotating hexagons to align their colors."
 run/main_scene="res://root.tscn"
-boot_splash/image="res://boarish-logo-only.png"
+boot_splash/image="res://images/boarish-logo-only.png"
 boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
-config/icon="res://icon.png"
+config/icon="res://images/icon.png"
 config/windows_native_icon="res://icon.ico"
 config/name_fr="Qu'est-ce Que L'Hexagone?"
 
@@ -33,7 +33,7 @@ settings/stdout/verbose_stdout=true
 
 [display]
 
-mouse_cursor/custom_image="res://cursor_hand.png"
+mouse_cursor/custom_image="res://images/cursor_hand.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 

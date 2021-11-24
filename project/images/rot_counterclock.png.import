@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rot_counterclock.png-284cd96d142b25b6c228d9df15569b9c.stex"
+path="res://.import/rot_counterclock.png-0bc12d3bc1667b97e6070e1c7e40431c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rot_counterclock.png"
-dest_files=[ "res://.import/rot_counterclock.png-284cd96d142b25b6c228d9df15569b9c.stex" ]
+source_file="res://images/rot_counterclock.png"
+dest_files=[ "res://.import/rot_counterclock.png-0bc12d3bc1667b97e6070e1c7e40431c.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
