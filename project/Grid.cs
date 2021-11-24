@@ -14,8 +14,8 @@
 
 using Godot;
 
-using static Godot.KeyList;
 using static Godot.JoystickList;
+using static Godot.KeyList;
 
 /**
  * Wrapper class for a grid of hexagons
