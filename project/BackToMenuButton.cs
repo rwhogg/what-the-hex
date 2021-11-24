@@ -46,6 +46,6 @@ public class BackToMenuButton : ThemeButton
      */
     protected override void ChangeScene()
     {
-        GetTree().ChangeScene("res://Menu.tscn");
+        GetTree().ChangeScene(ResourcePaths.MENU_SCENE);
     }
 }

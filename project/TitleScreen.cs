@@ -97,7 +97,7 @@ public class TitleScreen : Control
     private void GoToMenu()
     {
         RuntimeConfig.IsInert = false;
-        GetTree().ChangeScene("res://Menu.tscn");
+        GetTree().ChangeScene(ResourcePaths.MENU_SCENE);
     }
 
     private void GenerateStars()
@@ -137,7 +137,7 @@ public class TitleScreen : Control
     private void AttractMode()
     {
         RuntimeConfig.IsInert = true;
-        GetTree().ChangeScene("res://GameScene.tscn");
+        GetTree().ChangeScene(ResourcePaths.GAME_SCENE);
     }
 
     private void AllowStart()

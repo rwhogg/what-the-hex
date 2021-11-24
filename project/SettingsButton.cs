@@ -22,6 +22,6 @@ public class SettingsButton : ThemeButton
      */
     protected override void ChangeScene()
     {
-        GetTree().ChangeScene("res://settings.tscn");
+        GetTree().ChangeScene(ResourcePaths.SETTINGS_SCENE);
     }
 }

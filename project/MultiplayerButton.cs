@@ -16,7 +16,7 @@ using Godot;
 
 public class MultiplayerButton : ThemeButton
 {
-    private const string MultiplayerConfigScene = "res://MultiplayerConfig.tscn";
+    private const string MultiplayerConfigScene = ResourcePaths.MULTIPLAYER_CONFIG_SCENE;
 
     /**
      * Called when this button and its children enter the scene tree.

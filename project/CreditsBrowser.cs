@@ -27,7 +27,7 @@ public class CreditsBrowser : TextEdit
     public override void _Ready()
     {
         var file = new File();
-        _ = file.Open("res://THIRD-PARTY-LICENSES.txt", File.ModeFlags.Read);
+        _ = file.Open(ResourcePaths.THIRD_PARTY_LICENSES, File.ModeFlags.Read);
         Text = file.GetAsText();
         file.Dispose();
     }

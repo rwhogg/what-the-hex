@@ -34,7 +34,7 @@ public class StarSprite : AnimatedSprite
 
         if(StarTexture.GetData() == null)
         {
-            Image starParticle = GD.Load<StreamTexture>("res://images/smallStar.png").GetData();
+            Image starParticle = GD.Load<StreamTexture>(ResourcePaths.SMALL_STAR).GetData();
             StarTexture.CreateFromImage(starParticle);
             StarFrames.AddFrame("default", StarTexture);
         }

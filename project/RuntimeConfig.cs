@@ -73,7 +73,7 @@ public class RuntimeConfig : Node
 
             if(popup == null)
             {
-                popup = ResourceLoader.Load<PackedScene>("res://PausePopup.tscn").Instance<PopupDialog>();
+                popup = ResourceLoader.Load<PackedScene>(ResourcePaths.PAUSE_POPUP_SCENE).Instance<PopupDialog>();
                 gameComponent.AddChild(popup);
                 popup.GetNode("ButtonContainer/ResumeButton").Connect("pressed", this, nameof(Resume));
                 popup.PopupCentered();

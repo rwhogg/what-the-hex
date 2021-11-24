@@ -25,6 +25,6 @@ public class MenuBackButton : ThemeButton
      */
     protected override void ChangeScene()
     {
-        GetTree().ChangeScene("res://root.tscn");
+        GetTree().ChangeScene(ResourcePaths.TITLE_SCREEN_SCENE);
     }
 }

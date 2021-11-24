@@ -26,6 +26,6 @@ public class ClickButtonSound : AudioStreamPlayer
     public override void _Ready()
     {
         base._Ready();
-        Stream = GD.Load<AudioStream>("res://audio/confirmation_002.wav");
+        Stream = GD.Load<AudioStream>(ResourcePaths.CLICK_MENU_SOUND);
     }
 }

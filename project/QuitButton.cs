@@ -26,6 +26,6 @@ public class QuitButton : ThemeButton
     {
         GetTree().Paused = false;
         RuntimeConfig.NukePopup();
-        GetTree().ChangeScene("res://Menu.tscn");
+        GetTree().ChangeScene(ResourcePaths.MENU_SCENE);
     }
 }
