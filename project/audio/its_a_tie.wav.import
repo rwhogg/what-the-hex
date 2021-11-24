@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/confirmation_002.wav-22aa857a337be831fc3f4edf95b3c4c4.sample"
+path="res://.import/its_a_tie.wav-ad1bec6d082457ad85d1becc3f1b06f3.sample"
 
 [deps]
 
-source_file="res://confirmation_002.wav"
-dest_files=[ "res://.import/confirmation_002.wav-22aa857a337be831fc3f4edf95b3c4c4.sample" ]
+source_file="res://audio/its_a_tie.wav"
+dest_files=[ "res://.import/its_a_tie.wav-ad1bec6d082457ad85d1becc3f1b06f3.sample" ]
 
 [params]
 

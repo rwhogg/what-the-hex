@@ -21,11 +21,11 @@ using Godot;
 public class ClickButtonSound : AudioStreamPlayer
 {
     /**
-     * Called when this node and its children enter thescene tree
+     * Called when this node and its children enter the scene tree
      */
     public override void _Ready()
     {
         base._Ready();
-        Stream = GD.Load<AudioStream>("res://confirmation_002.wav");
+        Stream = GD.Load<AudioStream>("res://audio/confirmation_002.wav");
     }
 }

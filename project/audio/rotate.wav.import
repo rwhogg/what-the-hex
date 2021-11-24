@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/TheHexWillHealYou.wav-2e963e6189a379dae6aafa956392f04d.sample"
+path="res://.import/rotate.wav-66b73cc8627fbc160254322722fd190d.sample"
 
 [deps]
 
-source_file="res://TheHexWillHealYou.wav"
-dest_files=[ "res://.import/TheHexWillHealYou.wav-2e963e6189a379dae6aafa956392f04d.sample" ]
+source_file="res://audio/rotate.wav"
+dest_files=[ "res://.import/rotate.wav-66b73cc8627fbc160254322722fd190d.sample" ]
 
 [params]
 

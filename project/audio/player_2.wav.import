@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/MyHexWillGoOn.wav-83d5156099368fdf1b9668dd15e35aea.sample"
+path="res://.import/player_2.wav-f4bde7eabc39df05658b5ed0253d5b37.sample"
 
 [deps]
 
-source_file="res://MyHexWillGoOn.wav"
-dest_files=[ "res://.import/MyHexWillGoOn.wav-83d5156099368fdf1b9668dd15e35aea.sample" ]
+source_file="res://audio/player_2.wav"
+dest_files=[ "res://.import/player_2.wav-f4bde7eabc39df05658b5ed0253d5b37.sample" ]
 
 [params]
 

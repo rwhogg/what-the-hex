@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/rotate.wav-bea54e5103b48d043c9371a7daf4c579.sample"
+path="res://.import/Win.wav-849313a5b698be0e7e8a803914402c0b.sample"
 
 [deps]
 
-source_file="res://rotate.wav"
-dest_files=[ "res://.import/rotate.wav-bea54e5103b48d043c9371a7daf4c579.sample" ]
+source_file="res://audio/Win.wav"
+dest_files=[ "res://.import/Win.wav-849313a5b698be0e7e8a803914402c0b.sample" ]
 
 [params]
 

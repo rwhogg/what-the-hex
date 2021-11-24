@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/refresh.wav-0142550107f2eb694a39df22c4b84e2c.sample"
+path="res://.import/pause.wav-9f464ad637787ca1a1598dad21e8d1ea.sample"
 
 [deps]
 
-source_file="res://refresh.wav"
-dest_files=[ "res://.import/refresh.wav-0142550107f2eb694a39df22c4b84e2c.sample" ]
+source_file="res://audio/pause.wav"
+dest_files=[ "res://.import/pause.wav-9f464ad637787ca1a1598dad21e8d1ea.sample" ]
 
 [params]
 

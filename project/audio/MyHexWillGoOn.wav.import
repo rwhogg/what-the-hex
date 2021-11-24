@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/its_a_tie.wav-88849b6be1e32436700faadfa399c1fd.sample"
+path="res://.import/MyHexWillGoOn.wav-c3de1b51f7567c685e3bc914a2f46871.sample"
 
 [deps]
 
-source_file="res://its_a_tie.wav"
-dest_files=[ "res://.import/its_a_tie.wav-88849b6be1e32436700faadfa399c1fd.sample" ]
+source_file="res://audio/MyHexWillGoOn.wav"
+dest_files=[ "res://.import/MyHexWillGoOn.wav-c3de1b51f7567c685e3bc914a2f46871.sample" ]
 
 [params]
 

@@ -173,7 +173,7 @@ public class GameComponent : Node2D
 
         var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
-        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : 10.0f);
+        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : 100.0f);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
         refreshTimer.Connect(TimeoutSignal, this, nameof(On_RefreshTimer_Timeout));
