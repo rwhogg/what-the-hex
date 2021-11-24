@@ -154,11 +154,11 @@ public class Hexagon : Node2D
             DrawLine(hexagonPoints[i], hexagonPoints[i + 1], EdgeColors[i], EdgeThickness);
         }
         DrawLine(hexagonPoints[hexagonPoints.Length - 1], hexagonPoints[0], EdgeColors[EdgeColors.Count - 1], EdgeThickness);
-        if(Selected[0] && ShouldShowSelections())
+        if(Selected[0])
         {
             DrawCircle(new Vector2(0, 0), 5, Colors.GetPlayerColors()[0]);
         }
-        else if(Selected[1] && ShouldShowSelections())
+        else if(Selected[1])
         {
             DrawCircle(new Vector2(0, 0), 5, Colors.GetPlayerColors()[1]);
         }
@@ -287,13 +287,6 @@ public class Hexagon : Node2D
             return DeepSkyBlue;
         }
         return BaseColor;
-    }
-
-    private static bool ShouldShowSelections()
-    {
-        bool isControllerMode = Utils.IsControllerMode();
-        bool hasTouch = OS.HasTouchscreenUiHint();
-        return isControllerMode || hasTouch;
     }
 
     /**

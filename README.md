@@ -52,8 +52,6 @@ Keyboard (Supported on desktop only, might work on web):
 * Arrow Keys: Change currently selected hexagon
 * Space Bar: Rotate currently selected hexagon clockwise
 
-Note that the selection dot will only appear if a controller is connected. I intend to fix this.
-
 Touch (Supported on Android only, _might_ work on desktop platforms with a touch screen):
 
 * Tap on any hexagon: Select
