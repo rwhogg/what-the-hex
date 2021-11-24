@@ -47,7 +47,7 @@ Mouse (Supported on desktop and web only):
 * Left Click: Rotate hexagon under mouse cursor counterclockwise
 * Right Click: Rotate hexagon under mouse cursor clockwise
 
-Keyboard (Supported on desktop only, might work on web):
+Keyboard (Supported on desktop and web only):
 
 * Arrow Keys: Change currently selected hexagon
 * Space Bar: Rotate currently selected hexagon clockwise
