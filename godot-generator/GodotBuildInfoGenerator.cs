@@ -46,7 +46,6 @@ class GodotBuildInfoGenerator: ISourceGenerator
             "using System;\npublic static class GodotVersionInfo\n{{\n    public static string GetGodotInfo()\n    {{\n        return {0};\n    }}\n}}\n",
             "\"" + GodotVersion + "\""
         );
-        File.WriteAllText("/mnt/c/Users/rwhog/Myfile.cs", sourceCode);
         context.AddSource("GodotVersionInfo", SourceText.From(sourceCode, Encoding.UTF8));
     }
 }
