@@ -75,7 +75,8 @@ public class RuntimeConfig : Node
             {
                 popup = ResourceLoader.Load<PackedScene>(ResourcePaths.PAUSE_POPUP_SCENE).Instance<PopupDialog>();
                 gameComponent.AddChild(popup);
-                popup.GetNode("ButtonContainer/ResumeButton").Connect("pressed", this, nameof(Resume));
+                var resumeButton = popup.GetNode("ButtonContainer/ResumeButton");
+                resumeButton.Connect("pressed", this, nameof(Resume));
                 popup.PopupCentered();
                 sceneTree.Paused = true;
             }

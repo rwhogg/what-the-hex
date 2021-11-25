@@ -28,6 +28,12 @@ public class ControllerLabel : RichTextLabel
 
     public override void _Ready()
     {
+        if(ControllerIndex >= 1 && !RuntimeConfig.Is2Player)
+        {
+            Visible = false;
+            return;
+        }
+
         BbcodeText = String.Format(
             culture,
             "[color={0}]P{1}: {2}[/color]",

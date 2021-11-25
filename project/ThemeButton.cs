@@ -45,7 +45,7 @@ public abstract class ThemeButton : Button
 
     protected virtual void ChangeScene() { }
 
-    private void PlaySelectSound()
+    public void PlaySelectSound()
     {
         SelectButtonSound.Play();
     }

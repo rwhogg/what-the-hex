@@ -31,7 +31,7 @@ public class MultiplayerButton : ThemeButton
     protected override void ChangeScene()
     {
         RuntimeConfig.Is2Player = true;
-        GetTree().ChangeScene(ResourcePaths.GAME_CONFIG_SCENE);
+        GetTree().ChangeScene(ResourcePaths.MULTIPLAYER_GAME_CONFIG_SCENE);
     }
 
     private void CheckDisable()

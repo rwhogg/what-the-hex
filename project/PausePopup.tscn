@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=1]
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=2]
 [ext_resource path="res://QuitButton.cs" type="Script" id=3]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://ControllerLabel.cs" type="Script" id=5]
+[ext_resource path="res://ThemeButton.cs" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -16,7 +17,6 @@ font_data = ExtResource( 4 )
 
 [node name="PausePopupRoot" type="PopupDialog"]
 pause_mode = 2
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.05945
@@ -60,6 +60,7 @@ margin_right = 227.0
 margin_bottom = 52.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Resume"
+script = ExtResource( 6 )
 
 [node name="QuitButton" type="Button" parent="ButtonContainer"]
 margin_top = 64.0
