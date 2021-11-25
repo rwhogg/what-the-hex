@@ -28,6 +28,8 @@ public class AboutInfoBox : TextEdit
     {
         // Note: if this file complains about GitVersionInformation not existing,
         // run "dotnet restore" followed by "dotnet build"
+#pragma warning disable CS0103
         Text = Text.Replace("_vers_", GitVersionInformation.FullSemVer);
+#pragma warning restore CS0103
     }
 }

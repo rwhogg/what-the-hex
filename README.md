@@ -47,6 +47,11 @@ Mouse (Supported on desktop and web only):
 * Left Click: Rotate hexagon under mouse cursor counterclockwise
 * Right Click: Rotate hexagon under mouse cursor clockwise
 
+Keyboard (Supported on desktop and web only):
+
+* Arrow Keys: Change currently selected hexagon
+* Space Bar: Rotate currently selected hexagon clockwise
+
 Touch (Supported on Android only, _might_ work on desktop platforms with a touch screen):
 
 * Tap on any hexagon: Select
@@ -68,12 +73,13 @@ Tier 2 (Will Probably Work Well):
 
 Tier 3 (Might work if compiled from source, but no promises)
 
-* iOS
+* iOS (I lack the hardware to compile for this)
+* Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
 
 Tier 4 (Might work in the future, but I don't currently expect it to)
 
 * Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271
-* Raspberry Pi and other non-Android ARM devices: I don't want to compile my own build templates, so this is unsupported until they add one by default.
+
 
 # Reporting Bugs
 

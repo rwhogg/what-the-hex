@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/what-the-hex-voice.wav-2440f6f27d6fbeb0887013c6d6ab0187.sample"
+
+[deps]
+
+source_file="res://audio/what-the-hex-voice.wav"
+dest_files=[ "res://.import/what-the-hex-voice.wav-2440f6f27d6fbeb0887013c6d6ab0187.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

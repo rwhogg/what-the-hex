@@ -27,6 +27,7 @@ public class PlayButton : ThemeButton
     {
         RuntimeConfig.DefaultLayout();
         RuntimeConfig.Is2Player = false;
-        GetTree().ChangeScene("res://GameScene.tscn");
+        // FIXME I want a single-player config screen
+        GetTree().ChangeScene(ResourcePaths.GAME_SCENE);
     }
 }

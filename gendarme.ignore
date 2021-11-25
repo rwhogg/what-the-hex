@@ -1,10 +1,23 @@
-# False positive
 R:Gendarme.Rules.Performance.UseStringEmptyRule
+# False positives
 M:System.Void Utils::.cctor()
 M:System.Void GitVersionInformation::.cctor()
 # The method it recommends is seemingly undefined? Maybe Mono doesn't implement it
 R:Gendarme.Rules.Globalization.PreferStringComparisonOverrideRule
 M:System.Void AboutInfoBox::_Ready()
-# Can't deduplicate due to existing signal interface
 R:Gendarme.Rules.Smells.AvoidCodeDuplicatedInSameClassRule
+# Can't deduplicate due to existing signal interface
 M:System.Void GameComponent::On_TouchRotateClockwise()
+# False positive
+M:System.Void ConfigFileUtils::SaveHiscore(System.Int32)
+M:System.Void ConfigFileUtils::SetShouldPlayMusic(System.Boolean)
+R:Gendarme.Rules.Performance.AvoidUnusedParametersRule
+# needed to satisfy signal interface
+M:System.Void MultiplayerButton::CheckDisable(System.Int32,System.Boolean)
+R:Gendarme.Rules.Smells.AvoidLongMethodsRule
+# Refactoring this method is dangerous. Don't touch it!
+M:System.Boolean GridUtils::CheckSide(Hexagon,GridUtils/Side,Hexagon[][])
+R:Gendarme.Rules.Smells.AvoidCodeDuplicatedInSiblingClassesRule
+# Not really much point in consolidating these
+M:System.Void OnePlayerScoreLabel::_Process(System.Single)
+M:System.Void TwoPlayerScoreLabel::_Process(System.Single)

@@ -25,6 +25,6 @@ public class CreditsButton : ThemeButton
      */
     protected override void ChangeScene()
     {
-        GetTree().ChangeScene("res://credits.tscn");
+        GetTree().ChangeScene(ResourcePaths.CREDITS_SCENE);
     }
 }

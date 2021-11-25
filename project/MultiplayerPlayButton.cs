@@ -14,7 +14,7 @@
 
 public class MultiplayerPlayButton : ThemeButton
 {
-    private const string GameScene = "res://GameScene.tscn";
+    private const string GameScene = ResourcePaths.GAME_SCENE;
 
     protected override void ChangeScene()
     {

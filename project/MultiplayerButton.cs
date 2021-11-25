@@ -16,7 +16,7 @@ using Godot;
 
 public class MultiplayerButton : ThemeButton
 {
-    private const string MultiplayerConfigScene = "res://MultiplayerConfig.tscn";
+    private const string MultiplayerConfigScene = ResourcePaths.MULTIPLAYER_CONFIG_SCENE;
 
     /**
      * Called when this button and its children enter the scene tree.
@@ -45,7 +45,7 @@ public class MultiplayerButton : ThemeButton
     private void CheckDisable(int device, bool connected)
 #pragma warning restore CA1801
     {
-        // this overload (2 arguments) is only needed so that the signal signatures matches
+        // this overload (2 arguments) is only needed so that the signal signatures match
         CheckDisable();
     }
 

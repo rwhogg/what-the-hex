@@ -40,16 +40,19 @@ public class TitleScreen : Control
         {
             ControllerMappings.SetUpMappings();
             OS.SetWindowTitle(Tr("GAME_TITLE_CLEAN"));
-            Timer starCreateTimer = GetNode<Timer>("StarCreateTimer");
-            Timer starDeleteTimer = GetNode<Timer>("StarDeleteTimer");
+            var starCreateTimer = GetNode<Timer>("StarCreateTimer");
+            var starDeleteTimer = GetNode<Timer>("StarDeleteTimer");
+            var attractModeTimer = GetNode<Timer>("AttractModeTimer");
             starCreateTimer.Connect(TIMEOUT_SIGNAL, this, nameof(GenerateStars));
             starDeleteTimer.Connect(TIMEOUT_SIGNAL, this, nameof(RemoveStars));
-            GetNode<AudioStreamPlayer>("TitleTextAudio").Connect("finished", this, nameof(StartStarTimers));
+            attractModeTimer.Connect(TIMEOUT_SIGNAL, this, nameof(AttractMode));
+
+            GetNode<AudioStreamPlayer>("TitleTextAudio").Connect("finished", this, nameof(StartTimers));
 
             // When you go back to the title screen from the menu, it's sucking up input events from the menu
             // which immediately dumps you back in the menu...
             SceneTreeTimer startTimer = GetTree().CreateTimer(1.0f);
-            startTimer.Connect(TIMEOUT_SIGNAL, this, nameof(AllowStart)); // FIXME see if you can use async here https://docs.godotengine.org/en/stable/getting_started/scripting/c_sharp/c_sharp_differences.html?#yield
+            startTimer.Connect(TIMEOUT_SIGNAL, this, nameof(AllowStart));
         }
         catch(IOException)
         {
@@ -93,7 +96,8 @@ public class TitleScreen : Control
 
     private void GoToMenu()
     {
-        GetTree().ChangeScene("res://Menu.tscn");
+        RuntimeConfig.IsInert = false;
+        GetTree().ChangeScene(ResourcePaths.MENU_SCENE);
     }
 
     private void GenerateStars()
@@ -130,16 +134,24 @@ public class TitleScreen : Control
         }
     }
 
+    private void AttractMode()
+    {
+        RuntimeConfig.IsInert = true;
+        GetTree().ChangeScene(ResourcePaths.GAME_SCENE);
+    }
+
     private void AllowStart()
     {
         CanStart = true;
     }
 
-    private void StartStarTimers()
+    private void StartTimers()
     {
-        Timer starCreateTimer = GetNode<Timer>("StarCreateTimer");
-        Timer starDeleteTimer = GetNode<Timer>("StarDeleteTimer");
+        var starCreateTimer = GetNode<Timer>("StarCreateTimer");
+        var starDeleteTimer = GetNode<Timer>("StarDeleteTimer");
+        var attractModeTimer = GetNode<Timer>("AttractModeTimer");
         starCreateTimer.Start(0.5f);
         starDeleteTimer.Start(1.0f);
+        attractModeTimer.Start(30.0f);
     }
 }

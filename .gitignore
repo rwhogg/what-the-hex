@@ -4,8 +4,9 @@
 .import/
 export.cfg
 export_presets.cfg
-*.aar
 
+# Android
+*.aar
 project/android/build
 project/android/build/assets
 project/android/build/build
@@ -14,11 +15,6 @@ project/android/build/build
 
 # XUnit - haven't figured out how to properly integrate this yet
 obj
-Entranced By The Hex.wav
-
-*.orig
-*~
-*.swp
 
 gendarme.html
 docs
@@ -57,3 +53,7 @@ output.html
 super-linter.log
 .~lock.*#
 exports/Win_x86_nsis
+.ionide/symbolCache.db
+*.orig
+*~
+*.swp

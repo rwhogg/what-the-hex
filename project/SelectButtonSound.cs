@@ -17,7 +17,7 @@
 using Godot;
 
 /**
- * Script for playing a sound when you click the select button
+ * Script for playing a sound when you select a button
  */
 public class SelectButtonSound : AudioStreamPlayer
 {
@@ -26,8 +26,7 @@ public class SelectButtonSound : AudioStreamPlayer
      */
     public override void _Ready()
     {
-        // FIXME I should rename that sound file
         base._Ready();
-        Stream = GD.Load<AudioStream>("res://menu-5.wav");
+        Stream = GD.Load<AudioStream>(ResourcePaths.SELECT_MENU_SOUND);
     }
 }

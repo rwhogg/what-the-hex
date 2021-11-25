@@ -49,9 +49,11 @@ public class GameComponent : Node2D
      */
     public int NumAdvantageMatchesMade { get; set; }
 
+    public bool GameEnded = false;
+
     private IPowerUp ReservedPowerUp;
 
-    private Grid HexagonGrid;
+    private BaseGrid HexagonGrid;
 
     private Vector2 HexagonStartPoint = new Vector2(70, 100);
 
@@ -111,7 +113,7 @@ public class GameComponent : Node2D
         {
             RuntimeConfig.DefaultLayout();
         }
-        HexagonGrid = GridUtils.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor);
+        HexagonGrid = GridUtils.RandomHexagonGrid(HexagonStartPoint, RuntimeConfig.HexesPerRow, Hexagon.DefaultHexColor, RuntimeConfig.IsInert);
         HexagonGrid.SetSelectedHexagon(0, 0, 0);
         if(RuntimeConfig.Is2Player)
         {
@@ -129,6 +131,12 @@ public class GameComponent : Node2D
 
     private void SetUpButtonHandlers()
     {
+        if(RuntimeConfig.IsInert)
+        {
+            GD.Print("Running in inert mode");
+            return;
+        }
+
         var rotateClockwiseButton = GetNodeOrNull<TouchScreenButton>("RotateClockwiseButton");
         if(rotateClockwiseButton != null && rotateClockwiseButton.ShapeVisible)
         {
@@ -154,6 +162,12 @@ public class GameComponent : Node2D
 
     private void StartTimers()
     {
+        if(RuntimeConfig.IsInert)
+        {
+            GD.Print("Running in inert mode, not starting timers");
+            return;
+        }
+
         var advantageTimer = GetNode<Timer>("AdvantageTimer");
         advantageTimer.Connect(TimeoutSignal, this, nameof(On_AdvantageTimer_Timeout));
 
@@ -175,6 +189,11 @@ public class GameComponent : Node2D
         Update();
 
         var gameTimer = GetNode<Timer>("GameTimer");
+
+        if(RuntimeConfig.IsInert)
+        {
+            return;
+        }
         var music = GetNode<AudioStreamPlayer>("Music");
         _ = music.PitchScale;
         if((int)gameTimer.TimeLeft < 20)
@@ -185,6 +204,35 @@ public class GameComponent : Node2D
         {
             music.PitchScale = 1.0f;
         }
+    }
+
+    /**
+     * Handles input.
+     * @param @event Input event.
+     */
+    public override void _Input(InputEvent @event)
+    {
+        if(RuntimeConfig.IsInert)
+        {
+            if(@event is InputEventJoypadButton || @event is InputEventMouseButton || @event is InputEventKey)
+            {
+                GetTree().ChangeScene("root.tscn");
+            }
+            return;
+        }
+        else if(GameEnded)
+        {
+            // allow continue via gamepad
+            if(@event is InputEventJoypadButton eventJoypadButton)
+            {
+                if((JoystickList)eventJoypadButton.ButtonIndex == JoystickList.Start)
+                {
+                    On_ContinueButtonPressed();
+                    return;
+                }
+            }
+        }
+        base._Input(@event);
     }
 
     private void On_GameTimer_Timeout()
@@ -376,6 +424,7 @@ public class GameComponent : Node2D
             HexagonGrid.QueueFree();
             HexagonGrid = null;
         }
+        GameEnded = true;
     }
 
     private void DetermineWinner()

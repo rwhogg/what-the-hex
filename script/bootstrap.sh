@@ -6,10 +6,10 @@
 
 if [ -z "$GODOT" ]; then
     echo "Set the environment variable GODOT"
-elif $GODOT --version | tr -d '[:space:]' | grep -q 3.3.4.stable.mono.official ; then
+elif $GODOT --version | tr -d '[:space:]' | grep -q 3.4.stable.mono.official ; then
     echo "Godot Mono is available!"
 else
-    echo "Please install Godot Mono edition 3.3.4 if you have not done so already"
+    echo "Please install Godot Mono edition 3.4 if you have not done so already"
 fi
 
 if [ -x "$(command -v brew)" ]; then
@@ -19,7 +19,11 @@ fi
 if [ -x "$(command -v gendarme)" ]; then
     echo "Gendarme is available!"
 elif [[ $(uname -r) =~ .*WSL2 ]]; then
-    sudo apt install gendarme
+    if [ -x "$(command -v apt)" ]; then
+        sudo apt install gendarme
+    else
+        echo "Please install Gendarme!"
+    fi
 else
     echo "Please install Gendarme!"
 fi
