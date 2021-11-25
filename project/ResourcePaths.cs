@@ -19,7 +19,7 @@ class ResourcePaths
     public const string CREDITS_SCENE = "res://credits.tscn";
     public const string GAME_SCENE = "res://GameScene.tscn";
     public const string MENU_SCENE = "res://Menu.tscn";
-    public const string MULTIPLAYER_CONFIG_SCENE = "res://MultiplayerConfig.tscn";
+    public const string GAME_CONFIG_SCENE = "res://GameConfig.tscn";
     public const string PAUSE_POPUP_SCENE = "res://PausePopup.tscn";
     // FIXME capitalize this scene's file name for consistency's sake
     public const string SETTINGS_SCENE = "res://settings.tscn";
