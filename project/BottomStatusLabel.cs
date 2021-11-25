@@ -43,7 +43,7 @@ public class BottomStatusLabel: RichTextLabel
         var recentScoreToShow = RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty;
         BbcodeText = String.Format(
             culture,
-            "{0}: [color={1}]{2}[/color] {3} {4}: {5}\t{6}",
+            "{0}: [color={1}]{2} {3}[/color] {4}: {5}\t{6}",
             advantageLabel,
             advantageColor,
             colorName,
