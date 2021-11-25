@@ -50,9 +50,9 @@ public class GameComponent : Node2D
      */
     public int NumAdvantageMatchesMade { get; set; }
 
-    public bool GameEnded = false;
+    public bool GameEnded;
 
-    public bool HasWon = false;
+    public bool HasWon;
 
     public BaseGrid HexagonGrid;
 
@@ -68,7 +68,9 @@ public class GameComponent : Node2D
 
     private int NumRefreshes;
 
+#pragma warning disable CA5394
     private readonly Random MyRandom = new Random();
+#pragma warning restore CA5394
 
     private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
@@ -420,7 +422,9 @@ public class GameComponent : Node2D
 
     private IPowerUp RandomPowerUp()
     {
+#pragma warning disable CA5394
         int random = MyRandom.Next(0, 2);
+#pragma warning disable CA5394
         if(random == 0)
         {
             return new StopRefreshPowerUp();
