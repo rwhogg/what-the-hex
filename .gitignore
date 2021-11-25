@@ -57,3 +57,6 @@ exports/Win_x86_nsis
 *.orig
 *~
 *.swp
+
+# Generator DLL's
+godot-generator/bin/
