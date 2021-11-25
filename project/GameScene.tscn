@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://GameComponent.cs" type="Script" id=1]
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://MenuTheme.tres" type="Theme" id=18]
 [ext_resource path="res://images/background.png" type="Texture" id=19]
 [ext_resource path="res://audio/TheHexWillHealYou.wav" type="AudioStream" id=20]
+[ext_resource path="res://ContinueButton.cs" type="Script" id=21]
 [ext_resource path="res://audio/pause.wav" type="AudioStream" id=22]
 [ext_resource path="res://audio/its_a_tie.wav" type="AudioStream" id=23]
 [ext_resource path="res://audio/victory.wav" type="AudioStream" id=24]
@@ -94,6 +95,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="YouWinLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 261.547
+margin_top = 172.998
+margin_right = 946.547
+margin_bottom = 281.998
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "You Win"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Label that displays during a Game Over"
+}
+
 [node name="GameOverLabel" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -112,7 +130,6 @@ __meta__ = {
 }
 
 [node name="ContinueButton" type="Button" parent="."]
-visible = false
 margin_left = 248.0
 margin_top = 310.0
 margin_right = 763.0
@@ -120,7 +137,8 @@ margin_bottom = 419.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = ExtResource( 5 )
 disabled = true
-text = "Continue?"
+text = "Coninue?"
+script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

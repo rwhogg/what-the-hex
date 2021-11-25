@@ -20,7 +20,7 @@ _The pursuit of true hexcellence requires that you clear your mind and become on
 
 * You can rotate any given hexagon 60 degrees counterclockwise with a left click, 60 degrees clockwise with a right click
 
-* You start with 100 seconds on the clock
+* You start with 100 seconds (configurable) on the clock
 
 * If a rhombus with 4 hexagons bordering it has all 4 edges the same color, you get a match
 
@@ -31,7 +31,7 @@ _The pursuit of true hexcellence requires that you clear your mind and become on
 * Hexagons are internally black by default but turn blue when they are selected for replacement
 * The number of hexagons refreshed per cycle increases by 1 every 3 refresh cycles
 
-* You win if you make 20 matches
+* You win if you make 20 matches (configurable)
 
 # Controls
 
@@ -80,6 +80,14 @@ Tier 4 (Might work in the future, but I don't currently expect it to)
 
 * Xbox One and Xbox Series X/S: Currently UWP targets do not support Mono. If this is fixed in the future I'm definitely interested. The relevant GitHub Issue is https://github.com/godotengine/godot/issues/20271
 
+# Multiplayer Support
+
+What The Hex? features a 2-player mode. Currently, only hotseat is supported and I'm not currently planning on implementing network support.
+
+It is only enabled if at least 2 gamepads are connected. The mouse and keyboard controls still work, but for the moment they are both assumed to be the
+first player's.
+
+At the moment, it is a simple timed score-attack mode. I'm also considering implementing a match race mode and/or a zone control mode.
 
 # Reporting Bugs
 

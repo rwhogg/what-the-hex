@@ -52,6 +52,8 @@ public class GameComponent : Node2D
 
     public bool GameEnded = false;
 
+    public bool HasWon = false;
+
     public BaseGrid HexagonGrid;
 
     private IPowerUp ReservedPowerUp;
@@ -105,9 +107,14 @@ public class GameComponent : Node2D
         StartTimers();
 
         GetNode<RichTextLabel>("GameOverLabel").Hide();
+        GetNode<RichTextLabel>("YouWinLabel").Hide();
+        DisableContinueButton();
 
         int matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
         WinConditions.Add(new NumMatchesWinCondition(matchesNeeded));
+
+        HasWon = false;
+        GameEnded = false;
     }
 
     private void InitGrid()
@@ -391,12 +398,14 @@ public class GameComponent : Node2D
         }
         if(hasWon)
         {
+            HasWon = true;
             EndOfGame();
             GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
             if(!RuntimeConfig.Is2Player)
             {
                 ConfigFileUtils.SaveHiscore(Math.Max(Scores[0], HiScore));
             }
+            GetNode<RichTextLabel>("YouWinLabel").Show();
             EnableContinueButton();
         }
     }
@@ -487,5 +496,12 @@ public class GameComponent : Node2D
         var continueButton = GetNode<Button>("ContinueButton");
         continueButton.Disabled = false;
         continueButton.Show();
+    }
+
+    private void DisableContinueButton()
+    {
+        var continueButton = GetNode<Button>("ContinueButton");
+        continueButton.Disabled = true;
+        continueButton.Hide();
     }
 }
