@@ -19,7 +19,7 @@ using Godot;
 /**
  * Root control for the preferences menu
  */
-public class Preferences : Control
+public class Preferences: Control
 {
     private bool ShouldPlayMusic { get; set; }
 

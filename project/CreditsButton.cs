@@ -17,7 +17,7 @@
 /**
  * Script for the Credits button on the menu scene.
  */
-public class CreditsButton : ThemeButton
+public class CreditsButton: ThemeButton
 {
     /**
      * Changes the scene to the credits scene.

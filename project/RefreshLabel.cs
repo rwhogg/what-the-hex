@@ -22,7 +22,7 @@ using Godot;
 /**
  * Script for the refresh timer label in the game scene
  */
-public class RefreshLabel : RichTextLabel
+public class RefreshLabel: RichTextLabel
 {
     private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 

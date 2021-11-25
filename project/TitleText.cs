@@ -20,7 +20,7 @@ using Godot;
 /**
  * Script for the title screen text
  */
-public class TitleText : RichTextLabel
+public class TitleText: RichTextLabel
 {
     private readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 

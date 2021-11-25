@@ -16,7 +16,7 @@
 /**
  * Script for the About button on the menu scene.
  */
-public class AboutButton : ThemeButton
+public class AboutButton: ThemeButton
 {
     /**
      * Change to the About scene

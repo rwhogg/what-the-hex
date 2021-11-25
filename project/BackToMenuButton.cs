@@ -20,7 +20,7 @@ using Godot;
 * This script is shared by the settings, about, and credits back buttons,
 * because they all go back to the menu scene.
 */
-public class BackToMenuButton : ThemeButton
+public class BackToMenuButton: ThemeButton
 {
     /**
      * Receives ui_cancel events to go back to the main menu

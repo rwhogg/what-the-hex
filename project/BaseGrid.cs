@@ -23,7 +23,7 @@ using static Godot.Mathf;
 /**
  * Wrapper class for a grid of hexagons
  */
-public class BaseGrid : Node2D
+public class BaseGrid: Node2D
 {
     // FIXME: the hexagon and the grid classes are so tightly intertwined, and also they
     // probably have game logic embedded in them. It would be better if I could

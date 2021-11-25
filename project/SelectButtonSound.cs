@@ -19,7 +19,7 @@ using Godot;
 /**
  * Script for playing a sound when you select a button
  */
-public class SelectButtonSound : AudioStreamPlayer
+public class SelectButtonSound: AudioStreamPlayer
 {
     /**
      * Called when this node and its children enter the scene tree

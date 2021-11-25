@@ -15,7 +15,7 @@
 
 using Godot;
 
-public class GameConfig : Control
+public class GameConfig: Control
 {
     public float GameTime = 100.0f;
 

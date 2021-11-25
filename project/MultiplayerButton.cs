@@ -14,7 +14,7 @@
 
 using Godot;
 
-public class MultiplayerButton : ThemeButton
+public class MultiplayerButton: ThemeButton
 {
     /**
      * Called when this button and its children enter the scene tree.

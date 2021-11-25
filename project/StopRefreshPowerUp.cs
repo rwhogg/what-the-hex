@@ -21,7 +21,7 @@ using Godot;
 /**
  * PowerUp that stops all refreshes for 15 seconds.
  */
-public class StopRefreshPowerUp : Godot.Object, IPowerUp
+public class StopRefreshPowerUp: Godot.Object, IPowerUp
 {
     public static readonly ImageTexture Texture = new ImageTexture();
 

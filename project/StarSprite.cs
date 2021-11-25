@@ -19,7 +19,7 @@ using Godot;
 /**
  * Sprite for the stars that appear on the title screen
  */
-public class StarSprite : AnimatedSprite
+public class StarSprite: AnimatedSprite
 {
     private static readonly SpriteFrames StarFrames = new SpriteFrames();
 

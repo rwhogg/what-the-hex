@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using Godot;
-public class MainMenuQuitButton : ThemeButton
+public class MainMenuQuitButton: ThemeButton
 {
     /**
      * Called when the button is pressed

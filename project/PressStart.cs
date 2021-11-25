@@ -21,7 +21,7 @@ using Godot;
  * Label depends on whether or not a controller is detected,
  * and on whether or not we have a touchscreen.
  */
-public class PressStart : Label
+public class PressStart: Label
 {
     /**
      * Called when this node and its children enter the scene tree

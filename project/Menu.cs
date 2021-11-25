@@ -21,7 +21,7 @@ using Godot;
 /**
  * Script for the Menu screen.
  */
-public class Menu : Control
+public class Menu: Control
 {
     private Button[] Buttons;
     private int selected = -1;

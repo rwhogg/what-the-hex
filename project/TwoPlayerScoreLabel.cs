@@ -21,7 +21,7 @@ using Godot;
 /**
  *  Label that displays score details
  */
-public class TwoPlayerScoreLabel : ScoreLabel
+public class TwoPlayerScoreLabel: ScoreLabel
 {
     /**
      * Called once per frame.

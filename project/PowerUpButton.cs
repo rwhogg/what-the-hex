@@ -16,6 +16,6 @@
 
 using Godot;
 
-public class PowerUpButton : TextureButton
+public class PowerUpButton: TextureButton
 {
 }

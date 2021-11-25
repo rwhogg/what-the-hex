@@ -17,7 +17,7 @@ using System.Globalization;
 
 using Godot;
 
-public class ControllerLabel : RichTextLabel
+public class ControllerLabel: RichTextLabel
 {
 #pragma warning disable CS0649
     [Export]

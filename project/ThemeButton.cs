@@ -16,7 +16,7 @@
 
 using Godot;
 
-public abstract class ThemeButton : Button
+public abstract class ThemeButton: Button
 {
     private AudioStreamPlayer ClickButtonSound;
     private AudioStreamPlayer SelectButtonSound;

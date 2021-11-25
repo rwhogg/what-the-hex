@@ -17,7 +17,7 @@ using Godot;
 /**
  * Script for the Music player in the game scene
  */
-public class Music : AudioStreamPlayer
+public class Music: AudioStreamPlayer
 {
     /**
      * If we are configured to play music, do so.

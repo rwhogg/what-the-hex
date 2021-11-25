@@ -18,7 +18,7 @@ using Godot;
 /**
  * Audio stream player that plays my voiceover after a brief delay
  */
-public class TitleTextAudio : AudioStreamPlayer
+public class TitleTextAudio: AudioStreamPlayer
 {
     /**
      * Called when this node and its children enter the scene tree

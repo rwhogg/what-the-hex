@@ -20,7 +20,7 @@ using Godot;
 /**
  * Script for the bottom status bar
  */
-public class BottomStatusLabel : RichTextLabel
+public class BottomStatusLabel: RichTextLabel
 {
     private int RecentScore;
 

@@ -19,7 +19,7 @@ using Godot;
 /**
  * Script for the PlayMusicCheckBox in the settings scene
  */
-public class PlayMusicCheckBox : CheckBox
+public class PlayMusicCheckBox: CheckBox
 {
     /**
      * Check the config file to see if we are configured to play music or not.

@@ -18,7 +18,7 @@ using Godot;
 /**
  * Audio stream player for when someone clicks on a menu button
  */
-public class ClickButtonSound : AudioStreamPlayer
+public class ClickButtonSound: AudioStreamPlayer
 {
     /**
      * Called when this node and its children enter the scene tree

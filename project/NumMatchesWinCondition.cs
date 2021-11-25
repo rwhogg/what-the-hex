@@ -17,7 +17,7 @@ using System;
 /**
  * Win condition that is based on making a certain number of matches
  */
-public class NumMatchesWinCondition : IWinCondition
+public class NumMatchesWinCondition: IWinCondition
 {
     private readonly int MatchesToWin;
 

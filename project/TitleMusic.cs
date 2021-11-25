@@ -19,7 +19,7 @@ using Godot;
 /**
  * Script for playing music from the title screen
  */
-public class TitleMusic : AudioStreamPlayer
+public class TitleMusic: AudioStreamPlayer
 {
     /**
      * Called when this node and its children enter the scene tree

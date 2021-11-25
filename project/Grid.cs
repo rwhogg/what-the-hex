@@ -20,7 +20,7 @@ using static Godot.KeyList;
 /**
  * Wrapper class for a grid of hexagons
  */
-public class Grid : BaseGrid
+public class Grid: BaseGrid
 {
     // FIXME: the hexagon and the grid classes are so tightly intertwined, and also they
     // probably have game logic embedded in them. It would be better if I could

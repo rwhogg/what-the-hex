@@ -16,7 +16,7 @@
 /**
  * QuitButton on the pause menu
  */
-public class QuitButton : ThemeButton
+public class QuitButton: ThemeButton
 {
     /**
      * Switches back to the menu scene.

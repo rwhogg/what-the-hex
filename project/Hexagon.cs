@@ -26,7 +26,7 @@ using static Godot.Mathf;
 /**
  * Hexagon node class
  */
-public class Hexagon : Node2D
+public class Hexagon: Node2D
 {
     /**
      * The base color of this hexagon

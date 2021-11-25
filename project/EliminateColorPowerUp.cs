@@ -16,7 +16,7 @@ using System;
 
 using Godot;
 
-public class EliminateColorPowerUp : Godot.Object, IPowerUp
+public class EliminateColorPowerUp: Godot.Object, IPowerUp
 {
     public static readonly ImageTexture Texture = new ImageTexture();
 

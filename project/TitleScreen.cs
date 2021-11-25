@@ -21,7 +21,7 @@ using Godot;
 /**
  * TitleScreen is the extension script for the title screen.
  */
-public class TitleScreen : Control
+public class TitleScreen: Control
 {
     private static readonly RandomNumberGenerator Random = new RandomNumberGenerator();
 

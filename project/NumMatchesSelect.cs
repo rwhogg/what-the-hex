@@ -15,7 +15,7 @@
 
 using Godot;
 
-public class NumMatchesSelect : SpinBox
+public class NumMatchesSelect: SpinBox
 {
     public override void _Ready()
     {

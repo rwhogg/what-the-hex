@@ -17,7 +17,7 @@
 /**
  * Script for the Back button in the menu screen
  */
-public class MenuBackButton : ThemeButton
+public class MenuBackButton: ThemeButton
 {
     /**
      * Switches back to the root scene.

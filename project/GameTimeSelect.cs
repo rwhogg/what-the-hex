@@ -15,7 +15,7 @@
 
 using Godot;
 
-public class GameTimeSelect : SpinBox
+public class GameTimeSelect: SpinBox
 {
     public override void _Ready()
     {

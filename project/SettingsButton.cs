@@ -14,7 +14,7 @@
 
 
 
-public class SettingsButton : ThemeButton
+public class SettingsButton: ThemeButton
 {
     /**
      * Changes the scene to the settings scene.

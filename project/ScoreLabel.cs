@@ -20,7 +20,7 @@ using Godot;
 /**
  *  Label that displays score details
  */
-public class ScoreLabel : RichTextLabel
+public class ScoreLabel: RichTextLabel
 {
     protected readonly CultureInfo Culture = ConfigFileUtils.GetCulture();
 }

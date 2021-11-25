@@ -18,7 +18,7 @@ using Godot;
 /**
  * Script for the Credits Browser
  */
-public class CreditsBrowser : TextEdit
+public class CreditsBrowser: TextEdit
 {
     /**
      * Displays the third party licenses file contents in the "editor".

@@ -18,7 +18,7 @@ using Godot;
 /**
  * Script for the About box
  */
-public class AboutInfoBox : TextEdit
+public class AboutInfoBox: TextEdit
 {
     /**
      * Called when this object and its children enter the scene tree.

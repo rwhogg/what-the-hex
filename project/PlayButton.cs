@@ -18,7 +18,7 @@
 /**
  * Script for the Play button in the menu scene
  */
-public class PlayButton : ThemeButton
+public class PlayButton: ThemeButton
 {
     /**
      * Called when the button is pressed

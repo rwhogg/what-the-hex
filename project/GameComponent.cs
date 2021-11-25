@@ -23,7 +23,7 @@ using static Godot.Mathf;
 /**
  * Script for the main Game Component.
  */
-public class GameComponent : Node2D
+public class GameComponent: Node2D
 {
     /**
      * The current score(s)

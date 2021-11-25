@@ -22,7 +22,7 @@ using static Godot.Mathf;
 /**
  * Label saying how many more advantage matches we need until the next powerup
  */
-public class PowerUpLabel : Label
+public class PowerUpLabel: Label
 {
     private readonly CultureInfo culture = ConfigFileUtils.GetCulture();
 

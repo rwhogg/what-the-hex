@@ -17,7 +17,7 @@ using Godot;
 /**
  * Globals that we can use to configure the game scene
  */
-public class RuntimeConfig : Node
+public class RuntimeConfig: Node
 {
     /**
      * True if we are in 2-player mode
