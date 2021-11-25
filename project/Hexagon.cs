@@ -275,6 +275,9 @@ public class Hexagon : Node2D
         BaseColor = DefaultHexColor;
     }
 
+    /**
+     * Generate a new set of edge colors for this hexagon
+     */
     public void Refresh()
     {
         Collection<Color> newEdgeColors = HexagonUtils.RandomEdgeColors(EdgeColorOptions);
