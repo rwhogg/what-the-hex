@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://KenneyRocket.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://GameConfig.cs" type="Script" id=5]
 [ext_resource path="res://BackToMenuButton.cs" type="Script" id=6]
 [ext_resource path="res://ControllerLabel.cs" type="Script" id=7]
-[ext_resource path="res://MatchesConfig.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -88,5 +87,3 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="MatchesConfig" parent="." instance=ExtResource( 8 )]
