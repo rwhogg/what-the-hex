@@ -36,7 +36,7 @@ public class Hexagon : Node2D
     /**
      * List of all edge colors for this hexagon
      */
-    public Collection<Color> EdgeColors { get; set; }
+    public Collection<Color> EdgeColors { get; }
 
     /**
      * If true, this hexagon is currently selected for rotation
@@ -277,7 +277,11 @@ public class Hexagon : Node2D
 
     public void Refresh()
     {
-        EdgeColors = HexagonUtils.RandomEdgeColors(EdgeColorOptions);
+        Collection<Color> newEdgeColors = HexagonUtils.RandomEdgeColors(EdgeColorOptions);
+        for(int i = 0; i < EdgeColors.Count; i++)
+        {
+            EdgeColors[i] = newEdgeColors[i];
+        }
     }
 
     private Color GetHexColor()
