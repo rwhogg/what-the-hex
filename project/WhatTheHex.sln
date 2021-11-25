@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "What The Hex", "WhatTheHex.csproj", "{C773C24A-9214-4958-9078-6FDB4C7C9747}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", "..\godot-generator\GodotGenerator.csproj", "{DB138C8B-7C34-4AC7-A443-A0B29D1CE8A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7123}") = "Generator", "..\godot-generator\GodotGenerator.csproj", "{DB138C8B-7C34-4AC7-A443-A0B29D1CE8A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
