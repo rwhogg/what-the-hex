@@ -18,5 +18,10 @@ dotnet_diagnostic.IDE0005.severity = warning
 dotnet_diagnostic.CA1014.Severity = none
 # Enum overlap (I'm fine with this)
 dotnet_diagnostic.CA1069.severity = none
-# we're only using the one assembly... no reason to use namespaces
+# we're only using the one assembly (excluding the generator)... no reason to use namespaces
 dotnet_diagnostic.CA1050.Severity = none
+# Don't want to embed pragmas into the generator...
+dotnet_diagnostic.CA1024.Severity = none
+
+# FIXME: just too overwhelmed by these (visible instance fields) at the moment
+dotnet_diagnostic.CA1051.Severity = none

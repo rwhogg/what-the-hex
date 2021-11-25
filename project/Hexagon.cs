@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 
 using Godot;
@@ -36,7 +37,7 @@ public class Hexagon : Node2D
     /**
      * List of all edge colors for this hexagon
      */
-    public List<Color> EdgeColors { get; set; }
+    public Collection<Color> EdgeColors { get; set; }
 
     /**
      * If true, this hexagon is currently selected for rotation
@@ -111,11 +112,11 @@ public class Hexagon : Node2D
      * @param baseColor Base color
      * @param edgeColors Edge colors
      */
-    public Hexagon(Vector2 center, Color baseColor, IReadOnlyCollection<Color> edgeColors)
+    public Hexagon(Vector2 center, Color baseColor, Collection<Color> edgeColors)
     {
         Position = center;
         BaseColor = baseColor;
-        EdgeColors = new List<Color>(edgeColors);
+        EdgeColors = new Collection<Color>(edgeColors);
         MarkedForReplacement = false;
         Selected = new bool[] { false, false };
         Matched = false;

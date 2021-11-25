@@ -60,3 +60,4 @@ exports/Win_x86_nsis
 
 # Generator DLL's
 godot-generator/bin/
+godot-generator/Generator.props

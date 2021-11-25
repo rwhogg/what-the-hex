@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using Godot;
 
@@ -41,7 +42,7 @@ public static class HexagonUtils
      */
     public static Hexagon RandomHexagon(Vector2 center, Color baseColor, Color[] edgeColorOptions)
     {
-        List<Color> edgeColors = RandomEdgeColors(edgeColorOptions);
+        Collection<Color> edgeColors = RandomEdgeColors(edgeColorOptions);
         return new Hexagon(center, baseColor, edgeColors);
     }
 
@@ -50,9 +51,9 @@ public static class HexagonUtils
      * @param edgeColorOptions Edge color options
      * @return A list of randomly chosen edge colors
      */
-    public static List<Color> RandomEdgeColors(Color[] edgeColorOptions)
+    public static Collection<Color> RandomEdgeColors(Color[] edgeColorOptions)
     {
-        List<Color> edgeColors = new List<Color>();
+        Collection<Color> edgeColors = new Collection<Color>();
         for(int i = 0; i < 6; i++)
         {
             edgeColors.Add(RandomColor(edgeColorOptions));
