@@ -15,12 +15,15 @@
 
 using Godot;
 
-public class MultiplayerConfig : Control
+public class GameTimeSelect : SpinBox
 {
-    public float GameTime = 100.0f;
-
-    public void SetGameTime(float value)
+    public override void _Ready()
     {
-        GameTime = value;
+        Connect("value_changed", this, nameof(SetGameTime));
+    }
+
+    private void SetGameTime(float value)
+    {
+        ((MultiplayerConfig)GetParent().GetParent()).SetGameTime(value);
     }
 }
