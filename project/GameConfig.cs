@@ -19,11 +19,18 @@ public class GameConfig : Control
 {
     public float GameTime = 100.0f;
 
+    public int NumMatches = 20;
+
     [Export]
     public bool Is2Player = false;
 
     public void SetGameTime(float value)
     {
         GameTime = value;
+    }
+
+    public void SetNumMatches(int value)
+    {
+        NumMatches = value;
     }
 }

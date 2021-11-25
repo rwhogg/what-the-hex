@@ -17,8 +17,10 @@ public class StartGameButton : ThemeButton
     protected override void ChangeScene()
     {
         var gameConfig = GetTree().Root.GetNode<GameConfig>("GameConfig");
+        RuntimeConfig.DefaultLayout();
         RuntimeConfig.Is2Player = gameConfig.Is2Player;
         RuntimeConfig.GameStartTime = gameConfig.GameTime;
+        RuntimeConfig.MatchesNeeded = gameConfig.NumMatches;
         GetTree().ChangeScene(ResourcePaths.GAME_SCENE);
     }
 }

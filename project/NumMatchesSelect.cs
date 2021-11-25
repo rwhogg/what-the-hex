@@ -13,19 +13,17 @@
 // limitations under the License.
 
 
+using Godot;
 
-
-/**
- * Script for the Play button in the menu scene
- */
-public class PlayButton : ThemeButton
+public class NumMatchesSelect : SpinBox
 {
-    /**
-     * Called when the button is pressed
-     */
-    protected override void ChangeScene()
+    public override void _Ready()
     {
-        RuntimeConfig.Is2Player = false; // FIXME test if still necessary
-        GetTree().ChangeScene(ResourcePaths.SINGLE_PLAYER_CONFIG_SCENE);
+        Connect("value_changed", this, nameof(SetNumMatches));
+    }
+
+    private void SetNumMatches(int value)
+    {
+        ((GameConfig)GetParent().GetParent()).SetNumMatches(value);
     }
 }
