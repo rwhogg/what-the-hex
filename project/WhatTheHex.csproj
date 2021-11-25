@@ -19,6 +19,4 @@
             ReferenceOutputAssembly="false"
         />
     </ItemGroup>
-
-    <Import Project="../godot-generator/Generator.props" />
 </Project>

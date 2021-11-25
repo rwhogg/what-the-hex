@@ -28,6 +28,7 @@ class GodotBuildInfoGenerator: ISourceGenerator
     public void Initialize(GeneratorInitializationContext context)
     {
         Process godotProcess = new Process();
+        // FIXME: the ".exe" will not be present when building on non-WSL Linux
         godotProcess.StartInfo.FileName = "godot.exe";
         godotProcess.StartInfo.Arguments = "--version";
         godotProcess.StartInfo.CreateNoWindow = true;
