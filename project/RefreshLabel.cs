@@ -34,7 +34,7 @@ public class RefreshLabel: RichTextLabel
     public override void _Process(float delta)
     {
         Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/RefreshTimer");
-        int timeLeft = (int)timer.TimeLeft + 1;
+        var timeLeft = (int)timer.TimeLeft + 1;
         this.BbcodeText = String.Format(culture, "[color=red][right]{0}[/right][/color]", timeLeft.ToString(culture));
     }
 }

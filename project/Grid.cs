@@ -84,10 +84,10 @@ public class Grid: BaseGrid
                     new int[] { 0, 1 },
                     new int[] { 1, 0 },
                 };
-                int[] dir = dirsToGo[eventKey.Scancode - (uint)Left]; // Left is actually the lowest key
+                var dir = dirsToGo[eventKey.Scancode - (uint)Left]; // Left is actually the lowest key
                 SelectedHexagons[0].Selected[0] = false;
-                int newI = SelectedHexagons[0].I + dir[0];
-                int numRows = HexagonsPerRow.Length;
+                var newI = SelectedHexagons[0].I + dir[0];
+                var numRows = HexagonsPerRow.Length;
                 if(newI < 0)
                 {
                     newI = 0;
@@ -96,7 +96,7 @@ public class Grid: BaseGrid
                 {
                     newI = numRows - 1;
                 }
-                int newJ = SelectedHexagons[0].J + dir[1];
+                var newJ = SelectedHexagons[0].J + dir[1];
                 if(newJ < 0)
                 {
                     newJ = 0;
@@ -128,7 +128,7 @@ public class Grid: BaseGrid
             return;
         }
 
-        int controllerIndex = eventControllerButton.Device;
+        var controllerIndex = eventControllerButton.Device;
         if(controllerIndex != 0 && !RuntimeConfig.Is2Player)
         {
             // ensure we don't get index-out-of-bounds exceptions because the controller index maps to the player
@@ -147,10 +147,10 @@ public class Grid: BaseGrid
                     new int[] { 0, -1 },
                     new int[] { 0, 1 },
                 };
-                int[] dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
+                var dir = dirsToGo[eventControllerButton.ButtonIndex - (int)DpadUp];
                 SelectedHexagons[controllerIndex].Selected[controllerIndex] = false;
-                int newI = SelectedHexagons[controllerIndex].I + dir[0];
-                int numRows = HexagonsPerRow.Length;
+                var newI = SelectedHexagons[controllerIndex].I + dir[0];
+                var numRows = HexagonsPerRow.Length;
                 if(newI < 0)
                 {
                     newI = 0;
@@ -159,7 +159,7 @@ public class Grid: BaseGrid
                 {
                     newI = numRows - 1;
                 }
-                int newJ = SelectedHexagons[controllerIndex].J + dir[1];
+                var newJ = SelectedHexagons[controllerIndex].J + dir[1];
                 if(newJ < 0)
                 {
                     newJ = 0;

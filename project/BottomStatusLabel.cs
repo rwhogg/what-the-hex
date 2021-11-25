@@ -34,13 +34,13 @@ public class BottomStatusLabel: RichTextLabel
     {
         base._Process(delta);
         var gameComponent = GetTree().Root.GetNode<GameComponent>("GameComponent");
-        string colorName = Utils.ColorMap(gameComponent.AdvantageColor);
-        string advantageTimeLeft = ((int)gameComponent.GetNode<Timer>("AdvantageTimer").TimeLeft).ToString(culture);
-        string refreshTimeLeft = ((int)gameComponent.GetNode<Timer>("RefreshTimer").TimeLeft).ToString(culture);
-        string advantageLabel = Tr("ADVANTAGE");
-        string refreshLabel = Tr("REFRESH");
-        string advantageColor = (colorName == "pink" ? "#ff69b4" : colorName);
-        string recentScoreToShow = RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty;
+        var colorName = Utils.ColorMap(gameComponent.AdvantageColor);
+        var advantageTimeLeft = ((int)gameComponent.GetNode<Timer>("AdvantageTimer").TimeLeft).ToString(culture);
+        var refreshTimeLeft = ((int)gameComponent.GetNode<Timer>("RefreshTimer").TimeLeft).ToString(culture);
+        var advantageLabel = Tr("ADVANTAGE");
+        var refreshLabel = Tr("REFRESH");
+        var advantageColor = (colorName == "pink" ? "#ff69b4" : colorName);
+        var recentScoreToShow = RecentScore > 0 ? "+" + RecentScore.ToString(culture) : String.Empty;
         BbcodeText = String.Format(
             culture,
             "{0}: [color={1}]{2}[/color] {3} {4}: {5}\t{6}",

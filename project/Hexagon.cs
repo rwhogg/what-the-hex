@@ -149,7 +149,7 @@ public class Hexagon: Node2D
         // remember to use relative coordinates for all calls here
         Vector2[] hexagonPoints = GetPoints();
         DrawColoredPolygon(hexagonPoints, GetHexColor());
-        for(int i = 0; i < hexagonPoints.Length - 1; i++)
+        for(var i = 0; i < hexagonPoints.Length - 1; i++)
         {
             DrawLine(hexagonPoints[i], hexagonPoints[i + 1], EdgeColors[i], EdgeThickness);
         }
@@ -176,12 +176,12 @@ public class Hexagon: Node2D
     {
         float centerX = 0;
         float centerY = 0;
-        Vector2 p0 = new Vector2(0.5F * SideLength + centerX, centerY - Cos30 * SideLength);
-        Vector2 p1 = new Vector2(SideLength + centerX, centerY);
-        Vector2 p2 = new Vector2(0.5F * SideLength + centerX, Cos30 * SideLength + centerY);
-        Vector2 p3 = new Vector2(centerX - 0.5F * SideLength, Cos30 * SideLength + centerY);
-        Vector2 p4 = new Vector2(centerX - SideLength, centerY);
-        Vector2 p5 = new Vector2(centerX - 0.5F * SideLength, centerY - Cos30 * SideLength);
+        var p0 = new Vector2(0.5F * SideLength + centerX, centerY - Cos30 * SideLength);
+        var p1 = new Vector2(SideLength + centerX, centerY);
+        var p2 = new Vector2(0.5F * SideLength + centerX, Cos30 * SideLength + centerY);
+        var p3 = new Vector2(centerX - 0.5F * SideLength, Cos30 * SideLength + centerY);
+        var p4 = new Vector2(centerX - SideLength, centerY);
+        var p5 = new Vector2(centerX - 0.5F * SideLength, centerY - Cos30 * SideLength);
         return new Vector2[] { p0, p1, p2, p3, p4, p5 };
     }
 
@@ -281,7 +281,7 @@ public class Hexagon: Node2D
     public void Refresh()
     {
         Collection<Color> newEdgeColors = HexagonUtils.RandomEdgeColors(EdgeColorOptions);
-        for(int i = 0; i < EdgeColors.Count; i++)
+        for(var i = 0; i < EdgeColors.Count; i++)
         {
             EdgeColors[i] = newEdgeColors[i];
         }

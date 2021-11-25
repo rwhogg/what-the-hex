@@ -35,7 +35,7 @@ public static class ConfigFileUtils
     public static CultureInfo GetCulture()
     {
         var configFile = GetConfigFile();
-        string cultureName = (string)configFile.GetValue("settings", "culture", "en-US");
+        var cultureName = (string)configFile.GetValue("settings", "culture", "en-US");
         return new CultureInfo(cultureName);
 
         // Yes, I prefer en-US over en-CA. Sorry to all the other Canucks reading this.
@@ -114,7 +114,7 @@ public static class ConfigFileUtils
         {
             return LoadedConfigFile;
         }
-        ConfigFile configFile = new ConfigFile();
+        var configFile = new ConfigFile();
         configFile.Load(ConfigFileLocation);
         LoadedConfigFile = configFile;
         return configFile;

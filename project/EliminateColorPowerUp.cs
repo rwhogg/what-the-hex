@@ -46,9 +46,9 @@ public class EliminateColorPowerUp: Godot.Object, IPowerUp
         {
             GD.Print("Color Eliminated: " + Utils.ColorMap(colorToEliminate));
         }
-        Color[] allOtherColors = new Color[Hexagon.EdgeColorOptions.Length - 1];
-        int j = 0;
-        for(int i = 0; i < Hexagon.EdgeColorOptions.Length; i++)
+        var allOtherColors = new Color[Hexagon.EdgeColorOptions.Length - 1];
+        var j = 0;
+        for(var i = 0; i < Hexagon.EdgeColorOptions.Length; i++)
         {
             if(Hexagon.EdgeColorOptions[i] != colorToEliminate)
             {
@@ -62,7 +62,7 @@ public class EliminateColorPowerUp: Godot.Object, IPowerUp
         {
             foreach(Hexagon hex in hexRow)
             {
-                for(int i = 0; i < hex.EdgeColors.Count; i++)
+                for(var i = 0; i < hex.EdgeColors.Count; i++)
                 {
                     Color edgeColor = hex.EdgeColors[i];
                     if(edgeColor == colorToEliminate)

@@ -18,6 +18,8 @@ csharp_space_before_dot = false
 csharp_space_after_keywords_in_control_flow_statements = false
 csharp_space_before_colon_in_inheritance_clause = false
 csharp_space_after_colon_in_inheritance_clause = true
+
+dotnet_diagnostic.IDE0007.severity = error
 csharp_style_var_when_type_is_apparent = true
 csharp_style_var_for_built_in_types = true
 
@@ -39,8 +41,9 @@ dotnet_style_qualification_for_method = false
 dotnet_naming_rule.members_should_be_pascal_case.severity = warning
 dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 
+# Note: there's some sed post-processing in precommit.sh to deal with semicolon comment quirks
 dotnet_diagnostic.IDE0073.severity = error
-file_header_template = Copyright 2021 Bob "Wombat" Hogg\n\nLicensed under the Apache License, Version 2.0 (the "License")\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n//\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.
+file_header_template = Copyright 2021 Bob "Wombat" Hogg\n\nLicensed under the Apache License, Version 2.0 (the "License");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.
 
 # Automatically removes redundant imports
 dotnet_diagnostic.IDE0005.severity = warning

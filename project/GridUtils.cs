@@ -42,14 +42,14 @@ public static class GridUtils
             throw new ArgumentNullException(nameof(HexagonsPerRow));
         }
 
-        HashSet<Hexagon> matchedHexagons = new HashSet<Hexagon>();
+        var matchedHexagons = new HashSet<Hexagon>();
         matchedColors = new Godot.Collections.Dictionary<Color, int>();
-        int tre = 0;
-        int bre = 1;
-        int ble = 3;
-        int tle = 4;
-        int row = (int)affectedHexagon.I;
-        int column = (int)affectedHexagon.J;
+        var tre = 0;
+        var bre = 1;
+        var ble = 3;
+        var tle = 4;
+        var row = (int)affectedHexagon.I;
+        var column = (int)affectedHexagon.J;
 
         // FIXME: this logic might have to be adjusted to handle layouts with unequal columns per row
 
@@ -147,15 +147,15 @@ public static class GridUtils
         {
             grid = new BaseGrid(basePosition, hexagonsPerRow);
         }
-        int numRows = hexagonsPerRow.Length;
-        Hexagon[][] hexArray = new Hexagon[numRows][];
-        for(int i = 0; i < numRows; i++)
+        var numRows = hexagonsPerRow.Length;
+        var hexArray = new Hexagon[numRows][];
+        for(var i = 0; i < numRows; i++)
         {
             hexArray[i] = new Hexagon[hexagonsPerRow[i]];
-            for(int j = 0; j < hexagonsPerRow[i]; j++)
+            for(var j = 0; j < hexagonsPerRow[i]; j++)
             {
-                float xPos = (float)(j * Hexagon.BigRadius() * 2);
-                float yPos = (float)(i * Hexagon.SmallRadius() * 2);
+                var xPos = (float)(j * Hexagon.BigRadius() * 2);
+                var yPos = (float)(i * Hexagon.SmallRadius() * 2);
 
                 // Bit of a buffer so the edge colors don't overlap
                 // (the hardcoded constants are just eyeballed to look reasonable)
@@ -164,7 +164,7 @@ public static class GridUtils
                 xPos += Hexagon.EdgeThickness * j * 0.2F;
                 yPos += Hexagon.EdgeThickness * i * 0.8F;
 
-                Vector2 position = new Vector2(xPos, yPos);
+                var position = new Vector2(xPos, yPos);
                 hexArray[i][j] = HexagonUtils.RandomHexagon(position, baseColor);
                 hexArray[i][j].I = i;
                 hexArray[i][j].J = j;
@@ -178,12 +178,12 @@ public static class GridUtils
 
     private static bool CheckSide(Hexagon affectedHexagon, Side side, Hexagon[][] HexArray)
     {
-        int tre = 0;
-        int bre = 1;
-        int ble = 3;
-        int tle = 4;
-        int row = (int)affectedHexagon.I;
-        int column = (int)affectedHexagon.J;
+        var tre = 0;
+        var bre = 1;
+        var ble = 3;
+        var tle = 4;
+        var row = (int)affectedHexagon.I;
+        var column = (int)affectedHexagon.J;
 
         int[] n1;
         int[] n2;

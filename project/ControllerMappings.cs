@@ -26,7 +26,7 @@ public static class ControllerMappings
 
     public static void SetUpMappings()
     {
-        string osName = OS.GetName();
+        var osName = OS.GetName();
         if(osName == "Windows")
         {
             Input.AddJoyMapping(SN30_PRO_MAPPING_WINDOWS, true);

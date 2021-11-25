@@ -112,7 +112,7 @@ public class GameComponent: Node2D
         GetNode<RichTextLabel>("YouWinLabel").Hide();
         DisableContinueButton();
 
-        int matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
+        var matchesNeeded = RuntimeConfig.MatchesNeeded > 0 ? RuntimeConfig.MatchesNeeded : 20;
         WinConditions.Add(new NumMatchesWinCondition(matchesNeeded));
 
         HasWon = false;
@@ -185,7 +185,7 @@ public class GameComponent: Node2D
 
         var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
-        float defaultTime = OS.IsDebugBuild() ? 20.0f : 100.0f;
+        var defaultTime = OS.IsDebugBuild() ? 20.0f : 100.0f;
         gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : defaultTime);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
@@ -324,15 +324,15 @@ public class GameComponent: Node2D
 #pragma warning restore CA1801
 #pragma warning restore IDE0060
     {
-        int additionalScore = 0;
-        bool madeAnyAdvantageMatch = false;
-        bool madeAnyMatch = false;
+        var additionalScore = 0;
+        var madeAnyAdvantageMatch = false;
+        var madeAnyMatch = false;
         foreach(var colorCount in matchedColors)
         {
-            int numMatched = colorCount.Value;
-            bool madeAdvantageMatch = colorCount.Key == AdvantageColor;
+            var numMatched = colorCount.Value;
+            var madeAdvantageMatch = colorCount.Key == AdvantageColor;
             madeAnyAdvantageMatch = madeAnyAdvantageMatch || madeAdvantageMatch;
-            int multiplier = madeAdvantageMatch ? 300 : 100;
+            var multiplier = madeAdvantageMatch ? 300 : 100;
             additionalScore += (int)Pow(numMatched, 2) * multiplier;
             NumMatchesMade += numMatched;
             if(numMatched > 0)
@@ -390,7 +390,7 @@ public class GameComponent: Node2D
 
     private void CheckWin()
     {
-        bool hasWon = WinConditions.Count > 0;
+        var hasWon = WinConditions.Count > 0;
         foreach(IWinCondition wc in WinConditions)
         {
             if(!wc.HasWon(this))
@@ -423,7 +423,7 @@ public class GameComponent: Node2D
     private IPowerUp RandomPowerUp()
     {
 #pragma warning disable CA5394
-        int random = MyRandom.Next(0, 2);
+        var random = MyRandom.Next(0, 2);
 #pragma warning disable CA5394
         if(random == 0)
         {

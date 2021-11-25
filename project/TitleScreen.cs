@@ -102,19 +102,19 @@ public class TitleScreen: Control
 
     private void GenerateStars()
     {
-        for(int i = 1; i <= 5; i++)
+        for(var i = 1; i <= 5; i++)
         {
 #pragma warning disable CA2000
-            StarSprite star = new StarSprite
+            var star = new StarSprite
             {
                 Position = new Vector2(Random.RandiRange(100, 300), Random.RandiRange(100, 400))
             }; // these are later disposed by Godot
             AddChild(star);
             star.AddToGroup(StarGroupName);
         }
-        for(int i = 1; i <= 5; i++)
+        for(var i = 1; i <= 5; i++)
         {
-            StarSprite star = new StarSprite
+            var star = new StarSprite
             {
 #pragma warning restore CA2000
                 Position = new Vector2(Random.RandiRange(600, 800), Random.RandiRange(100, 400))

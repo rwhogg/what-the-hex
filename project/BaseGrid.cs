@@ -90,12 +90,12 @@ public class BaseGrid: Node2D
      */
     public void SelectHexagonsForReplacement(int numHexagonsToReplace)
     {
-        int n = 0;
+        var n = 0;
         while(n < numHexagonsToReplace)
         {
 #pragma warning disable CA5394
-            int randomRow = Rand.Next(0, HexagonsPerRow.Length);
-            int randomCol = Rand.Next(0, HexagonsPerRow[randomRow]);
+            var randomRow = Rand.Next(0, HexagonsPerRow.Length);
+            var randomCol = Rand.Next(0, HexagonsPerRow[randomRow]);
 #pragma warning restore CA5394
             if(HexArray[randomRow][randomCol].MarkedForReplacement)
             {
@@ -132,8 +132,8 @@ public class BaseGrid: Node2D
                 colorToFlash = pair.Key;
             }
         }
-        Hexagon[] hexagons = new Hexagon[matchedHexagons.Count];
-        int i = 0;
+        var hexagons = new Hexagon[matchedHexagons.Count];
+        var i = 0;
         foreach(Hexagon hexagon in matchedHexagons)
         {
             if(OS.IsDebugBuild())
@@ -158,8 +158,8 @@ public class BaseGrid: Node2D
 
     protected Hexagon GetAffectedHexagon(Vector2 clickPos)
     {
-        int j = RoundToInt(clickPos.x / (2 * Hexagon.BigRadius() + 0.2F * Hexagon.EdgeThickness));
-        int i = RoundToInt(clickPos.y / (2 * Hexagon.SmallRadius() + 0.8F * Hexagon.EdgeThickness));
+        var j = RoundToInt(clickPos.x / (2 * Hexagon.BigRadius() + 0.2F * Hexagon.EdgeThickness));
+        var i = RoundToInt(clickPos.y / (2 * Hexagon.SmallRadius() + 0.8F * Hexagon.EdgeThickness));
         if(i >= HexagonsPerRow.Length || j >= HexagonsPerRow[i])
         {
             if(OS.IsDebugBuild())

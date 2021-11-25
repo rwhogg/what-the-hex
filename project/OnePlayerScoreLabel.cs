@@ -32,10 +32,10 @@ public class OnePlayerScoreLabel: ScoreLabel
         base._Process(delta);
         Timer timer = GetTree().Root.GetNode<Timer>("GameComponent/GameTimer");
         GameComponent game = GetTree().Root.GetNode<GameComponent>("GameComponent");
-        int timeLeft = (int)timer.TimeLeft;
-        int score = game.Scores[0];
-        int matches = game.NumMatchesMade;
-        int hiscore = game.HiScore;
+        var timeLeft = (int)timer.TimeLeft;
+        var score = game.Scores[0];
+        var matches = game.NumMatchesMade;
+        var hiscore = game.HiScore;
         BbcodeText = String.Format(Culture,
             "[color=red]{0} {1} {2} {3} {4} {5} {6} {7}[/color]",
             Tr("TIME"), timeLeft, Tr("MATCH"), matches, Tr("SCORE"), score, Tr("HIGHSCORE"), hiscore

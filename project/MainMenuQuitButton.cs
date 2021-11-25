@@ -20,7 +20,7 @@ public class MainMenuQuitButton: ThemeButton
      */
     protected override void ChangeScene()
     {
-        int notification = OS.GetName() == "Android" ? MainLoop.NotificationWmGoBackRequest : MainLoop.NotificationWmQuitRequest;
+        var notification = OS.GetName() == "Android" ? MainLoop.NotificationWmGoBackRequest : MainLoop.NotificationWmQuitRequest;
         GetTree().Notification(notification);
     }
 }

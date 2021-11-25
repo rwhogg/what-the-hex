@@ -25,7 +25,7 @@ public class ContinueButton: ThemeButton
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        bool hasWon = Game.HasWon;
+        var hasWon = Game.HasWon;
         Text = Tr(hasWon ? "PLAY_AGAIN_QUESTION" : "CONTINUE_QUESTION");
     }
 }

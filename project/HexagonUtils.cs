@@ -52,8 +52,8 @@ public static class HexagonUtils
      */
     public static Collection<Color> RandomEdgeColors(Color[] edgeColorOptions)
     {
-        Collection<Color> edgeColors = new Collection<Color>();
-        for(int i = 0; i < 6; i++)
+        var edgeColors = new Collection<Color>();
+        for(var i = 0; i < 6; i++)
         {
             edgeColors.Add(RandomColor(edgeColorOptions));
         }

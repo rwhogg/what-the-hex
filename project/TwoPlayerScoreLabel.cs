@@ -38,9 +38,9 @@ public class TwoPlayerScoreLabel: ScoreLabel
             return;
         }
 
-        int timeLeft = (int)timer.TimeLeft;
-        int score1 = game.Scores[0];
-        int score2 = game.Scores[1];
+        var timeLeft = (int)timer.TimeLeft;
+        var score1 = game.Scores[0];
+        var score2 = game.Scores[1];
         BbcodeText = String.Format(Culture,
             "[color=red]{0}: {1}[/color]\t\t\t\t\t\t\t[color=blue]{2}: {3}[/color]\t\t\t\t\t\t\t\t[color=green]{4}: {5}[/color]",
             Tr("PLAYER_ONE"),

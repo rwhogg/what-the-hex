@@ -47,7 +47,7 @@ public class RuntimeConfig: Node
     public static void DefaultLayout()
     {
         RuntimeConfig.HexesPerRow = new int[5];
-        for(int i = 0; i < 5; i++)
+        for(var i = 0; i < 5; i++)
         {
             RuntimeConfig.HexesPerRow[i] = 8;
         }
