@@ -28,6 +28,8 @@ class ResourcePaths
     public const string TITLE_SCREEN_SCENE = "res://root.tscn";
 
     public const string CLOCK_IMAGE = "res://images/clock.png";
+    // FIXME move into images
+    public const string PAINT_BUCKET_IMAGE = "res://paint_bucket.png";
     public const string SMALL_STAR = "res://images/smallStar.png";
 
     // FIXME rename these files

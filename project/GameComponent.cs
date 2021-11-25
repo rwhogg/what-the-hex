@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Diagnostics.Contracts;
 
 using Godot;
@@ -25,7 +26,7 @@ using static Godot.Mathf;
 public class GameComponent : Node2D
 {
     /**
-     * The current score
+     * The current score(s)
      */
     public int[] Scores { get; set; }
 
@@ -51,9 +52,9 @@ public class GameComponent : Node2D
 
     public bool GameEnded = false;
 
-    private IPowerUp ReservedPowerUp;
+    public BaseGrid HexagonGrid;
 
-    private BaseGrid HexagonGrid;
+    private IPowerUp ReservedPowerUp;
 
     private Vector2 HexagonStartPoint = new Vector2(70, 100);
 
@@ -64,6 +65,8 @@ public class GameComponent : Node2D
     private const string TimeoutSignal = "timeout";
 
     private int NumRefreshes;
+
+    private readonly Random MyRandom = new Random();
 
     private readonly System.Collections.Generic.List<IWinCondition> WinConditions = new System.Collections.Generic.List<IWinCondition>();
 
@@ -389,7 +392,10 @@ public class GameComponent : Node2D
         {
             EndOfGame();
             GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
-            ConfigFileUtils.SaveHiscore(Scores[0]);
+            if(!RuntimeConfig.Is2Player)
+            {
+                ConfigFileUtils.SaveHiscore(Scores[0]);
+            }
         }
     }
 
@@ -403,7 +409,7 @@ public class GameComponent : Node2D
 
     private IPowerUp RandomPowerUp()
     {
-        int random = (new Random()).Next(0, 2);
+        int random = MyRandom.Next(0, 2);
         if(random == 0)
         {
             return new StopRefreshPowerUp();
