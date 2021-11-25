@@ -17,7 +17,7 @@ public class MultiplayerPlayButton : ThemeButton
     protected override void ChangeScene()
     {
         RuntimeConfig.Is2Player = true;
-        RuntimeConfig.GameStartTime = GetTree().Root.GetNode<MultiplayerConfig>("GameConfig").GameTime;
+        RuntimeConfig.GameStartTime = GetTree().Root.GetNode<GameConfig>("GameConfig").GameTime;
         GetTree().ChangeScene(ResourcePaths.GAME_SCENE);
     }
 }

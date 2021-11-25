@@ -4,7 +4,7 @@
 [ext_resource path="res://kenney_space.tres" type="DynamicFont" id=2]
 [ext_resource path="res://GameTimeConfig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MultiplayerPlayButton.cs" type="Script" id=4]
-[ext_resource path="res://MultiplayerConfig.cs" type="Script" id=5]
+[ext_resource path="res://GameConfig.cs" type="Script" id=5]
 [ext_resource path="res://BackToMenuButton.cs" type="Script" id=6]
 [ext_resource path="res://ControllerLabel.cs" type="Script" id=7]
 

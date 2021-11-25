@@ -24,6 +24,6 @@ public class GameTimeSelect : SpinBox
 
     private void SetGameTime(float value)
     {
-        ((MultiplayerConfig)GetParent().GetParent()).SetGameTime(value);
+        ((GameConfig)GetParent().GetParent()).SetGameTime(value);
     }
 }

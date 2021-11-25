@@ -16,8 +16,6 @@ using Godot;
 
 public class MultiplayerButton : ThemeButton
 {
-    private const string MultiplayerConfigScene = ResourcePaths.GAME_CONFIG_SCENE;
-
     /**
      * Called when this button and its children enter the scene tree.
      */
@@ -33,7 +31,7 @@ public class MultiplayerButton : ThemeButton
     protected override void ChangeScene()
     {
         RuntimeConfig.Is2Player = true;
-        GetTree().ChangeScene(MultiplayerConfigScene);
+        GetTree().ChangeScene(ResourcePaths.GAME_CONFIG_SCENE);
     }
 
     private void CheckDisable()
