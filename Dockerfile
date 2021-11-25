@@ -1,4 +1,4 @@
-FROM ghcr.io/homebrew/ubuntu18.04:3.2.10
+FROM ghcr.io/homebrew/ubuntu18.04:3.3.5
 RUN brew analytics off
 ENV HOMEBREW_NO_AUTO_UPDATE=1
 RUN brew install wget unzip

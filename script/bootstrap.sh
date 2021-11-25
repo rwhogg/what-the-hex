@@ -27,11 +27,3 @@ elif [[ $(uname -r) =~ .*WSL2 ]]; then
 else
     echo "Please install Gendarme!"
 fi
-
-if [ -x "$(command -v addlicense)" ]; then
-    echo "addlicense is available!"
-elif [ -x "$(command -v go)" ]; then
-    go install github.com/google/addlicense@latest
-else
-    echo "Please install Golang"
-fi
