@@ -211,13 +211,13 @@ public class Grid : BaseGrid
 
         SelectedHexagons[0].Selected[0] = false;
         SetSelectedHexagon(affectedHexagon.I, affectedHexagon.J, 0);
-        
+
         if(OS.HasTouchscreenUiHint())
         {
             // on touch screen devices, a tap should be equivalent to a select, not a rotation
             return;
         }
-        
+
         Direction direction = Direction.COUNTERCLOCKWISE;
         if((int)ButtonList.Right == eventMouseButton.ButtonIndex)
         {
