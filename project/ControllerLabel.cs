@@ -41,7 +41,6 @@ public class ControllerLabel : RichTextLabel
             ControllerIndex + 1,
             GetControllerName()
         );
-        GD.Print(BbcodeText);
     }
 
     private String GetControllerName()
