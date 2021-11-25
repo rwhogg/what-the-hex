@@ -32,7 +32,7 @@ public class EliminateColorPowerUp : Godot.Object, IPowerUp
         Color colorToEliminate = HexagonUtils.RandomColor();
         if(OS.IsDebugBuild())
         {
-            GD.Print("Color Eliminated: " + colorToEliminate);
+            GD.Print("Color Eliminated: " + Utils.ColorMap(colorToEliminate));
         }
         Color[] allOtherColors = new Color[Hexagon.EdgeColorOptions.Length - 1];
         int j = 0;
