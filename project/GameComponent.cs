@@ -176,7 +176,8 @@ public class GameComponent : Node2D
 
         var gameTimer = GetNode<Timer>("GameTimer");
         gameTimer.Connect(TimeoutSignal, this, nameof(On_GameTimer_Timeout));
-        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : 100.0f);
+        float defaultTime = OS.IsDebugBuild() ? 20.0f : 100.0f;
+        gameTimer.Start(RuntimeConfig.GameStartTime > 0 ? RuntimeConfig.GameStartTime : defaultTime);
 
         var refreshTimer = GetNode<Timer>("RefreshTimer");
         refreshTimer.Connect(TimeoutSignal, this, nameof(On_RefreshTimer_Timeout));
@@ -394,8 +395,9 @@ public class GameComponent : Node2D
             GetNode<AudioStreamPlayer>("WinSoundPlayer").Play();
             if(!RuntimeConfig.Is2Player)
             {
-                ConfigFileUtils.SaveHiscore(Scores[0]);
+                ConfigFileUtils.SaveHiscore(Math.Max(Scores[0], HiScore));
             }
+            EnableContinueButton();
         }
     }
 
