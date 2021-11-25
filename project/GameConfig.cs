@@ -19,6 +19,9 @@ public class GameConfig : Control
 {
     public float GameTime = 100.0f;
 
+    [Export]
+    public bool Is2Player = false;
+
     public void SetGameTime(float value)
     {
         GameTime = value;

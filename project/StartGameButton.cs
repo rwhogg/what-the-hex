@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-public class MultiplayerPlayButton : ThemeButton
+public class StartGameButton : ThemeButton
 {
     protected override void ChangeScene()
     {
-        RuntimeConfig.Is2Player = true;
-        RuntimeConfig.GameStartTime = GetTree().Root.GetNode<GameConfig>("GameConfig").GameTime;
+        var gameConfig = GetTree().Root.GetNode<GameConfig>("GameConfig");
+        RuntimeConfig.Is2Player = gameConfig.Is2Player;
+        RuntimeConfig.GameStartTime = gameConfig.GameTime;
         GetTree().ChangeScene(ResourcePaths.GAME_SCENE);
     }
 }
