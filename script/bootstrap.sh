@@ -6,10 +6,10 @@
 
 if [ -z "$GODOT" ]; then
     echo "Set the environment variable GODOT"
-elif $GODOT --version | tr -d '[:space:]' | grep -q 3.4.stable.mono.official ; then
+elif $GODOT --version | tr -d '[:space:]' | grep -q 3.4.4.stable.mono.official.419e713a2 ; then
     echo "Godot Mono is available!"
 else
-    echo "Please install Godot Mono edition 3.4 if you have not done so already"
+    echo "Please install Godot Mono edition 3.4.4 if you have not done so already"
 fi
 
 if [ -x "$(command -v brew)" ]; then
