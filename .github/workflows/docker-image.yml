@@ -1,20 +1,26 @@
-# FIXME change this to JSON
-name: Docker Image CI
-
-on:
-    push:
-        branches: [ trunk]
-jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-        - uses: actions/checkout@v2
-        - 
-            name: Build the Docker image
-            run: bash ./script/build-docker-image.sh
-        -
-            name: Build solutions
-            run: docker run -v $(pwd):/app what-the-hex-build-container:latest /bin/bash -c "cd /app/project && mkdir .mono && godot --build-solutions || godot --build-solutions"
+{
+    "name": "Docker Image CI",
+    "on": {
+        "push": {
+            "branches": ["trunk"]
+        }
+    },
+    "jobs": {
+        "build": {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {
+                    "uses": "actions/checkout@v2"
+                },
+                {
+                    "name": "Build the Docker image",
+                    "run": "bash ./script/build-docker-image.sh"
+                },
+                {
+                    "name": "Build solutions",
+                    "run": "docker run -v $(pwd):/app what-the-hex-build-container:latest /bin/bash -c \"cd /app/project && mkdir .mono && godot --build-solutions || godot --build-solutions\""
+                }
+            ]
+        }
+    }
+}
